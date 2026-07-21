@@ -1,0 +1,65 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "tbs-2026-dashboard",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd tbs-2026-dashboard && npm run dev"],
+      "port": 3030
+    },
+    {
+      "name": "psa-utm-dashboard",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd psa-utm-dashboard && npm run dev"],
+      "port": 3040
+    },
+    {
+      "name": "psa-growth-dashboard",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd psa-growth-dashboard && set \"USE_MOCK_DATA=true\" && npm run dev"],
+      "port": 3050
+    },
+    {
+      "name": "jogo-a-voz",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["-e", "const http=require('http'),fs=require('fs'),path=require('path');const root=path.join(process.cwd(),'jogo-a-voz');http.createServer((q,s)=>{let p=decodeURIComponent(q.url.split('?')[0]);if(p==='/')p='/index.html';const f=path.join(root,p);fs.readFile(f,(e,d)=>{if(e){s.writeHead(404);s.end('nf');}else{const ext=path.extname(f),t=ext==='.html'?'text/html; charset=utf-8':'text/plain';s.writeHead(200,{'content-type':t});s.end(d);}});}).listen(4399,()=>console.log('jogo-a-voz up on 4399'));"],
+      "port": 4399
+    },
+    {
+      "name": "psa-growth-dashboard",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd psa-growth-dashboard && npm run dev"],
+      "port": 3050
+    },
+    {
+      "name": "psa50-dashboard",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd psa50-dashboard && npm run dev"],
+      "port": 3031
+    },
+    {
+      "name": "indice-palestrante",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["-e", "const http=require('http'),fs=require('fs'),path=require('path');http.createServer((q,s)=>{const f=path.join(process.cwd(),'indice-palestrante.html');fs.readFile(f,(e,d)=>{if(e){s.writeHead(404);s.end('not found');}else{s.writeHead(200,{'content-type':'text/html; charset=utf-8'});s.end(d);}});}).listen(4501,()=>console.log('indice-palestrante on 4501'));"],
+      "port": 4501
+    },
+    {
+      "name": "curadoria-pocket",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["-e", "const http=require('http'),fs=require('fs'),path=require('path');http.createServer((q,s)=>{const f=path.join(process.cwd(),'curadoria-pocket.html');fs.readFile(f,(e,d)=>{if(e){s.writeHead(404);s.end('not found');}else{s.writeHead(200,{'content-type':'text/html; charset=utf-8'});s.end(d);}});}).listen(4500,()=>console.log('curadoria-pocket on 4500'));"],
+      "port": 4500
+    },
+    {
+      "name": "psa-creative-studio",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd psa-creative-studio && npm run dev"],
+      "port": 3060
+    },
+    {
+      "name": "psa-custos-claude",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd psa-custos-claude && npm run dev"],
+      "port": 3070
+    }
+  ]
+}

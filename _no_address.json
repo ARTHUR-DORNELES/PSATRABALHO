@@ -1,0 +1,92 @@
+[
+  {
+    "cnpj": "83310441002756",
+    "cnpj_raw": "83310441002756",
+    "razao": "Aurora Coop",
+    "nomes": "Aurora Coop",
+    "enderecos": "",
+    "deals_count": 1,
+    "sum_amount": 13511.42,
+    "sp_detected": false
+  },
+  {
+    "cnpj": "76659820000313",
+    "cnpj_raw": "76659820000313",
+    "razao": "PUC PR",
+    "nomes": "PUC PR",
+    "enderecos": "",
+    "deals_count": 1,
+    "sum_amount": 8500,
+    "sp_detected": false
+  },
+  {
+    "cnpj": "33469172000168",
+    "cnpj_raw": "33469172000168",
+    "razao": "SENAC NACIONAL",
+    "nomes": "SENAC NACIONAL",
+    "enderecos": "",
+    "deals_count": 1,
+    "sum_amount": 22060,
+    "sp_detected": false
+  },
+  {
+    "cnpj": "78320397000196",
+    "cnpj_raw": "78320397000196",
+    "razao": "Capal Cooperativa Agroindustrial",
+    "nomes": "Capal Cooperativa Agroindustrial",
+    "enderecos": "",
+    "deals_count": 1,
+    "sum_amount": 6300,
+    "sp_detected": false
+  },
+  {
+    "cnpj": "80160260000163",
+    "cnpj_raw": "80160260000163",
+    "razao": "Sicoob Central SC/RS",
+    "nomes": "Sicoob Central SC/RS",
+    "enderecos": "",
+    "deals_count": 1,
+    "sum_amount": 8500,
+    "sp_detected": false
+  },
+  {
+    "cnpj": "3484789000191",
+    "cnpj_raw": "03484789000191",
+    "razao": "INSTITUTO DE ENGENHARIA DE MATO GROSSO",
+    "nomes": "INSTITUTO DE ENGENHARIA DE MATO GROSSO",
+    "enderecos": "",
+    "deals_count": 1,
+    "sum_amount": 0,
+    "sp_detected": false
+  },
+  {
+    "cnpj": "88894548001900",
+    "cnpj_raw": "88894548001900",
+    "razao": "Sicredi",
+    "nomes": "Sicredi",
+    "enderecos": "",
+    "deals_count": 2,
+    "sum_amount": 14000,
+    "sp_detected": false
+  },
+  {
+    "cnpj": "28718393000192",
+    "cnpj_raw": "28718393000192",
+    "razao": "ABRAMAN",
+    "nomes": "ABRAMAN",
+    "enderecos": "",
+    "deals_count": 1,
+    "sum_amount": 1,
+    "sp_detected": false
+  },
+  {
+    "cnpj": "26475689000102",
+    "cnpj_raw": "26475689000102",
+    "razao": "Block Imoveis -",
+    "nomes": "Block Imoveis -",
+    "enderecos": "",
+    "deals_count": 1,
+    "sum_amount": 4600,
+    "sp_detected": false
+  }
+]

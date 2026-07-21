@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="A PSA está construindo a maior plataforma de palestrantes do Brasil. Sua CDL ou Associação Comercial pode ajudar a moldá-la — e ainda gerar uma nova fonte de receita." />
+<title>Plataforma PSA para CDLs e Associações | Pesquisa de Certificação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --psa-bg:#0B1020;
+    --psa-surface:#111733;
+    --psa-card:#161E40;
+    --psa-border:#243056;
+    --psa-accent:#3B82F6;
+    --psa-accent-hover:#2563EB;
+    --psa-success:#10B981;
+    --psa-warning:#F59E0B;
+    --psa-muted:#94A3B8;
+    --psa-text:#E2E8F0;
+    --psa-white:#F8FAFC;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:var(--psa-bg);
+    color:var(--psa-text);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1180px;margin:0 auto;padding:0 24px}
+
+  /* TOPO */
+  .topbar{
+    border-bottom:1px solid var(--psa-border);
+    background:rgba(11,16,32,.85);
+    backdrop-filter:blur(8px);
+    position:sticky;top:0;z-index:50;
+  }
+  .topbar-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:.5px;color:var(--psa-white)}
+  .brand-mark{
+    width:34px;height:34px;border-radius:9px;
+    background:linear-gradient(135deg,var(--psa-accent) 0%,#60A5FA 100%);
+    display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;
+  }
+  .brand-tag{font-size:11px;text-transform:uppercase;letter-spacing:1.8px;color:var(--psa-muted);font-weight:600}
+  .topbar a.cta{
+    background:var(--psa-accent);color:#fff;padding:10px 18px;border-radius:8px;font-weight:600;font-size:14px;
+    transition:background .2s;
+  }
+  .topbar a.cta:hover{background:var(--psa-accent-hover)}
+
+  /* HERO */
+  .hero{
+    position:relative;overflow:hidden;
+    padding:80px 0 90px;
+    background:
+      radial-gradient(1100px 500px at 80% -10%,rgba(59,130,246,.18),transparent 60%),
+      radial-gradient(700px 400px at -10% 110%,rgba(16,185,129,.12),transparent 60%),
+      var(--psa-bg);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(59,130,246,.12);color:#93C5FD;
+    border:1px solid rgba(59,130,246,.3);
+    padding:6px 14px;border-radius:999px;
+    font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.2px;
+    margin-bottom:24px;
+  }
+  .eyebrow .dot{width:6px;height:6px;background:var(--psa-success);border-radius:50%;box-shadow:0 0 0 4px rgba(16,185,129,.2)}
+  h1{
+    font-size:54px;line-height:1.08;font-weight:800;color:var(--psa-white);
+    letter-spacing:-1.2px;margin-bottom:22px;
+  }
+  h1 span{
+    background:linear-gradient(135deg,#60A5FA 0%,#3B82F6 60%,#10B981 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .lead{font-size:19px;color:#CBD5E1;max-width:560px;margin-bottom:32px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
+  .btn-primary{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--psa-accent);color:#fff;padding:14px 26px;border-radius:10px;
+    font-weight:600;font-size:15px;border:1px solid var(--psa-accent);
+    transition:transform .15s, background .15s, box-shadow .2s;
+    box-shadow:0 6px 20px rgba(59,130,246,.35);
+  }
+  .btn-primary:hover{background:var(--psa-accent-hover);transform:translateY(-1px);box-shadow:0 10px 28px rgba(59,130,246,.45)}
+  .btn-ghost{
+    display:inline-flex;align-items:center;gap:8px;
+    background:transparent;color:var(--psa-text);padding:14px 22px;border-radius:10px;
+    border:1px solid var(--psa-border);font-weight:600;font-size:15px;
+    transition:background .15s, border-color .15s;
+  }
+  .btn-ghost:hover{background:rgba(255,255,255,.04);border-color:#3B4D7E}
+  .hero-trust{display:flex;gap:28px;align-items:center;color:var(--psa-muted);font-size:13px;flex-wrap:wrap}
+  .hero-trust strong{color:var(--psa-white);font-weight:600}
+
+  .hero-card{
+    background:linear-gradient(180deg,var(--psa-card) 0%,#101631 100%);
+    border:1px solid var(--psa-border);
+    border-radius:18px;padding:28px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.5);
+    position:relative;
+  }
+  .hero-card-title{font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:var(--psa-muted);font-weight:600;margin-bottom:14px}
+  .stat-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+  .stat{
+    background:rgba(255,255,255,.03);border:1px solid var(--psa-border);
+    border-radius:12px;padding:16px 18px;
+  }
+  .stat-num{font-size:26px;font-weight:700;color:var(--psa-white);letter-spacing:-.5px}
+  .stat-label{font-size:12px;color:var(--psa-muted);text-transform:uppercase;letter-spacing:.8px;margin-top:4px;font-weight:500}
+  .feature-list{display:flex;flex-direction:column;gap:12px}
+  .feature-list li{display:flex;align-items:center;gap:10px;font-size:14.5px;color:#CBD5E1;list-style:none}
+  .check{
+    width:22px;height:22px;border-radius:50%;
+    background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.4);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    color:var(--psa-success);font-weight:700;font-size:13px;
+  }
+
+  /* SEÇÕES */
+  section{padding:88px 0}
+  .section-head{text-align:center;max-width:780px;margin:0 auto 56px}
+  .section-tag{
+    display:inline-block;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;
+    color:#60A5FA;margin-bottom:14px;
+  }
+  h2{font-size:38px;line-height:1.18;font-weight:800;color:var(--psa-white);letter-spacing:-.7px;margin-bottom:16px}
+  h3{font-size:20px;font-weight:700;color:var(--psa-white);margin-bottom:8px}
+  .section-sub{font-size:17px;color:#94A3B8}
+
+  /* PROBLEMA */
+  .problem{background:linear-gradient(180deg,var(--psa-bg) 0%,#0A0F1F 100%)}
+  .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .pain{
+    background:var(--psa-card);border:1px solid var(--psa-border);
+    padding:28px;border-radius:14px;
+    transition:transform .2s, border-color .2s;
+  }
+  .pain:hover{transform:translateY(-3px);border-color:#3B4D7E}
+  .pain-icon{
+    width:48px;height:48px;border-radius:12px;
+    background:rgba(239,68,68,.1);color:#F87171;
+    display:flex;align-items:center;justify-content:center;
+    font-size:22px;margin-bottom:18px;
+  }
+  .pain p{color:#94A3B8;font-size:15px}
+
+  /* SOLUÇÃO / BENEFÍCIOS */
+  .solution{background:#0A0F1F}
+  .benefit-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+  .benefit{
+    background:linear-gradient(180deg,var(--psa-card) 0%,#101631 100%);
+    border:1px solid var(--psa-border);border-radius:16px;padding:32px;
+    position:relative;overflow:hidden;
+  }
+  .benefit::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--psa-accent),#60A5FA,var(--psa-success));
+  }
+  .benefit-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:36px;height:36px;border-radius:10px;
+    background:rgba(59,130,246,.15);color:#60A5FA;
+    font-weight:700;font-size:15px;margin-bottom:18px;
+    border:1px solid rgba(59,130,246,.3);
+  }
+  .benefit p{color:#CBD5E1;font-size:15px}
+
+  /* COMO FUNCIONA */
+  .how{background:linear-gradient(180deg,#0A0F1F 0%,var(--psa-bg) 100%)}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:24px}
+  .step{
+    background:var(--psa-card);border:1px solid var(--psa-border);
+    padding:26px 22px;border-radius:14px;position:relative;
+  }
+  .step-num{
+    font-size:13px;font-weight:700;color:#60A5FA;
+    text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;
+  }
+  .step h4{font-size:17px;font-weight:700;color:var(--psa-white);margin-bottom:6px}
+  .step p{font-size:14px;color:#94A3B8}
+
+  /* RECEITA / DESTAQUE */
+  .highlight{
+    background:linear-gradient(135deg,#0F1A3D 0%,#0B1631 100%);
+    border-top:1px solid var(--psa-border);border-bottom:1px solid var(--psa-border);
+  }
+  .highlight-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+  .revenue-card{
+    background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.25);
+    border-radius:16px;padding:36px;
+  }
+  .revenue-card .label{color:var(--psa-success);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px}
+  .revenue-card h3{font-size:26px;color:var(--psa-white);margin-bottom:14px;line-height:1.3}
+  .revenue-card p{color:#CBD5E1}
+
+  /* FORM */
+  .form-section{
+    background:radial-gradient(800px 400px at 50% 0%,rgba(59,130,246,.1),transparent 70%),var(--psa-bg);
+  }
+  .form-wrap{
+    max-width:780px;margin:0 auto;
+    background:linear-gradient(180deg,var(--psa-card) 0%,#101631 100%);
+    border:1px solid var(--psa-border);border-radius:20px;padding:48px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.5);
+  }
+  .form-wrap h2{font-size:30px;text-align:center}
+  .form-wrap .section-sub{text-align:center;margin-bottom:36px}
+  .q-block{margin-bottom:32px;padding-bottom:28px;border-bottom:1px solid var(--psa-border)}
+  .q-block:last-of-type{border-bottom:none;margin-bottom:24px;padding-bottom:0}
+  .q-label{
+    display:block;font-size:16px;font-weight:600;color:var(--psa-white);
+    margin-bottom:14px;line-height:1.5;
+  }
+  .q-num{
+    display:inline-block;width:26px;height:26px;line-height:26px;text-align:center;
+    background:var(--psa-accent);color:#fff;border-radius:50%;font-size:13px;font-weight:700;
+    margin-right:10px;
+  }
+  .opt-list{display:flex;flex-direction:column;gap:10px}
+  .opt{
+    display:flex;align-items:center;gap:12px;
+    padding:13px 16px;background:rgba(255,255,255,.02);
+    border:1px solid var(--psa-border);border-radius:10px;cursor:pointer;
+    transition:background .15s,border-color .15s;
+    color:#CBD5E1;font-size:15px;
+  }
+  .opt:hover{background:rgba(59,130,246,.06);border-color:#3B4D7E}
+  .opt input[type=radio],.opt input[type=checkbox]{
+    accent-color:var(--psa-accent);width:18px;height:18px;cursor:pointer;
+  }
+  .opt input:checked + span{color:var(--psa-white);font-weight:500}
+  .text-input,textarea.text-input{
+    width:100%;background:rgba(255,255,255,.03);border:1px solid var(--psa-border);
+    border-radius:10px;padding:13px 16px;color:var(--psa-white);font-size:15px;
+    font-family:inherit;
+    transition:border-color .15s, background .15s;
+  }
+  .text-input:focus,textarea.text-input:focus{outline:none;border-color:var(--psa-accent);background:rgba(59,130,246,.05)}
+  textarea.text-input{resize:vertical;min-height:110px}
+  .other-input{margin-top:10px}
+  .submit-row{display:flex;justify-content:center;margin-top:36px}
+  .submit-btn{
+    background:linear-gradient(135deg,var(--psa-accent) 0%,#2563EB 100%);
+    color:#fff;border:none;padding:16px 40px;border-radius:12px;
+    font-weight:700;font-size:16px;cursor:pointer;letter-spacing:.3px;
+    box-shadow:0 8px 24px rgba(59,130,246,.4);
+    transition:transform .15s,box-shadow .15s;
+  }
+  .submit-btn:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(59,130,246,.5)}
+  .form-footer{text-align:center;margin-top:18px;color:var(--psa-muted);font-size:13px}
+
+  /* RODAPÉ */
+  footer{background:#070B18;border-top:1px solid var(--psa-border);padding:36px 0;text-align:center;color:var(--psa-muted);font-size:13px}
+  footer .brand{justify-content:center;margin-bottom:10px}
+
+  /* RESPONSIVO */
+  @media (max-width:960px){
+    .hero{padding:60px 0 70px}
+    .hero-grid{grid-template-columns:1fr;gap:40px}
+    h1{font-size:38px}
+    .pain-grid,.benefit-grid,.steps,.highlight-grid{grid-template-columns:1fr;gap:18px}
+    section{padding:64px 0}
+    h2{font-size:28px}
+    .form-wrap{padding:30px 22px}
+    .form-wrap h2{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPO -->
+<header class="topbar">
+  <div class="container topbar-inner">
+    <div class="brand">
+      <div class="brand-mark">P</div>
+      <div>
+        <div>PSA</div>
+        <div class="brand-tag">Plataforma de Palestrantes</div>
+      </div>
+    </div>
+    <a href="#pesquisa" class="cta">Participar da pesquisa</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot"></span> Pesquisa de certificação · CDLs e Associações</div>
+      <h1>Sua entidade pode <span>gerar receita</span> com palestras — e ainda entregar mais valor para os associados.</h1>
+      <p class="lead">A PSA está construindo a maior plataforma de palestrantes do Brasil. Sua CDL ou Associação Comercial é peça-chave para definir o produto: ajude a moldar a plataforma e ganhe acesso prioritário, condições especiais e uma nova fonte de receita.</p>
+      <div class="hero-cta">
+        <a href="#pesquisa" class="btn-primary">Responder pesquisa em 2 min →</a>
+        <a href="#como-funciona" class="btn-ghost">Como a plataforma funciona</a>
+      </div>
+      <div class="hero-trust">
+        <span><strong>+1.500</strong> palestrantes na rede PSA</span>
+        <span><strong>+10 anos</strong> de mercado</span>
+        <span><strong>5 questões</strong> · 2 minutos</span>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-card-title">O que a plataforma entrega</div>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Transparente</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">R$ 0</div>
+          <div class="stat-label">Para começar</div>
+        </div>
+      </div>
+      <ul class="feature-list">
+        <li><span class="check">✓</span> Busca por tema, região e perfil de palestrante</li>
+        <li><span class="check">✓</span> Faixas de investimento visíveis antes do contato</li>
+        <li><span class="check">✓</span> Solicitação de propostas e candidaturas gratuitas</li>
+        <li><span class="check">✓</span> Comissionamento por indicação para sua entidade</li>
+        <li><span class="check">✓</span> Visibilidade nacional para eventos e associados</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section class="problem">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-tag">O cenário hoje</div>
+      <h2>Contratar palestrante ainda é demorado, opaco e caro.</h2>
+      <p class="section-sub">A maior parte das CDLs e Associações depende de indicações, agências sem transparência de preço e busca manual em redes sociais — perdendo tempo e dinheiro a cada evento.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain">
+        <div class="pain-icon">⏱</div>
+        <h3>Tempo perdido</h3>
+        <p>Negociações longas e respostas demoradas atrasam o calendário de eventos da entidade.</p>
+      </div>
+      <div class="pain">
+        <div class="pain-icon">$</div>
+        <h3>Falta de transparência</h3>
+        <p>Sem visibilidade de cachê antes do contato, fica difícil planejar orçamento e justificar investimento.</p>
+      </div>
+      <div class="pain">
+        <div class="pain-icon">⚙</div>
+        <h3>Sem alavanca de receita</h3>
+        <p>Toda a verba sai do caixa — a entidade não captura valor mesmo gerando demanda recorrente para o mercado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUÇÃO -->
+<section class="solution" id="como-funciona">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-tag">A plataforma PSA</div>
+      <h2>Um único ambiente para encontrar, contratar e gerar receita com palestras.</h2>
+      <p class="section-sub">Conectamos sua entidade aos principais palestrantes do Brasil — com transparência total e modelos comerciais que beneficiam a associação e o associado.</p>
+    </div>
+
+    <div class="benefit-grid">
+      <div class="benefit">
+        <div class="benefit-num">01</div>
+        <h3>Busca inteligente por tema, região e perfil</h3>
+        <p>Filtre por área de conhecimento, faixa de cachê, disponibilidade e localização. Em minutos, sua equipe encontra o palestrante certo para cada evento da entidade.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-num">02</div>
+        <h3>Cachês e propostas com transparência total</h3>
+        <p>Faixas de investimento visíveis antes do contato. Sem ligações às cegas, sem perda de tempo com nomes fora do orçamento.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-num">03</div>
+        <h3>Contratação gratuita por candidatura</h3>
+        <p>Palestrantes podem se candidatar de forma gratuita aos eventos da sua entidade — ampliando opções e gerando networking sem custo.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-num">04</div>
+        <h3>Receita recorrente para a entidade</h3>
+        <p>Comissionamento por indicação e modelo de intermediação para que sua CDL ou Associação transforme palestras em uma fonte estável de receita.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="how">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-tag">Como funciona</div>
+      <h2>Da busca à contratação em 4 passos.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">Passo 01</div>
+        <h4>Cadastre a entidade</h4>
+        <p>Acesso prioritário e gratuito durante o período de certificação.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">Passo 02</div>
+        <h4>Busque ou publique</h4>
+        <p>Encontre palestrantes por tema ou publique uma demanda e receba candidaturas.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">Passo 03</div>
+        <h4>Negocie com transparência</h4>
+        <p>Veja cachê, agenda e portfólio antes de qualquer contato comercial.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">Passo 04</div>
+        <h4>Contrate e receba</h4>
+        <p>Feche o evento e capture comissão ou desconto — direto no caixa da entidade.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESTAQUE RECEITA -->
+<section class="highlight">
+  <div class="container highlight-grid">
+    <div>
+      <div class="section-tag">Para CDLs e Associações</div>
+      <h2>Sua entidade no centro do mercado de palestras.</h2>
+      <p class="section-sub">Mais do que uma ferramenta de busca: um canal direto de receita. Indicações, intermediação e mensalidades simbólicas se transformam em uma linha de faturamento previsível, ao mesmo tempo em que entregam um benefício concreto para os associados.</p>
+    </div>
+    <div class="revenue-card">
+      <div class="label">Modelo de receita</div>
+      <h3>Comissão sobre cada palestra contratada por associados ou pela própria entidade.</h3>
+      <p>Configurável de acordo com o porte da CDL/Associação e o volume de eventos do calendário anual. Sem custo de implantação durante a fase de certificação.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PESQUISA -->
+<section class="form-section" id="pesquisa">
+  <div class="container">
+    <div class="form-wrap">
+      <div class="section-head" style="margin-bottom:30px">
+        <div class="section-tag">Pesquisa de certificação</div>
+        <h2>Ajude a moldar a plataforma — em 2 minutos.</h2>
+        <p class="section-sub">Suas respostas definem funcionalidades, faixas de preço e modelo comercial. Quem responde entra na lista de acesso prioritário e condições especiais de lançamento.</p>
+      </div>
+
+      <form id="pesquisa-cdl" novalidate>
+        <!-- Identificação opcional -->
+        <div class="q-block">
+          <label class="q-label">Seus dados (para retorno e acesso prioritário)</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <input class="text-input" type="text" name="nome" placeholder="Nome completo" required>
+            <input class="text-input" type="email" name="email" placeholder="E-mail corporativo" required>
+            <input class="text-input" type="text" name="entidade" placeholder="CDL / Associação" required>
+            <input class="text-input" type="tel" name="telefone" placeholder="Telefone / WhatsApp">
+          </div>
+        </div>
+
+        <!-- 1 -->
+        <div class="q-block">
+          <label class="q-label"><span class="q-num">1</span>Como sua entidade contrata palestrantes hoje?</label>
+          <div class="opt-list">
+            <label class="opt"><input type="radio" name="q1" value="indicacao_direta"><span>Indicação direta</span></label>
+            <label class="opt"><input type="radio" name="q1" value="agencia"><span>Empresas de palestras ou agência</span></label>
+            <label class="opt"><input type="radio" name="q1" value="redes_sociais"><span>Busca em redes sociais</span></label>
+            <label class="opt"><input type="radio" name="q1" value="base_propria"><span>Já tenho uma base própria</span></label>
+            <label class="opt"><input type="radio" name="q1" value="outra"><span>Outra</span></label>
+          </div>
+          <input class="text-input other-input" type="text" name="q1_outra" placeholder="Qual?">
+        </div>
+
+        <!-- 2 -->
+        <div class="q-block">
+          <label class="q-label"><span class="q-num">2</span>Qual é a maior dificuldade nesse processo hoje?</label>
+          <div class="opt-list">
+            <label class="opt"><input type="radio" name="q2" value="encontrar_tema"><span>Encontrar bons palestrantes por tema</span></label>
+            <label class="opt"><input type="radio" name="q2" value="orcamento"><span>Falta de opções dentro do orçamento</span></label>
+            <label class="opt"><input type="radio" name="q2" value="preco"><span>Saber o preço antes de entrar em contato</span></label>
+            <label class="opt"><input type="radio" name="q2" value="negociacao"><span>Negociação / tempo de resposta</span></label>
+            <label class="opt"><input type="radio" name="q2" value="logistica"><span>Logística / agenda</span></label>
+            <label class="opt"><input type="radio" name="q2" value="sem_problema"><span>Não tenho problema no processo</span></label>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="q-block">
+          <label class="q-label"><span class="q-num">3</span>Se existisse uma plataforma onde sua entidade pudesse localizar palestrantes, consultar valores e até contratar de forma gratuita, o quanto isso ajudaria — tanto para gerar mais valor aos associados quanto para criar uma nova fonte de receita com indicações e intermediação?</label>
+          <div class="opt-list">
+            <label class="opt"><input type="radio" name="q3" value="muito"><span>Ajudaria muito</span></label>
+            <label class="opt"><input type="radio" name="q3" value="pouco"><span>Ajudaria um pouco</span></label>
+            <label class="opt"><input type="radio" name="q3" value="nao"><span>Não faria diferença</span></label>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="q-block">
+          <label class="q-label"><span class="q-num">4</span>Quanto sua entidade estaria disposta a pagar por mês por uma plataforma que pode gerar receita para ela?</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center">
+            <input class="text-input" type="text" name="q4_valor" placeholder="R$ valor mensal">
+            <label class="opt"><input type="radio" name="q4" value="nao_pagaria"><span>Não pagaria</span></label>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="q-block">
+          <label class="q-label"><span class="q-num">5</span>O que precisaria existir na plataforma para que sua entidade considerasse pagar por ela?</label>
+          <textarea class="text-input" name="q5" placeholder="Funcionalidades, integrações, modelo comercial, garantias..."></textarea>
+        </div>
+
+        <div class="submit-row">
+          <button class="submit-btn" type="submit">Enviar respostas e garantir acesso prioritário →</button>
+        </div>
+        <div class="form-footer">Levam menos de 2 minutos. Suas respostas são confidenciais e usadas apenas para o desenvolvimento da plataforma PSA.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="brand">
+      <div class="brand-mark">P</div>
+      <div>PSA · Plataforma de Palestrantes</div>
+    </div>
+    © PSA — Pesquisa de certificação · LP 1 · CDLs e Associações Comerciais e Empresariais
+  </div>
+</footer>
+
+</body>
+</html>

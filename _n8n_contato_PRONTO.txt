@@ -1,0 +1,26 @@
+{{ (() => {
+  const b = $('Webhook').item.json.body || {};
+  const c = b.Customer || {}; const p = b.Product || {};
+  const dig = s => String(s||'').replace(/\D/g,'');
+  const normTel = raw => { let d = dig(raw).replace(/^0+/,''); if(!d) return null;
+    if(d.length>=12 && d.startsWith('55')) return '+'+d;
+    if(d.length===10 || d.length===11) return '+55'+d;
+    if(d.length===12 || d.length===13) return '+'+d; return null; };
+  const fixEmail = raw => { let e=String(raw||'').trim().toLowerCase().replace(/\s+/g,'');
+    const at=e.lastIndexOf('@'); if(at<1) return e;
+    let u=e.slice(0,at), d=e.slice(at+1);
+    d=d.replace(/^(gmial|gmai|gmaill)\./,'gmail.');
+    d=d.replace(/^(gmail|hotmail|outlook|live|icloud)\.[a-z.]+$/,'$1.com');
+    d=d.replace(/\.(con|vom|comi|copm|cmo|ocm|c0m|om|cim)$/,'.com');
+    d=d.replace(/^yahoo\.(con|cm|vom)$/,'yahoo.com');
+    return u+'@'+d; };
+  const email = fixEmail(b.email ?? c.email);
+  const tel = normTel(b.phone ?? c.mobile);
+  const status = ({ "Concluido": true, "Abandonou carrinho": false, "Cancelado": "Cancelado", "Aguardando pagamento": "Aguardando pagamento" })[b.status] ?? "Aguardando pagamento";
+  const props = { email, firstname: (b.name ?? c.full_name ?? ""), website: (b.product_id ?? p.product_id ?? ""), tbschool__status_do_checkout: status };
+  if (tel) props.phone = tel;
+  if (b.product_name ?? p.product_name) props.tbschool__produto_de_interesse = (b.product_name ?? p.product_name);
+  if (b.checkout_link) props.tbschool__link_checkout = "https://pay.kiwify.com/" + b.checkout_link;
+  if (b.created_at) props.tbschool__data_que_iniciou_checkout = b.created_at;
+  return JSON.stringify({ inputs: [ { idProperty: "email", id: email, properties: props } ] });
+})() }}

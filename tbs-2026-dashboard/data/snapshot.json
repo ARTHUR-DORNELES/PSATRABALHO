@@ -1,0 +1,343 @@
+{
+  "$schema": "./snapshot.schema",
+  "generatedAt": "2026-05-18T19:30:00.000Z",
+  "source": "HubSpot via Claude Code MCP (portal 49656171)",
+  "currentEdition": 2026,
+  "phases": [
+    { "key": "inscricoes", "label": "Inscrições Abertas (Todas Regiões)", "start": "2026-06-01", "end": "2026-08-31" },
+    { "key": "live1", "label": "Data sugestão Live 1", "start": "2026-07-16", "end": "2026-07-16" },
+    { "key": "anuncio_200", "label": "Anúncio dos 200 selecionados", "start": "2026-09-07", "end": "2026-09-07" },
+    { "key": "eliminatoria", "label": "Eliminatória", "start": "2026-09-08", "end": "2026-09-14" },
+    { "key": "anuncio_20", "label": "Anúncio dos 20 classificados para o Reality", "start": "2026-09-21", "end": "2026-09-21" },
+    { "key": "gravacao_reality", "label": "Gravação do Reality Show", "start": "2026-11-13", "end": "2026-11-18" },
+    { "key": "ensaio_final", "label": "Ensaio para a Final", "start": "2026-11-19", "end": "2026-11-20" },
+    { "key": "final", "label": "Grande Final do TBS 2026", "start": "2026-11-21", "end": "2026-11-21" }
+  ],
+  "headline": {
+    "edition2024": { "total": 31731, "label": "TBS 2024", "note": "Histórico — origem macro" },
+    "edition2025": { "total": 9966, "label": "TBS 2025", "note": "Janela jun-nov/2025 (proxy: createdate)" },
+    "edition2026": {
+      "total": 0,
+      "label": "TBS 2026",
+      "note": "Inscrições abertas em 01/06/2026 — contagem começa do zero e sobe com inscrições reais",
+      "interesse": 0
+    }
+  },
+  "funnel": {
+    "edition": 2026,
+    "label": "Funil TBS 2026",
+    "stages": [
+      { "key": "inscricao_confirmada", "label": "Inscrição confirmada", "value": 0, "absolute": true },
+      { "key": "completou_cadastro", "label": "Completou cadastro", "value": 0, "absolute": true },
+      { "key": "upload_video_concluido", "label": "Upload vídeo concluído", "value": 0, "absolute": true },
+      { "key": "analise_ia_pronto", "label": "Análise de IA pronto", "value": 0, "absolute": true }
+    ],
+    "conversion": {}
+  },
+  "timeseries": {
+    "label": "Inscrições por mês — comparação por edição",
+    "months": [
+      { "month": "jan", "y2024": 0, "y2025": 0, "y2026": 14 },
+      { "month": "fev", "y2024": 0, "y2025": 0, "y2026": 10 },
+      { "month": "mar", "y2024": 0, "y2025": 0, "y2026": 8 },
+      { "month": "abr", "y2024": 0, "y2025": 0, "y2026": 5 },
+      { "month": "mai", "y2024": 0, "y2025": 0, "y2026": 5 },
+      { "month": "jun", "y2024": 6800, "y2025": 2000, "y2026": 0 },
+      { "month": "jul", "y2024": 9200, "y2025": 3500, "y2026": 0 },
+      { "month": "ago", "y2024": 6400, "y2025": 1800, "y2026": 0 },
+      { "month": "set", "y2024": 4500, "y2025": 1500, "y2026": 0 },
+      { "month": "out", "y2024": 3000, "y2025": 700, "y2026": 0 },
+      { "month": "nov", "y2024": 1831, "y2025": 466, "y2026": 0 },
+      { "month": "dez", "y2024": 0, "y2025": 0, "y2026": 0 }
+    ],
+    "note": "y2024 estimado proporcionalmente sobre 31.731 (sem granularidade mensal real). y2025 baseado em sample de 200 contatos + estimativa da janela. y2026 são dados reais (HubSpot) — majoritariamente testes da equipe."
+  },
+  "origem": {
+    "macro": [
+      { "label": "TBS 2024", "value": 31731 },
+      { "label": "Outras origens", "value": 31731 },
+      { "label": "Lead Nativo", "value": 0, "note": "Não preenchido na base atual" }
+    ],
+    "analyticsSource": [
+      { "label": "OFFLINE", "value": 9318, "pct": 0.935 },
+      { "label": "PAID_SOCIAL", "value": 199, "pct": 0.02 },
+      { "label": "DIRECT_TRAFFIC", "value": 199, "pct": 0.02 },
+      { "label": "PAID_SEARCH", "value": 99, "pct": 0.01 },
+      { "label": "ORGANIC_SEARCH", "value": 99, "pct": 0.01 },
+      { "label": "REFERRALS", "value": 50, "pct": 0.005 }
+    ],
+    "noteOrigem": "TBS 2025 inteiro está em 'Outras origens' porque 'TBS 2025' não foi adicionado como opção no enum.",
+    "noteSource": "93,5% OFFLINE indica que a captura atual quase não passa pelo HubSpot tracking — atribuição de canal está quebrada (já identificado no Discovery MKT OPS)."
+  },
+  "parceiros": {
+    "edition": "all_time",
+    "label": "Parceiros — ranking de inscritos trazidos (todos os tempos)",
+    "ranking": [
+      { "partner": "Janaína Rost", "count": 5, "aliases": ["Janaina Rost", "Janaína Rost", "JANA ROST Carreira e Aprendizado"] },
+      { "partner": "Danilo Haenni Zimerman", "count": 4, "aliases": ["Danilo Haenni Zimerman"] },
+      { "partner": "Tatá Scaroni", "count": 2, "aliases": ["Tatá Scaroni"] },
+      { "partner": "Virginia Vairo", "count": 2, "aliases": ["Virginia Vairo", "VIRGINIA VAIRO BRAILE"] },
+      { "partner": "Malu Siqueira", "count": 1, "aliases": ["Malu Siqueira"] }
+    ],
+    "trash": [
+      { "label": "Teste", "count": 1 },
+      { "label": "Tste leo", "count": 1 },
+      { "label": "Teste Iago", "count": 1 }
+    ],
+    "totalContatos": 17,
+    "validosAposNormalizacao": 14,
+    "note": "Lista oficial de parceiros 2026 ainda em fechamento. Hoje 'nome_do_parceiro' é texto livre — vide alerta."
+  },
+  "demografia": {
+    "regiao": {
+      "available": false,
+      "reason": "regiao_tbs está 0% populado em TBS 2025 (workflow não capturava)",
+      "distribuicao": []
+    },
+    "momento": {
+      "available": true,
+      "respondedAbsolute": 1246,
+      "respondedPct": 0.125,
+      "distribuicao": [
+        { "label": "Já palestrei sendo remunerado", "value": 449, "pct": 0.36 },
+        { "label": "Já palestrei gratuitamente", "value": 349, "pct": 0.28 },
+        { "label": "Não informado", "value": 349, "pct": 0.28 },
+        { "label": "Nunca palestrei", "value": 99, "pct": 0.08 }
+      ]
+    },
+    "interesse2026": { "true": 0, "false": 0 }
+  },
+  "daily": {
+    "edition2026": {
+      "label": "Atividade diária TBS 2026",
+      "inscricoes": [],
+      "videos": [],
+      "votos": [],
+      "note": "Inscrições oficialmente abrem em 01/06/2026 (página de conversão ainda não está no ar). Tudo zerado até lá."
+    },
+    "edition2025Reference": {
+      "label": "Sample dos primeiros 11 dias TBS 2025 (200 inscritos)",
+      "inscricoes": [
+        { "date": "2025-06-01", "count": 1 },
+        { "date": "2025-06-02", "count": 9 },
+        { "date": "2025-06-03", "count": 9 },
+        { "date": "2025-06-04", "count": 36 },
+        { "date": "2025-06-05", "count": 18 },
+        { "date": "2025-06-06", "count": 21 },
+        { "date": "2025-06-07", "count": 8 },
+        { "date": "2025-06-08", "count": 2 },
+        { "date": "2025-06-09", "count": 7 },
+        { "date": "2025-06-10", "count": 69 },
+        { "date": "2025-06-11", "count": 20 }
+      ],
+      "videos": [
+        { "date": "2025-06-04", "count": 1 },
+        { "date": "2025-06-05", "count": 1 },
+        { "date": "2025-06-10", "count": 1 },
+        { "date": "2025-06-11", "count": 1 },
+        { "date": "2025-06-14", "count": 1 },
+        { "date": "2025-06-24", "count": 1 },
+        { "date": "2025-06-26", "count": 1 },
+        { "date": "2025-07-08", "count": 1 },
+        { "date": "2025-07-24", "count": 1 },
+        { "date": "2025-07-28", "count": 1 },
+        { "date": "2025-07-30", "count": 2 },
+        { "date": "2025-07-31", "count": 4 },
+        { "date": "2025-08-12", "count": 1 },
+        { "date": "2025-08-20", "count": 1 },
+        { "date": "2025-08-29", "count": 1 },
+        { "date": "2025-08-30", "count": 1 },
+        { "date": "2025-08-31", "count": 1 },
+        { "date": "2025-09-01", "count": 1 },
+        { "date": "2025-09-16", "count": 1 },
+        { "date": "2025-09-17", "count": 1 },
+        { "date": "2025-09-23", "count": 1 },
+        { "date": "2025-09-24", "count": 1 }
+      ],
+      "votos": [],
+      "note": "Sample de 200 inscritos no início do TBS 2025 (jun/2025). Vídeos enviados ao longo de jun-set. Voto (data_do_voto) não foi capturado nesta sample."
+    }
+  },
+  "perfil": {
+    "label": "Perfil dos inscritos TBS 2025 (extrapolado de sample de 200 sobre 9.966)",
+    "idade": {
+      "respondedAbsolute": 2093,
+      "respondedPct": 0.21,
+      "buckets": [
+        { "label": "18-24", "value": 50, "pct": 0.024 },
+        { "label": "25-34", "value": 348, "pct": 0.167 },
+        { "label": "35-44", "value": 1046, "pct": 0.5 },
+        { "label": "45-54", "value": 440, "pct": 0.214 },
+        { "label": "55-64", "value": 199, "pct": 0.095 }
+      ],
+      "note": "Faixa dominante 35-44 (50%). Apenas 21% da base preencheu data de nascimento."
+    },
+    "estados": {
+      "respondedAbsolute": 2043,
+      "respondedPct": 0.205,
+      "top": [
+        { "uf": "SP", "value": 448, "pct": 0.22 },
+        { "uf": "MG", "value": 399, "pct": 0.195 },
+        { "uf": "PE", "value": 199, "pct": 0.098 },
+        { "uf": "BA", "value": 199, "pct": 0.098 },
+        { "uf": "PR", "value": 150, "pct": 0.073 },
+        { "uf": "SC", "value": 99, "pct": 0.049 },
+        { "uf": "RS", "value": 99, "pct": 0.049 },
+        { "uf": "PA", "value": 99, "pct": 0.049 },
+        { "uf": "MS", "value": 99, "pct": 0.049 },
+        { "uf": "RJ", "value": 50, "pct": 0.024 },
+        { "uf": "GO", "value": 50, "pct": 0.024 },
+        { "uf": "MA", "value": 50, "pct": 0.024 },
+        { "uf": "RO", "value": 50, "pct": 0.024 },
+        { "uf": "CE", "value": 50, "pct": 0.024 }
+      ],
+      "note": "14 UFs representadas em TBS 2025. SP + MG concentram 41% do total. Apenas 20,5% preencheu estado."
+    },
+    "generoNorm": {
+      "respondedAbsolute": 1694,
+      "respondedPct": 0.17,
+      "distribuicao": [
+        { "label": "Masculino", "value": 996, "pct": 0.588 },
+        { "label": "Feminino", "value": 698, "pct": 0.412 }
+      ],
+      "rawDistinctValues": ["masculino (19)", "feminino (14)", "Masculino (1)"],
+      "note": "59% Masculino / 41% Feminino após normalização. Campo tinha 3 grafias diferentes na sample (e existem até 6 na base completa)."
+    },
+    "areaAtuacao": {
+      "respondedAbsolute": 1644,
+      "respondedPct": 0.165,
+      "top": [
+        { "label": "Empreendedorismo", "value": 199, "pct": 0.121 },
+        { "label": "Comunicacao", "value": 199, "pct": 0.121 },
+        { "label": "Motivacao", "value": 150, "pct": 0.091 },
+        { "label": "Desenvolvimento_Pessoal", "value": 150, "pct": 0.091 },
+        { "label": "Educacao_Corporativa", "value": 150, "pct": 0.091 },
+        { "label": "Cultura_Organizacional", "value": 100, "pct": 0.061 },
+        { "label": "Inteligencia_Emocional", "value": 100, "pct": 0.061 },
+        { "label": "Psicologia", "value": 100, "pct": 0.061 },
+        { "label": "Saude_Mental", "value": 100, "pct": 0.061 },
+        { "label": "Vendas", "value": 100, "pct": 0.061 },
+        { "label": "Educação", "value": 50, "pct": 0.03 },
+        { "label": "Marketing", "value": 50, "pct": 0.03 },
+        { "label": "Gestao_de_Pessoas", "value": 50, "pct": 0.03 },
+        { "label": "Lideranca", "value": 50, "pct": 0.03 },
+        { "label": "Jurídica", "value": 50, "pct": 0.03 }
+      ],
+      "note": "16,5% preencheu área. Valores misturados (snake_case vs Título), e há respostas livres tipo 'Cultura, Lideratura, Direitos Humanos' — sugere virar dropdown."
+    }
+  },
+  "emailsTbs": {
+    "label": "Régua de e-mails TBS 2025 (em qual disparo cada contato está)",
+    "respondedAbsolute": 7176,
+    "respondedPct": 0.72,
+    "distribuicao": [
+      { "label": "E-mail #0 (boas-vindas)", "rawValue": "E-mail #0", "value": 1248, "pct": 0.174 },
+      { "label": "E-mail #1 (lembrete inscrição)", "rawValue": "E-mail #1", "value": 4133, "pct": 0.576 },
+      { "label": "E-mail #1.1 (reforço inscrição)", "rawValue": "E-mail #1.1", "value": 1543, "pct": 0.215 },
+      { "label": "E-mail #2 (envio de vídeo)", "rawValue": "E-mail #2", "value": 251, "pct": 0.035 }
+    ],
+    "note": "72% da base TBS 2025 recebeu pelo menos um disparo. Maioria (58%) parou no E-mail #1 — sinal de que a régua perde força após o primeiro envio. Apenas 3,5% chegou ao E-mail #2 (envio de vídeo)."
+  },
+  "channels": {
+    "label": "Canais de entrada — TBS 2026",
+    "sampleSize": 0,
+    "totalInPeriod": 0,
+    "coverage": {
+      "withSignal": 0,
+      "withSignalPct": 0,
+      "noSignal": 0,
+      "noSignalPct": 0
+    },
+    "offlineInvestigation": {
+      "sampleSize": 200,
+      "total": 7780,
+      "title": "Investigação dos 7.780 OFFLINE",
+      "subtitle": "sample 200 cruzando hs_object_source / hs_email_domain / lifecyclestage",
+      "bySource": [
+        { "label": "INTEGRATION → Time Tech", "value": 197, "pct": 0.985 },
+        { "label": "INTEGRATION → Google Meet", "value": 2, "pct": 0.01 },
+        { "label": "(sem label) → Time Tech", "value": 1, "pct": 0.005 }
+      ],
+      "byDomain": [
+        { "label": "gmail.com", "value": 136, "pct": 0.68 },
+        { "label": "hotmail.com", "value": 26, "pct": 0.13 },
+        { "label": "yahoo.com.br", "value": 8, "pct": 0.04 },
+        { "label": "tuamaeaquelaursa.com", "value": 4, "pct": 0.02 },
+        { "label": "outlook.com", "value": 2, "pct": 0.01 },
+        { "label": "icloud.com", "value": 2, "pct": 0.01 },
+        { "label": "profissionaissa.com (interno)", "value": 2, "pct": 0.01 },
+        { "label": "Outros corporativos (long tail)", "value": 20, "pct": 0.10 }
+      ],
+      "byLifecycle": [
+        { "label": "subscriber", "value": 184, "pct": 0.92 },
+        { "label": "customer", "value": 4, "pct": 0.02 },
+        { "label": "Custom stage IDs (12 distintos)", "value": 12, "pct": 0.06 }
+      ],
+      "byConversionEvents": [
+        { "label": "0 forms HubSpot", "value": 186, "pct": 0.93 },
+        { "label": "1 form HubSpot", "value": 10, "pct": 0.05 },
+        { "label": "≥ 3 forms HubSpot", "value": 4, "pct": 0.02 }
+      ],
+      "keyFinding": "98,5% dos 'OFFLINE' são contatos criados via integração 'Time Tech' (hs_object_source_detail_1). São inscritos REAIS do form principal, criados via API HubSpot sem hs_analytics_source. Perfil: 68% Gmail, 13% Hotmail, 92% lifecyclestage = subscriber, 93% sem form submission HubSpot.",
+      "actionItem": "Acompanhamento: a integração 'Time Tech' agora tem um workflow ativo (29/05) populando utm_*_tbs nos contatos. Conforme o workflow processar retroativos e novos contatos forem entrando, a categoria 'Não rastreado' deve diminuir e os canais de UTM começarão a aparecer no bloco de cima."
+    },
+    "buckets": [
+      { "key": "email", "label": "Email marketing", "description": "fonte [TBS] = Email Marketing", "count": 0, "pct": 0 },
+      { "key": "whatsapp", "label": "WhatsApp", "description": "fonte [TBS] = Organic Social + detalhamento WhatsApp", "count": 0, "pct": 0 },
+      { "key": "paid_social", "label": "Social Pago", "description": "fonte [TBS] = Paid Social", "count": 0, "pct": 0 },
+      { "key": "organic_social", "label": "Social Orgânico", "description": "fonte [TBS] = Organic Social", "count": 0, "pct": 0 },
+      { "key": "paid_search", "label": "Pesquisa Paga", "description": "fonte [TBS] = Paid Search", "count": 0, "pct": 0 },
+      { "key": "comunidade", "label": "Comunidade", "description": "utm_source_tbs = comunidade", "count": 0, "pct": 0 },
+      { "key": "direto", "label": "Direto", "description": "tráfego direto (hs_analytics_source = DIRECT_TRAFFIC)", "count": 0, "pct": 0 },
+      { "key": "untracked", "label": "Não rastreado / sem fonte", "description": "sem nenhum sinal de origem", "count": 0, "pct": 0 }
+    ],
+    "topUtmSource": [],
+    "topUtmMedium": [],
+    "topUtmCampaign": [],
+    "note": "Origens classificadas por fonte__tbs_ + detalhamento (UTM). Organic Social + WhatsApp conta como WhatsApp."
+  },
+  "alertasTagueamento": [
+    {
+      "severity": "info",
+      "titulo": "Workflow utm_*_tbs ligado em 29/05 — populando retroativo",
+      "detalhe": "98,5% dos 7.780 contatos 'OFFLINE' do TBS 2025 vieram da integração 'Time Tech' (hs_object_source_detail_1) — inscritos reais do form principal sem UTMs no analytics_source. O workflow que popula utm_source_tbs / utm_medium_tbs / utm_campaign_tbs / utm_content_tbs / utm_term_tbs estava desligado e foi ativado em 29/05/2026. Está processando retroativos (2 contatos populados até agora) e vai pegar novos contatos automaticamente.",
+      "fix": "Acompanhar via 'Atualizar dados' a cobertura subir nos próximos dias. A seção 'Canais de entrada' vai começar a mostrar rankings de utm_source/medium/campaign à medida que mais contatos forem populados."
+    },
+    {
+      "severity": "warn",
+      "titulo": "Cobertura de UTM ainda baixa — 78% dos leads TBS 2025 sem rastreio",
+      "detalhe": "Em sample de 200 contatos TBS 2025, apenas 12% têm algum sinal de canal (UTM, analytics_source válido ou fonte_tbs). Os 88% restantes entram como OFFLINE sem distinção. Mídia paga e CRM têm parcial rastreio via UTMs (Facebook, hs_automation). Redes sociais orgânicas e Google Ads não são distinguíveis hoje.",
+      "fix": "(1) Padronizar UTMs em TODAS as campanhas seguindo reference_utm_standard.md (orgânico social, paid social, paid search, email CRM). (2) Criar workflow HubSpot que preenche origem_do_lead automaticamente baseado em utm_source/utm_medium quando contato é criado/atualizado. (3) Validar pixel/tag presence em todas as LPs TBS antes de 01/06."
+    },
+    {
+      "severity": "danger",
+      "titulo": "nome_do_parceiro é texto livre",
+      "detalhe": "Já temos 3 variações da mesma parceira ('Janaina Rost' / 'Janaína Rost' / 'JANA ROST Carreira e Aprendizado') e 3 contatos de lixo de teste. Se parceiros forem pagos por inscrito, isso vira reconciliação manual.",
+      "fix": "Converter para 'Dropdown select' no HubSpot UI (Settings → Properties) e popular com lista oficial."
+    },
+    {
+      "severity": "warn",
+      "titulo": "tbs___origem_macro sem 'TBS 2025'",
+      "detalhe": "Os ~10k inscritos de 2025 caíram em 'Outras origens'. Você perdeu a granularidade do ano passado para usar como base 2026.",
+      "fix": "Adicionar 'TBS 2025' como opção e fazer backfill via createdate jun-nov/2025."
+    },
+    {
+      "severity": "warn",
+      "titulo": "regiao_tbs 100% vazio em TBS 2025",
+      "detalhe": "Campo existe (5 regiões BR) mas o workflow de inscrição não capturou em 2025.",
+      "fix": "Adicionar pergunta de região no formulário de inscrição 2026."
+    },
+    {
+      "severity": "info",
+      "titulo": "genero_tbs com 6 grafias diferentes",
+      "detalhe": "'Feminino', 'feminino', 'Mulher', 'Masculino', 'masculino' aparecem misturados.",
+      "fix": "Converter para Dropdown ou aplicar normalização (lowercase + de-para)."
+    },
+    {
+      "severity": "danger",
+      "titulo": "hs_analytics_source: 93,5% OFFLINE",
+      "detalhe": "Atribuição de canal está quase totalmente vazia — quase nada vem via tracking web. Já identificado no Discovery MKT OPS.",
+      "fix": "Religar Meta Pixel, conectar Google Ads ↔ HubSpot, configurar GSC."
+    }
+  ]
+}

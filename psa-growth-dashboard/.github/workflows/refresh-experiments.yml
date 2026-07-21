@@ -1,0 +1,33 @@
+# Sincroniza os experimentos de hora em hora (puxa HubSpot, recalcula).
+# Roda via CLI (npm run sync) para contornar o limite de 60s do Vercel.
+# Se este projeto for um subdiretório de um monorepo, mova este arquivo
+# para .github/workflows/ na RAIZ do repositório e ajuste o working-directory.
+name: Refresh experimentos (sync)
+
+on:
+  schedule:
+    - cron: "0 * * * *" # a cada hora
+  workflow_dispatch: {}
+
+concurrency:
+  group: growth-sync
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: psa-growth-dashboard
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run sync
+        env:
+          USE_MOCK_DATA: "false"
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          HUBSPOT_PRIVATE_APP_TOKEN: ${{ secrets.HUBSPOT_PRIVATE_APP_TOKEN }}

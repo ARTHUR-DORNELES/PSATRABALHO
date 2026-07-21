@@ -1,0 +1,31 @@
+{{ (() => {
+  const w = $('Webhook').item.json.body;
+  // Chave = e-mail + produto. Funde abandono → pix/aguardando → fechado num ÚNICO negócio.
+  // (Voltamos disso: order_id criava negócios separados porque abandono/pix não têm order_id → órfãos.)
+  const chave = String(w.Customer.email || '').trim().toLowerCase() + "_" + w.Product.product_id;
+  return JSON.stringify({
+    inputs: [
+      {
+        idProperty: "kiwify_chave",
+        id: chave,
+        properties: Object.assign(
+          {
+            kiwify_chave: chave,
+            kiwify_order_id: w.order_id,
+            dealname: w.Customer.full_name + " - " + w.Product.product_name,
+            amount: String((w.Commissions?.my_commission ?? 0) / 100),
+            pipeline: "904543067",
+            dealstage: w.webhook_event_type === "order_approved"
+              ? (({ paid: "1372708683", refused: "1372708684", refunded: "1372708684", chargedback: "1372708684" })[w.order_status] ?? "1372708679")
+              : "1372708679",
+            tbschool__forma_de_pagamento: w.payment_method,
+            tbschool__produto_de_interesse: w.Product.product_name,
+            tbschool__valor_da_compra: String((w.Commissions?.charge_amount ?? 0) / 100)
+          },
+          w.pix_code ? { tbschool__codigo_do_pix: w.pix_code } : {},
+          w.boleto_barcode ? { tbschool__codigo_do_boleto: w.boleto_barcode } : {}
+        )
+      }
+    ]
+  });
+})() }}

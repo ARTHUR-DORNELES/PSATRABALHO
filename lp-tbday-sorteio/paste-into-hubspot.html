@@ -1,0 +1,299 @@
+<!-- ====================================================================
+     CONTEÚDO PRONTO PRA COLAR NO RICH TEXT DO HUBSPOT (modo source/código-fonte).
+
+     INSTRUÇÕES:
+     1. Abre este arquivo no Bloco de Notas (botão direito → Abrir com → Bloco de Notas)
+     2. Ctrl+A pra selecionar tudo
+     3. Ctrl+C pra copiar
+     4. No HubSpot, dentro do módulo Rich Text, clica no ícone </> (source/código-fonte)
+     5. Ctrl+V pra colar tudo. Salva.
+
+     ATENÇÃO — se o form do HubSpot não aparecer depois de publicar:
+       Vá em "Configurações" da página → "Avançado" → "Códigos adicionais" → "Cabeçalho"
+       e cole APENAS esta linha:
+         <script src="https://js.hsforms.net/forms/embed/49656171.js" defer></script>
+     ==================================================================== -->
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --psa-bg:#0A0A12;--psa-card:#181826;--psa-border:#2A2A3D;--psa-border-strong:#3A3A55;
+    --psa-orange:#FF5E1A;--psa-orange-soft:#FF7A3D;--psa-orange-glow:rgba(255,94,26,.35);
+    --psa-success:#22C55E;--psa-muted:#8B8BA8;--psa-text:#D9D9E8;--psa-white:#FFFFFF;
+  }
+  .psa-lp *{box-sizing:border-box;margin:0;padding:0}
+  .psa-lp{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:var(--psa-bg);color:var(--psa-text);line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .psa-lp a{color:inherit;text-decoration:none}
+  .psa-lp .container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+  /* HERO */
+  .psa-lp .hero{position:relative;overflow:hidden;padding:90px 0 100px;
+    background:radial-gradient(900px 500px at 75% -10%,rgba(255,94,26,.22),transparent 65%),radial-gradient(600px 400px at -10% 110%,rgba(255,176,102,.08),transparent 60%),var(--psa-bg);}
+  .psa-lp .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:64px;align-items:center;position:relative;z-index:1}
+  .psa-lp .eyebrow{display:inline-flex;align-items:center;gap:10px;background:rgba(255,94,26,.10);color:var(--psa-orange-soft);border:1px solid rgba(255,94,26,.35);padding:7px 16px;border-radius:999px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.6px;margin-bottom:28px}
+  .psa-lp .eyebrow .pulse{width:8px;height:8px;background:var(--psa-orange);border-radius:50%;box-shadow:0 0 0 0 rgba(255,94,26,.6);animation:psa-pulse 2s infinite}
+  @keyframes psa-pulse{0%{box-shadow:0 0 0 0 rgba(255,94,26,.6)}70%{box-shadow:0 0 0 10px rgba(255,94,26,0)}100%{box-shadow:0 0 0 0 rgba(255,94,26,0)}}
+  .psa-lp h1{font-size:60px;line-height:1.04;font-weight:900;color:var(--psa-white);letter-spacing:-1.8px;margin-bottom:24px}
+  .psa-lp h1 .underline{background:linear-gradient(120deg,var(--psa-orange) 0%,var(--psa-orange-soft) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .psa-lp .lead{font-size:20px;color:#B8B8CF;max-width:600px;margin-bottom:36px;line-height:1.55}
+  .psa-lp .lead strong{color:var(--psa-white);font-weight:600}
+  .psa-lp .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px}
+  .psa-lp .btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--psa-orange);color:#fff;padding:16px 30px;border-radius:10px;font-weight:700;font-size:15px;border:1px solid var(--psa-orange);transition:transform .15s,background .15s,box-shadow .2s;box-shadow:0 10px 30px var(--psa-orange-glow);text-transform:uppercase;letter-spacing:.6px}
+  .psa-lp .btn-primary:hover{background:#FF6D2E;transform:translateY(-2px);box-shadow:0 14px 36px rgba(255,94,26,.5)}
+  .psa-lp .btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--psa-text);padding:16px 24px;border-radius:10px;border:1px solid var(--psa-border-strong);font-weight:600;font-size:15px;transition:background .15s,border-color .15s}
+  .psa-lp .btn-ghost:hover{background:rgba(255,255,255,.04);border-color:var(--psa-orange-soft)}
+  .psa-lp .hero-trust{display:flex;gap:32px;align-items:center;color:var(--psa-muted);font-size:13px;flex-wrap:wrap}
+  .psa-lp .hero-trust .item{display:flex;align-items:center;gap:8px}
+  .psa-lp .hero-trust strong{color:var(--psa-white);font-weight:700;font-size:15px;display:block;letter-spacing:-.3px}
+  .psa-lp .hero-trust .label{font-size:12px;text-transform:uppercase;letter-spacing:.8px}
+
+  /* PRIZE CARD */
+  .psa-lp .prize-card{background:linear-gradient(160deg,#1A1A2A 0%,#0F0F1A 100%);border:1px solid var(--psa-border-strong);border-radius:20px;padding:32px;box-shadow:0 30px 80px -20px rgba(0,0,0,.7),0 0 0 1px rgba(255,94,26,.08) inset;position:relative;overflow:hidden}
+  .psa-lp .prize-tag{display:inline-block;background:var(--psa-orange);color:#fff;padding:6px 14px;border-radius:6px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.6px;margin-bottom:18px}
+  .psa-lp .prize-card h3{font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:var(--psa-muted);font-weight:700;margin-bottom:8px}
+  .psa-lp .prize-num{font-size:80px;font-weight:900;line-height:1;letter-spacing:-3px;margin-bottom:6px;background:linear-gradient(135deg,#fff 30%,var(--psa-orange-soft) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .psa-lp .prize-label{font-size:18px;color:var(--psa-white);font-weight:700;margin-bottom:24px}
+  .psa-lp .prize-detail{background:rgba(255,255,255,.03);border:1px solid var(--psa-border);border-radius:12px;padding:18px 20px;margin-bottom:14px;display:flex;align-items:center;gap:14px}
+  .psa-lp .prize-detail-icon{width:38px;height:38px;border-radius:9px;flex-shrink:0;background:rgba(255,94,26,.12);color:var(--psa-orange-soft);display:flex;align-items:center;justify-content:center;font-size:18px}
+  .psa-lp .prize-detail-text{font-size:14px;color:#CCCCDD;line-height:1.45}
+  .psa-lp .prize-detail-text strong{color:var(--psa-white);font-weight:700}
+  .psa-lp .prize-cta{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:24px;background:var(--psa-orange);color:#fff;padding:15px 22px;border-radius:11px;font-weight:800;font-size:14.5px;text-transform:uppercase;letter-spacing:.6px;box-shadow:0 10px 28px var(--psa-orange-glow);transition:transform .15s,background .15s;position:relative;z-index:1}
+  .psa-lp .prize-cta:hover{background:#FF6D2E;transform:translateY(-2px)}
+  .psa-lp .prize-footer{margin-top:18px;text-align:center;font-size:12px;color:var(--psa-muted);text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;justify-content:center;gap:8px}
+  .psa-lp .dot-live{width:8px;height:8px;background:var(--psa-success);border-radius:50%;animation:psa-pulse-live 2s infinite}
+  @keyframes psa-pulse-live{0%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}70%{box-shadow:0 0 0 8px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+
+  /* SEÇÕES */
+  .psa-lp section{padding:90px 0}
+  .psa-lp .section-head{text-align:center;max-width:820px;margin:0 auto 60px}
+  .psa-lp .section-tag{display:inline-block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:var(--psa-orange);margin-bottom:16px}
+  .psa-lp h2{font-size:44px;line-height:1.12;font-weight:900;color:var(--psa-white);letter-spacing:-1.2px;margin-bottom:18px}
+  .psa-lp h2 .accent{color:var(--psa-orange)}
+  .psa-lp h3{font-size:22px;font-weight:800;color:var(--psa-white);margin-bottom:10px;letter-spacing:-.3px}
+  .psa-lp .section-sub{font-size:18px;color:#A8A8C0;line-height:1.55}
+
+  /* PROGRAMA */
+  .psa-lp .program{background:#080810}
+  .psa-lp .program-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:980px;margin:0 auto}
+  .psa-lp .mod{background:linear-gradient(180deg,var(--psa-card) 0%,#13131F 100%);border:1px solid var(--psa-border);border-radius:16px;padding:32px 28px;transition:border-color .25s,transform .25s}
+  .psa-lp .mod:hover{border-color:var(--psa-orange-soft);transform:translateY(-3px)}
+  .psa-lp .mod-num{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:11px;background:rgba(255,94,26,.12);color:var(--psa-orange);font-weight:900;font-size:16px;margin-bottom:20px;border:1px solid rgba(255,94,26,.25);letter-spacing:-.5px}
+  .psa-lp .mod h3{font-size:19px;margin-bottom:10px}
+  .psa-lp .mod p{color:#9F9FB8;font-size:15px;line-height:1.55}
+
+  /* FORM */
+  .psa-lp .form-section{background:radial-gradient(1100px 600px at 50% 0%,rgba(255,94,26,.18),transparent 70%),radial-gradient(700px 400px at 50% 100%,rgba(255,94,26,.08),transparent 70%),var(--psa-bg);padding:100px 0}
+  .psa-lp .form-header{text-align:center;margin:0 auto 32px;max-width:720px}
+  .psa-lp .form-header h2{font-size:38px;margin-bottom:16px;color:var(--psa-white)}
+  .psa-lp .form-header .section-sub{font-size:17px;max-width:580px;margin:0 auto;color:#B8B8CF}
+  .psa-lp .form-progress{display:inline-flex;align-items:center;gap:10px;margin:24px auto 0;font-size:13px;color:#B8B8CF;background:rgba(255,255,255,.04);border:1px solid var(--psa-border);padding:10px 20px;border-radius:999px}
+  .psa-lp .form-progress .dot{width:8px;height:8px;border-radius:50%;background:var(--psa-orange);box-shadow:0 0 0 4px rgba(255,94,26,.15)}
+  .psa-lp .form-progress .line{width:24px;height:1px;background:var(--psa-border-strong)}
+  .psa-lp .form-progress strong{color:var(--psa-white);font-weight:700}
+  .psa-lp .social-proof-bar{max-width:880px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:12px 24px;background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.25);border-radius:14px;color:#E8E8F5;font-size:13.5px;font-weight:500}
+  .psa-lp .social-proof-bar .live-dot{width:10px;height:10px;background:var(--psa-success);border-radius:50%;animation:psa-pulse-live 2s infinite;flex-shrink:0}
+  .psa-lp .social-proof-bar strong{color:var(--psa-white);font-weight:800}
+  .psa-lp .form-trust-bar{max-width:880px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;padding:14px 24px;background:rgba(255,94,26,.06);border:1px solid rgba(255,94,26,.25);border-radius:14px;color:#E8E8F5;font-size:13.5px;font-weight:500}
+  .psa-lp .form-trust-bar .item{display:flex;align-items:center;gap:8px}
+  .psa-lp .form-trust-bar .icon{width:22px;height:22px;border-radius:50%;background:var(--psa-orange);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px}
+  .psa-lp .form-trust-bar .sep{width:1px;height:18px;background:rgba(255,255,255,.15)}
+  .psa-lp .form-wrap{max-width:880px;margin:0 auto;background:#FFFFFF;border-radius:24px;padding:52px 56px;box-shadow:0 50px 100px -20px rgba(0,0,0,.55),0 0 80px -10px rgba(255,94,26,.25);position:relative}
+  .psa-lp .form-wrap::before{content:"";position:absolute;top:0;left:32px;right:32px;height:4px;background:linear-gradient(90deg,var(--psa-orange) 0%,var(--psa-orange-soft) 100%);border-radius:0 0 4px 4px}
+  .psa-lp .form-wrap-intro{text-align:center;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid #EAEAF2}
+  .psa-lp .form-wrap-intro h3{font-size:22px;color:#0A0A12;font-weight:800;margin-bottom:8px;letter-spacing:-.4px}
+  .psa-lp .form-wrap-intro p{color:#5E5E78;font-size:15px;line-height:1.55}
+  .psa-lp .form-after{margin-top:24px;padding-top:24px;border-top:1px solid #EAEAF2;display:flex;align-items:flex-start;gap:14px;color:#5E5E78;font-size:13.5px;line-height:1.55}
+  .psa-lp .form-after .lock-icon{width:32px;height:32px;border-radius:8px;flex-shrink:0;background:rgba(255,94,26,.10);color:var(--psa-orange);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+  .psa-lp .form-after strong{color:#0A0A12;font-weight:700}
+
+  /* FAQ */
+  .psa-lp .faq{background:#080810;border-top:1px solid var(--psa-border)}
+  .psa-lp .faq-list{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+  .psa-lp .faq-item{background:var(--psa-card);border:1px solid var(--psa-border);border-radius:12px;overflow:hidden;transition:border-color .2s}
+  .psa-lp .faq-item:hover{border-color:var(--psa-border-strong)}
+  .psa-lp .faq-item summary{padding:22px 26px;cursor:pointer;font-size:16px;font-weight:600;color:var(--psa-white);display:flex;justify-content:space-between;align-items:center;gap:16px;list-style:none}
+  .psa-lp .faq-item summary::-webkit-details-marker{display:none}
+  .psa-lp .faq-item summary::after{content:"+";font-size:22px;color:var(--psa-orange);font-weight:300;transition:transform .2s}
+  .psa-lp .faq-item[open] summary::after{transform:rotate(45deg)}
+  .psa-lp .faq-item .answer{padding:0 26px 22px;color:#A8A8C0;font-size:15px;line-height:1.65}
+
+  /* RESPONSIVO */
+  @media (max-width:1024px){
+    .psa-lp .hero-grid{grid-template-columns:1fr;gap:48px}
+    .psa-lp .program-grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:720px){
+    .psa-lp .hero{padding:60px 0 70px}
+    .psa-lp h1{font-size:38px;letter-spacing:-1px}
+    .psa-lp .prize-num{font-size:64px}
+    .psa-lp section{padding:64px 0}
+    .psa-lp h2{font-size:30px}
+    .psa-lp .program-grid{grid-template-columns:1fr}
+    .psa-lp .form-wrap{padding:32px 22px}
+    .psa-lp .form-header h2{font-size:24px}
+  }
+</style>
+
+<div class="psa-lp">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">
+        <span class="pulse"></span>
+        Novidade PSA · Em desenvolvimento
+      </div>
+      <h1>
+        Algo novo está nascendo.<br/>
+        <span class="underline">A sua voz faz parte disso.</span>
+      </h1>
+      <p class="lead">
+        A PSA está desenvolvendo uma nova experiência para quem quer <strong>dominar a comunicação e oratória</strong>. Antes de lançar, queremos ouvir você. Responda a pesquisa e concorra a uma das <strong>3 vagas no The Best Day</strong>.
+      </p>
+      <div class="hero-cta">
+        <a href="#participar" class="btn-primary">Quero participar da pesquisa →</a>
+        <a href="#sobre" class="btn-ghost">Saber mais</a>
+      </div>
+      <div class="hero-trust">
+        <div class="item"><div><strong>10 min</strong><span class="label">Pesquisa rápida</span></div></div>
+        <div class="item"><div><strong>Co-criação</strong><span class="label">Você molda o produto</span></div></div>
+        <div class="item"><div><strong>3 ganhadores</strong><span class="label">Sorteio The Best Day</span></div></div>
+      </div>
+    </div>
+
+    <aside class="prize-card">
+      <div class="prize-tag">O Prêmio</div>
+      <h3>Você concorre a</h3>
+      <div class="prize-num">3</div>
+      <div class="prize-label">imersões no The Best Day</div>
+      <div class="prize-detail">
+        <div class="prize-detail-icon">★</div>
+        <div class="prize-detail-text"><strong>1 dia inteiro</strong> de imersão presencial na PSA com mentoria direta.</div>
+      </div>
+      <div class="prize-detail">
+        <div class="prize-detail-icon">◆</div>
+        <div class="prize-detail-text">Conteúdos exclusivos sobre <strong>construção de mensagem, palco e presença.</strong></div>
+      </div>
+      <div class="prize-detail">
+        <div class="prize-detail-icon">✦</div>
+        <div class="prize-detail-text">Networking direto com <strong>palestrantes referência</strong> da plataforma.</div>
+      </div>
+      <a href="#participar" class="prize-cta">Quero concorrer →</a>
+      <div class="prize-footer">
+        <span class="dot-live"></span>
+        Inscrições abertas · vagas limitadas
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- PROGRAMA -->
+<section class="program" id="sobre">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-tag">O The Best Day</div>
+      <h2>Um dia. Quatro passos para <span class="accent">dominar o palco</span>.</h2>
+      <p class="section-sub">Imersão presencial na PSA, em São Paulo. Prática real, com devolutiva direta da equipe que prepara os palestrantes referência do país.</p>
+    </div>
+    <div class="program-grid">
+      <div class="mod"><div class="mod-num">01</div><h3>A grande ideia</h3><p>Como encontrar a mensagem central da sua palestra — aquela que a plateia carrega para casa e repete na semana seguinte.</p></div>
+      <div class="mod"><div class="mod-num">02</div><h3>Metodologia inovadora</h3><p>Um método próprio, refinado com os palestrantes referência da PSA, para construir apresentações que prendem a atenção do primeiro ao último minuto.</p></div>
+      <div class="mod"><div class="mod-num">03</div><h3>Presença de palco</h3><p>Voz, corpo, pausa e olhar. Como ocupar o palco de forma que a sua autoridade apareça antes da primeira frase.</p></div>
+      <div class="mod"><div class="mod-num">04</div><h3>Prática guiada</h3><p>Você sobe no palco, fala, recebe devolutiva da equipe PSA e sai do dia com uma versão melhor da sua palestra.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="form-section" id="participar">
+  <div class="container">
+    <div class="form-header">
+      <div class="section-tag">A Pesquisa</div>
+      <h2>A sua resposta é <span style="color:#FF5E1A">parte do produto</span>.</h2>
+      <p class="section-sub">Antes de lançar, queremos entender o que você precisa. Cada resposta enviada concorre a uma das 3 vagas no The Best Day.</p>
+      <div class="form-progress">
+        <span class="dot"></span>
+        <strong>10 perguntas</strong>
+        <span class="line"></span>
+        <strong>~10 minutos</strong>
+        <span class="line"></span>
+        <strong>3 vagas em jogo</strong>
+      </div>
+    </div>
+
+    <div class="social-proof-bar">
+      <span class="live-dot"></span>
+      <span><strong id="participant-count">27</strong> pessoas já estão concorrendo às 3 vagas no The Best Day</span>
+    </div>
+
+    <div class="form-trust-bar">
+      <div class="item"><span class="icon">✓</span> Resposta entra no sorteio das 3 vagas</div>
+      <div class="sep"></div>
+      <div class="item"><span class="icon">✓</span> Lista prioritária no lançamento</div>
+      <div class="sep"></div>
+      <div class="item"><span class="icon">✓</span> Confidencial &amp; sem spam</div>
+    </div>
+
+    <div class="form-wrap">
+      <div class="form-wrap-intro">
+        <h3>Comece a sua participação</h3>
+        <p>10 perguntas, cerca de 10 minutos. Ao enviar, você já está concorrendo.</p>
+      </div>
+
+      <!-- ESTE DIV é onde o form do HubSpot aparece. NÃO REMOVA. -->
+      <div class="hs-form-frame" data-region="na1" data-form-id="3b15026a-9b09-418d-91cc-77ec76467823" data-portal-id="49656171"></div>
+
+      <div class="form-after">
+        <div class="lock-icon">⚿</div>
+        <div><strong>Seus dados ficam com a gente.</strong> Usamos suas respostas só pra construir a próxima formação e te comunicar sobre o sorteio. Sem repasse a terceiros, sem disparo de spam.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-tag">Perguntas frequentes</div>
+      <h2>Dúvidas rápidas <span class="accent">antes de participar.</span></h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>É realmente gratuito? Tem alguma pegadinha?</summary>
+        <div class="answer">Sim, 100% gratuito. Você responde a pesquisa, entra no sorteio e os 3 ganhadores recebem a vaga no The Best Day sem custo. Não há cobrança nem upsell obrigatório.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Vou virar alvo de uma enxurrada de e-mails da PSA?</summary>
+        <div class="answer">Não. A regra interna é simples: comunicamos você sobre o sorteio, sobre o lançamento do produto (já que sua resposta ajudou a construir) e nada além disso. Sem disparos diários, sem repasse de dados, sem campanhas de produtos sem relação. Você descadastra com 1 clique em qualquer e-mail.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Quanto vai custar o produto quando lançar?</summary>
+        <div class="answer">Ainda estamos definindo — exatamente por isso a pesquisa existe. Sua resposta na pergunta sobre investimento ajuda diretamente a calibrar o preço final. Quem responder esta pesquisa tem acesso à lista prioritária do lançamento, com condições especiais que não serão oferecidas para o público geral.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Quando o sorteio acontece e como vou saber se ganhei?</summary>
+        <div class="answer">O sorteio é realizado após o encerramento da pesquisa, de forma transparente, com base em todas as respostas enviadas. Os ganhadores são comunicados por e-mail e WhatsApp — exatamente os dados que você preenche no formulário.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Sou iniciante. Faz sentido participar?</summary>
+        <div class="answer">Sim. O The Best Day foi desenhado para qualquer pessoa que queira transformar conhecimento em palestra — do especialista que nunca subiu num palco ao palestrante que já cobra e quer refinar. O conteúdo é aplicável nos dois extremos.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Onde acontece e em qual data?</summary>
+        <div class="answer">A imersão acontece presencialmente na PSA, em São Paulo. A data exata do The Best Day para os ganhadores é informada no comunicado do sorteio, com antecedência suficiente para você organizar a agenda.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- Se o HubSpot deixar este script passar, ótimo. Se não, cola só ele em Configurações da Página → Avançado → Cabeçalho HTML. -->
+<script src="https://js.hsforms.net/forms/embed/49656171.js" defer></script>

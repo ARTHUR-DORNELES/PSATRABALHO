@@ -1,0 +1,293 @@
+{
+  "windowStart": "2025-06-01",
+  "windowEnd": "2025-08-31",
+  "totalDeals": 153,
+  "totalRevenue": 1725277.7100000002,
+  "microByCount": [
+    {
+      "tema": "12.2 Inspiração",
+      "count": 26,
+      "sumAmount": 278701.5
+    },
+    {
+      "tema": "9.8 Marketing",
+      "count": 17,
+      "sumAmount": 115230
+    },
+    {
+      "tema": "12.3 Engajamento",
+      "count": 16,
+      "sumAmount": 162684.81
+    },
+    {
+      "tema": "11.1 Futurismo",
+      "count": 7,
+      "sumAmount": 74824.1
+    },
+    {
+      "tema": "6.9 Negócios",
+      "count": 6,
+      "sumAmount": 102370
+    },
+    {
+      "tema": "10.8 Gestão de Conflitos",
+      "count": 5,
+      "sumAmount": 50100
+    },
+    {
+      "tema": "12.5 IA - Inteligência Artificial",
+      "count": 5,
+      "sumAmount": 30971
+    },
+    {
+      "tema": "2.2 Comunicação Interna",
+      "count": 5,
+      "sumAmount": 25700
+    },
+    {
+      "tema": "18.8 Datas Comemorativas",
+      "count": 4,
+      "sumAmount": 211347.67
+    },
+    {
+      "tema": "3.2 Diversidade",
+      "count": 4,
+      "sumAmount": 18300
+    },
+    {
+      "tema": "1.5 Tecnologia",
+      "count": 3,
+      "sumAmount": 36385.87
+    },
+    {
+      "tema": "18.9 Comportamento",
+      "count": 3,
+      "sumAmount": 28600
+    },
+    {
+      "tema": "10.5 Desenvolvimento de Lideranças",
+      "count": 3,
+      "sumAmount": 22300
+    },
+    {
+      "tema": "10.7 Relações Humanas",
+      "count": 2,
+      "sumAmount": 34540
+    },
+    {
+      "tema": "16.2 Alta Performance em Vendas",
+      "count": 2,
+      "sumAmount": 33700
+    },
+    {
+      "tema": "9.4 Finanças",
+      "count": 2,
+      "sumAmount": 26500
+    },
+    {
+      "tema": "6.1 Empreendedorismo Feminino",
+      "count": 2,
+      "sumAmount": 25500
+    },
+    {
+      "tema": "10.1 Cultura Organizacional",
+      "count": 2,
+      "sumAmount": 23856
+    },
+    {
+      "tema": "12.1 Propósito",
+      "count": 2,
+      "sumAmount": 15558
+    },
+    {
+      "tema": "15.4 ESG",
+      "count": 2,
+      "sumAmount": 14650
+    }
+  ],
+  "microByAmount": [
+    {
+      "tema": "12.2 Inspiração",
+      "count": 26,
+      "sumAmount": 278701.5
+    },
+    {
+      "tema": "18.8 Datas Comemorativas",
+      "count": 4,
+      "sumAmount": 211347.67
+    },
+    {
+      "tema": "12.3 Engajamento",
+      "count": 16,
+      "sumAmount": 162684.81
+    },
+    {
+      "tema": "9.8 Marketing",
+      "count": 17,
+      "sumAmount": 115230
+    },
+    {
+      "tema": "6.9 Negócios",
+      "count": 6,
+      "sumAmount": 102370
+    },
+    {
+      "tema": "11.1 Futurismo",
+      "count": 7,
+      "sumAmount": 74824.1
+    },
+    {
+      "tema": "10.8 Gestão de Conflitos",
+      "count": 5,
+      "sumAmount": 50100
+    },
+    {
+      "tema": "1.5 Tecnologia",
+      "count": 3,
+      "sumAmount": 36385.87
+    },
+    {
+      "tema": "10.7 Relações Humanas",
+      "count": 2,
+      "sumAmount": 34540
+    },
+    {
+      "tema": "16.2 Alta Performance em Vendas",
+      "count": 2,
+      "sumAmount": 33700
+    },
+    {
+      "tema": "18.7 Cooperativismo",
+      "count": 1,
+      "sumAmount": 32500
+    },
+    {
+      "tema": "12.5 IA - Inteligência Artificial",
+      "count": 5,
+      "sumAmount": 30971
+    },
+    {
+      "tema": "14.1 Segurança do Trabalho",
+      "count": 1,
+      "sumAmount": 28800
+    },
+    {
+      "tema": "18.9 Comportamento",
+      "count": 3,
+      "sumAmount": 28600
+    },
+    {
+      "tema": "2.1 Mestre de Cerimônia",
+      "count": 1,
+      "sumAmount": 27000
+    },
+    {
+      "tema": "9.4 Finanças",
+      "count": 2,
+      "sumAmount": 26500
+    },
+    {
+      "tema": "2.2 Comunicação Interna",
+      "count": 5,
+      "sumAmount": 25700
+    },
+    {
+      "tema": "6.1 Empreendedorismo Feminino",
+      "count": 2,
+      "sumAmount": 25500
+    },
+    {
+      "tema": "4.8 Cenários Econômicos",
+      "count": 1,
+      "sumAmount": 24500
+    },
+    {
+      "tema": "10.1 Cultura Organizacional",
+      "count": 2,
+      "sumAmount": 23856
+    }
+  ],
+  "macroByCount": [
+    {
+      "tema": "12. MOTIVAÇÃO",
+      "count": 43,
+      "sumAmount": 448755.74999999994
+    },
+    {
+      "tema": "11. INOVAÇÃO",
+      "count": 22,
+      "sumAmount": 248680.13
+    },
+    {
+      "tema": "18. OUTROS",
+      "count": 21,
+      "sumAmount": 410381.73
+    },
+    {
+      "tema": "2. COMUNICAÇÃO",
+      "count": 19,
+      "sumAmount": 123300
+    },
+    {
+      "tema": "5. EDUCAÇÃO",
+      "count": 6,
+      "sumAmount": 52314.1
+    },
+    {
+      "tema": "3. DIVERSIDADE E INCLUSÃO",
+      "count": 6,
+      "sumAmount": 31690
+    },
+    {
+      "tema": "4. ECONOMIA / POLÍTICA",
+      "count": 5,
+      "sumAmount": 65150
+    },
+    {
+      "tema": "10. GESTÃO DE PESSOAS",
+      "count": 5,
+      "sumAmount": 53756
+    },
+    {
+      "tema": "19. LIDERANÇA",
+      "count": 5,
+      "sumAmount": 60330
+    },
+    {
+      "tema": "16. VENDAS",
+      "count": 5,
+      "sumAmount": 75770
+    },
+    {
+      "tema": "13. SAÚDE",
+      "count": 4,
+      "sumAmount": 27050
+    },
+    {
+      "tema": "6. EMPREENDEDORISMO",
+      "count": 4,
+      "sumAmount": 54000
+    },
+    {
+      "tema": "9. GESTÃO",
+      "count": 3,
+      "sumAmount": 31500
+    },
+    {
+      "tema": "1. AGRONEGÓCIO",
+      "count": 2,
+      "sumAmount": 13950
+    },
+    {
+      "tema": "15. SUSTENTABILIDADE",
+      "count": 2,
+      "sumAmount": 14650
+    },
+    {
+      "tema": "8. ÉTICA",
+      "count": 1,
+      "sumAmount": 14000
+    }
+  ],
+  "uniqueMicros": 50
+}

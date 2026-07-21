@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diagnóstico de Marketing Operations — 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e1116; --surface:#171b23; --surface-2:#1d222c; --line:#2a303d;
+    --ink:#eef2f8; --ink-2:#aab2c2; --ink-3:#7a8497;
+    --accent:#ff7a45; --accent-2:#ffb86b;
+    --red:#ef4444; --amber:#f59e0b; --green:#10b981;
+    --maxw:920px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:64px 28px 96px}
+
+  /* Header */
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px;font-size:13px;color:var(--ink-3);letter-spacing:.04em;text-transform:uppercase}
+  .top .pill{padding:5px 10px;border:1px solid var(--line);border-radius:999px;color:var(--ink-2)}
+
+  .hero h1{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:54px;line-height:1.05;letter-spacing:-.02em;margin:0 0 16px;color:var(--ink)}
+  .hero h1 em{color:var(--accent);font-style:normal}
+  .hero p.lead{font-size:19px;color:var(--ink-2);max-width:680px;margin:0 0 32px}
+  .meta{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:20px;margin-top:32px}
+  .meta b{color:var(--ink);font-weight:600}
+
+  h2{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:80px 0 8px;color:var(--ink)}
+  h2 .num{display:inline-block;width:36px;height:36px;border-radius:8px;background:var(--accent);color:#0e1116;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;line-height:36px;text-align:center;margin-right:14px;vertical-align:2px}
+  h3{font-size:18px;font-weight:600;color:var(--ink);margin:32px 0 10px}
+  p{margin:0 0 14px;color:var(--ink-2)}
+  .section-sub{color:var(--ink-3);font-size:14px;margin:0 0 28px;letter-spacing:.02em;text-transform:uppercase}
+
+  /* Executive cards */
+  .grid-kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px 0 8px}
+  .kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .kpi .v{font-family:'Fraunces',serif;font-size:32px;font-weight:600;color:var(--ink);line-height:1.1}
+  .kpi .l{font-size:12px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin-top:6px}
+  .kpi.warn .v{color:var(--amber)}
+  .kpi.bad .v{color:var(--red)}
+  @media (max-width:720px){.grid-kpi{grid-template-columns:repeat(2,1fr)}}
+
+  /* Bullets */
+  ul.clean{list-style:none;padding:0;margin:14px 0 14px}
+  ul.clean li{position:relative;padding:10px 0 10px 26px;border-bottom:1px solid var(--line);color:var(--ink)}
+  ul.clean li:last-child{border-bottom:0}
+  ul.clean li::before{content:"";position:absolute;left:0;top:18px;width:8px;height:8px;border-radius:2px;background:var(--accent)}
+
+  /* Traffic light table */
+  table.tl{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;margin-top:16px;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  table.tl th,table.tl td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line)}
+  table.tl tr:last-child td{border-bottom:0}
+  table.tl th{background:var(--surface-2);color:var(--ink-3);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+  table.tl td:first-child{font-weight:600;color:var(--ink)}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:1px}
+  .dot.r{background:var(--red)} .dot.a{background:var(--amber)} .dot.g{background:var(--green)}
+
+  /* Risk / Opportunity cards */
+  .stack{display:grid;grid-template-columns:1fr;gap:12px;margin-top:18px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+  .card .label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;display:inline-block;padding:3px 8px;border-radius:5px;margin-bottom:10px}
+  .card.r .label{background:rgba(239,68,68,.15);color:var(--red)}
+  .card.o .label{background:rgba(16,185,129,.15);color:var(--green)}
+  .card.b .label{background:rgba(255,122,69,.15);color:var(--accent)}
+  .card h4{margin:0 0 8px;font-size:18px;color:var(--ink);font-weight:600}
+  .card p{margin:0;color:var(--ink-2);font-size:15px}
+  .card .meta-row{margin-top:12px;font-size:12px;color:var(--ink-3);display:flex;gap:18px;flex-wrap:wrap}
+  .card .meta-row b{color:var(--ink-2);font-weight:500}
+
+  /* Roadmap */
+  .roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+  .lane{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;position:relative;overflow:hidden}
+  .lane::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent)}
+  .lane .h{font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--ink);margin-bottom:4px}
+  .lane .sub{font-size:12px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px}
+  .lane ul{list-style:none;padding:0;margin:0}
+  .lane ul li{padding:8px 0;border-bottom:1px solid var(--line);color:var(--ink);font-size:14px}
+  .lane ul li:last-child{border-bottom:0}
+  @media (max-width:760px){.roadmap{grid-template-columns:1fr}}
+
+  /* Distribution bars */
+  .bars{margin:18px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 22px}
+  .bar{display:grid;grid-template-columns:200px 1fr 90px;align-items:center;gap:14px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .bar:last-child{border-bottom:0}
+  .bar .name{color:var(--ink);font-weight:500}
+  .bar .track{height:10px;background:var(--surface-2);border-radius:5px;overflow:hidden;border:1px solid var(--line)}
+  .bar .fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:5px}
+  .bar .val{text-align:right;color:var(--ink-2);font-variant-numeric:tabular-nums;font-size:13px;font-weight:500}
+  @media (max-width:600px){.bar{grid-template-columns:130px 1fr 70px}}
+
+  /* Persona / lifecycle blocks */
+  .lifecycle{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}
+  .stage{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;position:relative;overflow:hidden}
+  .stage::before{content:"";position:absolute;top:0;left:0;right:0;height:4px}
+  .stage.s1::before{background:var(--green)} .stage.s1 .tag{color:var(--green);background:rgba(16,185,129,.12)}
+  .stage.s2::before{background:#eab308} .stage.s2 .tag{color:#eab308;background:rgba(234,179,8,.12)}
+  .stage.s3::before{background:var(--amber)} .stage.s3 .tag{color:var(--amber);background:rgba(245,158,11,.12)}
+  .stage.s4::before{background:var(--red)} .stage.s4 .tag{color:var(--red);background:rgba(239,68,68,.12)}
+  .stage .tag{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;display:inline-block;padding:3px 8px;border-radius:5px;margin-bottom:10px}
+  .stage h4{margin:0 0 4px;font-size:16px;color:var(--ink);font-weight:600}
+  .stage .desc{font-size:13px;color:var(--ink-3);margin-bottom:10px}
+  .stage .action{font-size:13px;color:var(--ink-2);border-top:1px solid var(--line);padding-top:10px}
+  .stage .action b{color:var(--ink);display:block;font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;font-weight:600}
+  @media (max-width:760px){.lifecycle{grid-template-columns:repeat(2,1fr)}}
+
+  /* Bases prontas grid */
+  .bases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+  .base-cell{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .base-cell .nm{font-weight:600;color:var(--ink);font-size:15px;margin-bottom:4px}
+  .base-cell .ds{font-size:13px;color:var(--ink-3)}
+  @media (max-width:720px){.bases-grid{grid-template-columns:1fr}}
+
+  /* Question list (perguntas que precisamos responder) */
+  ul.q{list-style:none;padding:0;margin:14px 0;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  ul.q li{padding:14px 18px;border-bottom:1px solid var(--line);font-size:14px;display:flex;gap:14px;align-items:flex-start}
+  ul.q li:last-child{border-bottom:0}
+  ul.q .num{flex:0 0 26px;height:26px;border-radius:50%;background:var(--accent);color:#0e1116;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+  ul.q .qtext{color:var(--ink)}
+  ul.q .qtext em{display:block;color:var(--ink-3);font-style:normal;font-size:12.5px;margin-top:3px;letter-spacing:.02em;text-transform:uppercase}
+
+  /* Callout */
+  .callout{background:linear-gradient(135deg,rgba(255,122,69,.10),rgba(255,184,107,.05));border:1px solid rgba(255,122,69,.3);border-radius:14px;padding:24px 26px;margin:32px 0}
+  .callout .label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:8px}
+  .callout p{margin:0;color:var(--ink);font-size:16px}
+
+  /* Footer */
+  .footer{margin-top:96px;padding-top:24px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  /* Print — light theme override */
+  @media print{
+    :root{--bg:#fff;--surface:#fff;--surface-2:#f7f8fa;--line:#e2e6ee;--ink:#0e1116;--ink-2:#374151;--ink-3:#6b7280}
+    body{font-size:11pt}
+    .wrap{padding:0;max-width:none}
+    h2{page-break-after:avoid}
+    .card,.lane,.kpi,.callout,.stage,.base-cell{break-inside:avoid}
+    .bars,.bases-grid,.lifecycle,.roadmap,.grid-kpi{break-inside:avoid}
+    .top .pill{border-color:#cbd5e1}
+    table.tl{break-inside:auto}
+    .bar .track{background:#eef1f6;border-color:#dde2eb}
+    ul.q{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <span>Marketing Operations · Diagnóstico inicial</span>
+    <span class="pill">Confidencial</span>
+  </header>
+
+  <section class="hero">
+    <h1>Onde estamos hoje em <em>Marketing Ops</em> — e o que precisamos destravar.</h1>
+    <p class="lead">Um raio-x da operação a partir do discovery atual: base, canais, integrações e governança. Material preparado para alinhamento executivo e definição das prioridades dos próximos 90 dias.</p>
+    <div class="meta">
+      <span><b>Período</b> Maio / 2026</span>
+      <span><b>Fonte</b> Discovery interno + base HubSpot</span>
+      <span><b>Audiência</b> CEO &amp; liderança</span>
+    </div>
+  </section>
+
+  <!-- 1. Sumário executivo -->
+  <h2><span class="num">1</span>Sumário executivo</h2>
+  <p class="section-sub">A operação em 5 frases</p>
+
+  <ul class="clean">
+    <li><b>Base sólida, atribuição quebrada.</b> Temos <b>254.366 contatos</b> ativos no HubSpot, mas hoje 100% do tráfego digital cai como "Inbound" sem distinção de canal.</li>
+    <li><b>Mídia roda às escuras.</b> Investimos em Google Ads e Meta sem integração nativa com o HubSpot e sem CPC visível por canal — não conseguimos decidir realocação de verba com base em dados.</li>
+    <li><b>Zero KPI por canal.</b> Nenhum dos 6 canais mapeados (Social Orgânico, Social Pago, Google, SEO, Indicação, AEO) tem KPI definido e ativo hoje.</li>
+    <li><b>Conhecimento não documentado.</b> Lead Score B2B existe mas não está documentado; processos no HubSpot também não — risco de continuidade operacional.</li>
+    <li><b>Eventos desconectados do funil.</b> Nosso maior ativo de geração de demanda (TBS, palestras, drops) hoje não tem calendário integrado ao HubSpot e o pós-evento não retroalimenta nutrição.</li>
+  </ul>
+
+  <div class="callout">
+    <div class="label">Tese central</div>
+    <p>Não temos um problema de captura — temos um problema de mensuração e governança. Antes de aumentar volume, precisamos enxergar o que já entra, fechar o ciclo de atribuição e <b>ativar a base que já temos</b>.</p>
+  </div>
+
+  <!-- 2. A operação em números -->
+  <h2><span class="num">2</span>A operação em números</h2>
+  <p class="section-sub">Volumetria do HubSpot · Discovery atual</p>
+
+  <div class="grid-kpi">
+    <div class="kpi"><div class="v">254.366</div><div class="l">Contatos totais</div></div>
+    <div class="kpi"><div class="v">15</div><div class="l">Linhas de produto / interesse</div></div>
+    <div class="kpi warn"><div class="v">0 / 6</div><div class="l">Canais com KPI ativo</div></div>
+    <div class="kpi bad"><div class="v">7</div><div class="l">Integrações faltando</div></div>
+  </div>
+
+  <h3>Distribuição da base por produto / interesse</h3>
+  <div class="bars">
+    <div class="bar"><div class="name">TBS Inscritos</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="val">106.731</div></div>
+    <div class="bar"><div class="name">Assistiu Palestras</div><div class="track"><div class="fill" style="width:76%"></div></div><div class="val">81.274</div></div>
+    <div class="bar"><div class="name">Palestrantes</div><div class="track"><div class="fill" style="width:43%"></div></div><div class="val">45.401</div></div>
+    <div class="bar"><div class="name">TBS Votantes</div><div class="track"><div class="fill" style="width:30%"></div></div><div class="val">32.149</div></div>
+    <div class="bar"><div class="name">PSA Drops</div><div class="track"><div class="fill" style="width:17%"></div></div><div class="val">18.027</div></div>
+    <div class="bar"><div class="name">Palestrantes (B2C)</div><div class="track"><div class="fill" style="width:4%"></div></div><div class="val">3.893</div></div>
+    <div class="bar"><div class="name">PSA Partner</div><div class="track"><div class="fill" style="width:2%"></div></div><div class="val">1.984</div></div>
+    <div class="bar"><div class="name">Advisor</div><div class="track"><div class="fill" style="width:2%"></div></div><div class="val">1.884</div></div>
+    <div class="bar"><div class="name">Advisor Liderança</div><div class="track"><div class="fill" style="width:1%"></div></div><div class="val">1.019</div></div>
+    <div class="bar"><div class="name">Partner</div><div class="track"><div class="fill" style="width:.3%"></div></div><div class="val">219</div></div>
+    <div class="bar"><div class="name">Conference / Outros</div><div class="track"><div class="fill" style="width:.1%"></div></div><div class="val">66</div></div>
+  </div>
+  <p style="margin-top:14px;font-size:13px;color:var(--ink-3)"><i>Observação: contatos podem aparecer em múltiplos segmentos (ex.: um TBS Inscrito que também assistiu palestra). O total distinto é 254.366.</i></p>
+
+  <!-- 3. Quem está na nossa base -->
+  <h2><span class="num">3</span>Quem está na nossa base — e quem não estamos alcançando</h2>
+  <p class="section-sub">Distribuição, cobertura e estratégia para ativar todos os 254 mil</p>
+
+  <p>Antes de discutir aquisição de novos contatos, precisamos olhar com lupa para os <b>254.366 que já temos</b>. A pergunta-chave para o próximo trimestre não é "como crescer a base?", é <b>"de quem é essa base, quem está engajando, quem está parado e quem nunca recebeu nada?"</b>.</p>
+
+  <h3>3.1 As 6 bases prontas mapeadas no discovery</h3>
+  <p>O HubSpot hoje organiza os contatos em seis grupos. Cada um demanda uma estratégia diferente de relacionamento.</p>
+
+  <div class="bases-grid">
+    <div class="base-cell">
+      <div class="nm">Carteirizados (Farmer)</div>
+      <div class="ds">Contatos sob gestão ativa de Vendas. <b>Alvo de relacionamento contínuo.</b></div>
+    </div>
+    <div class="base-cell">
+      <div class="nm">Já comprou — fora da carteira</div>
+      <div class="ds">Compraram em algum momento e não estão sob gestão. <b>Alto potencial de upsell e reativação.</b></div>
+    </div>
+    <div class="base-cell">
+      <div class="nm">Contatos B2C</div>
+      <div class="ds">Compraram produto B2C. <b>Pouco explorados em cross-sell para B2B.</b></div>
+    </div>
+    <div class="base-cell">
+      <div class="nm">PNV — Pós Não-Vendas</div>
+      <div class="ds">Tiveram oportunidade aberta mas não fecharam. <b>Hoje não têm trilha definida de re-engajamento.</b></div>
+    </div>
+    <div class="base-cell">
+      <div class="nm">PNO — Pós Não-Oportunidade</div>
+      <div class="ds">Não chegaram a virar oportunidade. <b>Maior bolsão "esquecido" da base.</b></div>
+    </div>
+    <div class="base-cell">
+      <div class="nm">Indefinido</div>
+      <div class="ds">Sem categoria atribuída. <b>Precisa ser auditado e classificado antes de qualquer ação.</b></div>
+    </div>
+  </div>
+
+  <h3>3.2 A foto que nos falta — perguntas que definem a estratégia</h3>
+  <p>Hoje sabemos quantos contatos temos por produto. Mas não sabemos quem está realmente <b>vivo</b> nessa base. Estas são as cinco perguntas que precisamos responder dentro do HubSpot nas próximas 4 semanas — e que sustentam todo o restante deste plano:</p>
+
+  <ul class="q">
+    <li><span class="num">1</span><div class="qtext">Dos 254.366 contatos, quantos têm e-mail válido e estão marcados como <b>Marketing Contact</b>?<em>Define a base efetivamente acionável</em></div></li>
+    <li><span class="num">2</span><div class="qtext">Quantos contatos abriram pelo menos um e-mail nos últimos <b>30, 90 e 180 dias</b>?<em>Define os 4 estados de engajamento (engajado, morno, parado, morto)</em></div></li>
+    <li><span class="num">3</span><div class="qtext">Quantos contatos estão <b>sem nenhuma trilha</b> de comunicação ativa hoje?<em>Identifica os "órfãos de conteúdo"</em></div></li>
+    <li><span class="num">4</span><div class="qtext">Qual o <b>overlap real</b> entre as bases (TBS, Palestrantes, B2C, Partner)?<em>Mostra se o mesmo contato vive em múltiplas trilhas e como evitar saturação</em></div></li>
+    <li><span class="num">5</span><div class="qtext">Quantos contatos têm <b>opt-in LGPD</b> documentado e quantos vieram de coleta legada não-conforme?<em>Define o que pode ser usado em comunicação ativa sem risco</em></div></li>
+  </ul>
+
+  <h3>3.3 Os 4 estados de contato — modelo de cobertura proposto</h3>
+  <p>Independente do produto que originou o contato, todo registro na base se encaixa em um dos quatro estados abaixo. Cada estado pede um movimento diferente. <b>Esse é o modelo que proponho como espinha dorsal da gestão da base.</b></p>
+
+  <div class="lifecycle">
+    <div class="stage s1">
+      <span class="tag">Estado 1</span>
+      <h4>Engajado</h4>
+      <div class="desc">Abriu / clicou em e-mail nos últimos 30 dias.</div>
+      <div class="action"><b>Ação</b>Manter quente — conteúdo de produto, convite para evento, oferta direta.</div>
+    </div>
+    <div class="stage s2">
+      <span class="tag">Estado 2</span>
+      <h4>Morno</h4>
+      <div class="desc">Engajou entre 30 e 180 dias atrás.</div>
+      <div class="action"><b>Ação</b>Nutrir com conteúdo direcionado por persona. Reforçar valor antes de pedir conversão.</div>
+    </div>
+    <div class="stage s3">
+      <span class="tag">Estado 3</span>
+      <h4>Parado</h4>
+      <div class="desc">Sem engajamento entre 180 dias e 1 ano.</div>
+      <div class="action"><b>Ação</b>Campanha de reativação dedicada — última chance antes de descadastro automático.</div>
+    </div>
+    <div class="stage s4">
+      <span class="tag">Estado 4</span>
+      <h4>Morto</h4>
+      <div class="desc">Sem engajamento há mais de 1 ano ou hard bounce.</div>
+      <div class="action"><b>Ação</b>Arquivar / suprimir. Parar de pagar capacidade de envio em contatos sem retorno.</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="label">Por que isso importa para o CEO</div>
+    <p>Hoje pagamos pelo HubSpot proporcionalmente ao tamanho da base de Marketing Contacts — e não proporcionalmente ao engajamento real. Cada contato "morto" mantido custa, e cada "parado" sem trilha é uma oportunidade perdida. Esse modelo organiza a base num ativo gerenciável — não num repositório.</p>
+  </div>
+
+  <h3>3.4 Os "órfãos de conteúdo" — onde estão os bolsões esquecidos</h3>
+  <p>Mesmo sem ter ainda os números exatos de engajamento, o discovery já permite identificar quatro bolsões que hoje <b>não têm trilha de comunicação definida</b>:</p>
+
+  <div class="stack">
+    <div class="card b">
+      <span class="label">Órfão 1</span>
+      <h4>"Indefinido" — sem categoria atribuída</h4>
+      <p>Subconjunto da base sem segmento de produto ou interesse marcado. Não recebe nada porque não está em nenhuma lista. <b>Primeira ação: auditar e classificar.</b></p>
+    </div>
+    <div class="card b">
+      <span class="label">Órfão 2</span>
+      <h4>PNO + PNV — pós-funil esquecido</h4>
+      <p>Contatos que passaram por Vendas e não converteram. Hoje não têm trilha automática de "voltar a aquecer". É a maior fonte de receita potencial não trabalhada.</p>
+    </div>
+    <div class="card b">
+      <span class="label">Órfão 3</span>
+      <h4>Assistiu Palestras (81.274 contatos)</h4>
+      <p>Maior bolsão de engajamento espontâneo da base. A maioria nunca foi nutrida para um produto específico depois do evento. <b>Pós-evento como motor de demanda está ocioso.</b></p>
+    </div>
+    <div class="card b">
+      <span class="label">Órfão 4</span>
+      <h4>B2C que comprou e nunca voltou</h4>
+      <p>Compraram um produto B2C e ficaram fora de cross-sell para outros produtos do portfólio (TBW, Drops, Partner). Recompra e expansão dependem de uma trilha que hoje não existe.</p>
+    </div>
+  </div>
+
+  <h3>3.5 Como chegar em todos — estratégia de cobertura em 4 pilares</h3>
+  <p>O caminho para "alcançar todos da base" não é mandar mais e-mail — é mandar o e-mail certo para o segmento certo. Proponho operar a base em 4 pilares simultâneos:</p>
+
+  <ul class="clean">
+    <li><b>Pilar 1 · Mapear.</b> Auditoria completa: validade, engajamento (30/90/180/365 dias), opt-in, overlap entre listas. Resultado: foto exata em vez de estimativa.</li>
+    <li><b>Pilar 2 · Segmentar.</b> Cada contato passa a ter dois eixos: <i>estado de engajamento</i> (Engajado / Morno / Parado / Morto) × <i>linha de produto de interesse</i> (TBS, TBW, Drops, Partner, etc.). Esse cruzamento define a trilha.</li>
+    <li><b>Pilar 3 · Nutrir.</b> Trilhas de conteúdo automatizadas por linha de produto, modulando frequência conforme o estado de engajamento. Engajado recebe mais; parado recebe campanha de reativação focada.</li>
+    <li><b>Pilar 4 · Reativar e higienizar.</b> Antes de descadastrar contatos parados, uma única campanha de "última chance". Os que reagem voltam para nutrição; os que não, saem da base — reduzindo custo e aumentando saúde de envio.</li>
+  </ul>
+
+  <!-- 4. Diagnóstico por canal -->
+  <h2><span class="num">4</span>Diagnóstico por canal</h2>
+  <p class="section-sub">Mensurabilidade, presença no HubSpot, KPI e prioridade</p>
+
+  <table class="tl">
+    <thead>
+      <tr><th>Canal</th><th>É mensurável?</th><th>Está no HubSpot?</th><th>Tem KPI?</th><th>Prioridade</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Social orgânico</td><td><span class="dot a"></span>Parcial — confirmar UTM</td><td><span class="dot g"></span>Sim, origem social</td><td><span class="dot r"></span>Não</td><td>Baixa</td></tr>
+      <tr><td>Social pago</td><td><span class="dot g"></span>Sim, campanhas nativas de lead</td><td><span class="dot a"></span>Sim, mas não está rodando</td><td><span class="dot r"></span>Não roda campanha</td><td><b style="color:var(--red)">Alta</b></td></tr>
+      <tr><td>Tráfego pago (Google)</td><td><span class="dot g"></span>Sim, Google Search</td><td><span class="dot a"></span>Sim, mas rever UTM</td><td><span class="dot r"></span>Não</td><td><b style="color:var(--red)">Alta</b></td></tr>
+      <tr><td>SEO</td><td><span class="dot a"></span>Conferir</td><td><span class="dot g"></span>Sim</td><td><span class="dot r"></span>Não</td><td>Baixa</td></tr>
+      <tr><td>Indicação</td><td><span class="dot g"></span>Sim</td><td><span class="dot g"></span>Sim</td><td><span class="dot r"></span>Não</td><td>Média</td></tr>
+      <tr><td>AEO</td><td><span class="dot r"></span>Não</td><td><span class="dot r"></span>Não</td><td><span class="dot r"></span>Não</td><td>Baixa</td></tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top:18px"><b style="color:var(--ink)">Leitura:</b> nenhum dos 6 canais tem KPI ativo. Os dois canais de prioridade Alta — Social Pago e Tráfego Pago — são justamente os que têm investimento direto e que hoje têm tracking comprometido (UTMs a revisar, campanhas paradas).</p>
+
+  <!-- 5. Lacunas e desafios -->
+  <h2><span class="num">5</span>Lacunas e desafios estruturais</h2>
+  <p class="section-sub">O que está faltando hoje · Atualizado no discovery v2</p>
+
+  <h3>Integrações ausentes</h3>
+  <ul class="clean">
+    <li><b>Google Search Console ↔ HubSpot</b> — sem integração; SEO sem visibilidade no Hub.</li>
+    <li><b>Google Ads ↔ HubSpot</b> — sem integração; sem CPC, CTR e conversão por campanha no Hub.</li>
+    <li><b>Meta (Facebook/Instagram)</b> — desconectado; precisa religar e usar o calendário do HubSpot.</li>
+    <li><b>Atribuição de canais</b> — Meta, LinkedIn, Orgânico, Pago e Google caem todos como "Inbound" indistintamente.</li>
+    <li><b>Calendário de eventos</b> — sem integração com HubSpot; eventos não retroalimentam o funil.</li>
+    <li><b>CPC por canal individual</b> — não disponível; impossível comparar eficiência de mídia.</li>
+  </ul>
+
+  <h3>Documentação e governança</h3>
+  <ul class="clean">
+    <li><b>Lead Score B2B sem documentação</b> — existe critério, mas não está documentado nem auditável.</li>
+    <li><b>Processos do HubSpot sem documentação</b> — risco direto de continuidade caso a operação mude de mãos.</li>
+    <li><b>Sem retomada de SEO</b> e <b>sem movimentação para AEO</b> — duas frentes orgânicas paradas.</li>
+    <li><b>Sem segmentação clara dentro de Social</b> — orgânico e pago não são quebrados por subcategoria mensurável.</li>
+  </ul>
+
+  <!-- 6. Riscos críticos -->
+  <h2><span class="num">6</span>Riscos críticos para a operação</h2>
+  <p class="section-sub">Os 3 maiores riscos de negócio do estado atual</p>
+
+  <div class="stack">
+    <div class="card r">
+      <span class="label">Risco 1 · Financeiro</span>
+      <h4>Investimento em mídia sem visibilidade de retorno</h4>
+      <p>Sem CPC por canal, sem atribuição funcional e com Meta desconectado, hoje não conseguimos responder com dados a pergunta "qual canal traz mais retorno por real investido?". Decisões de alocação de verba são feitas no escuro.</p>
+      <div class="meta-row"><span><b>Impacto:</b> alto</span><span><b>Probabilidade:</b> certo</span><span><b>Janela de ação:</b> 30 dias</span></div>
+    </div>
+    <div class="card r">
+      <span class="label">Risco 2 · Operacional</span>
+      <h4>Conhecimento operacional não documentado</h4>
+      <p>Lead Score B2B e processos do HubSpot não estão documentados. Se a operação muda de mãos amanhã, perdemos lógica de qualificação e fluxo de trabalho — comprometendo continuidade e qualidade da entrega.</p>
+      <div class="meta-row"><span><b>Impacto:</b> alto</span><span><b>Probabilidade:</b> média</span><span><b>Janela de ação:</b> 60 dias</span></div>
+    </div>
+    <div class="card r">
+      <span class="label">Risco 3 · Estratégico</span>
+      <h4>Base de 254k sem governança ativa</h4>
+      <p>Temos quase um quarto de milhão de contatos, mas não temos: KPI de engajamento, auditoria de validade da base, política clara de LGPD/consent, nem dono por segmento. A base existe, mas não é um ativo gerenciado — é um repositório.</p>
+      <div class="meta-row"><span><b>Impacto:</b> médio-alto</span><span><b>Probabilidade:</b> alta</span><span><b>Janela de ação:</b> 90 dias</span></div>
+    </div>
+  </div>
+
+  <!-- 7. Quick wins -->
+  <h2><span class="num">7</span>Oportunidades de ganho rápido</h2>
+  <p class="section-sub">Movimentos de 30–60 dias com impacto desproporcional</p>
+
+  <div class="stack">
+    <div class="card o">
+      <span class="label">Quick win 1</span>
+      <h4>Religar Meta + padronizar UTM em todas as campanhas</h4>
+      <p>Recupera atribuição de Social Pago e Google Ads de forma imediata. Esforço técnico baixo, dependente de configuração e conformidade de naming. Destrava decisão de mídia em 30 dias.</p>
+    </div>
+    <div class="card o">
+      <span class="label">Quick win 2</span>
+      <h4>Auditoria de engajamento dos 254k</h4>
+      <p>Cruzar engajamento dos últimos 30/90/180/365 dias para classificar a base nos 4 estados (Engajado / Morno / Parado / Morto). Resultado: saber exatamente em quem investir comunicação e quem suprimir.</p>
+    </div>
+    <div class="card o">
+      <span class="label">Quick win 3</span>
+      <h4>Documentar Lead Score B2B atual e definir 1 KPI por canal</h4>
+      <p>Não precisa redesenhar — basta auditar e registrar o que já existe. Estabelece linha de base mensurável e remove o risco de "conhecimento na cabeça de uma pessoa".</p>
+    </div>
+    <div class="card o">
+      <span class="label">Quick win 4</span>
+      <h4>Trilha de pós-palestra para os 81.274 que assistiram</h4>
+      <p>Esse é o maior bolsão engajado da base sem trilha definida. Uma única automação de pós-evento (sequência de 3 e-mails por linha de produto) já gera reativação significativa em semanas, sem custo de mídia.</p>
+    </div>
+  </div>
+
+  <!-- 8. Roadmap -->
+  <h2><span class="num">8</span>Roadmap proposto · 30 / 60 / 90 dias</h2>
+  <p class="section-sub">Estabilizar → Mensurar → Otimizar</p>
+
+  <div class="roadmap">
+    <div class="lane">
+      <div class="h">30 dias</div>
+      <div class="sub">Estabilizar</div>
+      <ul>
+        <li>Religar Meta e validar Google Ads</li>
+        <li>Padronizar UTM em todas as campanhas</li>
+        <li>Documentar Lead Score B2B atual</li>
+        <li>Auditoria de engajamento da base (4 estados)</li>
+        <li>Definir dono da base por segmento</li>
+      </ul>
+    </div>
+    <div class="lane">
+      <div class="h">60 dias</div>
+      <div class="sub">Mensurar</div>
+      <ul>
+        <li>Integrar Google Search Console ao HubSpot</li>
+        <li>1 KPI por canal definido e rodando</li>
+        <li>Dashboard executivo no HubSpot</li>
+        <li>CPC por canal individual visível</li>
+        <li>Trilha de pós-palestra ativa</li>
+        <li>Auditoria LGPD concluída</li>
+      </ul>
+    </div>
+    <div class="lane">
+      <div class="h">90 dias</div>
+      <div class="sub">Otimizar</div>
+      <ul>
+        <li>Lifecycle stages estruturado (MQL → SQL)</li>
+        <li>Lead routing + SLA Mkt → Vendas</li>
+        <li>Calendário de eventos integrado</li>
+        <li>Trilhas por persona × estado de engajamento</li>
+        <li>Campanha de reativação para parados</li>
+        <li>Lead Score revisado e validado</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 9. Decisões pedidas -->
+  <h2><span class="num">9</span>Decisões pedidas ao CEO</h2>
+  <p class="section-sub">Para destravar o roadmap</p>
+
+  <ul class="clean">
+    <li><b>Sponsorship para auditoria + higienização da base</b> — provavelmente reduz a base ativa antes de crescer (decisão de qualidade vs vaidade); reduz custo de HubSpot proporcionalmente.</li>
+    <li><b>Direção de prioridade</b> entre B2B e B2C — hoje tratamos ambos com a mesma estrutura, e isso limita a profundidade do trabalho.</li>
+    <li><b>Aprovação para padronizar nomenclatura</b> em campanhas, listas e formulários — exige reorganização de ativos existentes.</li>
+  </ul>
+
+  <footer class="footer">
+    <span>Diagnóstico de Marketing Operations · Maio 2026</span>
+    <span>Documento confidencial — uso interno</span>
+  </footer>
+
+</div>
+</body>
+</html>

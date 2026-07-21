@@ -1,0 +1,151 @@
+Date,User email,Account UUID,Product,Model,Model family,Request count,Prompt tokens,Completion tokens,Net spend (USD),Gross spend (USD)
+2026-06-16,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-opus-4-8,Opus,27,45377,53473,1.5637,1.7983
+2026-06-16,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-sonnet-5,Sonnet,20,31460,9728,0.2403,0.2763
+2026-06-16,ti@profissionaissa.com,acct_1001,Claude Code,claude-opus-4-8,Opus,46,13273,57967,1.5155,1.7428
+2026-06-16,ti@profissionaissa.com,acct_1001,Claude Code,claude-sonnet-5,Sonnet,4,4842,10440,0.1711,0.1968
+2026-06-16,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-opus-4-8,Opus,30,28318,24292,0.7489,0.8612
+2026-06-16,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-haiku-4-5,Haiku,8,3356,2944,0.0181,0.0208
+2026-06-16,bruna.eckhardt@profissionaissa.com,acct_1005,Claude Code,claude-opus-4-8,Opus,7,2978,13630,0.3556,0.4089
+2026-06-17,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-opus-4-8,Opus,41,42522,32858,1.0341,1.1892
+2026-06-17,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-sonnet-5,Sonnet,14,11518,14642,0.2542,0.2923
+2026-06-17,ti@profissionaissa.com,acct_1001,Claude Code,claude-opus-4-8,Opus,34,36730,44155,1.2875,1.4806
+2026-06-17,ti@profissionaissa.com,acct_1001,Claude Code,claude-sonnet-5,Sonnet,7,2306,12447,0.1936,0.2226
+2026-06-17,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-opus-4-8,Opus,23,7348,51243,1.3178,1.5155
+2026-06-17,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-sonnet-5,Sonnet,5,7376,9048,0.1578,0.1815
+2026-06-17,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-opus-4-8,Opus,7,8032,14004,0.3903,0.4488
+2026-06-17,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-sonnet-5,Sonnet,2,2252,602,0.0158,0.0182
+2026-06-18,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-opus-4-8,Opus,16,23444,16110,0.5200,0.5980
+2026-06-18,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-sonnet-5,Sonnet,3,4540,6053,0.1044,0.1201
+2026-06-18,ti@profissionaissa.com,acct_1001,Claude Code,claude-opus-4-8,Opus,16,8514,23005,0.6177,0.7104
+2026-06-18,ti@profissionaissa.com,acct_1001,Claude Code,claude-haiku-4-5,Haiku,1,832,571,0.0037,0.0043
+2026-06-18,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-sonnet-5,Sonnet,2,1886,2572,0.0442,0.0508
+2026-06-19,ti@profissionaissa.com,acct_1001,Claude Code,claude-opus-4-8,Opus,42,37525,48053,1.3889,1.5972
+2026-06-19,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-opus-4-8,Opus,7,1918,4484,0.1217,0.1400
+2026-06-19,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-sonnet-5,Sonnet,2,2204,3814,0.0638,0.0734
+2026-06-22,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-opus-4-8,Opus,9,12915,10225,0.3202,0.3682
+2026-06-22,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-sonnet-5,Sonnet,17,6226,41000,0.6337,0.7288
+2026-06-22,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-haiku-4-5,Haiku,3,3354,4449,0.0256,0.0294
+2026-06-22,ti@profissionaissa.com,acct_1001,Claude Code,claude-opus-4-8,Opus,23,38499,11174,0.4718,0.5426
+2026-06-22,ti@profissionaissa.com,acct_1001,Claude Code,claude-sonnet-5,Sonnet,16,7106,29115,0.4580,0.5267
+2026-06-22,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-opus-4-8,Opus,42,38371,58127,1.6450,1.8917
+2026-06-22,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-sonnet-5,Sonnet,1,528,460,0.0085,0.0098
+2026-06-22,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-sonnet-5,Sonnet,4,5690,5640,0.1017,0.1170
+2026-06-22,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-haiku-4-5,Haiku,1,440,1796,0.0094,0.0108
+2026-06-22,bruna.eckhardt@profissionaissa.com,acct_1005,Claude Code,claude-opus-4-8,Opus,11,4238,26795,0.6911,0.7948
+2026-06-22,bruna.eckhardt@profissionaissa.com,acct_1005,Claude Code,claude-sonnet-5,Sonnet,8,3279,7568,0.1234,0.1419
+2026-06-22,bruna.eckhardt@profissionaissa.com,acct_1005,Claude Code,claude-haiku-4-5,Haiku,2,1712,3993,0.0217,0.0250
+2026-06-23,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-opus-4-8,Opus,4,1522,6129,0.1608,0.1849
+2026-06-23,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-sonnet-5,Sonnet,23,15410,15684,0.2815,0.3237
+2026-06-23,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-haiku-4-5,Haiku,4,3603,6333,0.0353,0.0406
+2026-06-23,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-opus-4-8,Opus,11,6868,25118,0.6623,0.7616
+2026-06-23,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-haiku-4-5,Haiku,1,678,851,0.0049,0.0056
+2026-06-23,bruna.eckhardt@profissionaissa.com,acct_1005,Claude Code,claude-haiku-4-5,Haiku,2,1938,3246,0.0182,0.0209
+2026-06-24,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-opus-4-8,Opus,30,37004,74990,2.0598,2.3688
+2026-06-24,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-sonnet-5,Sonnet,21,19923,52345,0.8449,0.9716
+2026-06-24,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-opus-4-8,Opus,12,3894,21733,0.5628,0.6472
+2026-06-24,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-sonnet-5,Sonnet,8,1746,19387,0.2960,0.3404
+2026-06-24,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-opus-4-8,Opus,3,2924,1282,0.0467,0.0537
+2026-06-24,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-sonnet-5,Sonnet,2,1670,4514,0.0727,0.0836
+2026-06-25,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-opus-4-8,Opus,27,26130,16718,0.5486,0.6309
+2026-06-25,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-sonnet-5,Sonnet,13,4448,12678,0.2035,0.2340
+2026-06-25,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-haiku-4-5,Haiku,2,1351,2126,0.0120,0.0138
+2026-06-25,ti@profissionaissa.com,acct_1001,Claude Code,claude-opus-4-8,Opus,26,27820,66851,1.8104,2.0820
+2026-06-25,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-opus-4-8,Opus,8,3420,11858,0.3135,0.3605
+2026-06-25,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-opus-4-8,Opus,13,17904,27471,0.7763,0.8927
+2026-06-25,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-opus-4-8,Opus,12,14818,17017,0.4995,0.5744
+2026-06-25,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-haiku-4-5,Haiku,1,220,2496,0.0127,0.0146
+2026-06-26,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-opus-4-8,Opus,18,24385,45091,1.2492,1.4366
+2026-06-26,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-sonnet-5,Sonnet,6,2196,11952,0.1859,0.2138
+2026-06-26,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-haiku-4-5,Haiku,5,8362,4592,0.0313,0.0360
+2026-06-26,ti@profissionaissa.com,acct_1001,Claude Code,claude-opus-4-8,Opus,45,52743,90597,2.5286,2.9079
+2026-06-26,ti@profissionaissa.com,acct_1001,Claude Code,claude-sonnet-5,Sonnet,20,23226,33365,0.5702,0.6557
+2026-06-26,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-opus-4-8,Opus,16,27110,39285,1.1177,1.2854
+2026-06-26,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-sonnet-5,Sonnet,8,9215,6382,0.1234,0.1419
+2026-06-26,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-opus-4-8,Opus,13,3392,5271,0.1487,0.1710
+2026-06-26,bruna.eckhardt@profissionaissa.com,acct_1005,Claude Code,claude-opus-4-8,Opus,10,11086,16712,0.4732,0.5442
+2026-06-26,bruna.eckhardt@profissionaissa.com,acct_1005,Claude Code,claude-sonnet-5,Sonnet,4,3034,2744,0.0503,0.0578
+2026-06-29,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-opus-4-8,Opus,9,13186,14197,0.4209,0.4840
+2026-06-29,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-opus-4-8,Opus,12,10653,12650,0.3695,0.4249
+2026-06-29,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-sonnet-5,Sonnet,4,1321,5633,0.0885,0.1018
+2026-06-29,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-haiku-4-5,Haiku,9,10680,18055,0.1010,0.1162
+2026-06-29,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-haiku-4-5,Haiku,1,1161,463,0.0035,0.0040
+2026-06-29,bruna.eckhardt@profissionaissa.com,acct_1005,Claude Code,claude-opus-4-8,Opus,3,1080,927,0.0286,0.0329
+2026-06-29,bruna.eckhardt@profissionaissa.com,acct_1005,Claude Code,claude-sonnet-5,Sonnet,5,1825,7199,0.1135,0.1305
+2026-06-29,bruna.eckhardt@profissionaissa.com,acct_1005,Claude Code,claude-haiku-4-5,Haiku,3,1290,3412,0.0184,0.0212
+2026-06-30,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-opus-4-8,Opus,36,7721,50576,1.3030,1.4984
+2026-06-30,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-haiku-4-5,Haiku,3,4765,8164,0.0456,0.0524
+2026-06-30,ti@profissionaissa.com,acct_1001,Claude Code,claude-opus-4-8,Opus,30,43424,59082,1.6942,1.9483
+2026-06-30,ti@profissionaissa.com,acct_1001,Claude Code,claude-haiku-4-5,Haiku,7,2946,8493,0.0454,0.0522
+2026-06-30,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-opus-4-8,Opus,6,6294,12271,0.3382,0.3889
+2026-07-01,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-opus-4-8,Opus,33,29934,20986,0.6743,0.7754
+2026-07-01,ti@profissionaissa.com,acct_1001,Claude Code,claude-opus-4-8,Opus,16,21375,40909,1.1296,1.2990
+2026-07-01,ti@profissionaissa.com,acct_1001,Claude Code,claude-sonnet-5,Sonnet,16,21996,15273,0.2951,0.3394
+2026-07-01,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-opus-4-8,Opus,4,2284,6284,0.1685,0.1938
+2026-07-01,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-sonnet-5,Sonnet,16,25906,16879,0.3309,0.3805
+2026-07-01,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-haiku-4-5,Haiku,4,861,4081,0.0213,0.0245
+2026-07-01,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-opus-4-8,Opus,13,5742,9039,0.2547,0.2929
+2026-07-01,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-haiku-4-5,Haiku,2,3343,5186,0.0293,0.0337
+2026-07-01,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-opus-4-8,Opus,11,13653,21464,0.6049,0.6956
+2026-07-01,bruna.eckhardt@profissionaissa.com,acct_1005,Claude Code,claude-opus-4-8,Opus,2,1561,1902,0.0554,0.0637
+2026-07-02,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-opus-4-8,Opus,12,8230,30984,0.8157,0.9381
+2026-07-02,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-sonnet-5,Sonnet,4,5390,1493,0.0386,0.0444
+2026-07-02,bruna.eckhardt@profissionaissa.com,acct_1005,Claude Code,claude-haiku-4-5,Haiku,2,1745,1227,0.0079,0.0091
+2026-07-03,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-opus-4-8,Opus,15,21850,39119,1.0872,1.2503
+2026-07-03,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-sonnet-5,Sonnet,6,3186,2832,0.0520,0.0598
+2026-07-03,ti@profissionaissa.com,acct_1001,Claude Code,claude-opus-4-8,Opus,18,18481,6992,0.2672,0.3073
+2026-07-03,ti@profissionaissa.com,acct_1001,Claude Code,claude-sonnet-5,Sonnet,14,10166,4434,0.0970,0.1115
+2026-07-03,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-opus-4-8,Opus,20,18986,22303,0.6525,0.7504
+2026-07-03,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-sonnet-5,Sonnet,9,6805,19168,0.3079,0.3541
+2026-07-03,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-opus-4-8,Opus,6,9619,3511,0.1359,0.1563
+2026-07-03,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-sonnet-5,Sonnet,6,6172,12103,0.2001,0.2301
+2026-07-03,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-haiku-4-5,Haiku,1,1206,1069,0.0066,0.0076
+2026-07-03,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-haiku-4-5,Haiku,2,1402,5202,0.0274,0.0315
+2026-07-06,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-opus-4-8,Opus,7,3086,2719,0.0834,0.0959
+2026-07-06,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-sonnet-5,Sonnet,18,21492,19340,0.3546,0.4078
+2026-07-06,ti@profissionaissa.com,acct_1001,Claude Code,claude-opus-4-8,Opus,15,11592,27115,0.7358,0.8462
+2026-07-06,ti@profissionaissa.com,acct_1001,Claude Code,claude-haiku-4-5,Haiku,7,5780,6949,0.0405,0.0466
+2026-07-06,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-opus-4-8,Opus,10,2631,10991,0.2879,0.3311
+2026-07-06,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-sonnet-5,Sonnet,10,4520,5618,0.0978,0.1125
+2026-07-06,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-opus-4-8,Opus,7,5415,9262,0.2586,0.2974
+2026-07-07,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-opus-4-8,Opus,6,2910,2802,0.0846,0.0973
+2026-07-07,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-sonnet-5,Sonnet,12,13899,27299,0.4512,0.5189
+2026-07-07,ti@profissionaissa.com,acct_1001,Claude Code,claude-opus-4-8,Opus,25,27921,10889,0.4118,0.4736
+2026-07-07,ti@profissionaissa.com,acct_1001,Claude Code,claude-sonnet-5,Sonnet,3,1280,6559,0.1022,0.1175
+2026-07-07,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-opus-4-8,Opus,26,14857,11084,0.3514,0.4041
+2026-07-07,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-haiku-4-5,Haiku,4,2040,5954,0.0318,0.0366
+2026-07-07,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-opus-4-8,Opus,8,3877,13305,0.3520,0.4048
+2026-07-08,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-opus-4-8,Opus,29,16660,49798,1.3282,1.5274
+2026-07-08,ti@profissionaissa.com,acct_1001,Claude Code,claude-opus-4-8,Opus,30,24201,47208,1.3012,1.4964
+2026-07-08,ti@profissionaissa.com,acct_1001,Claude Code,claude-sonnet-5,Sonnet,5,7402,2019,0.0525,0.0604
+2026-07-08,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-opus-4-8,Opus,3,2551,7180,0.1923,0.2211
+2026-07-09,ti@profissionaissa.com,acct_1001,Claude Code,claude-opus-4-8,Opus,13,21100,7980,0.3050,0.3507
+2026-07-09,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-opus-4-8,Opus,35,18243,43792,1.1860,1.3639
+2026-07-09,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-haiku-4-5,Haiku,1,1196,1442,0.0084,0.0097
+2026-07-09,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-sonnet-5,Sonnet,2,2814,4118,0.0702,0.0807
+2026-07-09,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-haiku-4-5,Haiku,1,658,2536,0.0133,0.0153
+2026-07-09,bruna.eckhardt@profissionaissa.com,acct_1005,Claude Code,claude-opus-4-8,Opus,3,1039,2086,0.0573,0.0659
+2026-07-10,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-opus-4-8,Opus,40,37349,91782,2.4813,2.8535
+2026-07-10,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-sonnet-5,Sonnet,3,866,3320,0.0524,0.0603
+2026-07-10,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-haiku-4-5,Haiku,9,14041,7312,0.0506,0.0582
+2026-07-10,ti@profissionaissa.com,acct_1001,Claude Code,claude-opus-4-8,Opus,37,56639,69303,2.0158,2.3182
+2026-07-10,ti@profissionaissa.com,acct_1001,Claude Code,claude-sonnet-5,Sonnet,11,14742,18030,0.3147,0.3619
+2026-07-10,ti@profissionaissa.com,acct_1001,Claude Code,claude-haiku-4-5,Haiku,3,4819,6975,0.0397,0.0457
+2026-07-10,bruna.eckhardt@profissionaissa.com,acct_1005,Claude Code,claude-opus-4-8,Opus,13,9625,4747,0.1668,0.1918
+2026-07-13,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-opus-4-8,Opus,36,45116,85965,2.3747,2.7309
+2026-07-13,roberto.santos@profissionaissa.com,acct_1000,Claude Code,claude-haiku-4-5,Haiku,2,942,4189,0.0219,0.0252
+2026-07-13,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-opus-4-8,Opus,42,39668,31368,0.9825,1.1299
+2026-07-13,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-sonnet-5,Sonnet,13,16068,13315,0.2479,0.2851
+2026-07-13,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-opus-4-8,Opus,2,2731,4085,0.1158,0.1332
+2026-07-13,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-sonnet-5,Sonnet,3,644,3652,0.0567,0.0652
+2026-07-13,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-haiku-4-5,Haiku,0,0,0,0.0000,0.0000
+2026-07-14,ti@profissionaissa.com,acct_1001,Claude Code,claude-opus-4-8,Opus,19,25935,47978,1.3291,1.5285
+2026-07-14,ti@profissionaissa.com,acct_1001,Claude Code,claude-sonnet-5,Sonnet,22,8099,59272,0.9134,1.0504
+2026-07-14,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-opus-4-8,Opus,23,26064,55052,1.5066,1.7326
+2026-07-14,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-sonnet-5,Sonnet,15,7203,31353,0.4919,0.5657
+2026-07-14,bernardo.haab@profissionaissa.com,acct_1003,Chat,claude-opus-4-8,Opus,5,1412,6941,0.1806,0.2077
+2026-07-15,crm.psa@profissionaissa.com,acct_1002,Claude Code,claude-opus-4-8,Opus,14,13540,16360,0.4767,0.5482
+2026-07-15,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-opus-4-8,Opus,12,20261,12065,0.4029,0.4633
+2026-07-15,bruna.simoni@profissionaissa.com,acct_1004,Chat,claude-haiku-4-5,Haiku,2,2516,4873,0.0269,0.0309
+2026-07-15,bruna.eckhardt@profissionaissa.com,acct_1005,Claude Code,claude-opus-4-8,Opus,5,4630,13452,0.3594,0.4133
+2026-07-15,bruna.eckhardt@profissionaissa.com,acct_1005,Claude Code,claude-sonnet-5,Sonnet,3,4384,6396,0.1091,0.1255
+2026-07-15,bruna.eckhardt@profissionaissa.com,acct_1005,Claude Code,claude-haiku-4-5,Haiku,1,870,1835,0.0100,0.0115

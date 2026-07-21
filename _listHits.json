@@ -1,0 +1,27 @@
+[
+  {
+    "id": "12654",
+    "name": "Patrocinios | Contato para abordar (C-level)",
+    "type": "DYNAMIC",
+    "hits": [
+      "cargo__oficial_",
+      "qual_e_o_seu_cargo___"
+    ]
+  },
+  {
+    "id": "6418",
+    "name": "[Produtos Palestrantes] Reforço de Agendamento - Executivos - Contatos - 28102025",
+    "type": "DYNAMIC",
+    "hits": [
+      "qual_e_o_seu_cargo___"
+    ]
+  },
+  {
+    "id": "6404",
+    "name": "[Produtos Palestrantes] Reforço de Agendamento - Executivos - 28102025",
+    "type": "DYNAMIC",
+    "hits": [
+      "qual_e_o_seu_cargo___"
+    ]
+  }
+]

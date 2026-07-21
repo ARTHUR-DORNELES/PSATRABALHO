@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pesquisa Inovação — Performance por Segmento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e1116; --surface:#171b23; --surface-2:#1d222c; --line:#2a303d;
+    --ink:#eef2f8; --ink-2:#aab2c2; --ink-3:#7a8497;
+    --accent:#ff7a45; --accent-2:#ffb86b;
+    --red:#ef4444; --amber:#f59e0b; --green:#10b981; --blue:#60a5fa;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:56px 28px 88px}
+
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;font-size:13px;color:var(--ink-3);letter-spacing:.04em;text-transform:uppercase}
+  .top .pill{padding:5px 10px;border:1px solid var(--line);border-radius:999px;color:var(--ink-2)}
+  .top .right{display:flex;gap:10px;align-items:center}
+
+  .refresh-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:var(--accent);color:#0e1116;border:0;border-radius:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:transform .1s, opacity .15s}
+  .refresh-btn:hover{transform:translateY(-1px);background:var(--accent-2)}
+  .refresh-btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+  .refresh-btn .spin{width:12px;height:12px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;display:inline-block;animation:spin .8s linear infinite}
+  .refresh-btn.loading .icon{display:none}
+  .refresh-btn:not(.loading) .spin{display:none}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .last-updated{font-size:11px;color:var(--ink-3);text-transform:none;letter-spacing:0}
+  .last-updated b{color:var(--ink-2);font-weight:500}
+
+  .toast{position:fixed;bottom:24px;right:24px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:12px 16px;font-size:13px;color:var(--ink);box-shadow:0 8px 24px rgba(0,0,0,.4);opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;max-width:380px;z-index:100}
+  .toast.show{opacity:1;transform:translateY(0)}
+  .toast.error{border-left-color:var(--red)}
+  .toast.success{border-left-color:var(--green)}
+
+  .hero h1{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:46px;line-height:1.05;letter-spacing:-.02em;margin:0 0 14px;color:var(--ink)}
+  .hero h1 em{color:var(--accent);font-style:normal}
+  .hero p.lead{font-size:18px;color:var(--ink-2);max-width:760px;margin:0 0 28px}
+  .meta{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:18px;margin-top:28px}
+  .meta b{color:var(--ink);font-weight:600}
+
+  h2{font-family:'Fraunces',serif;font-weight:600;font-size:28px;letter-spacing:-.01em;margin:64px 0 6px;color:var(--ink)}
+  h2 .num{display:inline-block;width:32px;height:32px;border-radius:8px;background:var(--accent);color:#0e1116;font-family:'Inter',sans-serif;font-weight:700;font-size:13px;line-height:32px;text-align:center;margin-right:12px;vertical-align:2px}
+  h3{font-size:17px;font-weight:600;color:var(--ink);margin:28px 0 10px}
+  p{margin:0 0 14px;color:var(--ink-2)}
+  .section-sub{color:var(--ink-3);font-size:13px;margin:0 0 24px;letter-spacing:.02em;text-transform:uppercase}
+
+  .grid-kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 8px}
+  .kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .kpi .v{font-family:'Fraunces',serif;font-size:30px;font-weight:600;color:var(--ink);line-height:1.1}
+  .kpi .l{font-size:11px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin-top:6px}
+  .kpi .sub{font-size:12px;color:var(--ink-3);margin-top:6px}
+  .kpi.good .v{color:var(--green)}
+  .kpi.warn .v{color:var(--amber)}
+  .kpi.bad .v{color:var(--red)}
+  @media (max-width:720px){.grid-kpi{grid-template-columns:repeat(2,1fr)}}
+
+  .segments{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
+  .seg{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+  .seg-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+  .seg-title{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .seg-title h4{margin:0;font-size:17px;color:var(--ink);font-weight:600}
+  .badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 8px;border-radius:5px}
+  .badge.g{background:rgba(16,185,129,.15);color:var(--green)}
+  .badge.a{background:rgba(245,158,11,.15);color:var(--amber)}
+  .badge.r{background:rgba(239,68,68,.15);color:var(--red)}
+  .seg-desc{color:var(--ink-3);font-size:13px;margin:6px 0 14px;font-style:italic}
+  .seg-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:10px}
+  .seg-cell{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .seg-cell .l{font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+  .seg-cell .v{font-family:'Fraunces',serif;font-size:22px;color:var(--ink);font-weight:600;line-height:1.1}
+  .seg-cell .vs{font-size:11px;color:var(--ink-3);margin-top:4px}
+  .seg-cell .vs.up{color:var(--green)} .seg-cell .vs.down{color:var(--red)} .seg-cell .vs.warn{color:var(--amber)}
+  @media (max-width:760px){.seg-grid{grid-template-columns:repeat(2,1fr)}}
+
+  .bars{margin:18px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+  .bars h4{margin:0 0 14px;font-size:14px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+  .bar{display:grid;grid-template-columns:230px 1fr 90px;align-items:center;gap:14px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .bar:last-child{border-bottom:0}
+  .bar .name{color:var(--ink);font-weight:500;font-size:13px}
+  .bar .track{height:10px;background:var(--surface-2);border-radius:5px;overflow:hidden;border:1px solid var(--line);position:relative}
+  .bar .fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:5px;transition:width .4s}
+  .bar .fill.blue{background:linear-gradient(90deg,#3b82f6,#60a5fa)}
+  .bar .fill.green{background:linear-gradient(90deg,#059669,#34d399)}
+  .bar .val{text-align:right;color:var(--ink-2);font-variant-numeric:tabular-nums;font-size:13px;font-weight:500}
+  .benchmark-mark{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink-3);opacity:.6}
+  @media (max-width:760px){.bar{grid-template-columns:140px 1fr 70px}}
+
+  table.tl{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin-top:16px;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  table.tl th,table.tl td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line)}
+  table.tl tr:last-child td{border-bottom:0}
+  table.tl th{background:var(--surface-2);color:var(--ink-3);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+  table.tl td{color:var(--ink-2)}
+  table.tl td.num{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink)}
+  table.tl td:first-child{font-weight:600;color:var(--ink)}
+  table.tl tfoot td{background:var(--surface-2);font-weight:700;color:var(--ink);border-top:2px solid var(--line)}
+
+  .callout{background:linear-gradient(135deg,rgba(255,122,69,.08),rgba(255,184,107,.04));border:1px solid rgba(255,122,69,.25);border-radius:14px;padding:18px 22px;margin-top:18px}
+  .callout h4{margin:0 0 6px;font-size:15px;color:var(--accent)}
+  .callout p{margin:0;color:var(--ink-2);font-size:14px}
+
+  .stack{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+  @media (max-width:760px){.stack{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .card h4{margin:0 0 8px;font-size:15px;color:var(--ink)}
+  .card p{margin:0;font-size:14px;color:var(--ink-2)}
+  .card .label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;display:inline-block;padding:3px 8px;border-radius:5px;margin-bottom:8px}
+  .card.r .label{background:rgba(239,68,68,.15);color:var(--red)}
+  .card.o .label{background:rgba(16,185,129,.15);color:var(--green)}
+  .card.b .label{background:rgba(96,165,250,.15);color:var(--blue)}
+
+  .footnote{font-size:12px;color:var(--ink-3);margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+
+  .source-badge{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:.06em;padding:2px 6px;border-radius:4px;margin-left:8px;vertical-align:1px}
+  .source-badge.live{background:rgba(16,185,129,.15);color:var(--green)}
+  .source-badge.snap{background:rgba(245,158,11,.15);color:var(--amber)}
+
+  .funnels{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
+  .funnel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+  .funnel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:12px;flex-wrap:wrap}
+  .funnel-head h4{margin:0;font-size:16px;color:var(--ink);font-weight:600}
+  .funnel-head .form-name{font-size:12px;color:var(--ink-3)}
+  .funnel-step{display:grid;grid-template-columns:120px 1fr 140px;align-items:center;gap:14px;padding:5px 0;font-size:13px}
+  .funnel-step .step-label{color:var(--ink-2);font-weight:500;font-size:13px}
+  .funnel-step .bar{height:26px;background:var(--surface-2);border:1px solid var(--line);border-radius:6px;position:relative;overflow:hidden}
+  .funnel-step .fill{height:100%;border-radius:5px;display:flex;align-items:center;padding:0 10px;font-weight:600;font-size:12px;min-width:24px;font-variant-numeric:tabular-nums}
+  .funnel-step .fill.s1{background:linear-gradient(90deg,#3b82f6,#60a5fa);color:white}
+  .funnel-step .fill.s2{background:linear-gradient(90deg,#0891b2,#22d3ee);color:white}
+  .funnel-step .fill.s3{background:linear-gradient(90deg,#059669,#34d399);color:white}
+  .funnel-step .fill.s4{background:linear-gradient(90deg,#d97706,#fbbf24);color:#0e1116}
+  .funnel-step .fill.s5{background:linear-gradient(90deg,#dc2626,#f87171);color:white}
+  .funnel-step .conv{font-size:11px;color:var(--ink-3);text-align:right;font-variant-numeric:tabular-nums}
+  .funnel-step .conv b{color:var(--ink);font-weight:600;font-size:12px}
+  .funnel-step .conv .anom{color:var(--amber);font-weight:600}
+  .funnel-orphan{padding:10px 14px;background:var(--surface-2);border-radius:8px;font-size:12px;color:var(--ink-3);margin-top:10px;border:1px dashed var(--line)}
+  @media (max-width:760px){.funnel-step{grid-template-columns:90px 1fr 100px;gap:8px;font-size:12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <span>Marketing Operations · PSA</span>
+    <div class="right">
+      <span class="last-updated" id="lastUpdated">Carregando…</span>
+      <button class="refresh-btn" id="refreshBtn" type="button">
+        <span class="icon">↻</span>
+        <span class="spin"></span>
+        <span class="lbl">Atualizar</span>
+      </button>
+    </div>
+  </div>
+
+  <header class="hero">
+    <h1>Pesquisa <em>Inovação</em> — performance por segmento</h1>
+    <p class="lead">Disparo da campanha de pesquisa de inovação em <span id="segCount">—</span> segmentos da base. Visão consolidada de entregas, aberturas, cliques e leitura por segmento, comparada ao benchmark B2B de referência.</p>
+    <div class="meta">
+      <span><b id="metaSegments">—</b> segmentos disparados</span>
+      <span>Janela de envio: <b id="metaWindow">—</b></span>
+      <span>Owner: <b>Arthur Dorneles</b></span>
+      <span>Fonte: <b>HubSpot Marketing Email</b> <span class="source-badge" id="sourceBadge"></span></span>
+    </div>
+  </header>
+
+  <h2><span class="num">1</span>Resumo executivo</h2>
+  <p class="section-sub">Totais consolidados dos disparos</p>
+
+  <div class="grid-kpi" id="kpiGrid"></div>
+
+  <div class="callout" id="executiveCallout">
+    <h4>Leitura rápida</h4>
+    <p id="executiveText">—</p>
+  </div>
+
+  <h2><span class="num">2</span>Performance por segmento</h2>
+  <p class="section-sub">Realizado vs. expectativa <span id="benchLabel"></span></p>
+
+  <div class="segments" id="segmentsList"></div>
+
+  <h2><span class="num">3</span>Funil completo · e-mail → form</h2>
+  <p class="section-sub">Vinculação entre os disparos e os formulários de captura por segmento</p>
+
+  <div class="callout" id="funnelCallout">
+    <h4>Onde está o gargalo</h4>
+    <p id="funnelText">—</p>
+  </div>
+
+  <div class="funnels" id="funnelsList"></div>
+
+  <h2><span class="num">4</span>Comparativo visual</h2>
+  <p class="section-sub">Posicionamento de cada segmento vs. benchmark</p>
+
+  <div class="bars">
+    <h4>Taxa de abertura · benchmark <span id="openBench">22</span>%</h4>
+    <div id="openBars"></div>
+  </div>
+
+  <div class="bars" style="margin-top:14px">
+    <h4>Taxa de clique · benchmark <span id="clickBench">2,5</span>%</h4>
+    <div id="clickBars"></div>
+  </div>
+
+  <div class="bars" style="margin-top:14px">
+    <h4>Volume entregue · participação no disparo total</h4>
+    <div id="volumeBars"></div>
+  </div>
+
+  <h2><span class="num">5</span>Tabela consolidada</h2>
+  <p class="section-sub">Realizado, expectativa e gap por segmento</p>
+
+  <table class="tl">
+    <thead>
+      <tr>
+        <th>Segmento</th>
+        <th class="num" style="text-align:right">Entregue</th>
+        <th class="num" style="text-align:right">Abertura</th>
+        <th class="num" style="text-align:right">Clique</th>
+        <th class="num" style="text-align:right">Cliques abs.</th>
+        <th class="num" style="text-align:right">Gap vs. meta clique</th>
+      </tr>
+    </thead>
+    <tbody id="tblBody"></tbody>
+    <tfoot id="tblFoot"></tfoot>
+  </table>
+
+  <p class="footnote">Cliques absolutos calculados a partir de <i>entregue × taxa de clique</i> quando o HubSpot devolve apenas o ratio. Benchmark de referência: pesquisa B2B SaaS (~22% abertura, ~2,5% clique) — substitua via <code>BENCHMARK_OPEN_RATE</code> / <code>BENCHMARK_CLICK_RATE</code> no <code>.env</code> se quiser usar meta interna.</p>
+
+  <h2><span class="num">6</span>Leituras &amp; hipóteses</h2>
+  <p class="section-sub">O que esses números sugerem</p>
+
+  <div class="stack">
+    <div class="card b">
+      <span class="label">Insight 1</span>
+      <h4>Agência de Marketing puxa a média</h4>
+      <p>Único segmento com abertura de 2 dígitos e clique mensurável. Sugere base aquecida e relevância de tema. Vale repetir abordagem nesse perfil em próximos disparos.</p>
+    </div>
+    <div class="card r">
+      <span class="label">Risco</span>
+      <h4>Bases ex-TBW estão frias</h4>
+      <p>87% do volume entregue veio dos dois cortes de ex-cadastrados TBW, com abertura de 1,5–1,8% — sinal clássico de base envelhecida, baixo opt-in recente ou problema de entregabilidade/spam.</p>
+    </div>
+    <div class="card r">
+      <span class="label">Risco crítico</span>
+      <h4>Zero envios reais em 43 views</h4>
+      <p>Os 4 forms vinculados (Agência, CDL, Outros, The Best School) somam <b>43 visualizações</b> e <b>nenhum envio real</b> — só 6 submits classificados como spam. Drop view→envio total. Testar o form manualmente é a 1ª ação: pode ser bug no submit, captcha bloqueando, ou copy/quantidade de campos afastando.</p>
+    </div>
+    <div class="card b">
+      <span class="label">Anomalia</span>
+      <h4>Views &gt; cliques em 3 dos 4 forms</h4>
+      <p>CDL (16v / 0c), Outros (2v / 0c) e Ex-TBW/TBS (22v / 10c combinados) têm mais views no form do que cliques no e-mail. Indica tráfego direto/orgânico nas LPs ou tracking de clique subestimando. Vale conferir UTMs e fontes no relatório de tráfego das LPs.</p>
+    </div>
+    <div class="card r">
+      <span class="label">Alerta</span>
+      <h4>6 envios spam no form TBS</h4>
+      <p>O Formulário - The Best School registrou 6 submits classificados como spam (provavelmente bot). Forms hospedados em 2 LPs públicas ficam mais expostos — ativar reCAPTCHA v3 ou honeypot já reduz o ruído e impede que envios bot polluam relatórios futuros.</p>
+    </div>
+    <div class="card o">
+      <span class="label">Próximo passo</span>
+      <h4>Higienizar antes de re-disparar</h4>
+      <p>Antes de novos envios para ex-TBW, rodar uma régua de re-engajamento (1–2 toques) e suprimir bounces/inativos. Sem isso, novos disparos derrubam reputação do domínio.</p>
+    </div>
+    <div class="card o">
+      <span class="label">Próximo passo</span>
+      <h4>Comparar com benchmark interno</h4>
+      <p>Confirmar a expectativa real com base no histórico PSA dos últimos 6 meses (não no benchmark genérico B2B). Substituir as metas pelos números reais da operação no <code>.env</code>.</p>
+    </div>
+    <div class="card b">
+      <span class="label">A validar</span>
+      <h4>Critério exato de cada segmento</h4>
+      <p>As descrições por segmento aqui são <i>inferidas pelo nome do e-mail</i>. Confirmar o filtro/lista usado em cada disparo no HubSpot e editar <code>data.json</code> ou o servidor.</p>
+    </div>
+  </div>
+
+  <p class="footnote" style="margin-top:36px">Dados sincronizados via <code>POST /api/refresh</code> contra o HubSpot Marketing Email API. Use o botão <b>Atualizar</b> no topo da página para puxar a leitura mais recente.</p>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const fmtInt = (n) => Number(n || 0).toLocaleString('pt-BR');
+  const fmtPct = (n, dp = 2) => {
+    const v = Number(n || 0);
+    return v.toLocaleString('pt-BR', { minimumFractionDigits: dp, maximumFractionDigits: dp }) + '%';
+  };
+  const fmtPctShort = (n) => {
+    const v = Number(n || 0);
+    const dp = v >= 10 ? 2 : 2;
+    return v.toLocaleString('pt-BR', { minimumFractionDigits: dp, maximumFractionDigits: dp }) + '%';
+  };
+  const fmtDateTime = (iso) => {
+    if (!iso) return '—';
+    const d = new Date(iso);
+    return d.toLocaleString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  };
+
+  let toastTimer;
+  function toast(msg, kind = '') {
+    const el = $('toast');
+    el.textContent = msg;
+    el.className = 'toast show ' + kind;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 4000);
+  }
+
+  function gapVsBench(actual, bench) {
+    if (!bench) return 0;
+    return ((actual - bench) / bench) * 100;
+  }
+  function gapLabel(actual, bench) {
+    const g = gapVsBench(actual, bench);
+    const sign = g >= 0 ? '+' : '';
+    return sign + Math.round(g) + '%';
+  }
+  function gapColor(actual, bench) {
+    const g = gapVsBench(actual, bench);
+    if (g >= -10) return 'var(--green)';
+    if (g >= -50) return 'var(--amber)';
+    return 'var(--red)';
+  }
+  function badgeFor(seg, bench) {
+    if (seg.badge) return seg.badge;
+    const openGap = gapVsBench(seg.openRate, bench.openRate);
+    const clickGap = gapVsBench(seg.clickRate, bench.clickRate);
+    if (openGap >= -50 && clickGap >= -70) return { label: 'Melhor performance', kind: 'g' };
+    if (seg.clickRate === 0) return { label: 'Sem clique', kind: 'r' };
+    if (seg.openRate < 3) return { label: 'Base fria', kind: 'r' };
+    if (seg.delivered < 100) return { label: 'Volume baixo', kind: 'a' };
+    return { label: 'Abaixo da meta', kind: 'a' };
+  }
+
+  function renderKPIs(data) {
+    const segs = data.segments;
+    const delivered = segs.reduce((s, x) => s + x.delivered, 0);
+    const opens = segs.reduce((s, x) => s + x.opens, 0);
+    const clicks = segs.reduce((s, x) => s + x.clicks, 0);
+    const openRate = delivered ? (opens / delivered) * 100 : 0;
+    const clickRate = delivered ? (clicks / delivered) * 100 : 0;
+    const oCls = openRate >= data.benchmark.openRate * 0.8 ? 'good' : openRate >= data.benchmark.openRate * 0.5 ? 'warn' : 'bad';
+    const cCls = clickRate >= data.benchmark.clickRate * 0.8 ? 'good' : clickRate >= data.benchmark.clickRate * 0.5 ? 'warn' : 'bad';
+    $('kpiGrid').innerHTML = `
+      <div class="kpi"><div class="v">${fmtInt(delivered)}</div><div class="l">E-mails entregues</div></div>
+      <div class="kpi ${oCls}"><div class="v">${fmtPct(openRate)}</div><div class="l">Taxa de abertura média</div><div class="sub">vs ${fmtPct(data.benchmark.openRate, 1)} bench</div></div>
+      <div class="kpi ${cCls}"><div class="v">${fmtPct(clickRate)}</div><div class="l">Taxa de clique média</div><div class="sub">vs ${fmtPct(data.benchmark.clickRate, 1)} bench</div></div>
+      <div class="kpi"><div class="v">${fmtInt(clicks)}</div><div class="l">Cliques absolutos</div><div class="sub">soma dos ${segs.length} segmentos</div></div>
+    `;
+    return { delivered, opens, clicks, openRate, clickRate };
+  }
+
+  function renderExecutive(data, totals) {
+    const segs = data.segments;
+    const top = [...segs].sort((a, b) => b.openRate - a.openRate)[0];
+    const big = [...segs].sort((a, b) => b.delivered - a.delivered).slice(0, 2);
+    const bigShare = totals.delivered ? Math.round((big.reduce((s, x) => s + x.delivered, 0) / totals.delivered) * 100) : 0;
+    const avgBigOpen = big.reduce((s, x) => s + x.openRate, 0) / big.length;
+    $('executiveText').innerHTML = `
+      Total de <b>${fmtInt(totals.clicks)} cliques</b> sobre <b>${fmtInt(totals.delivered)} entregas</b> nos ${segs.length} segmentos.
+      A média foi puxada para baixo pelos segmentos de maior volume
+      (<b>${big.map(b => b.name).join(' e ')}</b> somam ${bigShare}% das entregas com abertura média de ${fmtPctShort(avgBigOpen)}).
+      O segmento <b>${top.name}</b> performou melhor em abertura (${fmtPctShort(top.openRate)}).
+    `;
+  }
+
+  function renderSegments(data) {
+    const list = $('segmentsList');
+    const sorted = [...data.segments].sort((a, b) => b.openRate - a.openRate);
+    list.innerHTML = sorted.map(s => {
+      const badge = badgeFor(s, data.benchmark);
+      const oGap = gapLabel(s.openRate, data.benchmark.openRate);
+      const cGap = gapLabel(s.clickRate, data.benchmark.clickRate);
+      const oCol = gapColor(s.openRate, data.benchmark.openRate);
+      const cCol = gapColor(s.clickRate, data.benchmark.clickRate);
+      const cVsCls = s.clickRate > 0 ? 'up' : 'down';
+      const oVsCls = s.openRate >= data.benchmark.openRate * 0.6 ? 'up' : 'down';
+      const desc = s.description || '';
+      const sentLabel = s.publishedAt ? `Disparo · ${fmtDateTime(s.publishedAt)}` : '';
+      return `
+        <div class="seg">
+          <div class="seg-head">
+            <div class="seg-title">
+              <h4>${escapeHtml(s.name)}</h4>
+              <span class="badge ${badge.kind}">${escapeHtml(badge.label)}</span>
+            </div>
+            <span style="font-size:12px;color:var(--ink-3)">${escapeHtml(sentLabel)}</span>
+          </div>
+          ${desc ? `<p class="seg-desc">${escapeHtml(desc)}</p>` : ''}
+          <div class="seg-grid">
+            <div class="seg-cell"><div class="l">Entregue</div><div class="v">${fmtInt(s.delivered)}</div></div>
+            <div class="seg-cell"><div class="l">Aberturas</div><div class="v">${fmtInt(s.opens)}</div><div class="vs ${oVsCls}">${fmtPctShort(s.openRate)}</div></div>
+            <div class="seg-cell"><div class="l">Cliques</div><div class="v">${fmtInt(s.clicks)}</div><div class="vs ${cVsCls}">${fmtPctShort(s.clickRate)}</div></div>
+            <div class="seg-cell"><div class="l">vs. exp. abertura</div><div class="v" style="color:${oCol}">${oGap}</div><div class="vs">meta ${fmtPct(data.benchmark.openRate, 1)}</div></div>
+            <div class="seg-cell"><div class="l">vs. exp. clique</div><div class="v" style="color:${cCol}">${cGap}</div><div class="vs">meta ${fmtPct(data.benchmark.clickRate, 1)}</div></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderBars(data) {
+    const segs = data.segments;
+    const maxOpen = Math.max(data.benchmark.openRate, ...segs.map(s => s.openRate));
+    const maxClick = Math.max(data.benchmark.clickRate, ...segs.map(s => s.clickRate));
+    const totalDeliv = segs.reduce((s, x) => s + x.delivered, 0);
+
+    const openSorted = [...segs].sort((a, b) => b.openRate - a.openRate);
+    $('openBars').innerHTML = openSorted.map(s => {
+      const w = (s.openRate / maxOpen) * 100;
+      const bench = (data.benchmark.openRate / maxOpen) * 100;
+      return `<div class="bar"><div class="name">${escapeHtml(s.name)}</div><div class="track"><div class="fill" style="width:${w}%"></div><div class="benchmark-mark" style="left:${bench}%"></div></div><div class="val">${fmtPctShort(s.openRate)}</div></div>`;
+    }).join('');
+
+    const clickSorted = [...segs].sort((a, b) => b.clickRate - a.clickRate);
+    $('clickBars').innerHTML = clickSorted.map(s => {
+      const w = maxClick > 0 ? (s.clickRate / maxClick) * 100 : 0;
+      const bench = maxClick > 0 ? (data.benchmark.clickRate / maxClick) * 100 : 0;
+      return `<div class="bar"><div class="name">${escapeHtml(s.name)}</div><div class="track"><div class="fill blue" style="width:${w}%"></div><div class="benchmark-mark" style="left:${bench}%"></div></div><div class="val">${fmtPctShort(s.clickRate)}</div></div>`;
+    }).join('');
+
+    const volSorted = [...segs].sort((a, b) => b.delivered - a.delivered);
+    const maxDeliv = volSorted[0]?.delivered || 1;
+    $('volumeBars').innerHTML = volSorted.map(s => {
+      const w = (s.delivered / maxDeliv) * 100;
+      const share = totalDeliv ? (s.delivered / totalDeliv) * 100 : 0;
+      return `<div class="bar"><div class="name">${escapeHtml(s.name)}</div><div class="track"><div class="fill green" style="width:${w}%"></div></div><div class="val">${fmtInt(s.delivered)} <span style="color:var(--ink-3);font-size:11px">(${share.toFixed(1)}%)</span></div></div>`;
+    }).join('');
+  }
+
+  function renderTable(data, totals) {
+    const sorted = [...data.segments].sort((a, b) => b.openRate - a.openRate);
+    $('tblBody').innerHTML = sorted.map(s => {
+      const gapC = gapLabel(s.clickRate, data.benchmark.clickRate);
+      const col = gapColor(s.clickRate, data.benchmark.clickRate);
+      return `
+        <tr>
+          <td>${escapeHtml(s.name)}</td>
+          <td class="num">${fmtInt(s.delivered)}</td>
+          <td class="num">${fmtPctShort(s.openRate)}</td>
+          <td class="num">${fmtPctShort(s.clickRate)}</td>
+          <td class="num">${fmtInt(s.clicks)}</td>
+          <td class="num" style="color:${col}">${gapC}</td>
+        </tr>
+      `;
+    }).join('');
+    const totalGap = gapLabel(totals.clickRate, data.benchmark.clickRate);
+    $('tblFoot').innerHTML = `
+      <tr>
+        <td>Total / média ponderada</td>
+        <td class="num">${fmtInt(totals.delivered)}</td>
+        <td class="num">${fmtPctShort(totals.openRate)}</td>
+        <td class="num">${fmtPctShort(totals.clickRate)}</td>
+        <td class="num">${fmtInt(totals.clicks)}</td>
+        <td class="num">${totalGap}</td>
+      </tr>
+    `;
+  }
+
+  function renderMeta(data) {
+    const segs = data.segments;
+    $('segCount').textContent = segs.length;
+    $('metaSegments').textContent = segs.length;
+
+    const dates = segs.map(s => s.publishedAt).filter(Boolean).map(d => new Date(d)).sort((a, b) => a - b);
+    if (dates.length >= 2) {
+      const a = dates[0], b = dates[dates.length - 1];
+      const fmt = d => d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
+      $('metaWindow').textContent = fmt(a) + ' – ' + fmt(b);
+    } else if (dates.length === 1) {
+      $('metaWindow').textContent = dates[0].toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
+    } else {
+      $('metaWindow').textContent = '—';
+    }
+
+    const updated = data.lastUpdated ? new Date(data.lastUpdated).toLocaleString('pt-BR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—';
+    $('lastUpdated').innerHTML = `Última atualização: <b>${updated}</b>`;
+
+    const badge = $('sourceBadge');
+    if (data.source === 'hubspot-live') {
+      badge.textContent = 'Live';
+      badge.className = 'source-badge live';
+    } else {
+      badge.textContent = 'Snapshot';
+      badge.className = 'source-badge snap';
+    }
+
+    $('openBench').textContent = data.benchmark.openRate.toString().replace('.', ',');
+    $('clickBench').textContent = data.benchmark.clickRate.toString().replace('.', ',');
+    $('benchLabel').textContent = `(benchmark: ${fmtPct(data.benchmark.openRate, 1)} abertura · ${fmtPct(data.benchmark.clickRate, 1)} clique)`;
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
+  function combinedClicksForForm(formId, segments) {
+    return segments.filter(s => s.form && s.form.id === formId).reduce((sum, s) => sum + s.clicks, 0);
+  }
+
+  function renderFunnels(data) {
+    const sorted = [...data.segments].sort((a, b) => b.delivered - a.delivered);
+    $('funnelsList').innerHTML = sorted.map(s => renderFunnel(s, data.segments)).join('');
+
+    const totalClicks = data.segments.reduce((s, x) => s + x.clicks, 0);
+    const linkedSegs = data.segments.filter(s => s.form).length;
+    const orphans = data.segments.length - linkedSegs;
+
+    const seen = new Set();
+    let uniqueForms = 0, totalViews = 0, totalSubs = 0, totalSpam = 0;
+    for (const s of data.segments) {
+      if (!s.form || seen.has(s.form.id)) continue;
+      seen.add(s.form.id);
+      uniqueForms++;
+      totalViews += s.form.views || 0;
+      totalSubs += s.form.submissions || 0;
+      totalSpam += s.form.spam || 0;
+    }
+
+    let txt = `${uniqueForms} formulários únicos vinculados a ${linkedSegs} dos ${data.segments.length} segmentos: <b>${fmtInt(totalClicks)} cliques no e-mail</b> → <b>${fmtInt(totalViews)} views nos forms</b> → <b>${fmtInt(totalSubs)} envios reais</b>${totalSpam > 0 ? ' + <b style="color:var(--red)">' + totalSpam + ' envios spam</b>' : ''}.`;
+    if (orphans > 0) txt += ` ${orphans} segmento${orphans > 1 ? 's' : ''} sem form vinculado.`;
+    if (totalSubs === 0 && totalViews > 0) txt += ` <br><b style="color:var(--red)">Zero envios reais apesar de ${totalViews} views</b> — gargalo está no form. Revisar copy, número de campos ou bug no submit.`;
+    if (totalSpam > 0) txt += ` <br><b style="color:var(--amber)">Os ${totalSpam} envios spam</b> sugerem bot/scraper acessando os forms — vale ativar reCAPTCHA se ainda não tiver.`;
+    if (totalViews > totalClicks) txt += ` <br><b style="color:var(--amber)">Views (${totalViews}) &gt; cliques no e-mail (${totalClicks})</b> — tráfego chegou por outro canal (direto, orgânico) ou tracking do e-mail subestimando.`;
+    $('funnelText').innerHTML = txt;
+  }
+
+  function renderFunnel(s, allSegments) {
+    const steps = [
+      { label: 'Entregue', value: s.delivered, kind: 's1', conv: null },
+      { label: 'Aberto', value: s.opens, kind: 's2', conv: s.delivered ? (s.opens / s.delivered) * 100 : 0, convLabel: 'do entregue' },
+      { label: 'Clicou', value: s.clicks, kind: 's3', conv: s.opens ? (s.clicks / s.opens) * 100 : 0, convLabel: 'do aberto' },
+    ];
+    if (s.form) {
+      const clicksDenom = s.form.shared ? combinedClicksForForm(s.form.id, allSegments) : s.clicks;
+      const viewConv = clicksDenom ? (s.form.views / clicksDenom) * 100 : 0;
+      let viewAnom = null;
+      if (clicksDenom === 0 && s.form.views > 0) viewAnom = 'tráfego direto (zero cliques)';
+      else if (s.form.views > clicksDenom) viewAnom = 'views > cliques';
+      steps.push({
+        label: 'Viu o form',
+        value: s.form.views,
+        kind: 's4',
+        conv: viewConv,
+        convLabel: s.form.shared ? 'do clique combinado' : 'do clique',
+        anomaly: viewAnom,
+      });
+      const subStep = {
+        label: 'Enviou',
+        value: s.form.submissions,
+        kind: 's5',
+        conv: s.form.views ? (s.form.submissions / s.form.views) * 100 : 0,
+        convLabel: 'do view',
+      };
+      if (s.form.spam > 0) subStep.anomaly = `+${s.form.spam} envios spam (bot)`;
+      steps.push(subStep);
+    }
+
+    const max = Math.max(...steps.map(st => st.value), 1);
+
+    return `
+      <div class="funnel">
+        <div class="funnel-head">
+          <h4>${escapeHtml(s.name)}</h4>
+          <span class="form-name">${s.form ? '↪ Form: ' + escapeHtml(s.form.name) + (s.form.shared ? ' <span style="color:var(--amber)">(compartilhado)</span>' : '') + (s.form.pageLocationsCount ? ' · ' + s.form.pageLocationsCount + ' LPs' : '') : '— sem form vinculado'}</span>
+        </div>
+        ${steps.map(st => {
+          const w = Math.max(3, (st.value / max) * 100);
+          let convHtml = '';
+          if (st.conv == null) {
+            convHtml = '<span>100% base</span>';
+          } else {
+            convHtml = `<b>${st.conv.toFixed(1)}%</b> ${st.convLabel}`;
+            if (st.anomaly) convHtml += `<br><span class="anom">⚠ ${st.anomaly}</span>`;
+          }
+          return `
+            <div class="funnel-step">
+              <div class="step-label">${st.label}</div>
+              <div class="bar"><div class="fill ${st.kind}" style="width:${w}%">${fmtInt(st.value)}</div></div>
+              <div class="conv">${convHtml}</div>
+            </div>
+          `;
+        }).join('')}
+        ${!s.form ? '<div class="funnel-orphan">Sem formulário vinculado a este segmento no HubSpot. Confirmar para onde o CTA do e-mail levou esses cliques.</div>' : ''}
+      </div>
+    `;
+  }
+
+  function renderAll(data) {
+    renderMeta(data);
+    const totals = renderKPIs(data);
+    renderExecutive(data, totals);
+    renderSegments(data);
+    renderFunnels(data);
+    renderBars(data);
+    renderTable(data, totals);
+  }
+
+  async function loadData() {
+    try {
+      const r = await fetch('/api/data', { cache: 'no-store' });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const data = await r.json();
+      renderAll(data);
+    } catch (e) {
+      toast('Falha ao carregar dados: ' + e.message, 'error');
+      console.error(e);
+    }
+  }
+
+  async function refreshData() {
+    const btn = $('refreshBtn');
+    btn.classList.add('loading');
+    btn.disabled = true;
+    btn.querySelector('.lbl').textContent = 'Atualizando…';
+    try {
+      const r = await fetch('/api/refresh', { method: 'POST' });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error || 'HTTP ' + r.status);
+      renderAll(data);
+      if (data.warnings && data.warnings.length > 0) {
+        toast(`Atualizado · ${data.segments.length} segmentos. ${data.warnings[0]}`, 'error');
+      } else {
+        toast(`Dados atualizados do HubSpot · ${data.segments.length} segmentos`, 'success');
+      }
+    } catch (e) {
+      toast('Erro ao atualizar: ' + e.message, 'error');
+    } finally {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+      btn.querySelector('.lbl').textContent = 'Atualizar';
+    }
+  }
+
+  $('refreshBtn').addEventListener('click', refreshData);
+  loadData();
+})();
+</script>
+</body>
+</html>

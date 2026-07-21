@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="A PSA está construindo a plataforma definitiva de cotação de palestrantes para agências de marketing e eventos. Sua resposta entra direto no produto." />
+<title>Plataforma PSA · Agências de Marketing | Pesquisa de certificação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --psa-bg:#0B1020;
+    --psa-surface:#111733;
+    --psa-card:#161E40;
+    --psa-border:#243056;
+    --psa-accent:#3B82F6;
+    --psa-accent-hover:#2563EB;
+    --psa-success:#10B981;
+    --psa-warning:#F59E0B;
+    --psa-muted:#94A3B8;
+    --psa-text:#E2E8F0;
+    --psa-white:#F8FAFC;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden}
+  body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--psa-bg);color:var(--psa-text);line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit}
+
+  .screen{
+    display:grid;
+    grid-template-columns:minmax(0,45fr) minmax(0,55fr);
+    height:100vh;
+    width:100%;
+  }
+
+  /* ============ LEFT ============ */
+  .left{
+    position:relative;
+    padding:40px 56px;
+    display:flex;
+    flex-direction:column;
+    background:
+      radial-gradient(900px 500px at -10% 110%,rgba(245,158,11,.18),transparent 60%),
+      radial-gradient(700px 400px at 110% -10%,rgba(59,130,246,.16),transparent 60%),
+      var(--psa-bg);
+    overflow:hidden;
+  }
+  .left::after{
+    content:"";position:absolute;top:0;right:0;width:1px;height:100%;
+    background:linear-gradient(180deg,transparent,var(--psa-border) 30%,var(--psa-border) 70%,transparent);
+  }
+
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;color:var(--psa-white)}
+  .brand-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#F59E0B 0%,#3B82F6 100%);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff}
+  .brand-tag{font-size:10px;text-transform:uppercase;letter-spacing:1.6px;color:var(--psa-muted);font-weight:600;display:block}
+
+  .left-body{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:520px}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(245,158,11,.12);color:#FCD34D;
+    border:1px solid rgba(245,158,11,.3);
+    padding:6px 14px;border-radius:999px;
+    font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.2px;
+    margin-bottom:22px;width:fit-content;
+  }
+  .eyebrow .dot{width:6px;height:6px;background:var(--psa-warning);border-radius:50%;box-shadow:0 0 0 4px rgba(245,158,11,.2)}
+
+  h1{font-size:40px;line-height:1.1;font-weight:800;color:var(--psa-white);letter-spacing:-.8px;margin-bottom:18px}
+  h1 span{background:linear-gradient(135deg,#FCD34D 0%,#F59E0B 50%,#3B82F6 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{font-size:16px;color:#CBD5E1;margin-bottom:30px;max-width:480px}
+
+  .bullets{display:flex;flex-direction:column;gap:14px;list-style:none}
+  .bullets li{display:flex;align-items:flex-start;gap:14px;font-size:15px;color:#E2E8F0}
+  .bullets .check{
+    width:28px;height:28px;border-radius:8px;
+    background:rgba(16,185,129,.13);
+    border:1px solid rgba(16,185,129,.35);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    color:var(--psa-success);font-weight:700;font-size:14px;
+    margin-top:1px;
+  }
+  .bullets b{color:var(--psa-white);font-weight:700;display:block;margin-bottom:2px;font-size:15.5px}
+  .bullets span.desc{color:#94A3B8;font-size:13.5px;line-height:1.5}
+
+  .left-foot{margin-top:auto;padding-top:24px;display:flex;flex-direction:column;gap:8px}
+  .trust{display:flex;flex-wrap:wrap;gap:18px 26px;font-size:12px;color:var(--psa-muted)}
+  .trust strong{color:var(--psa-white);font-weight:600}
+  .trust .sep{color:var(--psa-border)}
+  .signature{font-size:11px;color:var(--psa-muted);font-style:italic;letter-spacing:.2px}
+
+  /* ============ RIGHT (FORM) ============ */
+  .right{
+    background:linear-gradient(180deg,#0E1428 0%,var(--psa-bg) 100%);
+    padding:36px 56px;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+  }
+  .form-head{margin-bottom:20px}
+  .form-tag{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.6px;color:#FCD34D;margin-bottom:8px}
+  .form-head h2{font-size:22px;line-height:1.25;font-weight:700;color:var(--psa-white);letter-spacing:-.3px;margin-bottom:6px}
+  .form-head p{font-size:13px;color:var(--psa-muted)}
+
+  form{display:flex;flex-direction:column;gap:18px;flex:1}
+
+  .field-group{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .text-input{
+    width:100%;background:rgba(255,255,255,.03);
+    border:1px solid var(--psa-border);border-radius:9px;
+    padding:11px 14px;color:var(--psa-white);font-size:13.5px;font-family:inherit;
+    transition:border-color .15s,background .15s;
+  }
+  .text-input::placeholder{color:#5C6B8A}
+  .text-input:focus{outline:none;border-color:var(--psa-warning);background:rgba(245,158,11,.05)}
+
+  .q{display:flex;flex-direction:column;gap:8px}
+  .q-label{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--psa-white);line-height:1.4}
+  .q-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;background:var(--psa-accent);color:#fff;
+    border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0;
+  }
+  .opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .opt-grid.cols-1{grid-template-columns:1fr}
+  .opt{
+    display:flex;align-items:center;gap:9px;
+    padding:9px 12px;background:rgba(255,255,255,.02);
+    border:1px solid var(--psa-border);border-radius:8px;
+    cursor:pointer;transition:background .15s,border-color .15s;
+    color:#CBD5E1;font-size:13px;line-height:1.3;
+  }
+  .opt:hover{background:rgba(245,158,11,.06);border-color:#5C4A1F}
+  .opt input{accent-color:var(--psa-warning);width:15px;height:15px;cursor:pointer;flex-shrink:0}
+  .opt:has(input:checked){background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.4);color:var(--psa-white)}
+
+  .price-row{display:grid;grid-template-columns:1.4fr 1fr;gap:10px;align-items:stretch}
+
+  /* honeypot — hidden from humans, visible to bots */
+  .hp{position:absolute;left:-9999px;opacity:0;pointer-events:none;height:0;width:0}
+
+  .submit-row{margin-top:auto;padding-top:6px}
+  .submit-btn{
+    width:100%;
+    background:linear-gradient(135deg,#F59E0B 0%,#3B82F6 100%);
+    color:#fff;border:none;padding:15px 24px;border-radius:11px;
+    font-weight:700;font-size:15px;cursor:pointer;letter-spacing:.2px;
+    box-shadow:0 8px 24px rgba(245,158,11,.3);
+    transition:transform .15s,box-shadow .15s,opacity .15s;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .submit-btn:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(245,158,11,.45)}
+  .submit-btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+  .form-foot{margin-top:10px;text-align:center;color:var(--psa-muted);font-size:11.5px}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:980px){
+    html,body{overflow:auto;height:auto}
+    .screen{grid-template-columns:1fr;height:auto}
+    .left{padding:32px 24px}
+    .left::after{display:none}
+    .right{padding:32px 24px}
+    .left-body{padding:20px 0}
+    h1{font-size:30px}
+  }
+  @media (max-width:520px){
+    .field-group,.opt-grid{grid-template-columns:1fr}
+    .price-row{grid-template-columns:1fr}
+  }
+
+  /* ============ HEIGHT FALLBACKS ============ */
+  /* Para telas curtas (notebook 13"), apertar um pouco mais */
+  @media (max-height:760px) and (min-width:981px){
+    .left{padding:28px 48px}
+    .right{padding:28px 48px}
+    h1{font-size:34px;margin-bottom:14px}
+    .lead{font-size:14.5px;margin-bottom:22px}
+    .bullets li{font-size:14px}
+    .bullets b{font-size:14.5px}
+    .form-head h2{font-size:20px}
+    form{gap:14px}
+  }
+</style>
+</head>
+<body>
+
+<div class="screen">
+
+  <!-- ============ LEFT: pitch ============ -->
+  <aside class="left">
+    <div class="brand">
+      <div class="brand-mark">P</div>
+      <div>
+        <div>PSA</div>
+        <span class="brand-tag">Plataforma de Palestrantes</span>
+      </div>
+    </div>
+
+    <div class="left-body">
+      <div class="eyebrow"><span class="dot"></span> Pesquisa para agências de marketing</div>
+      <h1>Sua agência <span>decide</span> como será a plataforma de cotação de palestrantes da PSA.</h1>
+      <p class="lead">Estamos desenhando a infraestrutura que vai centralizar briefing, cotação, agenda e fechamento — com a margem da agência preservada por design. Sua resposta entra direto no produto, antes do MVP ir ao ar.</p>
+
+      <ul class="bullets">
+        <li>
+          <span class="check">✓</span>
+          <div><b>Acesso prioritário ao MVP</b><span class="desc">Sua agência opera na plataforma antes da concorrência — e sai do beta com tarifa de fundador.</span></div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div><b>Voz direta no produto</b><span class="desc">Suas respostas viram requisito de engenharia, não pesquisa em planilha guardada. Você desenha o que vai usar.</span></div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div><b>Margem da agência preservada</b><span class="desc">Modelo comercial construído com agências, não imposto a elas. Sem cachê opaco, sem proposta sem briefing.</span></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="left-foot">
+      <div class="trust">
+        <span><strong>+1.500</strong> palestrantes na rede PSA</span>
+        <span class="sep">·</span>
+        <span><strong>3 perguntas</strong> · 2 minutos</span>
+        <span class="sep">·</span>
+        <span><strong>Confidencial</strong></span>
+      </div>
+      <div class="signature">Construído com agências, não para agências.</div>
+    </div>
+  </aside>
+
+  <!-- ============ RIGHT: form ============ -->
+  <main class="right">
+    <div class="form-head">
+      <div class="form-tag">Pesquisa de certificação</div>
+      <h2>Sua resposta. Nosso produto.</h2>
+      <p>3 perguntas · 2 minutos · acesso prioritário ao MVP garantido.</p>
+    </div>
+
+    <form id="pesquisa-agencia-v2" novalidate>
+      <!-- honeypot -->
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off">
+
+      <!-- Dados -->
+      <div class="field-group">
+        <input class="text-input" type="text" name="nome" placeholder="Nome completo *" required>
+        <input class="text-input" type="email" name="email" placeholder="E-mail corporativo *" required>
+        <input class="text-input" type="text" name="agencia" placeholder="Agência / Produtora *" required>
+        <input class="text-input" type="tel" name="telefone" placeholder="WhatsApp (opcional)">
+      </div>
+
+      <!-- Q1 -->
+      <div class="q">
+        <label class="q-label"><span class="q-num">1</span>Como sua agência contrata palestrantes hoje?</label>
+        <div class="opt-grid">
+          <label class="opt"><input type="radio" name="q1" value="indicacao_direta"><span>Indicação direta</span></label>
+          <label class="opt"><input type="radio" name="q1" value="agencia"><span>Empresa/agência de palestras</span></label>
+          <label class="opt"><input type="radio" name="q1" value="redes_sociais"><span>Busca em redes sociais</span></label>
+          <label class="opt"><input type="radio" name="q1" value="base_propria"><span>Base própria</span></label>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="q">
+        <label class="q-label"><span class="q-num">2</span>Maior dificuldade no processo atual?</label>
+        <div class="opt-grid">
+          <label class="opt"><input type="radio" name="q2" value="encontrar_tema"><span>Encontrar bons nomes por tema</span></label>
+          <label class="opt"><input type="radio" name="q2" value="preco"><span>Saber o preço antes do contato</span></label>
+          <label class="opt"><input type="radio" name="q2" value="negociacao"><span>Tempo de resposta / negociação</span></label>
+          <label class="opt"><input type="radio" name="q2" value="logistica"><span>Logística e agenda</span></label>
+        </div>
+      </div>
+
+      <!-- Q3 (was Q4 — pricing) -->
+      <div class="q">
+        <label class="q-label"><span class="q-num">3</span>Quanto sua agência pagaria por mês por essa plataforma?</label>
+        <div class="price-row">
+          <input class="text-input" type="text" name="q3_valor" placeholder="Ex: R$ 1.500 / mês">
+          <label class="opt"><input type="radio" name="q3" value="nao_pagaria"><span>Não pagaria</span></label>
+        </div>
+      </div>
+
+      <div class="submit-row">
+        <button class="submit-btn" type="submit">
+          Quero acesso prioritário ao MVP
+          <span>→</span>
+        </button>
+        <div class="form-foot">Suas respostas são confidenciais e usadas apenas para construir o produto.</div>
+      </div>
+    </form>
+  </main>
+
+</div>
+
+<script>
+  // Anti-bot básico — submit é bloqueado se honeypot tiver conteúdo
+  document.getElementById('pesquisa-agencia-v2').addEventListener('submit', function(e){
+    if (this.elements.website.value.trim() !== '') {
+      e.preventDefault();
+      return false;
+    }
+    // Aqui entra o submit pro HubSpot (vincular à API ou usar form embed do HubSpot)
+  });
+</script>
+
+</body>
+</html>

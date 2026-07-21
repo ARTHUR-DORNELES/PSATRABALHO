@@ -1,0 +1,509 @@
+{
+  "name": "Wiki Hub - Curadoria (A enriquece + B ranking->Drive por requisicao)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "7c69bb2f-96a0-40fc-a852-29c0d80bb94d",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        -300
+      ],
+      "id": "wh-a",
+      "name": "Webhook",
+      "webhookId": "7c69bb2f-96a0-40fc-a852-29c0d80bb94d"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.hubapi.com/crm/v3/objects/contacts/{{ $json.body.hs_object_id }}?properties=firstname,lastname,palestrante_wiki_url,palestrante_wiki_final_url,tema,macro_tema,macro_tema_contato",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "hubspotAppToken",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        -300
+      ],
+      "id": "get-contato",
+      "name": "Get Contato",
+      "credentials": {
+        "hubspotAppToken": {
+          "id": "OUKKuOZOqvfhSZ6v",
+          "name": "Time Tech"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Entrada: resposta do \"Get Contato\" (HubSpot GET). Saida: id, nome, wikiUrl.\nconst j = $json;\nconst p = j.properties || {};\nconst wikiUrl = p.palestrante_wiki_final_url || p.palestrante_wiki_url || '';\nconst nome = ((p.firstname || '') + ' ' + (p.lastname || '')).trim();\nconst macroTemaHub = p.macro_tema_contato || p.macro_tema || ''; // tema humano vindo do arquivo importado\nreturn [{ json: { id: j.id, nome, wikiUrl, tema: p.tema || '', macroTemaHub } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        -300
+      ],
+      "id": "prepara",
+      "name": "Prepara"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "cond-wiki",
+              "leftValue": "={{ $json.wikiUrl }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        660,
+        -300
+      ],
+      "id": "tem-wiki",
+      "name": "Tem Wiki"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.wikiUrl }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        880,
+        -380
+      ],
+      "id": "baixa-wiki",
+      "name": "Baixa Wiki"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Entrada: resposta do \"Baixa Wiki\" (HTML em texto). Saida: wikiText + sysPrompt.\nconst prep = $('Prepara').first().json;\nconst html = $json.data || $json.body || $json.body?.data || '';\nconst wikiText = String(html)\n  .replace(/<script[\\s\\S]*?<\\/script>/gi, ' ')\n  .replace(/<style[\\s\\S]*?<\\/style>/gi, ' ')\n  .replace(/<[^>]+>/g, ' ')\n  .replace(/&nbsp;/gi, ' ')\n  .replace(/&amp;/gi, '&')\n  .replace(/\\s+/g, ' ')\n  .trim()\n  .slice(0, 40000); // wikis reais ~16k chars; 40k da folga sem estourar contexto\n\nconst sysPrompt = [\n  'Voce e curador da PSA. Recebe o texto da wiki (\"Dossie Operacional\", 7 dimensoes) de UM palestrante.',\n  'Avalie SOMENTE com base no texto fornecido. Nao invente nada. Onde estiver \"a coletar\" ou vazio, use nota baixa.',\n  '',\n  '1) Identifique o MACRO TEMA do palestrante e mapeie para UM destes 25 valores EXATOS (use o rotulo com o numero):',\n  '[1. AGRONEGOCIO, 2. COMUNICACAO, 3. DIVERSIDADE E INCLUSAO, 4. ECONOMIA / POLITICA, 5. EDUCACAO, 6. EMPREENDEDORISMO, 7. ESPORTE, 8. ETICA, 9. GESTAO, 10. GESTAO DE PESSOAS, 11. INOVACAO, 12. MOTIVACAO, 13. SAUDE, 14. SIPAT, 15. SUSTENTABILIDADE, 16. VENDAS, 17. CONSCIENTIZACAO (MESES), 18. OUTROS, 19. LIDERANCA, 20. COMPORTAMENTO, 21. COOPERATIVISMO, 22. EXPERIENCIA E ATENDIMENTO, 23. DATAS COMEMORATIVAS, 24. FINANCAS, 25. PROTAGONISMO FEMININO].',\n  'Se nao encaixar em nenhum, use \"18. OUTROS\".',\n  '',\n  '2) De nota INTEIRA de 0 a 5 a cada dimensao, com 1 frase curta de justificativa extraida da wiki:',\n  '- quem_e   (peso 3): trajetoria, credenciais, autoridade no tema',\n  '- defende  (peso 5): tese central, subtemas, perguntas que responde melhor',\n  '- entrega  (peso 4): estilo de palco, formatos, adaptabilidade a publicos',\n  '- pra_quem (peso 5): publicos onde brilha, setores fortes, empresa ideal, contra-indicacoes',\n  '- comprova (peso 3): NPS, historico real de contratacoes, recompra, depoimentos',\n  '- raiox    (peso 4): promessa declarada, tese autoral, tom, arquitetura narrativa',\n  '(A dimensao \"Quanto custa\" NAO deve ser avaliada.)',\n  '',\n  '3) Responda APENAS um JSON valido, sem texto fora dele, neste formato:',\n  '{\"macro_tema\":\"11. INOVACAO\",\"notas\":{\"quem_e\":0,\"defende\":0,\"entrega\":0,\"pra_quem\":0,\"comprova\":0,\"raiox\":0},\"justificativas\":{\"quem_e\":\"\",\"defende\":\"\",\"entrega\":\"\",\"pra_quem\":\"\",\"comprova\":\"\",\"raiox\":\"\"}}'\n].join('\\n');\n\nreturn [{ json: { id: prep.id, nome: prep.nome, wikiUrl: prep.wikiUrl, tema: prep.tema, macroTemaHub: prep.macroTemaHub, wikiText, sysPrompt } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1100,
+        -380
+      ],
+      "id": "prep-prompt",
+      "name": "Prepara Prompt"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "openAiApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'gpt-4o', temperature: 0, response_format: { type: 'json_object' }, messages: [ { role: 'system', content: $json.sysPrompt }, { role: 'user', content: 'PALESTRANTE: ' + $json.nome + '\\nTEMA HUBSPOT (dica): ' + ($json.tema || '-') + '\\n\\nWIKI:\\n' + $json.wikiText } ] }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1320,
+        -380
+      ],
+      "id": "openai",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "xsLRnqjf6a6ia2JG",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Entrada: resposta do \"OpenAI\". Saida: registro pronto pro Redis (chave + valor JSON).\nconst prep = $('Prepara Prompt').first().json;\nlet content = ($json.choices && $json.choices[0] && $json.choices[0].message)\n  ? $json.choices[0].message.content\n  : ($json.content || '{}');\n\nlet d;\ntry { d = typeof content === 'string' ? JSON.parse(content) : content; }\ncatch (e) { d = { macro_tema: '18. OUTROS', notas: {}, justificativas: {} }; }\n\nconst pesos = { quem_e: 3, defende: 5, entrega: 4, pra_quem: 5, comprova: 3, raiox: 4 };\nconst notasIn = d.notas || {};\nconst notas = {};\nlet total = 0;\nfor (const k of Object.keys(pesos)) {\n  const n = Math.max(0, Math.min(5, Number(notasIn[k]) || 0));\n  notas[k] = n;\n  total += n * pesos[k];\n}\nconst compat = Math.round((total / 120) * 100); // 120 = soma_pesos(24) * nota_max(5)\n\nconst rec = {\n  id: prep.id,\n  nome: prep.nome,\n  macro_tema: prep.macroTemaHub || d.macro_tema || '18. OUTROS', // prioriza o tema humano do HubSpot\n  notas,\n  justificativas: d.justificativas || {},\n  pontuacao_total: total,\n  compatibilidade: compat,\n  wiki_url: prep.wikiUrl,\n  data_avaliacao: new Date().toISOString()\n};\n\nreturn [{ json: Object.assign({ redisKey: 'pcur:pal:' + prep.id, redisValue: JSON.stringify(rec) }, rec) }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1540,
+        -380
+      ],
+      "id": "monta-reg",
+      "name": "Monta Registro"
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{ $json.redisKey }}",
+        "value": "={{ $json.redisValue }}",
+        "keyType": "string"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        -380
+      ],
+      "id": "redis-set",
+      "name": "Redis Set",
+      "credentials": {
+        "redis": {
+          "id": "d4VAHvJKHzL9Pr8p",
+          "name": "Redis Profissionais SA"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        880,
+        -180
+      ],
+      "id": "sem-wiki",
+      "name": "Sem Wiki"
+    },
+    {
+      "parameters": {
+        "path": "wikihub-ranking",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        240
+      ],
+      "id": "wh-b",
+      "name": "Webhook Ranking",
+      "webhookId": "wikihub-ranking-endpoint"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Resolve o macro_tema recebido (numero '11', ou texto 'inovacao', ou rotulo exato) para o rotulo EXATO do enum.\nconst LABELS = ['1. AGRONEGÓCIO','2. COMUNICAÇÃO','3. DIVERSIDADE E INCLUSÃO','4. ECONOMIA / POLÍTICA','5. EDUCAÇÃO','6. EMPREENDEDORISMO','7. ESPORTE','8. ÉTICA','9. GESTÃO','10. GESTÃO DE PESSOAS','11. INOVAÇÃO','12. MOTIVAÇÃO','13. SAÚDE','14. SIPAT','15. SUSTENTABILIDADE','16. VENDAS','17. CONSCIENTIZAÇÃO (MESES)','18. OUTROS','19. LIDERANÇA','20. COMPORTAMENTO','21. COOPERATIVISMO','22. EXPERIÊNCIA E ATENDIMENTO','23. DATAS COMEMORATIVAS','24. FINANÇAS','25. PROTAGONISMO FEMININO'];\n\nconst wh = items[0].json || {};\nconst raw = String((wh.query && wh.query.macro_tema) || (wh.body && wh.body.macro_tema) || '').trim();\nconst norm = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');\n\nlet label = '';\nif (/^\\d+$/.test(raw)) {\n  label = LABELS.find(l => l.split('.')[0] === raw) || '';\n} else if (raw) {\n  const rn = norm(raw);\n  label = LABELS.find(l => norm(l) === rn)\n       || LABELS.find(l => norm(l.replace(/^\\d+\\.\\s*/, '')) === rn)\n       || LABELS.find(l => norm(l).indexOf(rn) !== -1)\n       || '';\n}\nif (!label) label = raw; // deixa cru; a busca pode simplesmente nao achar\n\nreturn [{ json: { temaLabel: label, temaRaw: raw } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        240
+      ],
+      "id": "resolve-tema",
+      "name": "Resolve Tema"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.hubapi.com/crm/v3/objects/contacts/search",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "hubspotAppToken",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ filterGroups: [{ filters: [{ propertyName: 'macro_tema_contato', operator: 'EQ', value: $json.temaLabel }, { propertyName: 'palestrante_wiki_url', operator: 'HAS_PROPERTY' }] }], properties: ['firstname','lastname','macro_tema_contato'], limit: 200 }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        240
+      ],
+      "id": "hs-search",
+      "name": "HubSpot Search",
+      "credentials": {
+        "hubspotAppToken": {
+          "id": "OUKKuOZOqvfhSZ6v",
+          "name": "Time Tech"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "keys",
+        "keyPattern": "pcur:pal:*",
+        "getValues": true
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        660,
+        240
+      ],
+      "id": "redis-keys",
+      "name": "Redis Keys",
+      "credentials": {
+        "redis": {
+          "id": "d4VAHvJKHzL9Pr8p",
+          "name": "Redis Profissionais SA"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Entradas: \"Redis Keys\" (scores) + \"HubSpot Search\" (subconjunto filtrado por macro tema) + \"Resolve Tema\".\n// Saida: CSV do ranking do macro tema (avaliados por pontuacao desc; pendentes por ultimo).\n\n// 1) Indexa scores do Redis por id\nconst scores = {};\nfunction pushParsed(v) {\n  let r = v;\n  if (typeof v === 'string') { try { r = JSON.parse(v); } catch (e) { return; } }\n  if (r && r.id) scores[String(r.id)] = r;\n}\nfor (const it of items) {\n  const j = it.json || {};\n  if (j.value !== undefined && (j.key || j.name)) {\n    pushParsed(j.value); // formato {key, value}\n  } else {\n    for (const [k, v] of Object.entries(j)) {\n      if (k.indexOf('pcur:pal:') === 0) pushParsed(v); // formato {chave: valor, ...}\n    }\n  }\n}\n\n// 2) Subconjunto filtrado no HubSpot (o \"primeiro filtro\")\nconst search = $('HubSpot Search').first().json;\nconst results = (search && search.results) || [];\nconst temaLabel = $('Resolve Tema').first().json.temaLabel || '';\n\nconst linhas = results.map(c => {\n  const p = c.properties || {};\n  const nome = ((p.firstname || '') + ' ' + (p.lastname || '')).trim();\n  const sc = scores[String(c.id)];\n  return {\n    id: c.id,\n    nome,\n    macro_tema: p.macro_tema_contato || temaLabel,\n    scored: !!sc,\n    pontuacao_total: sc ? sc.pontuacao_total : '',\n    compatibilidade: sc ? sc.compatibilidade : '',\n    notas: sc ? (sc.notas || {}) : {},\n    wiki_url: sc ? (sc.wiki_url || '') : ''\n  };\n});\n\n// 3) Ordena: avaliados primeiro (pontuacao desc), pendentes por ultimo\nlinhas.sort((a, b) => {\n  if (a.scored !== b.scored) return a.scored ? -1 : 1;\n  return (b.pontuacao_total || 0) - (a.pontuacao_total || 0);\n});\n\n// 4) CSV\nfunction esc(v) {\n  const s = String(v == null ? '' : v);\n  return /[\",\\n;]/.test(s) ? '\"' + s.replace(/\"/g, '\"\"') + '\"' : s;\n}\nconst header = ['rank', 'nome', 'macro_tema', 'status', 'pontuacao_total', 'compatibilidade_pct', 'quem_e', 'defende', 'entrega', 'pra_quem', 'comprova', 'raiox', 'hubspot_id', 'wiki_url'];\nconst out = [header.join(',')];\nlinhas.forEach((r, i) => {\n  const n = r.notas || {};\n  out.push([\n    i + 1, esc(r.nome), esc(r.macro_tema), r.scored ? 'avaliado' : 'pendente',\n    r.pontuacao_total, r.compatibilidade,\n    n.quem_e != null ? n.quem_e : '', n.defende != null ? n.defende : '', n.entrega != null ? n.entrega : '',\n    n.pra_quem != null ? n.pra_quem : '', n.comprova != null ? n.comprova : '', n.raiox != null ? n.raiox : '',\n    r.id, esc(r.wiki_url)\n  ].join(','));\n});\nconst csv = out.join('\\n');\nconst avaliados = linhas.filter(r => r.scored).length;\n\n// tambem devolve como arquivo binario (data) pro Google Drive salvar nesta mesma requisicao\nconst slug = String(temaLabel || 'todos').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');\nconst base64 = Buffer.from('﻿' + csv, 'utf8').toString('base64');\n\nreturn [{\n  json: { macro_tema: temaLabel, total: linhas.length, avaliados, pendentes: linhas.length - avaliados, csv },\n  binary: { data: { data: base64, mimeType: 'text/csv', fileName: 'ranking_' + slug + '.csv' } }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        240
+      ],
+      "id": "rankeia",
+      "name": "Rankeia"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "fileId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "1E4jIjjC4lIMhgWvdGd-4SAB-1OeJci8U9tMv3zuPADk"
+        },
+        "changeFileContent": true,
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1100,
+        240
+      ],
+      "id": "salva-drive",
+      "name": "Salva no Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "GhqUCRaPkB3COgnR",
+          "name": "Google Drive account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $('Rankeia').item.json.csv }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/csv; charset=utf-8"
+              },
+              {
+                "name": "Content-Disposition",
+                "value": "attachment; filename=ranking_palestrantes.csv"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1320,
+        240
+      ],
+      "id": "responde-csv",
+      "name": "Responde CSV"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get Contato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Contato": {
+      "main": [
+        [
+          {
+            "node": "Prepara",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepara": {
+      "main": [
+        [
+          {
+            "node": "Tem Wiki",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tem Wiki": {
+      "main": [
+        [
+          {
+            "node": "Baixa Wiki",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Sem Wiki",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Baixa Wiki": {
+      "main": [
+        [
+          {
+            "node": "Prepara Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepara Prompt": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Monta Registro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Monta Registro": {
+      "main": [
+        [
+          {
+            "node": "Redis Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Ranking": {
+      "main": [
+        [
+          {
+            "node": "Resolve Tema",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Resolve Tema": {
+      "main": [
+        [
+          {
+            "node": "HubSpot Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HubSpot Search": {
+      "main": [
+        [
+          {
+            "node": "Redis Keys",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis Keys": {
+      "main": [
+        [
+          {
+            "node": "Rankeia",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rankeia": {
+      "main": [
+        [
+          {
+            "node": "Salva no Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Salva no Drive": {
+      "main": [
+        [
+          {
+            "node": "Responde CSV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "tags": [],
+  "id": "myurEF7mpuQ2CVnI"
+}

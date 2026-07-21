@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Anton&family=Inter:wght@400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS variables pra alternar tema */
+:root, .light {
+  --tbs-bg: #FAFAFA;
+  --tbs-text: #0E0E10;
+  --tbs-mute: #6B6B72;
+  --tbs-card-bg: #FFFFFF;
+  --tbs-card-border: #E6E6EA;
+  --map-stroke: #FFFFFF;
+  --map-empty: #F3F4F6;
+  /* Canvas do mapa — claro e suave */
+  --map-canvas-bg: radial-gradient(120% 100% at 50% 0%, #FFF4E8 0%, #FFFFFF 55%, #FBF7F2 100%);
+  --map-canvas-border: #F0E2D2;
+  --map-glow: rgba(240, 130, 32, 0.28);
+  --map-edge: rgba(255, 255, 255, 0.95);
+  --map-region-zero: rgba(209, 74, 15, 0.14);
+}
+
+.dark {
+  --tbs-bg: #0E0E14;
+  --tbs-text: #FFFFFF;
+  --tbs-mute: #9090A8;
+  --tbs-card-bg: #1A1A24;
+  --tbs-card-border: #2A2A38;
+  --map-stroke: #0E0E14;
+  --map-empty: #22222E;
+  /* Canvas do mapa — dramático estilo criativo TBS (roxo→preto + glow laranja) */
+  --map-canvas-bg:
+    radial-gradient(80% 60% at 50% 110%, rgba(255, 107, 26, 0.45) 0%, rgba(209, 74, 15, 0.12) 40%, transparent 70%),
+    radial-gradient(120% 90% at 50% -10%, #2A1330 0%, #160A1E 45%, #0B0710 100%);
+  --map-canvas-border: #2A1A38;
+  --map-glow: rgba(255, 140, 50, 0.75);
+  --map-edge: rgba(255, 210, 180, 0.95);
+  --map-region-zero: rgba(255, 130, 40, 0.16);
+}
+
+html, body {
+  background: var(--tbs-bg);
+  color: var(--tbs-text);
+}
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.display { font-family: 'Oswald', Impact, sans-serif; letter-spacing: 0.005em; }
+.heavy { font-family: 'Anton', 'Oswald', Impact, sans-serif; letter-spacing: 0.01em; }
+
+.card {
+  background: var(--tbs-card-bg);
+  border: 1px solid var(--tbs-card-border);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.02) inset, 0 2px 16px rgba(0, 0, 0, 0.04);
+}
+
+.dark .card {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.02) inset, 0 2px 16px rgba(0, 0, 0, 0.3);
+}
+
+.card-title {
+  @apply text-sm font-semibold uppercase tracking-wider;
+  color: var(--tbs-text);
+}
+
+.card-subtitle {
+  @apply text-xs mt-1;
+  color: var(--tbs-mute);
+}
+
+.divider-accent {
+  height: 2px;
+  width: 32px;
+  background: linear-gradient(90deg, #D14A0F, #F08220, #FFA52A);
+  border-radius: 1px;
+}
+
+/* Canvas do mapa do Brasil — fundo dramático estilo criativo TBS */
+.map-canvas {
+  position: relative;
+  border-radius: 1rem;
+  background: var(--map-canvas-bg);
+  border: 1px solid var(--map-canvas-border);
+  overflow: hidden;
+}
+/* Faixas horizontais de luz (efeito "ondas" dos criativos) — só no dark */
+.dark .map-canvas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 9px,
+    rgba(255, 120, 40, 0.05) 9px,
+    rgba(255, 120, 40, 0.05) 10px
+  );
+  mask-image: radial-gradient(80% 70% at 50% 100%, #000 0%, transparent 75%);
+}
+
+.tbs-pill {
+  @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-medium uppercase tracking-wider;
+}
+
+.kpi-value {
+  @apply font-mono font-bold tabular-nums;
+  color: var(--tbs-text);
+}
+
+/* Tooltip Recharts — adapta por tema */
+.recharts-default-tooltip,
+.recharts-tooltip-wrapper > div {
+  background-color: var(--tbs-card-bg) !important;
+  border: 1px solid var(--tbs-card-border) !important;
+  border-radius: 8px !important;
+  color: var(--tbs-text) !important;
+}
+
+.recharts-legend-item-text {
+  color: var(--tbs-mute) !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--tbs-bg); }
+::-webkit-scrollbar-thumb { background: var(--tbs-card-border); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: #3A3A48; }
+
+/* Code inline */
+code {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+.dark code {
+  background: rgba(255, 255, 255, 0.06);
+}

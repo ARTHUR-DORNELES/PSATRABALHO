@@ -1,0 +1,388 @@
+const fs = require('fs');
+
+const CSV_PATH = "C:\\Users\\Usuário\\Downloads\\hubspot-whatsapp-recipients-list-2026-06-16.csv";
+
+// Deal-side: B2B deals, canal=WhatsApp, createdate 21/05-16/06. Lines: <stage>\t<dealid>\t<phone>
+const DEALS = `
+Proposta enviada (closedwon)	60994196048	(11)99022-0092
+Perdido (1076664461)	60688255778	(48)99199-5454
+Perdido (1076664461)	60713319583	+33991442822
+Reunião agendada / Qualificado (decisionmakerboughtin)	61162200853	+4797204421
+Perdido (1076664461)	60644361775	+55 11 93094-2345
+Perdido (1076664461)	60650552211	+55 11 93094-2345
+Perdido (1076664461)	60652004525	+55 11 93094-2345
+Perdido (1076664461)	60652010315	+55 11 93094-2345
+Proposta enviada (closedwon)	61022557531	+55 11 94762-6186
+Em negociação (closedlost)	60957856523	+55 11 98445-9097
+Em negociação (closedlost)	60710392377	+55 45 99921-9125
+Proposta enviada (closedwon)	60977537690	+55 79 99131-0013
+Em negociação (closedlost)	60649805233	+551121470000
+Proposta enviada (closedwon)	60991572814	+551123777281
+Reunião agendada / Qualificado (decisionmakerboughtin)	61143985165	+551139315818
+Proposta enviada (closedwon)	60798156682	+5511910835785
+Aguardando Envio de Proposta (contractsent)	60897730332	+5511918678792
+Perdido (1076664461)	60627045999	+5511919960499
+Perdido (1076664461)	60768173660	+5511919960499
+Em negociação (closedlost)	60650549679	+5511921766934
+Em negociação (closedlost)	60777685307	+5511932359570
+Perdido (1076664461)	60556895576	+5511934725254
+Proposta enviada (closedwon)	60964217752	+5511939263409
+Negócio fechado (1076664462)	60644334469	+5511940041411
+Negócio fechado (1076664462)	60647504998	+5511940041411
+Em negociação (closedlost)	60962466353	+5511940229649
+Reunião agendada / Qualificado (decisionmakerboughtin)	60695949881	+5511940229649
+Perdido (1076664461)	60672996914	+5511940245511
+Em negociação (closedlost)	60963794027	+5511941938145
+Perdido (1076664461)	60533771618	+5511942487892
+Reunião agendada / Qualificado (decisionmakerboughtin)	61007099513	+5511942691191
+Em negociação (closedlost)	60798394953	+5511945307119
+Negociação avançada (1167445770)	60787913751	+5511945754224
+Em negociação (closedlost)	60639651235	+5511947753730
+Em negociação (closedlost)	60991647121	+5511949173889
+Perdido (1076664461)	60624243477	+5511952488508
+Proposta enviada (closedwon)	60992775682	+5511952916190
+Proposta enviada (closedwon)	60992955494	+5511954396986
+Em negociação (closedlost)	61024742178	+5511955514257
+Proposta enviada (closedwon)	60809143700	+5511958950990
+Resting (1367665802)	60778706569	+5511959716375
+Resting (1367665802)	60535422901	+5511964460716
+Perdido (1076664461)	60603528062	+5511966013566
+Perdido (1076664461)	60720205322	+5511966013566
+Perdido (1076664461)	60710794055	+5511966722500
+Em negociação (closedlost)	60525082410	+5511968320457
+Reunião agendada / Qualificado (decisionmakerboughtin)	60466207160	+5511970537757
+Perdido (1076664461)	60960976980	+5511970884415
+Negociação avançada (1167445770)	60962181221	+5511970884415
+Perdido (1076664461)	60486893474	+5511971126636
+Perdido (1076664461)	60627923870	+5511971164984
+Proposta enviada (closedwon)	61109765957	+5511971277396
+Em negociação (closedlost)	60544171581	+5511971889427
+Em negociação (closedlost)	60672963485	+5511971926822
+Proposta enviada (closedwon)	61029991298	+5511972869063
+Resting (1367665802)	60694167933	+5511973791666
+Em negociação (closedlost)	60715019904	+5511975233444
+Proposta enviada (closedwon)	61114384532	+5511976301317
+Perdido (1076664461)	60672992346	+5511978329542
+Reunião agendada / Qualificado (decisionmakerboughtin)	61114768207	+5511978329542
+Proposta enviada (closedwon)	60888272507	+5511980128000
+Proposta enviada (closedwon)	61126882304	+5511981260550
+Reunião agendada / Qualificado (decisionmakerboughtin)	61024633954	+5511982147734
+Perdido (1076664461)	60630512789	+5511982564556
+Perdido (1076664461)	60807778204	+5511983388111
+Em negociação (closedlost)	60734967595	+5511986259878
+Proposta enviada (closedwon)	60961067286	+5511988061774
+Proposta enviada (closedwon)	60964430881	+5511988425097
+Negociação avançada (1167445770)	60891479302	+5511989501700
+Perdido (1076664461)	61017320332	+5511989568841
+Perdido (1076664461)	61032816695	+5511991988199
+Perdido (1076664461)	60692462751	+5511992799596
+Ganho / Contrato assinado (1076664460)	60642962542	+5511993202133
+Em negociação (closedlost)	60957301581	+5511993755986
+Perdido (1076664461)	60647513494	+5511994310990
+Perdido (1076664461)	60459550829	+5511994366883
+Perdido (1076664461)	60644353927	+5511995404999
+Em negociação (closedlost)	60842779227	+5511995404999
+Perdido (1076664461)	60459863470	+5511995663218
+Perdido (1076664461)	60486796682	+5511997020215
+Proposta enviada (closedwon)	60809120325	+5511997087174
+Proposta enviada (closedwon)	60844024758	+5511997611574
+Reunião agendada / Qualificado (decisionmakerboughtin)	60765123197	+5511997830677
+Perdido (1076664461)	60692149134	+5511998106877
+Em negociação (closedlost)	60714345328	+5511998632179
+Reunião agendada / Qualificado (decisionmakerboughtin)	61019871045	+5511998926875
+Perdido (1076664461)	61027845433	+5511999511933
+Em negociação (closedlost)	60621927826	+5511999679505
+Proposta enviada (closedwon)	61027964305	+5512974027379
+Perdido (1076664461)	60714580373	+5512981671166
+Proposta enviada (closedwon)	60956754320	+5512997700323
+Em negociação (closedlost)	60626064797	+5512997723512
+Em negociação (closedlost)	60842779227	+5513981084497
+Reunião agendada / Qualificado (decisionmakerboughtin)	61152235315	+5513981681910
+Em negociação (closedlost)	60614803275	+5513991314030
+Negociação avançada (1167445770)	61099034422	+5513996445307
+Reunião agendada / Qualificado (decisionmakerboughtin)	60843990554	+5513996562484
+Perdido (1076664461)	60551627080	+5514981468232
+Proposta enviada (closedwon)	60789042544	+5514996027717
+Em negociação (closedlost)	61111999253	+5514997797786
+Perdido (1076664461)	60610974642	+5514998536130
+Perdido (1076664461)	60650770960	+5516991044933
+Perdido (1076664461)	61047260518	+5516992479732
+Perdido (1076664461)	61047321478	+5516992479732
+Perdido (1076664461)	61047340624	+5516992479732
+Perdido (1076664461)	61047360106	+5516992479732
+Perdido (1076664461)	61047592064	+5516992479732
+Perdido (1076664461)	61047927897	+5516992479732
+Proposta enviada (closedwon)	60962890345	+5516992641465
+Em negociação (closedlost)	60663977134	+5516993586284
+Em negociação (closedlost)	60663978532	+5516993586284
+Perdido (1076664461)	60624170402	+5516996307248
+Perdido (1076664461)	60896376857	+551721391668
+Proposta enviada (closedwon)	61054287258	+5517991276196
+Perdido (1076664461)	60560287152	+5517992382523
+Em negociação (closedlost)	60816555809	+5517997914713
+Perdido (1076664461)	60424089651	+5518997848577
+Proposta enviada (closedwon)	60781959693	+5519971729845
+Perdido (1076664461)	60806538293	+5519981767714
+Em negociação (closedlost)	60668568832	+5519987361553
+Proposta enviada (closedwon)	60803196785	+5519991236674
+Proposta enviada (closedwon)	60989617459	+5519992216078
+Proposta enviada (closedwon)	60994019997	+5519992812204
+Proposta enviada (closedwon)	60991945911	+5519996834911
+Negócio fechado (1076664462)	61011334287	+5519998946828
+Perdido (1076664461)	60891618335	+5519999747172
+Perdido (1076664461)	61000549014	+5521964257688
+Perdido (1076664461)	60999935257	+5521965746768
+Proposta enviada (closedwon)	60714538618	+5521967303119
+Perdido (1076664461)	60670224037	+5521968305199
+Negociação avançada (1167445770)	60486583728	+5521969098313
+Em negociação (closedlost)	60644351630	+5521969292856
+Proposta enviada (closedwon)	61113236047	+5521971822209
+Proposta enviada (closedwon)	61025937734	+5521973235643
+Perdido (1076664461)	60844334256	+5521973663271
+Em negociação (closedlost)	60986380411	+5521979344375
+Perdido (1076664461)	60892935723	+5521983512222
+Perdido (1076664461)	60486786891	+5521983576647
+Negociação avançada (1167445770)	60486583728	+5521992082963
+Proposta enviada (closedwon)	60990694536	+5521999385015
+Aguardando Envio de Proposta (contractsent)	60963525412	+5522988195205
+Reunião agendada / Qualificado (decisionmakerboughtin)	60842162610	+5522992568688
+Perdido (1076664461)	60741175114	+5524981445889
+Reunião agendada / Qualificado (decisionmakerboughtin)	60739751531	+5524981445889
+Em negociação (closedlost)	60839923059	+552737233014
+Negócio fechado (1076664462)	60713094326	+5527997518993
+Resting (1367665802)	60710931113	+5528998812402
+Perdido (1076664461)	60895148701	+5528999112054
+Resting (1367665802)	60840403217	+553133799253
+Resting (1367665802)	60841128558	+553133799253
+Proposta enviada (closedwon)	61033688383	+553172390015
+Perdido (1076664461)	60654950236	+5531971274070
+Em negociação (closedlost)	60962238129	+5531973622424
+Perdido (1076664461)	61009905780	+5531982407053
+Perdido (1076664461)	60779153440	+5531982506085
+Em negociação (closedlost)	60799288218	+5531987428777
+Resting (1367665802)	60696059989	+5531988496992
+Perdido (1076664461)	60845566272	+5531991866914
+Em negociação (closedlost)	60778753033	+5531998760196
+Em negociação (closedlost)	60955227946	+5531999422223
+Proposta enviada (closedwon)	61047195969	+5531999791861
+Em negociação (closedlost)	60844296315	+5532988890609
+Resting (1367665802)	60795340984	+5532991330068
+Perdido (1076664461)	60447622416	+5533988189103
+Perdido (1076664461)	60978394515	+5533988244816
+Aguardando Envio de Proposta (contractsent)	61115208889	+5533988244816
+Negócio fechado (1076664462)	60651026714	+5534991544638
+Proposta enviada (closedwon)	60801006684	+5534991999944
+Perdido (1076664461)	60644351055	+5534992636385
+Proposta enviada (closedwon)	60524923148	+5534999060205
+Negócio fechado (1076664462)	60627931572	+553591191570
+Em negociação (closedlost)	60688630395	+5535988455188
+Proposta enviada (closedwon)	60846038356	+5537998578529
+Perdido (1076664461)	60801398589	+5537999451800
+Perdido (1076664461)	60846297361	+5538991220125
+Perdido (1076664461)	60688255778	+554192220156
+Negociação avançada (1167445770)	60670202956	+5541984102734
+Proposta enviada (closedwon)	61037184174	+554198504505
+Em negociação (closedlost)	60789757462	+5541987869703
+Em negociação (closedlost)	61027426852	+5541987884147
+Perdido (1076664461)	60688454763	+5541992768917
+Reunião agendada / Qualificado (decisionmakerboughtin)	61137535643	+5541998452548
+Resting (1367665802)	60696180086	+5541998534612
+Resting (1367665802)	60697065899	+5541998534612
+Perdido (1076664461)	60693090827	+5541999799803
+Resting (1367665802)	60799408792	+5542998095120
+Em negociação (closedlost)	60565585475	+5542999449927
+Perdido (1076664461)	60709908028	+5542999618000
+Em negociação (closedlost)	60715298417	+5543996358642
+Perdido (1076664461)	60524900774	+5544999948207
+Proposta enviada (closedwon)	60486863467	+5544999948207
+Em negociação (closedlost)	61035788574	+5545999230842
+Perdido (1076664461)	60893122733	+5545999471404
+Resting (1367665802)	60627924138	+554736223294
+Resting (1367665802)	60627926286	+554736223294
+Em negociação (closedlost)	60627921847	+554736223294
+Negociação avançada (1167445770)	60646071411	+554796187879
+Proposta enviada (closedwon)	60845734005	+5547984398583
+Resting (1367665802)	60799467622	+5547988410110
+Proposta enviada (closedwon)	60845734005	+5547988688708
+Reunião agendada / Qualificado (decisionmakerboughtin)	61109061667	+5547991046176
+Proposta enviada (closedwon)	60790285201	+5547992664591
+Reunião agendada / Qualificado (decisionmakerboughtin)	60841537413	+5547992838832
+Resting (1367665802)	61047558913	+5547996090796
+Resting (1367665802)	61048094372	+5547996090796
+Aguardando Envio de Proposta (contractsent)	61047488176	+5547996090796
+Perdido (1076664461)	60799114528	+5547996132740
+Proposta enviada (closedwon)	60996525184	+5547996797706
+Perdido (1076664461)	61102209453	+5547997714224
+Reunião agendada / Qualificado (decisionmakerboughtin)	61109061667	+5547997714224
+Resting (1367665802)	61108455695	+554834672200
+Em negociação (closedlost)	60551882168	+5548988256637
+Reunião agendada / Qualificado (decisionmakerboughtin)	60564748572	+5548988650640
+Perdido (1076664461)	60963062615	+5548991013531
+Perdido (1076664461)	60652015382	+5548991496454
+Perdido (1076664461)	60626979072	+5548992199175
+Em negociação (closedlost)	60963304782	+5548999271555
+Em negociação (closedlost)	60946007069	+554998095363
+Reunião agendada / Qualificado (decisionmakerboughtin)	60840871021	+5549988169706
+Perdido (1076664461)	60989141680	+5549998033687
+Reunião agendada / Qualificado (decisionmakerboughtin)	61112793398	+5549999147771
+Reunião agendada / Qualificado (decisionmakerboughtin)	61112793398	+5549999147771
+Em negociação (closedlost)	60525053510	+5551 98575-1024
+Resting (1367665802)	60805234694	+555133230083
+Perdido (1076664461)	60790746649	+555133804394
+Resting (1367665802)	60644363918	+555192261381
+Em negociação (closedlost)	60691184985	+555193148001
+Reunião agendada / Qualificado (decisionmakerboughtin)	61142112583	+555196404703
+Proposta enviada (closedwon)	60711459744	+5551980569746
+Em negociação (closedlost)	61027253897	+5551981779897
+Reunião agendada / Qualificado (decisionmakerboughtin)	60844975263	+5551982630209
+Aguardando Envio de Proposta (contractsent)	60644246579	+5551983360066
+Aguardando Envio de Proposta (contractsent)	60644246579	+5551983360066
+Perdido (1076664461)	60895038029	+5551984333753
+Negócio fechado (1076664462)	60839976604	+5551985745205
+Perdido (1076664461)	60795042360	+5551986136409
+Proposta enviada (closedwon)	61127520406	+5551991441981
+Perdido (1076664461)	60841553056	+5551991469069
+Perdido (1076664461)	60547621646	+5551992622897
+Perdido (1076664461)	60709472281	+5551992956336
+Resting (1367665802)	60962621069	+5551993548825
+Proposta enviada (closedwon)	60995565927	+5551993712013
+Perdido (1076664461)	61006668648	+5551995914429
+Proposta enviada (closedwon)	60714765651	+5551995927262
+Aguardando Envio de Proposta (contractsent)	61053183094	+5551996092375
+Perdido (1076664461)	60716536070	+5551996666686
+Resting (1367665802)	61114010633	+5551999294625
+Resting (1367665802)	60670276384	+5551999668249
+Perdido (1076664461)	60806339234	+5551999668252
+Perdido (1076664461)	60670461966	+5551999747205
+Reunião agendada / Qualificado (decisionmakerboughtin)	61051554874	+5551999747205
+Proposta enviada (closedwon)	61046906953	+5551999772201
+Perdido (1076664461)	60800403800	+555437717293
+Proposta enviada (closedwon)	60817372206	+555437717293
+Proposta enviada (closedwon)	60534788266	+5554991516874
+Em negociação (closedlost)	60486648660	+5554991670777
+Aguardando Envio de Proposta (contractsent)	60737258114	+5554991907966
+Perdido (1076664461)	60624383821	+5554992080222
+Proposta enviada (closedwon)	60891759700	+5554999016106
+Em negociação (closedlost)	60641545307	+5554999035776
+Proposta enviada (closedwon)	60790077090	+5555984320277
+Em negociação (closedlost)	60789925465	+5555996045838
+Proposta enviada (closedwon)	60845746234	+5555996119778
+Em negociação (closedlost)	60981792776	+5555996487682
+Em negociação (closedlost)	60992604676	+5561981900170
+Negociação avançada (1167445770)	60652007450	+5561982372081
+Proposta enviada (closedwon)	60458793243	+5561983300092
+Em negociação (closedlost)	60790379896	+5561991941435
+Proposta enviada (closedwon)	60524921666	+556284171655
+Negócio fechado (1076664462)	60801177165	+5562999544965
+Proposta enviada (closedwon)	60524921666	+5562999688833
+Perdido (1076664461)	60630509855	+5565999101272
+Em negociação (closedlost)	60629209739	+5565999101272
+Proposta enviada (closedwon)	61051296904	+556681143155
+Perdido (1076664461)	60710220603	+556733892836
+Em negociação (closedlost)	60524927596	+5567984634122
+Proposta enviada (closedwon)	60543455364	+5567992162829
+Perdido (1076664461)	60650677090	+5567996970523
+Perdido (1076664461)	60524926378	+5567999731003
+Proposta enviada (closedwon)	60955146275	+5569992476458
+Resting (1367665802)	60692280217	+5571988907865
+Resting (1367665802)	60713257243	+5581995776548
+Perdido (1076664461)	60893106206	+5581999934044
+Em negociação (closedlost)	60710684710	+5584991493216
+Perdido (1076664461)	60531580793	+5586981114873
+Perdido (1076664461)	60538512756	+5586999150003
+Reunião agendada / Qualificado (decisionmakerboughtin)	61149736572	+559188969044
+Perdido (1076664461)	60896233744	+5592991246898
+Perdido (1076664461)	60801498981	11942347158
+Perdido (1076664461)	60814805428	11995772288
+Proposta enviada (closedwon)	60809143700	11995772288
+Em negociação (closedlost)	60628021285	32988485058
+Em negociação (closedlost)	60789757462	41 9867-6305
+Em negociação (closedlost)	60789757462	4132719982
+Perdido (1076664461)	61113843204	51992427229
+Perdido (1076664461)	61114038150	51992427229
+Proposta enviada (closedwon)	61114213515	51992427229
+Resting (1367665802)	60524957843	51998415392
+Resting (1367665802)	60805250100	55 11 9 9251-8442
+Resting (1367665802)	60806175053	55 11 9 9251-8442
+Perdido (1076664461)	60964479109	5511982672971
+Em negociação (closedlost)	60486579476	5515996750418
+Perdido (1076664461)	60424026478	5542984152959
+Proposta enviada (closedwon)	60987294390	5554999766167
+Perdido (1076664461)	60667737457	61 8136-9979
+Em negociação (closedlost)	60977474433	65999895323
+Ganho / Contrato assinado (1076664460)	60670279853	67998592891
+Negócio fechado (1076664462)	61024924335	67998592891
+Resting (1367665802)	60692280217	71 3273-9846
+Em negociação (closedlost)	60993676401	95981140423
+Negócio fechado (1076664462)	61024905772	Unassigned
+Negociação avançada (1167445770)	61155984725	Unassigned
+Resting (1367665802)	60805250100	Unassigned
+Resting (1367665802)	60806175053	Unassigned
+Proposta enviada (closedwon)	60672953475	Unassigned
+Proposta enviada (closedwon)	61053316185	Unassigned
+Reunião agendada / Qualificado (decisionmakerboughtin)	60688513329	Unassigned
+Reunião agendada / Qualificado (decisionmakerboughtin)	60793482264	Unassigned
+Reunião agendada / Qualificado (decisionmakerboughtin)	60808652335	Unassigned
+`;
+
+function norm(p) {
+  if (!p) return null;
+  let d = String(p).replace(/\D/g, '');
+  if (!d) return null;
+  if (d.startsWith('55') && d.length >= 12) d = d.slice(2);
+  if (d.length < 10) return null;
+  return d.slice(0, 2) + d.slice(2).slice(-8);
+}
+
+// Parse deals
+const dealBest = new Map();
+for (let line of DEALS.trim().split('\n')) {
+  line = line.trim();
+  if (!line) continue;
+  const m = line.match(/\b(\d{11})\b/);
+  if (!m) continue;
+  const phonePart = line.slice(m.index + m[0].length).trim();
+  const isLost = line.includes('Perdido');
+  const key = norm(phonePart);
+  if (!key) continue;
+  if (!dealBest.has(key)) dealBest.set(key, []);
+  dealBest.get(key).push(isLost ? 'LOST' : 'QUAL');
+}
+
+// Parse CSV recipients
+const recips = new Set();
+const raw = fs.readFileSync(CSV_PATH, 'utf-8');
+const lines = raw.split(/\r?\n/);
+for (let i = 1; i < lines.length; i++) {
+  const line = lines[i];
+  if (!line.trim()) continue;
+  const mm = line.match(/"([^"]*)"\s*$/); // last quoted field = phone
+  if (!mm) continue;
+  const k = norm(mm[1]);
+  if (k) recips.add(k);
+}
+
+// Intersect
+let matched = 0, matchedQual = 0, matchedLostOnly = 0;
+for (const k of recips) {
+  if (dealBest.has(k)) {
+    matched++;
+    if (dealBest.get(k).some(s => s === 'QUAL')) matchedQual++;
+    else matchedLostOnly++;
+  }
+}
+
+console.log('Destinatarios unicos (CSV, normalizados):', recips.size);
+console.log('Telefones unicos lado-negocio:', dealBest.size);
+console.log('SAMPLE recips:', [...recips].slice(0,6));
+console.log('SAMPLE deals :', [...dealBest.keys()].slice(0,6));
+
+// DEBUG: overlap on last-8 only (ignore DDD)
+const recip8 = new Set([...recips].map(k => k.slice(-8)));
+const deal8 = new Set([...dealBest.keys()].map(k => k.slice(-8)));
+let ov8 = 0; for (const x of recip8) if (deal8.has(x)) ov8++;
+console.log('Overlap por ultimos-8-digitos:', ov8);
+
+// DEBUG: overlap on full digit strings (no DDD+last8 collapse)
+console.log('---');
+console.log('Destinatarios que viraram negocio (DDD+8):', matched, '| qual+:', matchedQual, '| soPerdido:', matchedLostOnly);

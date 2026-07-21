@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Propriedades estratégicas HubSpot — MKT OPS 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e1116; --surface:#171b23; --surface-2:#1d222c; --line:#2a303d;
+    --ink:#eef2f8; --ink-2:#aab2c2; --ink-3:#7a8497;
+    --accent:#ff7a45; --accent-2:#ffb86b;
+    --red:#ef4444; --amber:#f59e0b; --green:#10b981; --blue:#3b82f6;
+    --maxw:920px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:64px 28px 96px}
+
+  /* Header */
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px;font-size:13px;color:var(--ink-3);letter-spacing:.04em;text-transform:uppercase}
+  .top .pill{padding:5px 10px;border:1px solid var(--line);border-radius:999px;color:var(--ink-2)}
+
+  .hero h1{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:54px;line-height:1.05;letter-spacing:-.02em;margin:0 0 16px;color:var(--ink)}
+  .hero h1 em{color:var(--accent);font-style:normal}
+  .hero p.lead{font-size:19px;color:var(--ink-2);max-width:680px;margin:0 0 32px}
+  .meta{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:20px;margin-top:32px}
+  .meta b{color:var(--ink);font-weight:600}
+
+  h2{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:80px 0 8px;color:var(--ink)}
+  h2 .num{display:inline-block;width:36px;height:36px;border-radius:8px;background:var(--accent);color:#0e1116;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;line-height:36px;text-align:center;margin-right:14px;vertical-align:2px}
+  h3{font-size:18px;font-weight:600;color:var(--ink);margin:32px 0 10px}
+  p{margin:0 0 14px;color:var(--ink-2)}
+  .section-sub{color:var(--ink-3);font-size:14px;margin:0 0 28px;letter-spacing:.02em;text-transform:uppercase}
+
+  /* Executive cards */
+  .grid-kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px 0 8px}
+  .kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .kpi .v{font-family:'Fraunces',serif;font-size:32px;font-weight:600;color:var(--ink);line-height:1.1}
+  .kpi .l{font-size:12px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin-top:6px}
+  .kpi.warn .v{color:var(--amber)}
+  .kpi.bad .v{color:var(--red)}
+  .kpi.good .v{color:var(--green)}
+  @media (max-width:720px){.grid-kpi{grid-template-columns:repeat(2,1fr)}}
+
+  /* Bullets */
+  ul.clean{list-style:none;padding:0;margin:14px 0 14px}
+  ul.clean li{position:relative;padding:10px 0 10px 26px;border-bottom:1px solid var(--line);color:var(--ink)}
+  ul.clean li:last-child{border-bottom:0}
+  ul.clean li::before{content:"";position:absolute;left:0;top:18px;width:8px;height:8px;border-radius:2px;background:var(--accent)}
+
+  /* Propriedade cards */
+  .prop{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:14px 0}
+  .prop .hd{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+  .prop .hd .nm{font-family:'Fraunces',serif;font-size:21px;font-weight:600;color:var(--ink)}
+  .prop .hd .nm code{font-family:'Inter',monospace;font-size:13px;font-weight:500;color:var(--accent);background:rgba(255,122,69,.09);padding:3px 9px;border-radius:6px;margin-left:8px;vertical-align:2px;letter-spacing:.01em}
+  .prop .hd .tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:4px 10px;border-radius:6px;white-space:nowrap}
+  .prop .hd .tag.contato{color:var(--blue);background:rgba(59,130,246,.12)}
+  .prop .hd .tag.negocio{color:var(--accent);background:rgba(255,122,69,.12)}
+  .prop .hd .tag.empresa{color:var(--green);background:rgba(16,185,129,.12)}
+  .prop .vals{font-size:13px;color:var(--ink-3);margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .prop .vals b{color:var(--ink-2);text-transform:uppercase;letter-spacing:.05em;font-size:11px;font-weight:600;display:block;margin-bottom:4px}
+  .prop .row{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 22px;margin-bottom:12px}
+  .prop .row .blk{font-size:14px}
+  .prop .row .blk .hd2{font-size:11px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.07em;font-weight:600;margin-bottom:5px;display:flex;align-items:center;gap:6px}
+  .prop .row .blk .hd2 .ic{width:14px;height:14px;border-radius:3px;display:inline-block}
+  .prop .row .blk .hd2 .ic.imp{background:var(--accent)}
+  .prop .row .blk .hd2 .ic.uso{background:var(--blue)}
+  .prop .row .blk .hd2 .ic.bf{background:var(--green)}
+  .prop .row .blk .hd2 .ic.kpi{background:var(--amber)}
+  .prop .row .blk p{margin:0;color:var(--ink-2);font-size:14px;line-height:1.5}
+  .prop .row .blk ul{margin:0;padding-left:18px;color:var(--ink-2);font-size:13.5px;line-height:1.55}
+  .prop .row .blk ul li{margin-bottom:2px}
+  @media (max-width:720px){.prop .row{grid-template-columns:1fr}}
+
+  /* Roadmap */
+  .roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+  .lane{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;position:relative;overflow:hidden}
+  .lane::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent)}
+  .lane.l1::before{background:var(--green)}
+  .lane.l2::before{background:#eab308}
+  .lane.l3::before{background:var(--amber)}
+  .lane.l4::before{background:var(--blue)}
+  .lane .h{font-family:'Fraunces',serif;font-size:19px;font-weight:600;color:var(--ink);margin-bottom:2px}
+  .lane .sub{font-size:11px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px}
+  .lane ul{list-style:none;padding:0;margin:0}
+  .lane ul li{padding:7px 0;border-bottom:1px solid var(--line);color:var(--ink);font-size:13px}
+  .lane ul li:last-child{border-bottom:0}
+  .lane ul li code{font-family:'Inter',monospace;font-size:12px;color:var(--accent)}
+  @media (max-width:760px){.roadmap{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:480px){.roadmap{grid-template-columns:1fr}}
+
+  /* Cruzamento cards */
+  .cross{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:12px 0}
+  .cross .lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:6px}
+  .cross h4{margin:0 0 8px;font-size:17px;color:var(--ink);font-weight:600;font-family:'Fraunces',serif}
+  .cross p{margin:0;color:var(--ink-2);font-size:14.5px}
+  .cross .fields{margin-top:10px;font-size:12px;color:var(--ink-3)}
+  .cross .fields code{font-family:'Inter',monospace;color:var(--accent);background:rgba(255,122,69,.08);padding:2px 7px;border-radius:5px;margin-right:6px;font-size:11.5px}
+
+  /* Callout */
+  .callout{background:linear-gradient(135deg,rgba(255,122,69,.10),rgba(255,184,107,.05));border:1px solid rgba(255,122,69,.3);border-radius:14px;padding:24px 26px;margin:32px 0}
+  .callout .label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:8px}
+  .callout p{margin:0;color:var(--ink);font-size:16px}
+
+  /* Object separator */
+  .obj-sep{margin-top:48px;padding:18px 22px;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;display:flex;align-items:center;gap:16px}
+  .obj-sep .dot{width:14px;height:14px;border-radius:4px;flex:0 0 14px}
+  .obj-sep .dot.contato{background:var(--blue)}
+  .obj-sep .dot.negocio{background:var(--accent)}
+  .obj-sep .dot.empresa{background:var(--green)}
+  .obj-sep .ttl{font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--ink)}
+  .obj-sep .ds{font-size:13px;color:var(--ink-3);margin-left:auto}
+
+  /* Footer */
+  .footer{margin-top:96px;padding-top:24px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  /* Print — light theme override */
+  @media print{
+    :root{--bg:#fff;--surface:#fff;--surface-2:#f7f8fa;--line:#e2e6ee;--ink:#0e1116;--ink-2:#374151;--ink-3:#6b7280}
+    body{font-size:11pt}
+    .wrap{padding:0;max-width:none}
+    h2{page-break-after:avoid}
+    .prop,.lane,.kpi,.callout,.cross,.obj-sep{break-inside:avoid}
+    .roadmap,.grid-kpi{break-inside:avoid}
+    .top .pill{border-color:#cbd5e1}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <span>Marketing Operations · Governança de dados</span>
+    <span class="pill">Confidencial</span>
+  </header>
+
+  <section class="hero">
+    <h1>15 propriedades para <em>enxergar, decidir e prever</em> melhor.</h1>
+    <p class="lead">Proposta de novas propriedades no HubSpot — descobertas em conversa — que transformam dado solto em segmentação acionável de personas, oportunidades e empresas. Apresentação preparada para alinhamento e priorização com a liderança.</p>
+    <div class="meta">
+      <span><b>Período</b> Maio / 2026</span>
+      <span><b>Fonte</b> Export HubSpot Deals + Discovery MKT OPS</span>
+      <span><b>Audiência</b> Liderança Comercial &amp; Marketing</span>
+    </div>
+  </section>
+
+  <!-- 1. Sumário executivo -->
+  <h2><span class="num">1</span>Sumário executivo</h2>
+  <p class="section-sub">A proposta em 5 frases</p>
+
+  <ul class="clean">
+    <li><b>Temos campos demais e dado de menos.</b> O HubSpot tem hoje <b>627 propriedades em Negócios</b> (365 customizadas), com duplicações, campos órfãos e perguntas longas como label — mas falta o essencial sobre <i>quem compra</i> e <i>por quê</i>.</li>
+    <li><b>Selecionamos 15 propriedades estratégicas.</b> Distribuídas em três objetos — <b>6 em Contato</b>, <b>4 em Negócio</b> e <b>5 em Empresa</b> — focadas em capturar persona, gatilho de demanda e contexto da conta.</li>
+    <li><b>4 delas têm backfill imediato.</b> Podemos popular <i>retroativamente</i> "ex-aluno PSA", "participou de evento PSA", "flexibilidade de palestrante" e "urgência percebida" usando dados que já estão no HubSpot.</li>
+    <li><b>5 delas alimentam-se de IA sobre dados existentes.</b> Tipo de evento, área/departamento, gatilho da demanda, dor principal e público — extraíveis de textos livres já preenchidos (briefings, motivos, temas).</li>
+    <li><b>O ROI maior está nos cruzamentos.</b> 6 dashboards executivos só são possíveis com esses campos — incluindo a métrica que hoje a PSA não consegue medir: <b>quanto do pipeline B2B vem de ex-aluno</b>.</li>
+  </ul>
+
+  <div class="callout">
+    <div class="label">Tese central</div>
+    <p>Cada propriedade nova só justifica existir se responde a 3 perguntas: <b>(1) por que isso muda uma decisão?</b> <b>(2) o que conseguimos popular hoje sem coletar mais nada?</b> <b>(3) qual KPI ela viabiliza que hoje não temos?</b> — todas as 15 passaram nesse filtro.</p>
+  </div>
+
+  <!-- 2. Números da proposta -->
+  <h2><span class="num">2</span>O que está sendo proposto</h2>
+  <p class="section-sub">Volumetria da governança</p>
+
+  <div class="grid-kpi">
+    <div class="kpi"><div class="v">15</div><div class="l">Propriedades estratégicas</div></div>
+    <div class="kpi good"><div class="v">4</div><div class="l">Com backfill imediato</div></div>
+    <div class="kpi warn"><div class="v">5</div><div class="l">Backfill via IA</div></div>
+    <div class="kpi"><div class="v">6</div><div class="l">Coleta nova em conversa</div></div>
+  </div>
+
+  <p style="margin-top:22px">As 15 propriedades estão divididas pelos três objetos do CRM para evitar duplicação e respeitar o ciclo natural de cada dado — <b>quem é a pessoa</b> (Contato), <b>qual é a oportunidade específica</b> (Negócio) e <b>como é a conta como um todo</b> (Empresa).</p>
+
+  <!-- 3. Propriedades — CONTATO -->
+  <h2><span class="num">3</span>As 15 propriedades, uma a uma</h2>
+  <p class="section-sub">Importância · Uso · Backfill · KPIs</p>
+
+  <div class="obj-sep">
+    <span class="dot contato"></span>
+    <span class="ttl">Contato — 6 propriedades</span>
+    <span class="ds">Atributos da pessoa, persistem entre deals</span>
+  </div>
+
+  <!-- 3.1 tipo_de_evento -->
+  <div class="prop">
+    <div class="hd">
+      <div class="nm">Tipo de evento <code>tipo_de_evento</code></div>
+      <span class="tag contato">Contato</span>
+    </div>
+    <div class="vals"><b>Valores</b>Convenção · Data comemorativa · Festival</div>
+    <div class="row">
+      <div class="blk"><div class="hd2"><span class="ic imp"></span>Importância</div><p>Cada tipo de evento tem sazonalidade, ticket médio e perfil de palestrante completamente diferentes. Convenção é ticket alto + ciclo longo; data comemorativa é volume + ciclo curto; festival é exposição de marca.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic uso"></span>Uso prático</div><p>Segmentar pipeline, dimensionar capacidade do time por janela do ano, dimensionar catálogo de palestrantes e criar nutrição diferenciada.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic bf"></span>Backfill retroativo</div><p>Classificação via IA cruzando <code>nome_do_evento</code>, <code>tema_evento</code>, <code>briefing_evento</code>, <code>formato_evento</code> e <code>data_evento</code> — datas próximas a 8/3, 12/10, 25/12 indicam data comemorativa.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic kpi"></span>KPIs gerados</div>
+        <ul><li>Mix de pipeline por tipo</li><li>Ticket médio por tipo</li><li>Win rate por tipo</li><li>Heatmap mês × tipo (sazonalidade)</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.2 area_dpto -->
+  <div class="prop">
+    <div class="hd">
+      <div class="nm">Área / Departamento <code>area_dpto</code></div>
+      <span class="tag contato">Contato</span>
+    </div>
+    <div class="vals"><b>Valores</b>RH · Marketing · Financeiro · Administrativo</div>
+    <div class="row">
+      <div class="blk"><div class="hd2"><span class="ic imp"></span>Importância</div><p>Persona-base. RH compra diferente de Marketing — RH busca desenvolvimento, MKT busca evento-experiência, Adm busca celebração. Tom, gatilho e ciclo mudam.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic uso"></span>Uso prático</div><p>Roteamento de SDR especializado por área, ABM, copy diferenciado e calendário de prospecção (RH em Q1 para plano anual, MKT em Q3 para convenção).</p></div>
+      <div class="blk"><div class="hd2"><span class="ic bf"></span>Backfill retroativo</div><p>Classificação semântica de <code>cargo__oficial_</code>, <code>qual_e_o_seu_cargo_</code>, <code>area_na_empresa</code> e <code>equipe_responsavel_pela_compra</code>.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic kpi"></span>KPIs gerados</div>
+        <ul><li>Share de pipeline por área</li><li>CAC por área</li><li>Conversão MQL → Won por área</li><li>Ticket médio por área</li><li>LTV / recompra por área</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.3 papel_de_decisor -->
+  <div class="prop">
+    <div class="hd">
+      <div class="nm">Papel na decisão <code>papel_de_decisor</code></div>
+      <span class="tag contato">Contato</span>
+    </div>
+    <div class="vals"><b>Valores</b>Decisor · Influenciador · Champion · Gatekeeper · Usuário</div>
+    <div class="row">
+      <div class="blk"><div class="hd2"><span class="ic imp"></span>Importância</div><p>O melhor preditor de fechamento. Sem decisor mapeado, o deal está numa ilusão de pipeline — falar com Gatekeeper só atrasa.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic uso"></span>Uso prático</div><p>Força quebra do gatekeeper antes da proposta, valida health do pipeline e alimenta forecast confiável.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic bf"></span>Backfill retroativo</div><p>Revisar <code>decisor_na_empresa</code>, <code>quem_foi_seu_ponto_de_contato</code> e <code>responsavel_pelo_negocio</code> — se coincidem com o contato principal, esse é o Decisor; senão, classifica como Champion/Influenciador/Gatekeeper.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic kpi"></span>KPIs gerados</div>
+        <ul><li>% de SQLs com decisor identificado <i>(meta &gt;80%)</i></li><li>Ciclo médio: com decisor vs sem</li><li>Win rate: com decisor vs sem</li><li>Pipeline "fantasma" (sem decisor &gt; X dias)</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.4 canal_preferido -->
+  <div class="prop">
+    <div class="hd">
+      <div class="nm">Canal preferido <code>canal_preferido</code></div>
+      <span class="tag contato">Contato</span>
+    </div>
+    <div class="vals"><b>Valores</b>WhatsApp · Email · Ligação · LinkedIn · Reunião presencial</div>
+    <div class="row">
+      <div class="blk"><div class="hd2"><span class="ic imp"></span>Importância</div><p>Atrito de abordagem. Tentar fechar venda corporativa por WhatsApp quando o decisor só responde email derruba conversão.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic uso"></span>Uso prático</div><p>Cadência por canal, SLA por canal e definição da sequência de outreach.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic bf"></span>Backfill retroativo</div><p>Histórico de engagement já registrado pelo HubSpot — qual canal o contato respondeu (email reply, click, WhatsApp respondido, ligação atendida). Consolidar regra de "último canal que gerou resposta".</p></div>
+      <div class="blk"><div class="hd2"><span class="ic kpi"></span>KPIs gerados</div>
+        <ul><li>Taxa de resposta por canal</li><li>Tempo até primeira resposta por canal</li><li>Taxa de no-show de reunião por canal de agendamento</li><li>Conversão por canal preferencial</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.5 e_ex_aluno_psa -->
+  <div class="prop">
+    <div class="hd">
+      <div class="nm">É ex-aluno PSA <code>e_ex_aluno_psa</code></div>
+      <span class="tag contato">Contato</span>
+    </div>
+    <div class="vals"><b>Valores</b>Sim · Não &nbsp;·&nbsp; <i style="color:var(--green)">Backfill imediato disponível</i></div>
+    <div class="row">
+      <div class="blk"><div class="hd2"><span class="ic imp"></span>Importância</div><p>Ex-aluno tem CAC menor e LTV maior — venda é relacional, não aquisitiva. Playbook é completamente outro.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic uso"></span>Uso prático</div><p>Ativa esteira de relacionamento (não captação), aciona Farmer em vez de SDR, justifica desconto/condição diferenciada e alimenta campanha "alumni → corporativo".</p></div>
+      <div class="blk"><div class="hd2"><span class="ic bf"></span>Backfill retroativo</div><p>Cruzamento direto com listas já existentes: <b>TBS Inscritos (106k)</b>, <b>Assistiu Palestras (81k)</b>, <b>TBS Votantes (32k)</b>, <b>PSA Drops (18k)</b>. Quem aparece em qualquer uma → <code>true</code>.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic kpi"></span>KPIs gerados</div>
+        <ul><li><b>% do pipeline B2B oriundo de ex-aluno</b> — métrica hoje invisível</li><li>Win rate ex-aluno vs novo</li><li>Ticket médio ex-aluno vs novo</li><li>Tempo MQL → Won ex-aluno vs novo</li><li>Taxa de recompra de ex-aluno</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.6 participou_de_evento_psa -->
+  <div class="prop">
+    <div class="hd">
+      <div class="nm">Participou de evento PSA <code>participou_de_evento_psa</code></div>
+      <span class="tag contato">Contato</span>
+    </div>
+    <div class="vals"><b>Valores</b>Multi-select: TBS 2024 · TBDay 2025 · Drops X · Conference… &nbsp;·&nbsp; <i style="color:var(--green)">Backfill imediato disponível</i></div>
+    <div class="row">
+      <div class="blk"><div class="hd2"><span class="ic imp"></span>Importância</div><p>Densidade da relação. 1 evento ≠ 4 eventos. Quanto mais touches com a marca PSA, maior a propensão e maior a personalização possível.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic uso"></span>Uso prático</div><p>Abordagem ("vimos que você esteve no TBS 2024 e no Drops X — algo marcou?"), scoring de propensão, segmentação de nutrição por trilha de exposição.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic bf"></span>Backfill retroativo</div><p>Mesmo cruzamento da propriedade anterior, mantendo a granularidade — <code>data_de_inscricao_no_tbs</code> vira "TBS [ano]"; listas Assistiu Palestras com <code>nome_do_evento</code> viram os demais valores.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic kpi"></span>KPIs gerados</div>
+        <ul><li>Distribuição "número de eventos PSA antes de virar SQL"</li><li>Conversão por nível de exposição (1, 2, 3+ eventos)</li><li>Eventos com maior conversão para B2B — qual TBS gerou mais negócio?</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. NEGÓCIO -->
+  <div class="obj-sep">
+    <span class="dot negocio"></span>
+    <span class="ttl">Negócio — 4 propriedades</span>
+    <span class="ds">Atributos da oportunidade específica</span>
+  </div>
+
+  <!-- 4.1 gatilho_da_demanda -->
+  <div class="prop">
+    <div class="hd">
+      <div class="nm">Gatilho da demanda <code>gatilho_da_demanda</code></div>
+      <span class="tag negocio">Negócio</span>
+    </div>
+    <div class="vals"><b>Valores</b>Planejamento anual · Mudança de liderança · Resultado abaixo · Reestruturação · Fusão/aquisição · Crise específica · Calendário fixo · Pedido do board</div>
+    <div class="row">
+      <div class="blk"><div class="hd2"><span class="ic imp"></span>Importância</div><p>O "por que agora". Melhor preditor de timing real — mudança de liderança = janela curta e quente; planejamento anual = ciclo longo e burocrático.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic uso"></span>Uso prático</div><p>Ajuste do argumento na proposta, dimensionamento de urgência, reabordagem inteligente ("se o gatilho foi mudança de liderança, em 12 meses volta a oportunidade") e inteligência de mercado.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic bf"></span>Backfill retroativo</div><p>Classificar via IA <code>principal_motivo_de_busca</code>, <code>qual_a_principal_dor_da_sua_empresa_hoje_</code>, <code>briefing_evento</code> e <code>sobre_a_oportunidade</code>.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic kpi"></span>KPIs gerados</div>
+        <ul><li>Ciclo médio por gatilho</li><li>Win rate por gatilho</li><li>Ticket médio por gatilho</li><li>Mix de pipeline por gatilho — radar de mercado</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.2 dor_principal -->
+  <div class="prop">
+    <div class="hd">
+      <div class="nm">Dor principal <code>dor_principal</code></div>
+      <span class="tag negocio">Negócio</span>
+    </div>
+    <div class="vals"><b>Valores</b>Engajamento · Performance · Mudança/transformação · Retenção · Onboarding de líderes · Integração de times · Gestão de crise · Cultura</div>
+    <div class="row">
+      <div class="blk"><div class="hd2"><span class="ic imp"></span>Importância</div><p>O mapa da demanda real. Diz quais palestrantes investir, qual conteúdo produzir, qual posicionamento empurrar.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic uso"></span>Uso prático</div><p>Curadoria de palestrante (matching dor ↔ especialista), pauta editorial, posicionamento dos exclusivos, brief para Conference e TBDay.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic bf"></span>Backfill retroativo</div><p>Classificar via IA <code>tema_da_palestra</code>, <code>tema_evento</code>, <code>descreva_o_macro_tema</code>, <code>qual_o_tema_quer_desenvolver_</code> e <code>qual_a_principal_dor_da_sua_empresa_hoje_</code>.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic kpi"></span>KPIs gerados</div>
+        <ul><li>Share de demanda por dor (top 3 do trimestre)</li><li>Evolução temporal (radar de tendências)</li><li>Match dor ↔ palestrante: especialista que mais converte por dor</li><li>Ticket médio por dor</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.3 objetivo_pos_evento -->
+  <div class="prop">
+    <div class="hd">
+      <div class="nm">Objetivo pós-evento <code>objetivo_pos_evento</code></div>
+      <span class="tag negocio">Negócio</span>
+    </div>
+    <div class="vals"><b>Valores</b>Texto livre — o que querem que aconteça depois</div>
+    <div class="row">
+      <div class="blk"><div class="hd2"><span class="ic imp"></span>Importância</div><p>Liga a venda à entrega. Sem isso, o NPS é cego — você mede satisfação genérica em vez de "atingiu o que ele queria".</p></div>
+      <div class="blk"><div class="hd2"><span class="ic uso"></span>Uso prático</div><p>Input para curadoria, input para briefing do palestrante, base do NPS contextualizado e base para case ("foi atingido?").</p></div>
+      <div class="blk"><div class="hd2"><span class="ic bf"></span>Backfill retroativo</div><p>Parsing de <code>objetivos_do_evento</code>, <code>briefing_evento</code> e <code>sobre_a_oportunidade</code> — campos textuais já presentes.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic kpi"></span>KPIs gerados</div>
+        <ul><li>% de deals com objetivo claro (proxy de qualidade do briefing)</li><li>NPS condicionado a "objetivo atingido sim/não"</li><li>Taxa de recompra por clareza do objetivo</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.4 quem_e_o_publico -->
+  <div class="prop">
+    <div class="hd">
+      <div class="nm">Quem é o público <code>quem_e_o_publico</code></div>
+      <span class="tag negocio">Negócio</span>
+    </div>
+    <div class="vals"><b>Valores</b>Top liderança · Média liderança · Time inteiro · Comercial · Operacional · Misto</div>
+    <div class="row">
+      <div class="blk"><div class="hd2"><span class="ic imp"></span>Importância</div><p>Precificação e curadoria. Palestra para C-level paga 3× palestra para operacional — exige outro palestrante.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic uso"></span>Uso prático</div><p>Catálogo de palestrantes por público, precificação dinâmica e briefing dirigido.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic bf"></span>Backfill retroativo</div><p>Direto de <code>publico_majoritariamente_do_evento</code> (já existe!); <code>quantidade_pessoas</code> ajuda a inferir (200 pessoas dificilmente é só C-level).</p></div>
+      <div class="blk"><div class="hd2"><span class="ic kpi"></span>KPIs gerados</div>
+        <ul><li>Ticket médio por público</li><li>Win rate por público</li><li>Mix de pipeline por público</li><li>Palestrante mais convertedor por público</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. EMPRESA -->
+  <div class="obj-sep">
+    <span class="dot empresa"></span>
+    <span class="ttl">Empresa — 5 propriedades</span>
+    <span class="ds">Atributos da conta, valem para todos os deals</span>
+  </div>
+
+  <!-- 5.1 momento_da_empresa -->
+  <div class="prop">
+    <div class="hd">
+      <div class="nm">Momento da empresa <code>momento_da_empresa</code></div>
+      <span class="tag empresa">Empresa</span>
+    </div>
+    <div class="vals"><b>Valores</b>Crescimento acelerado · Reestruturação · Crise · Estabilidade · Fusão · IPO/M&amp;A · Pivô</div>
+    <div class="row">
+      <div class="blk"><div class="hd2"><span class="ic imp"></span>Importância</div><p>Filtra fit temporal. Empresa em crise demite, não contrata palestra; em IPO contrata para alinhar narrativa; em fusão contrata para integrar cultura.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic uso"></span>Uso prático</div><p>Scoring de account, timing de abordagem ABM, contextualização da proposta e prospecção proativa (monitorar fusões = onda de demanda).</p></div>
+      <div class="blk"><div class="hd2"><span class="ic bf"></span>Backfill retroativo</div><p>Parsing de <code>sobre_a_empresa</code>; cruzar com fontes externas (LinkedIn, notícias, B3); regra: empresa com &gt;20% headcount-growth no LinkedIn = "Crescimento acelerado".</p></div>
+      <div class="blk"><div class="hd2"><span class="ic kpi"></span>KPIs gerados</div>
+        <ul><li>Win rate por momento</li><li>Ticket médio por momento</li><li>Taxa de recompra por momento</li><li>Sinais de mercado — "% das contas do ICP estão em reestruturação"</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.2 palestrantes_ja_levaram -->
+  <div class="prop">
+    <div class="hd">
+      <div class="nm">Palestrantes já levaram <code>palestrantes_ja_levaram</code></div>
+      <span class="tag empresa">Empresa</span>
+    </div>
+    <div class="vals"><b>Valores</b>Texto livre — histórico de palestrantes na conta &nbsp;·&nbsp; <i style="color:var(--green)">Backfill imediato disponível</i></div>
+    <div class="row">
+      <div class="blk"><div class="hd2"><span class="ic imp"></span>Importância</div><p>Evita o erro #1 de recomendação (sugerir quem já foi), mostra preferências e revela concorrentes (quem foi via outra agência).</p></div>
+      <div class="blk"><div class="hd2"><span class="ic uso"></span>Uso prático</div><p>Curadoria mais assertiva, mapeamento competitivo e argumento de venda ("fechamos agora um cliente que tinha levado [concorrente]").</p></div>
+      <div class="blk"><div class="hd2"><span class="ic bf"></span>Backfill retroativo</div><p>Direto — histórico de deals ganhos da mesma <code>Company</code> no HubSpot já contém o <code>palestrante_principal</code>. Cruzar e popular na conta.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic kpi"></span>KPIs gerados</div>
+        <ul><li>% de contas com histórico mapeado</li><li>"Share of wallet" — % de palestras da conta com a PSA vs concorrência</li><li>Repeat-palestrante por conta (oportunidade ou risco?)</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.3 flexibilidade_palestrante -->
+  <div class="prop">
+    <div class="hd">
+      <div class="nm">Flexibilidade de palestrante <code>flexibilidade_palestrante</code></div>
+      <span class="tag empresa">Empresa</span>
+    </div>
+    <div class="vals"><b>Valores</b>Já decidiu · Shortlist nossa · Aberto a sugestão &nbsp;·&nbsp; <i style="color:var(--green)">Backfill imediato disponível</i></div>
+    <div class="row">
+      <div class="blk"><div class="hd2"><span class="ic imp"></span>Importância</div><p>Define o jogo da venda. "Já decidiu" é commodity (só intermedia). "Aberto a sugestão" é venda consultiva alta-margem.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic uso"></span>Uso prático</div><p>Aloca esforço de curadoria (proposta com 5 opções para "aberto"; agilidade para "já decidiu"), justifica margem e calibra forecast.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic bf"></span>Backfill retroativo</div><p><code>aceita_sugestao_</code> (já existe, bool) cruzado com <code>palestrante_de_interesse</code> — se preenchido = "Já decidiu" ou "Shortlist nossa"; se vazio + <code>aceita_sugestao_=true</code> = "Aberto".</p></div>
+      <div class="blk"><div class="hd2"><span class="ic kpi"></span>KPIs gerados</div>
+        <ul><li>Win rate por flexibilidade</li><li>Ticket médio por flexibilidade <i>(hipótese: "Aberto" &gt; "Já decidiu")</i></li><li>Ciclo de venda por flexibilidade</li><li>Margem por flexibilidade</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.4 nivel_de_urgencia_percebida -->
+  <div class="prop">
+    <div class="hd">
+      <div class="nm">Nível de urgência percebida <code>nivel_de_urgencia_percebida</code></div>
+      <span class="tag empresa">Empresa</span>
+    </div>
+    <div class="vals"><b>Valores</b>Alta · Média · Baixa &nbsp;·&nbsp; <i style="color:var(--green)">Cálculo automatizável</i></div>
+    <div class="row">
+      <div class="blk"><div class="hd2"><span class="ic imp"></span>Importância</div><p>Prioriza a fila do SDR/Closer e disciplina forecast. Alta urgência sem resposta = lead perdido em horas.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic uso"></span>Uso prático</div><p>SLA de resposta diferenciado, alerta em pipeline (lead alta urgência parado &gt; X horas) e forecast de fechamento no mês.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic bf"></span>Backfill retroativo</div><p>Cálculo automático: <code>data_evento</code> menos <code>createdate</code> &lt; 30 dias = Alta; 30-90 = Média; &gt;90 = Baixa. Pode virar campo calculado nativo do HubSpot.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic kpi"></span>KPIs gerados</div>
+        <ul><li>Tempo médio de proposta por urgência <i>(SLA)</i></li><li>Win rate por urgência</li><li>Forecast accuracy — alta urgência deveria fechar no mês</li><li>% de leads "alta urgência" perdidos por demora interna</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.5 caso_publicavel -->
+  <div class="prop">
+    <div class="hd">
+      <div class="nm">Caso publicável <code>caso_publicavel</code></div>
+      <span class="tag empresa">Empresa</span>
+    </div>
+    <div class="vals"><b>Valores</b>Sim · Não</div>
+    <div class="row">
+      <div class="blk"><div class="hd2"><span class="ic imp"></span>Importância</div><p>Social proof é o motor da aquisição B2B. Cada case fechado vira munição para o time de marketing por 12-24 meses.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic uso"></span>Uso prático</div><p>Alimenta pipeline de conteúdo, gera referência ativa (cliente fala com prospect), prova social em proposta e depoimentos para mídia paga.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic bf"></span>Backfill retroativo</div><p>Cruzar deals ganhos × <code>nps</code> alto (8+) — candidatos naturais. Para os de NPS alto, o farmer pede permissão na pesquisa pós-evento.</p></div>
+      <div class="blk"><div class="hd2"><span class="ic kpi"></span>KPIs gerados</div>
+        <ul><li>Volume de cases gerados / trimestre <i>(meta clara)</i></li><li>% de deals ganhos com permissão de case</li><li>Atribuição: quantos deals tiveram um case como touchpoint</li><li>Tempo entre fechamento do deal e publicação do case</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Cruzamentos -->
+  <h2><span class="num">4</span>Onde mora o ouro — 6 cruzamentos estratégicos</h2>
+  <p class="section-sub">Dashboards que só existem com esses campos</p>
+
+  <p>Cada propriedade isolada é útil, mas o valor real está nos cruzamentos. Os dashboards abaixo são <b>impossíveis hoje</b> e <b>imediatos após o backfill</b>.</p>
+
+  <div class="cross">
+    <div class="lbl">A · Matriz de match</div>
+    <h4>Persona × Dor × Palestrante</h4>
+    <p>Mostra "para RH com dor de Engajamento, palestrante X tem 70% win rate". Vira roteiro de recomendação e briefing automático do SDR.</p>
+    <div class="fields"><code>area_dpto</code><code>dor_principal</code><code>palestrante_principal</code></div>
+  </div>
+
+  <div class="cross">
+    <div class="lbl">B · Janelas de oportunidade</div>
+    <h4>Gatilho × Tipo de evento × Momento da empresa</h4>
+    <p>Quando momento = "Fusão" e gatilho = "Mudança de liderança", o tipo é quase sempre Convenção. Vira alerta automático: nova fusão noticiada + conta no ICP → pipeline proativo.</p>
+    <div class="fields"><code>gatilho_da_demanda</code><code>tipo_de_evento</code><code>momento_da_empresa</code></div>
+  </div>
+
+  <div class="cross">
+    <div class="lbl">C · ROI do ecossistema B2C</div>
+    <h4>Ex-aluno × Recompra × NPS</h4>
+    <p>Mede o ROI real dos eventos B2C (TBS, Drops, TBDay). Justifica investimento em TBS para o board não como "evento" mas como motor de pipeline B2B. <b>Hoje invisível.</b></p>
+    <div class="fields"><code>e_ex_aluno_psa</code><code>participou_de_evento_psa</code><code>nps</code></div>
+  </div>
+
+  <div class="cross">
+    <div class="lbl">D · Gap de SLA</div>
+    <h4>Urgência × Canal preferido × Tempo de resposta</h4>
+    <p>Alta urgência + canal preferido = Ligação, mas tratado por email → conversão cai X%. Vira regra de roteamento e disparo de alerta.</p>
+    <div class="fields"><code>nivel_de_urgencia_percebida</code><code>canal_preferido</code><code>tempo_primeira_resposta</code></div>
+  </div>
+
+  <div class="cross">
+    <div class="lbl">E · Onde está o ticket alto</div>
+    <h4>Flexibilidade × Público × Ticket</h4>
+    <p>"Aberto a sugestão" + "Top liderança" = ticket médio Y vezes maior que "Já decidiu" + "Operacional". Onde priorizar esforço comercial e curadoria.</p>
+    <div class="fields"><code>flexibilidade_palestrante</code><code>quem_e_o_publico</code><code>valor_liquido</code></div>
+  </div>
+
+  <div class="cross">
+    <div class="lbl">F · Loop de aquisição via pós-venda</div>
+    <h4>Caso publicável × Atribuição de pipeline</h4>
+    <p>Casos publicados → mídia/conteúdo → novos leads. Atribuir quantos deals tocaram um case antes de virar SQL — fecha o ciclo entre pós-venda e aquisição.</p>
+    <div class="fields"><code>caso_publicavel</code><code>utm_campaign</code><code>primeiro_toque_canal</code></div>
+  </div>
+
+  <!-- 7. Roadmap -->
+  <h2><span class="num">5</span>Plano de implementação em 4 ondas</h2>
+  <p class="section-sub">Do mais barato e rápido para o mais estratégico</p>
+
+  <div class="roadmap">
+    <div class="lane l1">
+      <div class="h">Onda 1</div>
+      <div class="sub">Quick wins · 2 semanas</div>
+      <ul>
+        <li><code>e_ex_aluno_psa</code></li>
+        <li><code>participou_de_evento_psa</code></li>
+        <li><code>flexibilidade_palestrante</code></li>
+        <li><code>nivel_de_urgencia_percebida</code></li>
+        <li style="color:var(--ink-3);font-size:11px;font-style:italic;margin-top:4px">Backfill direto, sem ferramenta nova</li>
+      </ul>
+    </div>
+    <div class="lane l2">
+      <div class="h">Onda 2</div>
+      <div class="sub">Backfill via IA · 3-4 semanas</div>
+      <ul>
+        <li><code>tipo_de_evento</code></li>
+        <li><code>area_dpto</code></li>
+        <li><code>gatilho_da_demanda</code></li>
+        <li><code>dor_principal</code></li>
+        <li><code>quem_e_o_publico</code></li>
+        <li style="color:var(--ink-3);font-size:11px;font-style:italic;margin-top:4px">Classificação de textos livres</li>
+      </ul>
+    </div>
+    <div class="lane l3">
+      <div class="h">Onda 3</div>
+      <div class="sub">Coleta nova em conversa · contínuo</div>
+      <ul>
+        <li><code>papel_de_decisor</code></li>
+        <li><code>canal_preferido</code></li>
+        <li><code>objetivo_pos_evento</code></li>
+        <li><code>caso_publicavel</code></li>
+        <li style="color:var(--ink-3);font-size:11px;font-style:italic;margin-top:4px">Entra no script de SDR e farmer</li>
+      </ul>
+    </div>
+    <div class="lane l4">
+      <div class="h">Onda 4</div>
+      <div class="sub">Inteligência externa · trimestral</div>
+      <ul>
+        <li><code>momento_da_empresa</code></li>
+        <li><code>palestrantes_ja_levaram</code> (atualização contínua)</li>
+        <li style="color:var(--ink-3);font-size:11px;font-style:italic;margin-top:4px">Cruzamento com LinkedIn, notícias, fontes públicas</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="label">Princípio de governança</div>
+    <p>Todo campo novo só funciona se virar pergunta explícita no script de qualificação ou no briefing — senão fica vazio igual aos "Lead Alta Books" da vida. <b>Cada onda só avança depois que a anterior está sendo de fato preenchida.</b></p>
+  </div>
+
+  <!-- 8. KPIs consolidados -->
+  <h2><span class="num">6</span>KPIs que destravamos</h2>
+  <p class="section-sub">As métricas novas que essas 15 propriedades viabilizam</p>
+
+  <ul class="clean">
+    <li><b>% do pipeline B2B oriundo de ex-aluno PSA</b> — a métrica que conecta o ecossistema B2C ao motor comercial.</li>
+    <li><b>Win rate e ciclo com decisor identificado vs sem</b> — disciplina o forecast e expõe pipeline-fantasma.</li>
+    <li><b>Match palestrante × dor × persona</b> — recomendação baseada em histórico, não em intuição.</li>
+    <li><b>Ticket médio por flexibilidade e público</b> — orienta para onde direcionar o esforço de venda consultiva.</li>
+    <li><b>Mix de pipeline por gatilho de demanda</b> — radar de mercado: o que está fazendo as empresas comprarem agora.</li>
+    <li><b>Volume de cases gerados por trimestre</b> — meta clara de produção de social proof.</li>
+    <li><b>SLA de resposta por canal preferido</b> — disciplina operacional de SDR e elimina perda por demora.</li>
+    <li><b>Share of wallet em palestras por conta</b> — quanto da demanda anual da empresa está com a PSA vs concorrentes.</li>
+  </ul>
+
+  <!-- 9. Próximos passos -->
+  <h2><span class="num">7</span>Próximos passos</h2>
+  <p class="section-sub">Decisões para sair desta apresentação</p>
+
+  <ul class="clean">
+    <li><b>Aprovar a criação das 15 propriedades</b> no HubSpot, respeitando objeto (Contato / Negócio / Empresa) e valores propostos.</li>
+    <li><b>Liberar a Onda 1</b> (backfill direto das 4 propriedades de quick win) — pode começar nesta semana.</li>
+    <li><b>Definir owner do backfill por IA</b> (Onda 2) e setup do prompt de classificação sobre o histórico de deals.</li>
+    <li><b>Atualizar o script de qualificação</b> do SDR para coletar as 6 propriedades de Onda 3 já na primeira reunião.</li>
+    <li><b>Marcar revisão em 60 dias</b> para validar taxa de preenchimento e aprovar o primeiro dashboard de cruzamentos (sugestão: começar pelo C — Ex-aluno × Recompra × NPS).</li>
+  </ul>
+
+  <div class="footer">
+    <span>Marketing Operations · Governança de dados HubSpot · Maio/2026</span>
+    <span>Documento interno</span>
+  </div>
+
+</div>
+</body>
+</html>

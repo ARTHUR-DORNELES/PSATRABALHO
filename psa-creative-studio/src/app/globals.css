@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fonte de marca TBS — DX Rigraf (arquivos em /public/fonts). Os templates
+   pedem 'DX Rigraf' primeiro (fallback Archivo), então passam a renderizar
+   nela automaticamente. Pesos: Black=900, ExtraBold=800, SemiBold=600. */
+@font-face {
+  font-family: "DX Rigraf";
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/DXRigraf-Black.otf") format("opentype");
+}
+@font-face {
+  font-family: "DX Rigraf";
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/DXRigraf-ExtraBold.otf") format("opentype");
+}
+@font-face {
+  font-family: "DX Rigraf";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/DXRigraf-SemiBold.otf") format("opentype");
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background-color: #0a0f17;
+  color: #e8eef6;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background-image:
+    radial-gradient(900px 520px at 100% -8%, rgba(46, 139, 255, 0.08), transparent 60%),
+    radial-gradient(820px 520px at -8% 0%, rgba(0, 200, 111, 0.07), transparent 60%);
+  background-attachment: fixed;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0e1623;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f2d42;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2a3b56;
+}
+
+@layer components {
+  /* área central estilo editor (Figma/Photoshop): fundo escuro com grade
+     pontilhada sutil, pra os criativos "flutuarem" como pranchetas. */
+  .psa-canvas {
+    background-color: #070b12;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 22px 22px;
+    background-position: -1px -1px;
+  }
+  .psa-card {
+    @apply rounded-xl border border-psa-border bg-psa-card shadow-psa-card;
+  }
+  .psa-pill {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold;
+  }
+  .psa-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .psa-btn-primary {
+    @apply psa-btn bg-psa-accent text-[#06231a] hover:bg-psa-accentHover;
+  }
+  .psa-btn-ghost {
+    @apply psa-btn border border-psa-border text-psa-muted hover:border-psa-accent hover:text-white;
+  }
+  .psa-input,
+  .psa-select,
+  .psa-textarea {
+    @apply w-full rounded-lg border border-psa-border bg-psa-bg px-3 py-2 text-sm text-white placeholder:text-psa-muted/60 focus:border-psa-accent focus:outline-none focus:ring-1 focus:ring-psa-accent/40;
+  }
+  .psa-label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wide text-psa-muted;
+  }
+  .psa-kpi {
+    @apply font-display text-3xl font-semibold leading-none tracking-tight text-white;
+  }
+  .psa-grad-text {
+    background-image: linear-gradient(135deg, #00c86f, #2e8bff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}

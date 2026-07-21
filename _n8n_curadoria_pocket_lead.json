@@ -1,0 +1,146 @@
+{
+  "name": "Curadoria Pocket — Lead HubSpot",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Curadoria Pocket — Lead Capture\n\n**Antes de ativar:**\n1. Criar credencial **HTTP Bearer Auth** no n8n com o Private App Token do HubSpot\n2. Selecionar essa credencial nos 3 nós HTTP Request\n3. Colar a Production URL do webhook na variável WEBHOOK_N8N do HTML\n4. Ativar o workflow\n\n**Propriedades usadas (já existem no HubSpot):**\n- `tema` → enum (Liderança, Vendas, Inovação…)\n- `budget` → enum (faixa de cachê)\n- `data_do_evento` → date (estimada pelo timing)\n- `message` → subtema + audiência\n- `origem_do_lead` → Inbound\n- `hs_lead_status` → NEW\n- `lifecyclestage` → Lead\n\n**Deal:** pipeline `default`, stage `appointmentscheduled` (1º stage B2B). Ajuste se necessário.",
+        "height": 380,
+        "width": 460,
+        "color": 7
+      },
+      "id": "sticky-setup",
+      "name": "📋 Setup",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [100, 60]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "curadoria-pocket-lead",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "n1",
+      "name": "📥 Receber lead",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [660, 380],
+      "webhookId": "curadoria-pocket-lead"
+    },
+    {
+      "parameters": {
+        "jsCode": "const b = $input.first().json.body;\n\nif (!b || !b.email) throw new Error('Payload inválido: email ausente');\n\n// Nome\nconst parts = (b.name || '').trim().split(' ');\nconst firstname = parts[0] || 'Lead';\nconst lastname = parts.slice(1).join(' ') || '';\nconst fullname = `${firstname}${lastname ? ' ' + lastname : ''}`;\n\n// Mapeamento SUBTEMA (aprofundamento) → enum HubSpot tema\n// Mais específico que o macro — usado como valor principal de `tema`\nconst SUBTEMA_MAP = {\n  // Liderança\n  'Alta Performance':       'Motivação',\n  'Liderança Feminina':     'Protagonismo Feminino',\n  'Gestão de Times':        'Gestão de Pessoas',\n  'Inteligência Emocional': 'Comportamento',\n  'Liderança Ágil':         'Liderança',\n  'Cultura de Resultado':   'Liderança',\n  // Vendas & Negócios\n  'Negociação':             'Vendas',\n  'Inside Sales':           'Vendas',\n  'Customer Experience':    'Experiência e Atendimento ao Cliente',\n  'Growth Hacking':         'Negócios',\n  'Retail & Varejo':        'Negócios',\n  'Precificação':           'Negócios',\n  // Inovação & IA\n  'IA & Machine Learning':  'Inovação',\n  'Transformação Digital':  'Inovação',\n  'Startups':               'Empreendedorismo',\n  'Design Thinking':        'Inovação',\n  'Future Skills':          'Outros',\n  'Open Innovation':        'Inovação',\n  // Marketing & Growth\n  'Branding':               'Negócios',\n  'Marketing Digital':      'Negócios',\n  'Storytelling':           'Comunicação',\n  'Data-Driven':            'Negócios',\n  'Social Media':           'Comunicação',\n  'Performance & ROI':      'Negócios',\n  // Cultura & Pessoas\n  'Diversidade & Inclusão': 'Diversidade',\n  'Employer Branding':      'Gestão de Pessoas',\n  'People Analytics':       'Gestão de Pessoas',\n  'Engajamento':            'Gestão de Pessoas',\n  'Retenção':               'Gestão de Pessoas',\n  'Futuro do RH':           'Gestão de Pessoas',\n  // ESG\n  'ESG para Negócios':      'Sustentabilidade e Responsabilidade Social',\n  'Impacto Social':         'Sustentabilidade e Responsabilidade Social',\n  'Economia Circular':      'Sustentabilidade e Responsabilidade Social',\n  'Governança':             'Sustentabilidade e Responsabilidade Social',\n  'Clima & Energia':        'Sustentabilidade e Responsabilidade Social',\n  'Diversidade & ESG':      'Diversidade',\n  // Saúde & Bem-estar\n  'Saúde Mental':           'Saúde',\n  'Burnout & Resiliência':  'Saúde',\n  'Mindfulness':            'Saúde',\n  'Produtividade':          'Motivação',\n  'Neurociência':           'Saúde',\n  'Performance Humana':     'Saúde',\n  // Futuro & Tendências\n  'Megatendências':         'Outros',\n  'Futuro do Trabalho':     'Outros',\n  'Geração Z & Alpha':      'Outros',\n  'Geopolítica':            'Política',\n  'Cenários 2030+':         'Outros',\n  'Nova Economia':          'Economia',\n  // Outro\n  'Educação':               'Educação',\n  'Esporte & Superação':    'Esporte',\n  'Criatividade':           'Outros',\n  'Oratória':               'Comunicação',\n  'Finanças':               'Finanças',\n  'Outro':                  'Outros',\n};\n\n// Fallback: macro tema → enum HubSpot (caso subtema não encontrado)\nconst MACRO_MAP = {\n  'Liderança':           'Liderança',\n  'Vendas & Negócios':   'Vendas',\n  'Inovação & IA':       'Inovação',\n  'Marketing & Growth':  'Negócios',\n  'Cultura & Pessoas':   'Gestão de Pessoas',\n  'ESG & Sustentab.':    'Sustentabilidade e Responsabilidade Social',\n  'Saúde & Bem-estar':   'Saúde',\n  'Futuro & Tendências': 'Outros',\n  'Outro tema':          'Outros',\n};\n\n// Mapeamento orçamento → enum HubSpot budget\nconst BUDGET_MAP = {\n  'Até R$ 10 mil':       '6k à 10k',\n  'Até R$ 50 mil':       '41k à 60k',\n  'Até R$ 100 mil':      '+ de 80k',\n  'Acima de R$ 100 mil': '+ de 80k',\n};\n\n// Mapeamento timing → data estimada (ms UTC)\nconst now = new Date();\nconst TIMING_DATE = {\n  'Urgente (–30 dias)': new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 20)).getTime(),\n  'Próximo mês':        new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 15)).getTime(),\n  '2º semestre 2026':   new Date(Date.UTC(2026, 9, 1)).getTime(),\n  '2027 ou além':       new Date(Date.UTC(2027, 2, 1)).getTime(),\n};\n\nconst temaHubspot = SUBTEMA_MAP[b.subtema] || MACRO_MAP[b.tema] || 'Outros';\n\nreturn [{\n  json: {\n    firstname,\n    lastname,\n    email:           b.email.toLowerCase().trim(),\n    phone:           (b.phone || '').replace(/\\D/g, ''),\n    tema:            temaHubspot,\n    budget:          BUDGET_MAP[b.orcamento] || 'Não informado',\n    data_do_evento:  TIMING_DATE[b.timing] || null,\n    message:         [`Tema: ${b.tema || ''}`, `Aprofundamento: ${b.subtema || ''}`, `Audiência: ${b.audiencia || ''}`].filter(s => !s.endsWith(': ')).join(' | '),\n    origem_do_lead:  'Inbound',\n    hs_lead_status:  'NEW',\n    lifecyclestage:  '1062353184',\n    dealname:        `Curadoria Pocket · ${fullname} · ${b.subtema || b.tema || ''}`.trim(),\n  }\n}];"
+      },
+      "id": "n2",
+      "name": "🔧 Mapear dados",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [880, 380]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.hubapi.com/crm/v3/objects/contacts/batch/upsert",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ inputs: [{ idProperty: 'email', id: $json.email, properties: { firstname: $json.firstname, lastname: $json.lastname, email: $json.email, phone: $json.phone, tema: $json.tema, budget: $json.budget, data_do_evento: $json.data_do_evento, message: $json.message, origem_do_lead: $json.origem_do_lead, hs_lead_status: $json.hs_lead_status, lifecyclestage: $json.lifecyclestage } }] }) }}",
+        "options": {}
+      },
+      "id": "n3",
+      "name": "👤 Upsert Contato",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1100, 380]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.hubapi.com/crm/v3/objects/deals",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ properties: { dealname: $('🔧 Mapear dados').item.json.dealname, pipeline: 'default', dealstage: 'appointmentscheduled', origem_do_lead: 'Inbound' } }) }}",
+        "options": {}
+      },
+      "id": "n4",
+      "name": "💼 Criar Deal",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1320, 380]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "={{ `https://api.hubapi.com/crm/v3/objects/deals/${$json.id}/associations/contacts/${$('👤 Upsert Contato').item.json.results[0].id}/deal_to_contact` }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "options": {}
+      },
+      "id": "n5",
+      "name": "🔗 Associar Deal → Contato",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1540, 380]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"status\": \"ok\" }"
+      },
+      "id": "n6",
+      "name": "✅ Responder 200",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1760, 380]
+    }
+  ],
+  "connections": {
+    "📥 Receber lead": {
+      "main": [
+        [{ "node": "🔧 Mapear dados", "type": "main", "index": 0 }]
+      ]
+    },
+    "🔧 Mapear dados": {
+      "main": [
+        [{ "node": "👤 Upsert Contato", "type": "main", "index": 0 }]
+      ]
+    },
+    "👤 Upsert Contato": {
+      "main": [
+        [{ "node": "💼 Criar Deal", "type": "main", "index": 0 }]
+      ]
+    },
+    "💼 Criar Deal": {
+      "main": [
+        [{ "node": "🔗 Associar Deal → Contato", "type": "main", "index": 0 }]
+      ]
+    },
+    "🔗 Associar Deal → Contato": {
+      "main": [
+        [{ "node": "✅ Responder 200", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "meta": { "templateCredsSetupCompleted": false },
+  "tags": [{ "name": "curadoria-pocket" }]
+}

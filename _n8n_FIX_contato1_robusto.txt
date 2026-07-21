@@ -1,0 +1,25 @@
+// ===== NÓ "Não existe - Cria o contato1" — fixEmail ROBUSTO (igual ao outro nó de contato) =====
+// Substitui o fixEmail fraco (mapinha) pelo que pega .vom / .xom / .com9 / .con etc.
+// Cola no campo JSON Body (começa em {{, sem "=" na frente).
+{{ (() => {
+  const b = $('Webhook').item.json.body;
+  const dig = s => String(s||'').replace(/\D/g,'');
+  const normTel = raw => { let d = dig(raw).replace(/^0+/,''); if(!d) return null;
+    if(d.length>=12 && d.startsWith('55')) return '+'+d;
+    if(d.length===10 || d.length===11) return '+55'+d;
+    if(d.length===12 || d.length===13) return '+'+d;
+    return null; };
+  const fixEmail = raw => { let e=String(raw||'').trim().toLowerCase().replace(/\s+/g,'');
+    const at=e.lastIndexOf('@'); if(at<1) return e;
+    let u=e.slice(0,at), d=e.slice(at+1);
+    d=d.replace(/^(gmial|gmai|gmaill)\./,'gmail.');
+    d=d.replace(/^(gmail|hotmail|outlook|live|icloud)\.[a-z.]+$/,'$1.com');
+    d=d.replace(/\.(con|vom|comi|copm|cmo|ocm|c0m|om|cim)$/,'.com');
+    d=d.replace(/^yahoo\.(con|cm|vom)$/,'yahoo.com');
+    return u+'@'+d; };
+  const email = fixEmail(b.Customer.email);
+  const tel = normTel(b.Customer.mobile);
+  const props = { email, firstname: b.Customer.full_name, website: b.Product.product_id };
+  if (tel) props.phone = tel;
+  return JSON.stringify({ inputs: [ { idProperty: "email", id: email, properties: props } ] });
+})() }}

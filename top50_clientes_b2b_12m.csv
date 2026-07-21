@@ -1,0 +1,51 @@
+rank,company_id,name,domain,tipo_de_empresa,segmento,industry,country,state,lifecyclestage,sum_amount_brl,deal_count,last_closedate,pipelines
+1,41914831030,SEBRAE/RR,sebrae.com.br,Sistema S,Serviços Profissionais,,,,customer,188644.82,35,2026-05-15,default
+2,33667334259,Sedec MT,sedec.mt.gov.br,Empresa Privada,,,,,,187227.66,1,2025-05-30,default
+3,54003331346,ASAAS,asaas.com.br,Empresa Privada,Financeiro,,,,customer,121429.00,2,2026-05-12,default
+4,53391926687,Sescoop Nacional,somoscooperativismo.coop.br,Órgão Público,,,,,customer,113676.69,3,2026-05-06,default
+5,33590105409,SEST SENAT MT,,,,,,,,111983.67,1,2025-09-24,default
+6,51690642186,Nexxus,nexxusengenharia.com.br,Empresa Privada,Energia e Utilities,,,,customer,104240.00,6,2026-02-06,default
+7,39482095267,Cordis,cordisbrasil.com.br,Empresa Privada,Serviços Profissionais,,,,,101500.00,2,2025-06-25,default
+8,35360304489,Auster Nutrição Animal,austernutri.com.br,Empresa Privada,Agronegócio,,,,,101039.17,3,2025-10-17,default
+9,35717658463,Cresol,cresol.com.br,Empresa Privada,,,,,customer,100690.00,6,2026-04-14,default
+10,33511563522,Cartê Marketing,carte.marketing,Empresa Privada,Serviços Profissionais,,,,1246600764,93640.00,2,2025-09-03,default
+11,40173550262,Banco do Brasil,bb.com.br,Empresa Privada,Financeiro,BANKING,Brazil,Federal District,1246600764,90806.63,7,2025-11-28,default
+12,41298714410,Aurora,auroraalimentos.com.br,Empresa Privada,Indústria,,,,1246600764,89729.06,10,2025-10-10,default
+13,48256069180,Santillana,santillana.com,Empresa Privada,Educação,E_LEARNING,Spain,Comunidad de Madrid,customer,89600.00,2,2026-01-19,default
+14,33080867100,Bears Marketing,bearsmkt.com,Agência de Eventos,Mídia e Conteúdo,,,,customer,85560.00,4,2026-02-10,default
+15,44107453188,Unimed Ribeirão Preto / Unimed Nordeste Paulista,unimedribeirao.com.br,Empresa Privada,,,,,customer,82450.00,3,2026-05-06,default
+16,39150609987,FUNDACAO DE ARTE DE NITEROI,,Órgão Público,"Cultura, Esporte e Entretenimento",POLITICAL_ORGANIZATION,,,1246600764,80000.00,1,2025-08-29,default
+17,54662971669,Grupo Salta Educação,gruposaltaedu.com,Empresa Privada,Educação,E_LEARNING,Brazil,,customer,78405.00,3,2026-03-31,default
+18,35717648565,TOTVS SÃO PAULO ,crescimento.com,Empresa Privada,,,,,1062353184,75500.01,3,2025-07-16,default
+19,37321364876,Grupo Comolatti,comolatti.com.br,Empresa Privada,Varejo e Comércio,,,,,69290.00,2,2025-12-01,default
+20,35718272795,BlueMint,bluemint.com.br,Órgão Público,Indústria,,,,customer,67559.00,5,2026-04-24,default
+21,40958899305,Secretaria de Estado de Educação de Minas Gerais,saogotardo.educacao.mg.gov.br,Órgão Público,Público / Governo,,,,1246600764,66988.75,5,2025-08-13,default
+22,37219928389,TOTVS,totvs.com.br,Empresa Privada,,MANAGEMENT_CONSULTING,,SC,1246600764,65501.00,3,2025-06-27,default
+23,41062448264,PEARSON,pearson.com,Empresa Privada,Educação,,,,customer,58505.04,4,2026-04-16,default
+24,35163701298,Stone,stone.com.br,Empresa Privada,Financeiro,,,,,54200.00,2,2025-11-05,default
+25,51632640596,Planfer,planfer.com.br,Empresa Privada,Agronegócio,,,,customer,54000.00,1,2026-03-31,default
+26,37071686556,Prefeitura de Penápolis,penapolis.sp.gov.br,Órgão Público,,,,,1246600764,53186.00,3,2025-07-16,default
+27,40965677143,SEPLAG MT,seplag.mt.gov.br,Órgão Público,Público / Governo,,,,customer,52561.04,4,2026-05-06,default
+28,33049994109,Gav Resorts,gavresorts.com.br,Empresa Privada,Alimentação e Hospitalidade,,,,customer,50724.00,1,2026-01-16,default
+29,33598334000,Seja Alta Performance,sejaap.com.br,Agência de Eventos,Serviços Profissionais,,,,customer,50060.00,1,2025-11-19,default
+30,43147717189,ITAÚ UNIBANCO,itaubba.com,Empresa Privada,Financeiro,BANKING,Brazil,Sao Paulo,1246600764,48000.00,2,2026-01-29,default
+31,41128109239,Sicoob Cecresp,cecrespcorretora.com.br,Empresa Privada,Financeiro,,,,customer,47017.50,4,2025-12-23,default
+32,45942602124,Citibank ,corporateportal.brazil.citibank.com,Empresa Privada,Financeiro,,,,customer,46800.00,2,2025-08-13,default
+33,33591653758,SEST SENAT Nacional ,sestsenat.org.br,Sistema S,Serviços Profissionais,BUSINESS_SUPPLIES_AND_EQUIPMENT,Brazil,Federal District,customer,45848.94,6,2026-01-19,default
+34,33511039891,Roque Assessoria,roqueassessoria.com.br,Agência de Palestrantes,,,,,,45000.00,1,2025-08-26,default
+35,33796801134,Studio 7 produtora,,Agência de Eventos,Mídia e Conteúdo,,,,,44951.38,1,2025-11-05,default
+36,53528776296,UOL,uolinc.com,Empresa Privada,Mídia e Conteúdo,,,,customer,44708.09,7,2026-05-06,default
+37,49899017823,Sindilojas Blumenau,sindilojasblumenau.com.br,Empresa Privada,Varejo e Comércio,,Brazil,,customer,43000.00,1,2026-02-11,default
+38,40528361331,OAB RS,oabrs.org.br,Órgão Público,Terceiro Setor,,,,customer,42850.00,4,2026-05-15,default
+39,40528361491,Sicoob Uni,unisicoob.com.br,Empresa Privada,,BANKING,Brazil,,1246600764,42500.00,1,2025-06-06,default
+40,38224561760,Prefeitura Municipal de Dois Vizinhos,,Órgão Público,Público / Governo,,,,,41123.04,2,2025-06-04,default
+41,53768387640,Equipe 10,,Empresa Privada,,,,,1246600764,40860.05,1,2026-02-25,default
+42,48609677944,Opia Marketing,opiamarketing.com.br,Empresa Privada,,,,,customer,40450.00,3,2026-01-29,default
+43,33512795017,NSG Pilkington,br.nsg.com,Empresa Privada,,,,,,40367.31,1,2025-09-05,default
+44,50927585543,Onlog,onlogexpress.com.br,Empresa Privada,,LOGISTICS_AND_SUPPLY_CHAIN,Brazil,,customer,39700.00,1,2026-02-23,default
+45,35059279030,Petrobras,petrobras.com.br,Órgão Público,Mineração e Extração,,,,customer,39670.45,3,2026-04-24,default
+46,35274834049,Tim Brasil,tim.com.br,Empresa Privada,Tecnologia e Comunicação,,,,,38950.00,3,2025-11-10,default
+47,33078907289,Alvo Eventos,alvoeventos.com.br,Agência de Eventos,Serviços Administrativos,,,,customer,38950.00,2,2026-01-20,default
+48,32983921997,ALE Combustíveis,ale.com.br,Empresa Privada,,,,,customer,38100.00,1,2026-01-15,default
+49,33077512459,Bracell,bracell.com,Empresa Privada,Indústria,,,,customer,38070.00,2,2026-01-19,default
+50,37217696908,Fecomércio-RS,fecomercio-rs.org.br,Empresa Privada,Terceiro Setor,,,,customer,37500.00,2,2026-03-09,default

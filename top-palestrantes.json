@@ -1,0 +1,428 @@
+{
+  "totalRecords": 4000,
+  "uniqueCount": 587,
+  "topByCount": [
+    {
+      "slug": "dado-schneider",
+      "count": 233,
+      "wonCount": 0,
+      "totalAmount": 1830362.02,
+      "wonAmount": 0
+    },
+    {
+      "slug": "giovane-gavio",
+      "count": 223,
+      "wonCount": 0,
+      "totalAmount": 1666013.1900000002,
+      "wonAmount": 0
+    },
+    {
+      "slug": "gabriel-carneiro",
+      "count": 222,
+      "wonCount": 3,
+      "totalAmount": 1445646.04,
+      "wonAmount": 37500
+    },
+    {
+      "slug": "ricardo-basaglia",
+      "count": 163,
+      "wonCount": 2,
+      "totalAmount": 1375225.95,
+      "wonAmount": 9000
+    },
+    {
+      "slug": "thiago-athanazio",
+      "count": 108,
+      "wonCount": 0,
+      "totalAmount": 621689.78,
+      "wonAmount": 0
+    },
+    {
+      "slug": "everton-lima-219854",
+      "count": 107,
+      "wonCount": 1,
+      "totalAmount": 545184.6,
+      "wonAmount": 200
+    },
+    {
+      "slug": "gustavo-borges",
+      "count": 105,
+      "wonCount": 0,
+      "totalAmount": 910029.82,
+      "wonAmount": 0
+    },
+    {
+      "slug": "nelson-freitas",
+      "count": 89,
+      "wonCount": 1,
+      "totalAmount": 738517.39,
+      "wonAmount": 5000
+    },
+    {
+      "slug": "emanuel-curi",
+      "count": 83,
+      "wonCount": 0,
+      "totalAmount": 583670.71,
+      "wonAmount": 0
+    },
+    {
+      "slug": "borja-castelar-063746",
+      "count": 69,
+      "wonCount": 0,
+      "totalAmount": 442595.5,
+      "wonAmount": 0
+    },
+    {
+      "slug": "monica-magalhaes-102532",
+      "count": 63,
+      "wonCount": 0,
+      "totalAmount": 426965.25,
+      "wonAmount": 0
+    },
+    {
+      "slug": "gustavo-torrente-766954",
+      "count": 61,
+      "wonCount": 3,
+      "totalAmount": 352525.11,
+      "wonAmount": 15000
+    },
+    {
+      "slug": "cafu",
+      "count": 55,
+      "wonCount": 1,
+      "totalAmount": 585105,
+      "wonAmount": 10750
+    },
+    {
+      "slug": "mauricio-schneider",
+      "count": 52,
+      "wonCount": 0,
+      "totalAmount": 380948.66,
+      "wonAmount": 0
+    },
+    {
+      "slug": "leandro-karnal",
+      "count": 48,
+      "wonCount": 0,
+      "totalAmount": 477461.29,
+      "wonAmount": 0
+    },
+    {
+      "slug": "fernanda-leite",
+      "count": 46,
+      "wonCount": 2,
+      "totalAmount": 232256.5,
+      "wonAmount": 42010
+    },
+    {
+      "slug": "rachel-maia",
+      "count": 46,
+      "wonCount": 0,
+      "totalAmount": 359595,
+      "wonAmount": 0
+    },
+    {
+      "slug": "lucas-silveira-264468",
+      "count": 45,
+      "wonCount": 0,
+      "totalAmount": 306940,
+      "wonAmount": 0
+    },
+    {
+      "slug": "mario-sergio-cortella",
+      "count": 45,
+      "wonCount": 1,
+      "totalAmount": 558963,
+      "wonAmount": 2700
+    },
+    {
+      "slug": "carlos-busch",
+      "count": 37,
+      "wonCount": 1,
+      "totalAmount": 198585,
+      "wonAmount": 12500
+    },
+    {
+      "slug": "luis-justo",
+      "count": 36,
+      "wonCount": 1,
+      "totalAmount": 292504.27,
+      "wonAmount": 4000
+    },
+    {
+      "slug": "luiz-felipe-ponde",
+      "count": 34,
+      "wonCount": 1,
+      "totalAmount": 371399.92000000004,
+      "wonAmount": 22500
+    },
+    {
+      "slug": "betty-mae-agi-119798",
+      "count": 31,
+      "wonCount": 0,
+      "totalAmount": 340664,
+      "wonAmount": 0
+    },
+    {
+      "slug": "richard-stad-595988",
+      "count": 30,
+      "wonCount": 1,
+      "totalAmount": 243743,
+      "wonAmount": 12800
+    },
+    {
+      "slug": "geraldo-rufino",
+      "count": 26,
+      "wonCount": 0,
+      "totalAmount": 191880,
+      "wonAmount": 0
+    },
+    {
+      "slug": "walter-longo",
+      "count": 25,
+      "wonCount": 0,
+      "totalAmount": 108295,
+      "wonAmount": 0
+    },
+    {
+      "slug": "paula-roosch",
+      "count": 25,
+      "wonCount": 0,
+      "totalAmount": 122658.67,
+      "wonAmount": 0
+    },
+    {
+      "slug": "Guto-rocha",
+      "count": 24,
+      "wonCount": 0,
+      "totalAmount": 148039.99,
+      "wonAmount": 0
+    },
+    {
+      "slug": "vinicius-kitahara0",
+      "count": 24,
+      "wonCount": 0,
+      "totalAmount": 133381,
+      "wonAmount": 0
+    },
+    {
+      "slug": "ricardo-lemos",
+      "count": 23,
+      "wonCount": 0,
+      "totalAmount": 99849,
+      "wonAmount": 0
+    }
+  ],
+  "topByRevenue": [
+    {
+      "slug": "fernanda-leite",
+      "count": 46,
+      "wonCount": 2,
+      "totalAmount": 232256.5,
+      "wonAmount": 42010
+    },
+    {
+      "slug": "gabriel-carneiro",
+      "count": 222,
+      "wonCount": 3,
+      "totalAmount": 1445646.04,
+      "wonAmount": 37500
+    },
+    {
+      "slug": "luiz-felipe-ponde",
+      "count": 34,
+      "wonCount": 1,
+      "totalAmount": 371399.92000000004,
+      "wonAmount": 22500
+    },
+    {
+      "slug": "gustavo-torrente-766954",
+      "count": 61,
+      "wonCount": 3,
+      "totalAmount": 352525.11,
+      "wonAmount": 15000
+    },
+    {
+      "slug": "ulisses-carneiro-548642",
+      "count": 15,
+      "wonCount": 1,
+      "totalAmount": 108748,
+      "wonAmount": 14000
+    },
+    {
+      "slug": "richard-stad-595988",
+      "count": 30,
+      "wonCount": 1,
+      "totalAmount": 243743,
+      "wonAmount": 12800
+    },
+    {
+      "slug": "carlos-busch",
+      "count": 37,
+      "wonCount": 1,
+      "totalAmount": 198585,
+      "wonAmount": 12500
+    },
+    {
+      "slug": "cafu",
+      "count": 55,
+      "wonCount": 1,
+      "totalAmount": 585105,
+      "wonAmount": 10750
+    },
+    {
+      "slug": "ricardo-amorim",
+      "count": 21,
+      "wonCount": 1,
+      "totalAmount": 196052.5,
+      "wonAmount": 10500
+    },
+    {
+      "slug": "nathan-osipe",
+      "count": 20,
+      "wonCount": 1,
+      "totalAmount": 106785,
+      "wonAmount": 9500
+    },
+    {
+      "slug": "ricardo-basaglia",
+      "count": 163,
+      "wonCount": 2,
+      "totalAmount": 1375225.95,
+      "wonAmount": 9000
+    },
+    {
+      "slug": "roberto-santos-476263",
+      "count": 11,
+      "wonCount": 2,
+      "totalAmount": 42850,
+      "wonAmount": 8300
+    },
+    {
+      "slug": "alan-ghani-004042",
+      "count": 5,
+      "wonCount": 1,
+      "totalAmount": 33600,
+      "wonAmount": 8000
+    },
+    {
+      "slug": "monique-evelle",
+      "count": 14,
+      "wonCount": 1,
+      "totalAmount": 90482.5,
+      "wonAmount": 7500
+    },
+    {
+      "slug": "zeina-latif",
+      "count": 11,
+      "wonCount": 1,
+      "totalAmount": 92960,
+      "wonAmount": 7500
+    },
+    {
+      "slug": "ana-rodrigues",
+      "count": 6,
+      "wonCount": 1,
+      "totalAmount": 21603,
+      "wonAmount": 7200
+    },
+    {
+      "slug": "piero-franceschi-533200",
+      "count": 16,
+      "wonCount": 1,
+      "totalAmount": 127978,
+      "wonAmount": 5500
+    },
+    {
+      "slug": "nelson-freitas",
+      "count": 89,
+      "wonCount": 1,
+      "totalAmount": 738517.39,
+      "wonAmount": 5000
+    },
+    {
+      "slug": "luis-justo",
+      "count": 36,
+      "wonCount": 1,
+      "totalAmount": 292504.27,
+      "wonAmount": 4000
+    },
+    {
+      "slug": "alice-salazar",
+      "count": 3,
+      "wonCount": 1,
+      "totalAmount": 19050,
+      "wonAmount": 3950
+    },
+    {
+      "slug": "dr.-stenio-zequi",
+      "count": 6,
+      "wonCount": 1,
+      "totalAmount": 20408.65,
+      "wonAmount": 3898.6499999999996
+    },
+    {
+      "slug": "camila-leal-lima-5okmla",
+      "count": 1,
+      "wonCount": 1,
+      "totalAmount": 3100,
+      "wonAmount": 3100
+    },
+    {
+      "slug": "marco-aurelio-souza",
+      "count": 17,
+      "wonCount": 1,
+      "totalAmount": 100981,
+      "wonAmount": 3000
+    },
+    {
+      "slug": "gil-giardelli",
+      "count": 3,
+      "wonCount": 1,
+      "totalAmount": 16915.010000000002,
+      "wonAmount": 3000
+    },
+    {
+      "slug": "gustavo-franco",
+      "count": 2,
+      "wonCount": 1,
+      "totalAmount": 17500,
+      "wonAmount": 3000
+    },
+    {
+      "slug": "mario-sergio-cortella",
+      "count": 45,
+      "wonCount": 1,
+      "totalAmount": 558963,
+      "wonAmount": 2700
+    },
+    {
+      "slug": "everton-lima-219854",
+      "count": 107,
+      "wonCount": 1,
+      "totalAmount": 545184.6,
+      "wonAmount": 200
+    },
+    {
+      "slug": "roberto-rodrigues",
+      "count": 2,
+      "wonCount": 1,
+      "totalAmount": 18120,
+      "wonAmount": 120
+    },
+    {
+      "slug": "marcus-bernardes-092136",
+      "count": 6,
+      "wonCount": 0,
+      "totalAmount": 20281.5,
+      "wonAmount": 0
+    },
+    {
+      "slug": "giovane-gavio",
+      "count": 223,
+      "wonCount": 0,
+      "totalAmount": 1666013.1900000002,
+      "wonAmount": 0
+    }
+  ]
+}

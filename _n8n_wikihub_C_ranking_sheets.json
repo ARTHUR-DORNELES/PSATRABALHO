@@ -1,0 +1,138 @@
+{
+  "name": "Wiki Hub - C - Ranking pro Sheets (agendado)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 1
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "sched-c",
+      "name": "A cada 1h"
+    },
+    {
+      "parameters": {
+        "operation": "keys",
+        "keyPattern": "pcur:pal:*",
+        "getValues": true
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        240,
+        0
+      ],
+      "id": "redis-keys-c",
+      "name": "Redis Keys",
+      "credentials": {
+        "redis": {
+          "id": "d4VAHvJKHzL9Pr8p",
+          "name": "Redis Profissionais SA"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Lê TODOS os scores do Redis (nó \"Redis Keys\" com Get Values) e devolve 1 linha por palestrante,\n// agrupado por macro tema e ranqueado dentro de cada tema. Saida = itens (1 por linha) pro Google Sheets.\nconst recs = [];\nfunction pushParsed(v) {\n  let r = v;\n  if (typeof v === 'string') { try { r = JSON.parse(v); } catch (e) { return; } }\n  if (r && r.id) recs.push(r);\n}\nfor (const it of items) {\n  const j = it.json || {};\n  if (j.value !== undefined && (j.key || j.name)) pushParsed(j.value);\n  else for (const [k, v] of Object.entries(j)) if (k.indexOf('pcur:pal:') === 0) pushParsed(v);\n}\n\nconst byTema = {};\nfor (const r of recs) { const t = r.macro_tema || '18. OUTROS'; (byTema[t] = byTema[t] || []).push(r); }\nconst temas = Object.keys(byTema).sort((a, b) => (parseInt(a) || 999) - (parseInt(b) || 999));\n\nconst rows = [];\nfor (const t of temas) {\n  const lst = byTema[t].slice().sort((a, b) => (b.pontuacao_total || 0) - (a.pontuacao_total || 0));\n  lst.forEach((r, i) => {\n    const n = r.notas || {};\n    rows.push({ json: {\n      macro_tema: t,\n      rank: i + 1,\n      nome: r.nome,\n      pontuacao_total: r.pontuacao_total,\n      compatibilidade_pct: r.compatibilidade,\n      quem_e: n.quem_e, defende: n.defende, entrega: n.entrega,\n      pra_quem: n.pra_quem, comprova: n.comprova, raiox: n.raiox,\n      hubspot_id: String(r.id),\n      wiki_url: r.wiki_url || '',\n      atualizado_em: r.data_avaliacao || ''\n    } });\n  });\n}\nreturn rows.length ? rows : [{ json: { macro_tema: '', rank: '', nome: '(sem avaliados ainda)', pontuacao_total: '', compatibilidade_pct: '', quem_e: '', defende: '', entrega: '', pra_quem: '', comprova: '', raiox: '', hubspot_id: '', wiki_url: '', atualizado_em: '' } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ],
+      "id": "monta-linhas-c",
+      "name": "Monta Linhas"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "1E4jIjjC4lIMhgWvdGd-4SAB-1OeJci8U9tMv3zuPADk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": "",
+          "cachedResultName": ""
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "matchingColumns": [
+            "hubspot_id"
+          ],
+          "value": {}
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        720,
+        0
+      ],
+      "id": "gsheets-c",
+      "name": "Grava no Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REPLACE_GSHEETS",
+          "name": "Google Sheets (crm.psa)"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "A cada 1h": {
+      "main": [
+        [
+          {
+            "node": "Redis Keys",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis Keys": {
+      "main": [
+        [
+          {
+            "node": "Monta Linhas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Monta Linhas": {
+      "main": [
+        [
+          {
+            "node": "Grava no Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "tags": []
+}

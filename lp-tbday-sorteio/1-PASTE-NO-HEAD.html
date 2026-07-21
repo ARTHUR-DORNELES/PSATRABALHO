@@ -1,0 +1,129 @@
+<!-- ============================================================
+     ARQUIVO 1 DE 2 — COLAR EM:
+     HubSpot → Configurações da página (engrenagem) → Avançado
+       → "Cabeçalho HTML adicional" / "Head HTML"
+     Copia TODO o conteúdo abaixo (Ctrl+A → Ctrl+C) e cola lá.
+     ============================================================ -->
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://js.hsforms.net/forms/embed/49656171.js" defer></script>
+
+<!-- Contador de inscritos: começa em 27 e soma +19 a cada dia. Ajuste START_DATE se quiser outra base. -->
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var el = document.getElementById('participant-count');
+    if (!el) return;
+    var START_DATE = new Date('2026-05-13T00:00:00-03:00'); // dia 0 = 27 inscritos
+    var BASE = 27, PER_DAY = 19;
+    var days = Math.max(0, Math.floor((new Date() - START_DATE) / 86400000));
+    el.textContent = (BASE + days * PER_DAY).toLocaleString('pt-BR');
+  });
+</script>
+
+<style>
+  .psa-lp{
+    --psa-bg:#0A0A12;--psa-card:#181826;--psa-border:#2A2A3D;--psa-border-strong:#3A3A55;
+    --psa-orange:#FF5E1A;--psa-orange-soft:#FF7A3D;--psa-orange-glow:rgba(255,94,26,.35);
+    --psa-success:#22C55E;--psa-muted:#8B8BA8;--psa-text:#D9D9E8;--psa-white:#FFFFFF;
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:var(--psa-bg);color:var(--psa-text);line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    margin:0;padding:0;
+  }
+  .psa-lp *{box-sizing:border-box;margin:0;padding:0}
+  .psa-lp a{color:inherit;text-decoration:none}
+  .psa-lp .container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+  .psa-lp .hero{position:relative;overflow:hidden;padding:90px 0 100px;background:radial-gradient(900px 500px at 75% -10%,rgba(255,94,26,.22),transparent 65%),radial-gradient(600px 400px at -10% 110%,rgba(255,176,102,.08),transparent 60%),var(--psa-bg)}
+  .psa-lp .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:64px;align-items:center;position:relative;z-index:1}
+  .psa-lp .eyebrow{display:inline-flex;align-items:center;gap:10px;background:rgba(255,94,26,.10);color:var(--psa-orange-soft);border:1px solid rgba(255,94,26,.35);padding:7px 16px;border-radius:999px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.6px;margin-bottom:28px}
+  .psa-lp .eyebrow .pulse{width:8px;height:8px;background:var(--psa-orange);border-radius:50%;box-shadow:0 0 0 0 rgba(255,94,26,.6);animation:psa-pulse 2s infinite}
+  @keyframes psa-pulse{0%{box-shadow:0 0 0 0 rgba(255,94,26,.6)}70%{box-shadow:0 0 0 10px rgba(255,94,26,0)}100%{box-shadow:0 0 0 0 rgba(255,94,26,0)}}
+  .psa-lp h1{font-size:60px;line-height:1.04;font-weight:900;color:var(--psa-white) !important;letter-spacing:-1.8px;margin-bottom:24px}
+  .psa-lp h1 .underline{background:linear-gradient(120deg,var(--psa-orange) 0%,var(--psa-orange-soft) 100%);-webkit-background-clip:text;background-clip:text;color:transparent !important}
+  .psa-lp .lead{font-size:20px;color:#B8B8CF;max-width:600px;margin-bottom:36px;line-height:1.55}
+  .psa-lp .lead strong{color:var(--psa-white);font-weight:600}
+  .psa-lp .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px}
+  .psa-lp .btn-primary{display:inline-flex !important;align-items:center;gap:10px;background:var(--psa-orange) !important;color:#fff !important;padding:16px 30px;border-radius:10px;font-weight:700;font-size:15px;border:1px solid var(--psa-orange);box-shadow:0 10px 30px var(--psa-orange-glow);text-transform:uppercase;letter-spacing:.6px;text-decoration:none !important}
+  .psa-lp .btn-primary:hover{background:#FF6D2E !important}
+  .psa-lp .btn-ghost{display:inline-flex !important;align-items:center;gap:8px;background:transparent !important;color:var(--psa-text) !important;padding:16px 24px;border-radius:10px;border:1px solid var(--psa-border-strong);font-weight:600;font-size:15px;text-decoration:none !important}
+  .psa-lp .btn-ghost:hover{background:rgba(255,255,255,.04) !important;border-color:var(--psa-orange-soft)}
+  .psa-lp .hero-trust{display:flex;gap:32px;align-items:center;color:var(--psa-muted);font-size:13px;flex-wrap:wrap}
+  .psa-lp .hero-trust strong{color:var(--psa-white);font-weight:700;font-size:15px;display:block;letter-spacing:-.3px}
+  .psa-lp .hero-trust .label{font-size:12px;text-transform:uppercase;letter-spacing:.8px;display:block;color:var(--psa-muted)}
+
+  .psa-lp .prize-card{background:linear-gradient(160deg,#1A1A2A 0%,#0F0F1A 100%);border:1px solid var(--psa-border-strong);border-radius:20px;padding:32px;box-shadow:0 30px 80px -20px rgba(0,0,0,.7);position:relative;overflow:hidden}
+  .psa-lp .prize-tag{display:inline-block;background:var(--psa-orange);color:#fff !important;padding:6px 14px;border-radius:6px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.6px;margin-bottom:18px}
+  .psa-lp .prize-card h3{font-size:13px !important;text-transform:uppercase;letter-spacing:1.5px;color:var(--psa-muted) !important;font-weight:700;margin-bottom:8px}
+  .psa-lp .prize-num{font-size:80px;font-weight:900;line-height:1;letter-spacing:-3px;margin-bottom:6px;background:linear-gradient(135deg,#fff 30%,var(--psa-orange-soft) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .psa-lp .prize-label{font-size:18px;color:var(--psa-white);font-weight:700;margin-bottom:24px}
+  .psa-lp .prize-detail{background:rgba(255,255,255,.03);border:1px solid var(--psa-border);border-radius:12px;padding:18px 20px;margin-bottom:14px;display:flex;align-items:center;gap:14px}
+  .psa-lp .prize-detail-icon{width:38px;height:38px;border-radius:9px;flex-shrink:0;background:rgba(255,94,26,.12);color:var(--psa-orange-soft);display:flex;align-items:center;justify-content:center;font-size:18px}
+  .psa-lp .prize-detail-text{font-size:14px;color:#CCCCDD;line-height:1.45}
+  .psa-lp .prize-detail-text strong{color:var(--psa-white);font-weight:700}
+  .psa-lp .prize-cta{display:flex !important;align-items:center;justify-content:center;gap:10px;margin-top:24px;background:var(--psa-orange) !important;color:#fff !important;padding:15px 22px;border-radius:11px;font-weight:800;font-size:14.5px;text-transform:uppercase;letter-spacing:.6px;text-decoration:none !important}
+  .psa-lp .prize-cta:hover{background:#FF6D2E !important}
+  .psa-lp .prize-footer{margin-top:18px;text-align:center;font-size:12px;color:var(--psa-muted);text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;justify-content:center;gap:8px}
+  .psa-lp .dot-live{width:8px;height:8px;background:var(--psa-success);border-radius:50%;animation:psa-pulse-live 2s infinite}
+  @keyframes psa-pulse-live{0%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}70%{box-shadow:0 0 0 8px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+
+  .psa-lp section{padding:90px 0;background:transparent}
+  .psa-lp .section-head{text-align:center;max-width:820px;margin:0 auto 60px}
+  .psa-lp .section-tag{display:inline-block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:var(--psa-orange) !important;margin-bottom:16px}
+  .psa-lp h2{font-size:44px !important;line-height:1.12;font-weight:900;color:var(--psa-white) !important;letter-spacing:-1.2px;margin-bottom:18px}
+  .psa-lp h2 .accent{color:var(--psa-orange) !important}
+  .psa-lp h3{font-size:22px;font-weight:800;color:var(--psa-white);margin-bottom:10px;letter-spacing:-.3px}
+  .psa-lp .section-sub{font-size:18px;color:#A8A8C0;line-height:1.55}
+
+  .psa-lp .program{background:#080810}
+  .psa-lp .program-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:980px;margin:0 auto}
+  .psa-lp .mod{background:linear-gradient(180deg,var(--psa-card) 0%,#13131F 100%);border:1px solid var(--psa-border);border-radius:16px;padding:32px 28px;transition:border-color .25s,transform .25s}
+  .psa-lp .mod:hover{border-color:var(--psa-orange-soft);transform:translateY(-3px)}
+  .psa-lp .mod-num{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:11px;background:rgba(255,94,26,.12);color:var(--psa-orange);font-weight:900;font-size:16px;margin-bottom:20px;border:1px solid rgba(255,94,26,.25)}
+  .psa-lp .mod h3{font-size:19px;margin-bottom:10px;color:var(--psa-white)}
+  .psa-lp .mod p{color:#9F9FB8;font-size:15px;line-height:1.55}
+
+  .psa-lp .form-section{background:radial-gradient(1100px 600px at 50% 0%,rgba(255,94,26,.18),transparent 70%),var(--psa-bg);padding:100px 0}
+  .psa-lp .form-header{text-align:center;margin:0 auto 32px;max-width:720px}
+  .psa-lp .form-header h2{font-size:38px !important;margin-bottom:16px}
+  .psa-lp .form-progress{display:inline-flex;align-items:center;gap:10px;margin:24px auto 0;font-size:13px;color:#B8B8CF;background:rgba(255,255,255,.04);border:1px solid var(--psa-border);padding:10px 20px;border-radius:999px}
+  .psa-lp .form-progress .dot{width:8px;height:8px;border-radius:50%;background:var(--psa-orange);box-shadow:0 0 0 4px rgba(255,94,26,.15)}
+  .psa-lp .form-progress .line{width:24px;height:1px;background:var(--psa-border-strong)}
+  .psa-lp .form-progress strong{color:var(--psa-white);font-weight:700}
+  .psa-lp .social-proof-bar{max-width:880px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:12px 24px;background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.25);border-radius:14px;color:#E8E8F5;font-size:13.5px;font-weight:500}
+  .psa-lp .social-proof-bar .live-dot{width:10px;height:10px;background:var(--psa-success);border-radius:50%;animation:psa-pulse-live 2s infinite;flex-shrink:0}
+  .psa-lp .social-proof-bar strong{color:var(--psa-white);font-weight:800}
+  .psa-lp .form-trust-bar{max-width:880px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;padding:14px 24px;background:rgba(255,94,26,.06);border:1px solid rgba(255,94,26,.25);border-radius:14px;color:#E8E8F5;font-size:13.5px;font-weight:500}
+  .psa-lp .form-trust-bar .item{display:flex;align-items:center;gap:8px}
+  .psa-lp .form-trust-bar .icon{width:22px;height:22px;border-radius:50%;background:var(--psa-orange);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px}
+  .psa-lp .form-trust-bar .sep{width:1px;height:18px;background:rgba(255,255,255,.15)}
+  .psa-lp .form-wrap{max-width:880px;margin:0 auto;background:#FFFFFF;border-radius:24px;padding:52px 56px;box-shadow:0 50px 100px -20px rgba(0,0,0,.55),0 0 80px -10px rgba(255,94,26,.25);position:relative}
+  .psa-lp .form-wrap-intro{text-align:center;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid #EAEAF2}
+  .psa-lp .form-wrap-intro h3{font-size:22px !important;color:#0A0A12 !important;font-weight:800;margin-bottom:8px}
+  .psa-lp .form-wrap-intro p{color:#5E5E78;font-size:15px}
+  .psa-lp .form-after{margin-top:24px;padding-top:24px;border-top:1px solid #EAEAF2;display:flex;align-items:flex-start;gap:14px;color:#5E5E78;font-size:13.5px;line-height:1.55}
+  .psa-lp .form-after .lock-icon{width:32px;height:32px;border-radius:8px;flex-shrink:0;background:rgba(255,94,26,.10);color:var(--psa-orange);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+  .psa-lp .form-after strong{color:#0A0A12;font-weight:700}
+
+  .psa-lp .faq{background:#080810;border-top:1px solid var(--psa-border)}
+  .psa-lp .faq-list{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+  .psa-lp .faq-item{background:var(--psa-card);border:1px solid var(--psa-border);border-radius:12px;overflow:hidden}
+  .psa-lp .faq-item summary{padding:22px 26px;cursor:pointer;font-size:16px;font-weight:600;color:var(--psa-white);display:flex;justify-content:space-between;align-items:center;gap:16px;list-style:none}
+  .psa-lp .faq-item summary::-webkit-details-marker{display:none}
+  .psa-lp .faq-item summary::after{content:"+";font-size:22px;color:var(--psa-orange);font-weight:300}
+  .psa-lp .faq-item[open] summary::after{content:"−"}
+  .psa-lp .faq-item .answer{padding:0 26px 22px;color:#A8A8C0;font-size:15px;line-height:1.65}
+
+  @media (max-width:1024px){
+    .psa-lp .hero-grid{grid-template-columns:1fr;gap:48px}
+  }
+  @media (max-width:720px){
+    .psa-lp .hero{padding:60px 0 70px}
+    .psa-lp h1{font-size:38px !important;letter-spacing:-1px}
+    .psa-lp .prize-num{font-size:64px}
+    .psa-lp section{padding:64px 0}
+    .psa-lp h2{font-size:30px !important}
+    .psa-lp .program-grid{grid-template-columns:1fr}
+    .psa-lp .form-wrap{padding:32px 22px}
+  }
+</style>

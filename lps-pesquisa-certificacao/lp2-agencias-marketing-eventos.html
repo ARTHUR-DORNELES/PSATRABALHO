@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="A PSA está construindo a plataforma definitiva para agências de marketing e eventos contratarem palestrantes com transparência, agilidade e margem." />
+<title>Plataforma PSA para Agências de Marketing e Eventos | Pesquisa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --psa-bg:#0B1020;
+    --psa-surface:#111733;
+    --psa-card:#161E40;
+    --psa-border:#243056;
+    --psa-accent:#3B82F6;
+    --psa-accent-hover:#2563EB;
+    --psa-success:#10B981;
+    --psa-warning:#F59E0B;
+    --psa-muted:#94A3B8;
+    --psa-text:#E2E8F0;
+    --psa-white:#F8FAFC;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--psa-bg);color:var(--psa-text);line-height:1.6;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1180px;margin:0 auto;padding:0 24px}
+
+  .topbar{border-bottom:1px solid var(--psa-border);background:rgba(11,16,32,.85);backdrop-filter:blur(8px);position:sticky;top:0;z-index:50}
+  .topbar-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:.5px;color:var(--psa-white)}
+  .brand-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#F59E0B 0%,#3B82F6 100%);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff}
+  .brand-tag{font-size:11px;text-transform:uppercase;letter-spacing:1.8px;color:var(--psa-muted);font-weight:600}
+  .topbar a.cta{background:var(--psa-accent);color:#fff;padding:10px 18px;border-radius:8px;font-weight:600;font-size:14px;transition:background .2s}
+  .topbar a.cta:hover{background:var(--psa-accent-hover)}
+
+  .hero{position:relative;overflow:hidden;padding:80px 0 90px;
+    background:
+      radial-gradient(1100px 500px at 80% -10%,rgba(245,158,11,.16),transparent 60%),
+      radial-gradient(700px 400px at -10% 110%,rgba(59,130,246,.15),transparent 60%),
+      var(--psa-bg);}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(245,158,11,.12);color:#FCD34D;border:1px solid rgba(245,158,11,.3);padding:6px 14px;border-radius:999px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:24px}
+  .eyebrow .dot{width:6px;height:6px;background:var(--psa-warning);border-radius:50%;box-shadow:0 0 0 4px rgba(245,158,11,.2)}
+  h1{font-size:54px;line-height:1.08;font-weight:800;color:var(--psa-white);letter-spacing:-1.2px;margin-bottom:22px}
+  h1 span{background:linear-gradient(135deg,#FCD34D 0%,#F59E0B 50%,#3B82F6 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{font-size:19px;color:#CBD5E1;max-width:560px;margin-bottom:32px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
+  .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--psa-accent);color:#fff;padding:14px 26px;border-radius:10px;font-weight:600;font-size:15px;border:1px solid var(--psa-accent);transition:transform .15s,background .15s,box-shadow .2s;box-shadow:0 6px 20px rgba(59,130,246,.35)}
+  .btn-primary:hover{background:var(--psa-accent-hover);transform:translateY(-1px);box-shadow:0 10px 28px rgba(59,130,246,.45)}
+  .btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--psa-text);padding:14px 22px;border-radius:10px;border:1px solid var(--psa-border);font-weight:600;font-size:15px;transition:background .15s,border-color .15s}
+  .btn-ghost:hover{background:rgba(255,255,255,.04);border-color:#3B4D7E}
+  .hero-trust{display:flex;gap:28px;align-items:center;color:var(--psa-muted);font-size:13px;flex-wrap:wrap}
+  .hero-trust strong{color:var(--psa-white);font-weight:600}
+
+  .hero-card{background:linear-gradient(180deg,var(--psa-card) 0%,#101631 100%);border:1px solid var(--psa-border);border-radius:18px;padding:28px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);position:relative}
+  .hero-card-title{font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:var(--psa-muted);font-weight:600;margin-bottom:14px}
+  .stat-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+  .stat{background:rgba(255,255,255,.03);border:1px solid var(--psa-border);border-radius:12px;padding:16px 18px}
+  .stat-num{font-size:26px;font-weight:700;color:var(--psa-white);letter-spacing:-.5px}
+  .stat-label{font-size:12px;color:var(--psa-muted);text-transform:uppercase;letter-spacing:.8px;margin-top:4px;font-weight:500}
+  .feature-list{display:flex;flex-direction:column;gap:12px}
+  .feature-list li{display:flex;align-items:center;gap:10px;font-size:14.5px;color:#CBD5E1;list-style:none}
+  .check{width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--psa-success);font-weight:700;font-size:13px}
+
+  section{padding:88px 0}
+  .section-head{text-align:center;max-width:780px;margin:0 auto 56px}
+  .section-tag{display:inline-block;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:#FCD34D;margin-bottom:14px}
+  h2{font-size:38px;line-height:1.18;font-weight:800;color:var(--psa-white);letter-spacing:-.7px;margin-bottom:16px}
+  h3{font-size:20px;font-weight:700;color:var(--psa-white);margin-bottom:8px}
+  .section-sub{font-size:17px;color:#94A3B8}
+
+  .problem{background:linear-gradient(180deg,var(--psa-bg) 0%,#0A0F1F 100%)}
+  .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .pain{background:var(--psa-card);border:1px solid var(--psa-border);padding:28px;border-radius:14px;transition:transform .2s,border-color .2s}
+  .pain:hover{transform:translateY(-3px);border-color:#3B4D7E}
+  .pain-icon{width:48px;height:48px;border-radius:12px;background:rgba(239,68,68,.1);color:#F87171;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px}
+  .pain p{color:#94A3B8;font-size:15px}
+
+  .solution{background:#0A0F1F}
+  .benefit-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+  .benefit{background:linear-gradient(180deg,var(--psa-card) 0%,#101631 100%);border:1px solid var(--psa-border);border-radius:16px;padding:32px;position:relative;overflow:hidden}
+  .benefit::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#F59E0B,#FCD34D,var(--psa-accent))}
+  .benefit-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;background:rgba(245,158,11,.15);color:#FCD34D;font-weight:700;font-size:15px;margin-bottom:18px;border:1px solid rgba(245,158,11,.3)}
+  .benefit p{color:#CBD5E1;font-size:15px}
+
+  .how{background:linear-gradient(180deg,#0A0F1F 0%,var(--psa-bg) 100%)}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:24px}
+  .step{background:var(--psa-card);border:1px solid var(--psa-border);padding:26px 22px;border-radius:14px;position:relative}
+  .step-num{font-size:13px;font-weight:700;color:#FCD34D;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px}
+  .step h4{font-size:17px;font-weight:700;color:var(--psa-white);margin-bottom:6px}
+  .step p{font-size:14px;color:#94A3B8}
+
+  .highlight{background:linear-gradient(135deg,#1F1B0F 0%,#0B1631 100%);border-top:1px solid var(--psa-border);border-bottom:1px solid var(--psa-border)}
+  .highlight-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+  .revenue-card{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.25);border-radius:16px;padding:36px}
+  .revenue-card .label{color:#FCD34D;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px}
+  .revenue-card h3{font-size:26px;color:var(--psa-white);margin-bottom:14px;line-height:1.3}
+  .revenue-card p{color:#CBD5E1}
+
+  .form-section{background:radial-gradient(800px 400px at 50% 0%,rgba(245,158,11,.1),transparent 70%),var(--psa-bg)}
+  .form-wrap{max-width:780px;margin:0 auto;background:linear-gradient(180deg,var(--psa-card) 0%,#101631 100%);border:1px solid var(--psa-border);border-radius:20px;padding:48px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
+  .form-wrap h2{font-size:30px;text-align:center}
+  .form-wrap .section-sub{text-align:center;margin-bottom:36px}
+  .q-block{margin-bottom:32px;padding-bottom:28px;border-bottom:1px solid var(--psa-border)}
+  .q-block:last-of-type{border-bottom:none;margin-bottom:24px;padding-bottom:0}
+  .q-label{display:block;font-size:16px;font-weight:600;color:var(--psa-white);margin-bottom:14px;line-height:1.5}
+  .q-num{display:inline-block;width:26px;height:26px;line-height:26px;text-align:center;background:var(--psa-accent);color:#fff;border-radius:50%;font-size:13px;font-weight:700;margin-right:10px}
+  .opt-list{display:flex;flex-direction:column;gap:10px}
+  .opt{display:flex;align-items:center;gap:12px;padding:13px 16px;background:rgba(255,255,255,.02);border:1px solid var(--psa-border);border-radius:10px;cursor:pointer;transition:background .15s,border-color .15s;color:#CBD5E1;font-size:15px}
+  .opt:hover{background:rgba(245,158,11,.06);border-color:#5C4A1F}
+  .opt input[type=radio],.opt input[type=checkbox]{accent-color:var(--psa-warning);width:18px;height:18px;cursor:pointer}
+  .text-input,textarea.text-input{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--psa-border);border-radius:10px;padding:13px 16px;color:var(--psa-white);font-size:15px;font-family:inherit;transition:border-color .15s,background .15s}
+  .text-input:focus,textarea.text-input:focus{outline:none;border-color:var(--psa-warning);background:rgba(245,158,11,.05)}
+  textarea.text-input{resize:vertical;min-height:110px}
+  .other-input{margin-top:10px}
+  .submit-row{display:flex;justify-content:center;margin-top:36px}
+  .submit-btn{background:linear-gradient(135deg,#F59E0B 0%,#3B82F6 100%);color:#fff;border:none;padding:16px 40px;border-radius:12px;font-weight:700;font-size:16px;cursor:pointer;letter-spacing:.3px;box-shadow:0 8px 24px rgba(245,158,11,.35);transition:transform .15s,box-shadow .15s}
+  .submit-btn:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(245,158,11,.5)}
+  .form-footer{text-align:center;margin-top:18px;color:var(--psa-muted);font-size:13px}
+
+  footer{background:#070B18;border-top:1px solid var(--psa-border);padding:36px 0;text-align:center;color:var(--psa-muted);font-size:13px}
+  footer .brand{justify-content:center;margin-bottom:10px}
+
+  @media (max-width:960px){
+    .hero{padding:60px 0 70px}
+    .hero-grid{grid-template-columns:1fr;gap:40px}
+    h1{font-size:38px}
+    .pain-grid,.benefit-grid,.steps,.highlight-grid{grid-template-columns:1fr;gap:18px}
+    section{padding:64px 0}
+    h2{font-size:28px}
+    .form-wrap{padding:30px 22px}
+    .form-wrap h2{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <div class="brand">
+      <div class="brand-mark">P</div>
+      <div>
+        <div>PSA</div>
+        <div class="brand-tag">Plataforma de Palestrantes</div>
+      </div>
+    </div>
+    <a href="#pesquisa" class="cta">Participar da pesquisa</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot"></span> Pesquisa de certificação · Agências de Marketing e Eventos</div>
+      <h1>Cotação, agenda e fechamento de <span>palestrantes</span> em um só lugar — com margem clara para sua agência.</h1>
+      <p class="lead">A PSA está construindo a plataforma que centraliza a contratação de palestrantes para agências de marketing e produtoras de eventos. Mais agilidade no briefing, mais transparência no cachê, mais previsibilidade no calendário — e margem definida desde o primeiro contato.</p>
+      <div class="hero-cta">
+        <a href="#pesquisa" class="btn-primary">Responder pesquisa em 2 min →</a>
+        <a href="#como-funciona" class="btn-ghost">Como a plataforma funciona</a>
+      </div>
+      <div class="hero-trust">
+        <span><strong>+1.500</strong> palestrantes na rede PSA</span>
+        <span><strong>Cotação</strong> em horas, não em dias</span>
+        <span><strong>5 questões</strong> · 2 minutos</span>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-card-title">O que muda no dia da agência</div>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num">-70%</div>
+          <div class="stat-label">Tempo de cotação</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Cachê transparente</div>
+        </div>
+      </div>
+      <ul class="feature-list">
+        <li><span class="check">✓</span> Curadoria de palestrantes filtrável por tema, formato e cachê</li>
+        <li><span class="check">✓</span> Briefing único que dispara propostas para múltiplos nomes</li>
+        <li><span class="check">✓</span> Disponibilidade de agenda em tempo real</li>
+        <li><span class="check">✓</span> Modelo de margem e comissionamento da agência preservado</li>
+        <li><span class="check">✓</span> Histórico, contratos e logística em um único painel</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="problem">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-tag">A dor da agência</div>
+      <h2>Cada palestrante é uma negociação manual — e isso custa caro.</h2>
+      <p class="section-sub">Cotar 8 nomes leva semana. Cliente final pressiona, palestrante demora, agenda muda, briefing volta. Quem opera dia a dia em agência conhece a roda.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain">
+        <div class="pain-icon">⏱</div>
+        <h3>Cotação em série</h3>
+        <p>Cada palestrante exige um contato, uma proposta e um follow-up. O ciclo até o cliente final é lento e fragiliza a agência.</p>
+      </div>
+      <div class="pain">
+        <div class="pain-icon">$</div>
+        <h3>Cachê opaco e margem em risco</h3>
+        <p>Sem visibilidade prévia de valores, fica difícil compor proposta com margem real. Surpresas no fechamento corroem a rentabilidade.</p>
+      </div>
+      <div class="pain">
+        <div class="pain-icon">⚙</div>
+        <h3>Logística dispersa</h3>
+        <p>Contratos, riders técnicos, deslocamento e datas vivem em e-mails e planilhas. Erros pequenos viram problemas grandes em evento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="solution" id="como-funciona">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-tag">A plataforma PSA</div>
+      <h2>Sua agência cota, fecha e entrega palestras com escala.</h2>
+      <p class="section-sub">A PSA conecta sua operação a uma rede curada de palestrantes — com transparência de cachê, agenda em tempo real e modelos de remuneração que respeitam a margem da agência.</p>
+    </div>
+
+    <div class="benefit-grid">
+      <div class="benefit">
+        <div class="benefit-num">01</div>
+        <h3>Cotação múltipla com um briefing</h3>
+        <p>Descreva o evento uma vez e dispare proposta para múltiplos palestrantes elegíveis. Reúna respostas em um único painel comparativo.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-num">02</div>
+        <h3>Cachê e disponibilidade transparentes</h3>
+        <p>Faixa de investimento e agenda exibidos antes do contato. Sua agência monta proposta com previsibilidade e sem retrabalho.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-num">03</div>
+        <h3>Margem e comissionamento da agência</h3>
+        <p>Modelo comercial pensado para preservar e ampliar a margem da agência em cada contratação fechada via plataforma.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-num">04</div>
+        <h3>Operação centralizada</h3>
+        <p>Contrato, rider técnico, agenda, deslocamento e pagamento — tudo em um único ambiente, com histórico por cliente e por palestrante.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-tag">Como funciona</div>
+      <h2>Do briefing ao fechamento — em horas, não em semanas.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">Passo 01</div>
+        <h4>Briefing único</h4>
+        <p>Tema, data, formato, faixa de cachê e objetivo do cliente final.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">Passo 02</div>
+        <h4>Curadoria automática</h4>
+        <p>A plataforma sugere palestrantes elegíveis e dispara propostas em paralelo.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">Passo 03</div>
+        <h4>Comparativo único</h4>
+        <p>Receba propostas, vídeos e cases lado a lado para apresentar ao cliente.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">Passo 04</div>
+        <h4>Fechamento e entrega</h4>
+        <p>Contrato digital, agenda confirmada e pagamento com regras da agência.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="highlight">
+  <div class="container highlight-grid">
+    <div>
+      <div class="section-tag">Para agências e produtoras</div>
+      <h2>Mais eventos por mês — com a mesma equipe.</h2>
+      <p class="section-sub">Quando a cotação deixa de ser manual, sua equipe comercial e de produção opera em outra escala. Mais propostas em pé, mais clientes atendidos, mais palestras fechadas — sem aumentar headcount nem comprometer a qualidade da curadoria.</p>
+    </div>
+    <div class="revenue-card">
+      <div class="label">Modelo comercial</div>
+      <h3>Plataforma como infraestrutura — margem da agência preservada em todo fechamento.</h3>
+      <p>Mensalidade ou comissão sobre transação, com regras desenhadas para que a agência mantenha o relacionamento direto com o cliente final e a margem sobre cada contratação.</p>
+    </div>
+  </div>
+</section>
+
+<section class="form-section" id="pesquisa">
+  <div class="container">
+    <div class="form-wrap">
+      <div class="section-head" style="margin-bottom:30px">
+        <div class="section-tag">Pesquisa de certificação</div>
+        <h2>Sua resposta define o produto que sua agência vai usar.</h2>
+        <p class="section-sub">5 perguntas, 2 minutos. Quem responde entra na lista de acesso prioritário, com condições especiais de lançamento e participação em rounds de validação.</p>
+      </div>
+
+      <form id="pesquisa-agencia" novalidate>
+        <div class="q-block">
+          <label class="q-label">Seus dados (para retorno e acesso prioritário)</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <input class="text-input" type="text" name="nome" placeholder="Nome completo" required>
+            <input class="text-input" type="email" name="email" placeholder="E-mail corporativo" required>
+            <input class="text-input" type="text" name="agencia" placeholder="Agência / Produtora" required>
+            <input class="text-input" type="tel" name="telefone" placeholder="Telefone / WhatsApp">
+          </div>
+        </div>
+
+        <div class="q-block">
+          <label class="q-label"><span class="q-num">1</span>Como sua agência contrata palestrantes hoje?</label>
+          <div class="opt-list">
+            <label class="opt"><input type="radio" name="q1" value="indicacao_direta"><span>Indicação direta</span></label>
+            <label class="opt"><input type="radio" name="q1" value="agencia"><span>Empresas de palestras ou agência</span></label>
+            <label class="opt"><input type="radio" name="q1" value="redes_sociais"><span>Busca em redes sociais</span></label>
+            <label class="opt"><input type="radio" name="q1" value="base_propria"><span>Já temos uma base própria</span></label>
+            <label class="opt"><input type="radio" name="q1" value="outra"><span>Outra</span></label>
+          </div>
+          <input class="text-input other-input" type="text" name="q1_outra" placeholder="Qual?">
+        </div>
+
+        <div class="q-block">
+          <label class="q-label"><span class="q-num">2</span>Qual é a maior dificuldade nesse processo hoje?</label>
+          <div class="opt-list">
+            <label class="opt"><input type="radio" name="q2" value="encontrar_tema"><span>Encontrar bons palestrantes por tema</span></label>
+            <label class="opt"><input type="radio" name="q2" value="orcamento"><span>Falta de opções dentro do orçamento</span></label>
+            <label class="opt"><input type="radio" name="q2" value="preco"><span>Saber o preço antes de entrar em contato</span></label>
+            <label class="opt"><input type="radio" name="q2" value="negociacao"><span>Negociação / tempo de resposta</span></label>
+            <label class="opt"><input type="radio" name="q2" value="logistica"><span>Logística / agenda</span></label>
+            <label class="opt"><input type="radio" name="q2" value="sem_problema"><span>Não tenho problema no processo</span></label>
+          </div>
+        </div>
+
+        <div class="q-block">
+          <label class="q-label"><span class="q-num">3</span>Se existisse uma plataforma onde sua empresa pudesse localizar palestrantes, consultar valores e até contratar de forma gratuita, o quanto isso ajudaria no dia a dia?</label>
+          <div class="opt-list">
+            <label class="opt"><input type="radio" name="q3" value="muito"><span>Ajudaria muito</span></label>
+            <label class="opt"><input type="radio" name="q3" value="pouco"><span>Ajudaria um pouco</span></label>
+            <label class="opt"><input type="radio" name="q3" value="nao"><span>Não faria diferença</span></label>
+          </div>
+        </div>
+
+        <div class="q-block">
+          <label class="q-label"><span class="q-num">4</span>Quanto sua agência estaria disposta a pagar por mês por uma plataforma assim?</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center">
+            <input class="text-input" type="text" name="q4_valor" placeholder="R$ valor mensal">
+            <label class="opt"><input type="radio" name="q4" value="nao_pagaria"><span>Não pagaria</span></label>
+          </div>
+        </div>
+
+        <div class="q-block">
+          <label class="q-label"><span class="q-num">5</span>O que precisaria existir na plataforma para que sua agência considerasse pagar por ela?</label>
+          <textarea class="text-input" name="q5" placeholder="Funcionalidades, integrações com CRM, modelo de margem, SLA..."></textarea>
+        </div>
+
+        <div class="submit-row">
+          <button class="submit-btn" type="submit">Enviar respostas e garantir acesso prioritário →</button>
+        </div>
+        <div class="form-footer">5 perguntas · 2 minutos. Suas respostas são confidenciais e usadas apenas para o desenvolvimento da plataforma PSA.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="brand">
+      <div class="brand-mark">P</div>
+      <div>PSA · Plataforma de Palestrantes</div>
+    </div>
+    © PSA — Pesquisa de certificação · LP 2 · Agências de Marketing e Eventos
+  </div>
+</footer>
+
+</body>
+</html>

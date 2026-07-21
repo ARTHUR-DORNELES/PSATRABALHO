@@ -1,0 +1,502 @@
+[
+  {
+    "cnpj": "53113791000122",
+    "cnpj_raw": "53113791000122",
+    "razao": "TOTVS S.A.",
+    "nomes": "TOTVS",
+    "enderecos": "AV BRAZ LEME 1000, CASA VERDE - SÃO PAULO/SP | AV BRAZ LEME 1000 - SÃO PAULO/SP | AV BRAZ LEME 1000, SAO PAULO/SP",
+    "deals_count": 5,
+    "sum_amount": 116001.01,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "9287895000161",
+    "cnpj_raw": "09287895000161",
+    "razao": "Thermo Fisher",
+    "nomes": "Thermo Fisher",
+    "enderecos": "",
+    "deals_count": 4,
+    "sum_amount": 18700,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "62931522000164",
+    "cnpj_raw": "62931522000164",
+    "razao": "CENTRAL DAS COOPERATIVAS DE CREDITO DO ESTADO DE SAO PAULO - SICOOB CENTRAL CECRESP",
+    "nomes": "Sicoob Cecresp",
+    "enderecos": "a definir | PC ALFREDO ISSA 48 18 AND CJ 181/182 01.033-040 STA EFIGENIA SAO PAULO SP | PC ALFREDO ISSA 48 18 AND CJ 181/182 CEP\n01.033-040 STA EFIGENIA SAO PAULO SP",
+    "deals_count": 3,
+    "sum_amount": 31017.5,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "1404158000190",
+    "cnpj_raw": "01404158000190",
+    "razao": "Pearson Education do Brasil Ltda",
+    "nomes": "Pearson Education do Brasil Ltda",
+    "enderecos": "Av. José Luiz Mazzali, nº 450, Sala A, Setor M03B-GLP Louveira I, Santo Antônio, Município de Louveira/SP, CEP 13.294-002",
+    "deals_count": 2,
+    "sum_amount": 45505.04,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "59952259000185",
+    "cnpj_raw": "59952259000185",
+    "razao": "Assembleia Legislativa do Estado de Sao Paulo",
+    "nomes": "ALESP | Alesp",
+    "enderecos": "Logradouro: Avenida Pedro Alvares Cabral, S/N\n\nComplemento: 2 Andar Sala2170\n\nBairro: V Mariana\n\nCEP: 04097-900\n\nMunicípio: São Paulo\n\nEstado: São Paulo",
+    "deals_count": 2,
+    "sum_amount": 43515,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "10461302000110",
+    "cnpj_raw": "10461302000110",
+    "razao": "SOLIDES TECNOLOGIA SA",
+    "nomes": "Solides",
+    "enderecos": "Avenida Paulista, 2278, Bela Vista, São Paulo, SP, CEP 01310-300",
+    "deals_count": 2,
+    "sum_amount": 29700,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "18627195000160",
+    "cnpj_raw": "18627195000160",
+    "razao": "Master Ind. E Comercio Ltda.",
+    "nomes": "Master Industria e Comercio",
+    "enderecos": "Rua Pataxos, 980, Galpao 05 - Pataxos - Embu das Artes - UF: SP - CEP: 06833-073",
+    "deals_count": 2,
+    "sum_amount": 22016,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "43708379000100",
+    "cnpj_raw": "43708379000100",
+    "razao": "FAST SHOP S.A",
+    "nomes": "Fast Shop",
+    "enderecos": "Avenida Zaki Narchi, 1650, Nível Sobreloja, Carandiru, São Paulo",
+    "deals_count": 2,
+    "sum_amount": 21560,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "26109297000111",
+    "cnpj_raw": "26109297000111",
+    "razao": "NORTIS INCORPORADORA E CONSTRUTORA S/A",
+    "nomes": "Grupo Nortis",
+    "enderecos": "Rua Mourato Coelho, 936, 6º andar - Pinheiros/ São Paulo - SP | RUA MOURATO COLEHO, 936 - 6 ANDAR - PINHEIROS - SÃO PAULO - SP CEP 05417-001",
+    "deals_count": 2,
+    "sum_amount": 21080,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "40432544000147",
+    "cnpj_raw": "40432544000147",
+    "razao": "CLARO S.A",
+    "nomes": "Claro",
+    "enderecos": "a definir | R HENRI DUNANT NÚMERO\n780 TORRE A E TORRE B CEP\n04.709-110 SANTO AMARO SP",
+    "deals_count": 2,
+    "sum_amount": 18700,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "47698553000123",
+    "cnpj_raw": "47698553000123",
+    "razao": "MOB COMUNICACAO EVENTOS E MARKETING LTDA",
+    "nomes": "Azul Viagens",
+    "enderecos": "RUA ATICA 119 CJ 113 CEP: 04634-040 JD BRASIL -ZONA SUL /SP",
+    "deals_count": 2,
+    "sum_amount": 18000,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "48114367000162",
+    "cnpj_raw": "48.114.367/0001-62",
+    "razao": "MDS CORRETORA E ADMINISTRADORA DE SEGUROS S.A.",
+    "nomes": "MDS Group | Fast Shop",
+    "enderecos": "AV DRA RUTH CARDOSO, 8501, ANDAR 29 ESCRITORIO 291 EDIF ELDORADO BUSINESS TO, PINHEIROS, SAO PAULO/SP. 05.425-070 | AV DRA RUTH CARDOSO, 8501, ANDAR 29 ESCRITORIO 291 EDIF ELDORADO BUSINESS TO, PINHEIROS, SÃO PAULO/SP",
+    "deals_count": 2,
+    "sum_amount": 16550,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "65849838000108",
+    "cnpj_raw": "65849838000108",
+    "razao": "PENSKE LOGISTICS DO BRASIL LTDA",
+    "nomes": "PENSKE",
+    "enderecos": "Av. das Nacoes Unidas, 11.541 - 17 Andar Sao Paulo, SP - 04578-907 - Brazil",
+    "deals_count": 2,
+    "sum_amount": 12180,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "19540550000121",
+    "cnpj_raw": "19540550000121",
+    "razao": "Asaas Gestão Financeira Instituição de Pagamento S.A.",
+    "nomes": "Asaas Gestão Financeira Instituição de Pagamento S.A.",
+    "enderecos": "Transamérica Expo Center // Av. Dr. Mário Vilas Boas Rodrigues, 387 - Santo Amaro, São Paulo - SP, 04757-020",
+    "deals_count": 1,
+    "sum_amount": 24310,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "3779133000104",
+    "cnpj_raw": " 03.779.133/0001-04",
+    "razao": "Serviço Social da Indústria - SESI/DR SP",
+    "nomes": "SESI SP",
+    "enderecos": "AVENIDA PAULISTA 133 - 01311-923",
+    "deals_count": 1,
+    "sum_amount": 23725,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "49576416000141",
+    "cnpj_raw": "49.576.416/0001-41",
+    "razao": "PREFEITURA MUNICIPAL DE PENÁPOLIS - SP",
+    "nomes": "",
+    "enderecos": "AV MARGINAL MARIA CHICA 1400, centro - Penápolis - SP",
+    "deals_count": 1,
+    "sum_amount": 22500,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "48101590000175",
+    "cnpj_raw": "48101590000175",
+    "razao": "Opia Marketing LTDA",
+    "nomes": "Opia Marketing",
+    "enderecos": "Rua Cardeal Arcoverde, 2811. Bloco 603. Pinheiros. Sao Paulo / SP. CEP: 05407-002",
+    "deals_count": 1,
+    "sum_amount": 20050,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "27796415000170",
+    "cnpj_raw": "27796415000170",
+    "razao": "SHELL ENERGY DO BRASIL LTDA",
+    "nomes": "Shell",
+    "enderecos": "AV BRIGADEIRO FARIA LIMA 3311 COMPLEMENTO CONJ 82\n\nCEP: 04.538-133 - ITAIM BIBI - SAO PAULO",
+    "deals_count": 1,
+    "sum_amount": 16000,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "61409892000173",
+    "cnpj_raw": "61409892000173",
+    "razao": "Companhia Brasileira de Aluminio",
+    "nomes": "CBA",
+    "enderecos": "Logradouro: Avenida Engenheiro Luiz Carlos Berrini 105, 105\nComplemento: Andar 14 Conj 141\nBairro: Cidade Moncoes\nCEP: 04571-900\nMunicípio: São Paulo",
+    "deals_count": 1,
+    "sum_amount": 15750,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "65086480000109",
+    "cnpj_raw": "65.086.480/0001-09",
+    "razao": "MOTIVARE MARKETING DE INCENTIVOS LTDA",
+    "nomes": "Itaú",
+    "enderecos": "AV BRIG FARIA LIMA, 4055 - ANDAR 4 SALA 4-111- CEP: 04.538-133 – ITAIM BIBI – SÃO PAULO SP,",
+    "deals_count": 1,
+    "sum_amount": 13500,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "10772872000121",
+    "cnpj_raw": "10772872000121",
+    "razao": "B Holding Participacoes LTDA (Casa do Celular)",
+    "nomes": "Casa do Celular",
+    "enderecos": "Al. Rio Negro, 585 - Alphaville, Barueri - SP, 06454-000",
+    "deals_count": 1,
+    "sum_amount": 13500,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "60259934000174",
+    "cnpj_raw": "60.259.934/0001-74",
+    "razao": "Federação das Empresas de Transporte de Carga do Estado de São Paulo",
+    "nomes": "Fetcesp",
+    "enderecos": "R ORLANDO MONTEIRO 1 - Vl Maria - São Paulo/RS - CEP 02121-900",
+    "deals_count": 1,
+    "sum_amount": 12200,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "1961898000399",
+    "cnpj_raw": "01.961.898/0003-99",
+    "razao": "CARGILL ALIMENTOS LTDA CAMPINAS - SP",
+    "nomes": "Cargill",
+    "enderecos": "Av. Bailaria Selma Parada,505       Jd. Madalena  CEP: 13091-605",
+    "deals_count": 1,
+    "sum_amount": 12000,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "8517560000120",
+    "cnpj_raw": "08517560000120",
+    "razao": "XR LIVE MKT",
+    "nomes": "XR Live MKT",
+    "enderecos": "Endereço: Rua Charles, 226 - Sala 9 \n\nChácara Klabin\n\nSão Paulo - SP CEP 04118-050",
+    "deals_count": 1,
+    "sum_amount": 12000,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "27231185000100",
+    "cnpj_raw": "27231185000100",
+    "razao": "DIMENSA S.A",
+    "nomes": "Dimensa",
+    "enderecos": "R DESEMBARGADOR EUCLIDES DA SILVEIRA 232 CEP 02.511-010 CASA VERDE SAO PAULO SP",
+    "deals_count": 1,
+    "sum_amount": 11636.5,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "45751427000160",
+    "cnpj_raw": "45751427000160",
+    "razao": "Camara Municipal de Paulinia",
+    "nomes": "Camara municipal paulinia",
+    "enderecos": "Rua Carlos Pazetti, 290 Jd. Vista Alegre, Paulínia-SP",
+    "deals_count": 1,
+    "sum_amount": 11028.93,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "7954091000143",
+    "cnpj_raw": "07.954.091/0001-43",
+    "razao": "MERCK SHARP AND DOHME SAUDE ANIMAL LTDA",
+    "nomes": "Merck",
+    "enderecos": "R CORONEL BENTO SOARES, 530, ITAGACABA - CRUZEIRO/SP 12.730-340",
+    "deals_count": 1,
+    "sum_amount": 10319.85,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "4176513002403",
+    "cnpj_raw": "04.176.513/0024-03",
+    "razao": "CKBR BEBIDAS LTDA",
+    "nomes": "Heineken",
+    "enderecos": "Rua Olimpíadas, 205. \nAndar 6 Sala Eisenbahn\n04.551-000\nVila Olimpia\nSão Paulo/SP",
+    "deals_count": 1,
+    "sum_amount": 9000,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "48424807000188",
+    "cnpj_raw": "48424807000188",
+    "razao": "EDITORA ALIANCA DIVERGENTE LTDA",
+    "nomes": "ALIANÇA DIVERGENTE",
+    "enderecos": "Rua Salviano José da Silva, 400 - Eldorado, São José dos Campos/ SP - 12.238-573",
+    "deals_count": 1,
+    "sum_amount": 9000,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "33200056000149",
+    "cnpj_raw": "33.200.056/0001-49",
+    "razao": "LOJAS RIACHUELO SA",
+    "nomes": "Riachuelo",
+    "enderecos": "Rua Lemos Monteiro 120 Andar 15/Parte/16/17/18 Edif Pinheirosone\nButanta - São Paulo SP",
+    "deals_count": 1,
+    "sum_amount": 8600,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "11137051031065",
+    "cnpj_raw": "11137051031065",
+    "razao": "BOTICÁRIO PRODUTOS DE BELEZA LTDA",
+    "nomes": "Boticário",
+    "enderecos": "Rua Olimpiadas, 205, Vila Olimpia - São Paulo - SP",
+    "deals_count": 1,
+    "sum_amount": 8500,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "13013480000177",
+    "cnpj_raw": "13013480000177",
+    "razao": "AVANTGARDE BRASIL COMUNICAÇÃO LTDA",
+    "nomes": "Karoline Machado",
+    "enderecos": "Rua Prof. José Leite e Oiticica, nº 530\nVila Gertrudes - São Paulo – SP\nCEP: 04750-080",
+    "deals_count": 1,
+    "sum_amount": 8500,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "52429206000135",
+    "cnpj_raw": "52429206000135",
+    "razao": "Enplan Engenharia e Construtora Ltda.",
+    "nomes": "Enplan Empreendimentos",
+    "enderecos": "Avenida Ibirapuera, 2144 - 6º andar - Moema - São Paulo-SP - CEP: 04028-001",
+    "deals_count": 1,
+    "sum_amount": 7200,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "45780175000105",
+    "cnpj_raw": "45780175000105",
+    "razao": "VCTEX INTERMEDIAÇÃO E CONSULTORIA LTDA",
+    "nomes": "Vctex",
+    "enderecos": "Avenida Andromeda - 885 - sala 1802 - Green Valley  Alphaville  - CEP 06.473-000 - Barueri - SP",
+    "deals_count": 1,
+    "sum_amount": 7100,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "28258237000196",
+    "cnpj_raw": "28.258.237/0001-96",
+    "razao": "Escola de Educacao Inf., Ensino Fund. e Medio Sao Paulo",
+    "nomes": "Escola São Paulo",
+    "enderecos": "Rua Verônicas, 176, Centro, Holambra",
+    "deals_count": 1,
+    "sum_amount": 7065,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "46604799000126",
+    "cnpj_raw": "46604799000126",
+    "razao": "A.c.e.j.b. Associacao Comercial e Empresarial de Jose Bonifacio",
+    "nomes": "Associação Comercial e Empresarial de José Bonifácio",
+    "enderecos": "Av. Campos Sales, 827 Bairro: Centro - José Bonifácio/SP",
+    "deals_count": 1,
+    "sum_amount": 6300,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "8184082000183",
+    "cnpj_raw": "08184082000183",
+    "razao": "Timlog Logistica LTDA",
+    "nomes": "Timlog Logística",
+    "enderecos": "Logradouro: Rodovia Sp 107 Km 27,5, S/N\n\nComplemento: Box A03-Mz55/56/63-69\n\nBairro: Veiling\n\nCEP: 13833-585\n\nMunicípio: Santo Antônio de Posse\n\nEstado: São Paulo",
+    "deals_count": 1,
+    "sum_amount": 5850,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "22076315000155",
+    "cnpj_raw": "22076315000155",
+    "razao": "Pro Vinte e Dois Consultoria em Gestao LTDA",
+    "nomes": "Uol",
+    "enderecos": "Logradouro: Avenida Irai, 280\nComplemento: Conj 903\nBairro: Indianopolis\nCEP: 04082-000\nMunicípio: São Paulo\nEstado: São Paulo",
+    "deals_count": 1,
+    "sum_amount": 5760,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "42632634000107",
+    "cnpj_raw": "42632634000107",
+    "razao": "Galeria Estrategia e Comunicacao LTDA",
+    "nomes": "GALERIA AG",
+    "enderecos": "Para correspondência:\nGaleria Estrategia e Comunicacao LTDA\nRua Mourato Coelho 1404 Andar 5 e 7\nPinheiros\nSão Paulo SP\n05417-002",
+    "deals_count": 1,
+    "sum_amount": 5686.2,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "93655173000633",
+    "cnpj_raw": "93.655.173/0006-33",
+    "razao": "META SERVICOS EM INFORMATICA S/A",
+    "nomes": "Meta e Soluções Empresariais",
+    "enderecos": "Rua Arizona, 491 - sala 142 - 14° andar - Ed. Itaporanga Cidade Monções- São Paulo/SP – CEP: 04.567-001",
+    "deals_count": 1,
+    "sum_amount": 5610,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "54375647022953",
+    "cnpj_raw": "54.375.647.0229-53",
+    "razao": "Drogal Farmacêutica Ltda",
+    "nomes": "Drogal Farmacêutica",
+    "enderecos": "Rua Governador Pedro de Toledo, nº 926, Centro, Piracicaba - SP",
+    "deals_count": 1,
+    "sum_amount": 5400,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "58160789000128",
+    "cnpj_raw": "58160789000128",
+    "razao": "Safra",
+    "nomes": "Safra",
+    "enderecos": "",
+    "deals_count": 1,
+    "sum_amount": 5350,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "15759157000172",
+    "cnpj_raw": "15759157000172",
+    "razao": "Supera RX Medicamentos LTDA",
+    "nomes": "Supera Rx Medicamentos",
+    "enderecos": "R. Alexandre de Gusmao, 278 - Vila Socorro -Sao Paulo - SP, 04760-020",
+    "deals_count": 1,
+    "sum_amount": 4890,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "40166794000182",
+    "cnpj_raw": "40166794000182",
+    "razao": "I-Systems Soluções de Infraestruturas S.A.",
+    "nomes": "Info Systems",
+    "enderecos": "Avenida Doutor Chucri Zaidan, nº 296, 22º andar, Condomínio Torre Z, Vila Cordeiro – São Paulo/SP, CEP 04583-110",
+    "deals_count": 1,
+    "sum_amount": 4500,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "61064929000179",
+    "cnpj_raw": "61064929000179",
+    "razao": "CORTEVA AGRISCIENCE DO BRASIL LTDA",
+    "nomes": "Corteva",
+    "enderecos": "AV TAMBORE 267 CEP\n06.460-000 TAMBORE BARUERI SP",
+    "deals_count": 1,
+    "sum_amount": 4500,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "7921077000143",
+    "cnpj_raw": "07.921.077/0001-43",
+    "razao": "Sob Medida Comunicação, Ltda",
+    "nomes": "SOB Medida Comunicação e Sustentabilidade",
+    "enderecos": "R. dona Elisa, 4 - Barra Funda, São Paulo - SP",
+    "deals_count": 1,
+    "sum_amount": 4500,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "26280013000155",
+    "cnpj_raw": "26280013000155",
+    "razao": "Agrivitta Insumos Agrícolas Ltda",
+    "nomes": "Agência DGC",
+    "enderecos": "Rua João Pessoa, 816 • Andar Superior (salas 5 a 8) Centro • CEP 15990020 • Matão-SP",
+    "deals_count": 1,
+    "sum_amount": 4100,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "60922168000186",
+    "cnpj_raw": " 60.922.168/0001-86",
+    "razao": "Associação Congregação de Santa Catarina",
+    "nomes": "Rede Santa Catarina",
+    "enderecos": "Avenida Paulista, 200, Bela Vista, São Paulo/SP",
+    "deals_count": 1,
+    "sum_amount": 3781,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "7007165002501",
+    "cnpj_raw": "07007165002501",
+    "razao": "Gdm Genetica do Brasil S. A.",
+    "nomes": "GDM",
+    "enderecos": "Logradouro: Avenida Selma Parada, 505\nComplemento: Sala 901 902 903 e 904\nBairro: Jardim Madalena\nCEP: 13091-605\nMunicípio: Campinas\nEstado: São Paulo",
+    "deals_count": 1,
+    "sum_amount": 3700,
+    "sp_detected": true
+  },
+  {
+    "cnpj": "97837181000147",
+    "cnpj_raw": "97837181000147",
+    "razao": "Dexco S.A.",
+    "nomes": "Dexco",
+    "enderecos": "Av. Paulista, 1938 - Bela Vista - SP - CEP: 01310-942",
+    "deals_count": 1,
+    "sum_amount": 3150,
+    "sp_detected": true
+  }
+]

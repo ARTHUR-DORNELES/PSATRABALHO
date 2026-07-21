@@ -1,0 +1,154 @@
+{
+  "lastUpdated": "2026-05-18T21:41:32.732Z",
+  "source": "hubspot-live",
+  "benchmark": {
+    "openRate": 22,
+    "clickRate": 2.5,
+    "formConversion": 15
+  },
+  "segments": [
+    {
+      "id": "212906384156",
+      "name": "Ex-TBW (corte 2)",
+      "rawName": "[PSA] Pesquisa - Inovação - Base de ex cadastrados no TBW (2)",
+      "delivered": 2949,
+      "opens": 55,
+      "clicks": 6,
+      "openRate": 1.87,
+      "clickRate": 0.2,
+      "publishedAt": "2026-05-14T20:28:47Z",
+      "updatedAt": "2026-05-14T20:32:54.426Z",
+      "description": "Segmentação inferida: contatos que já se cadastraram no TBW em edições anteriores (corte 2).",
+      "badge": {
+        "label": "Base fria",
+        "kind": "r"
+      },
+      "form": {
+        "id": "snap-form-tbs",
+        "name": "Formulário - The Best School",
+        "views": 22,
+        "submissions": 0,
+        "spam": 6,
+        "pageLocations": [
+          "LP 1",
+          "LP 2"
+        ],
+        "pageLocationsCount": 2,
+        "updatedAt": "2026-05-10T22:56:00-03:00",
+        "shared": true
+      }
+    },
+    {
+      "id": "212889545576",
+      "name": "Ex-TBW (corte 1)",
+      "rawName": "[PSA] Pesquisa - Inovação - Base de ex cadastrados no TBW",
+      "delivered": 2714,
+      "opens": 43,
+      "clicks": 4,
+      "openRate": 1.58,
+      "clickRate": 0.15,
+      "publishedAt": "2026-05-14T20:04:21Z",
+      "updatedAt": "2026-05-14T20:08:42.446Z",
+      "description": "Segmentação inferida: contatos que já se cadastraram no TBW em edições anteriores (corte 1).",
+      "badge": {
+        "label": "Base fria",
+        "kind": "r"
+      },
+      "form": {
+        "id": "snap-form-tbs",
+        "name": "Formulário - The Best School",
+        "views": 22,
+        "submissions": 0,
+        "spam": 6,
+        "pageLocations": [
+          "LP 1",
+          "LP 2"
+        ],
+        "pageLocationsCount": 2,
+        "updatedAt": "2026-05-10T22:56:00-03:00",
+        "shared": true
+      }
+    },
+    {
+      "id": "212964219821",
+      "name": "Agência de Marketing",
+      "rawName": "[PSA] Pesquisa - Inovação - Agencia de Marketing",
+      "delivered": 649,
+      "opens": 91,
+      "clicks": 5,
+      "openRate": 14.02,
+      "clickRate": 0.77,
+      "publishedAt": "2026-05-15T16:57:04Z",
+      "updatedAt": "2026-05-15T17:00:37.601Z",
+      "description": "Segmentação inferida: contatos com tipo de empresa / persona = Agência de Marketing.",
+      "badge": {
+        "label": "Melhor performance",
+        "kind": "g"
+      },
+      "form": {
+        "id": "snap-form-agencia",
+        "name": "Inovação | Agência",
+        "views": 3,
+        "submissions": 0,
+        "spam": 0,
+        "pageLocations": [],
+        "updatedAt": "2026-05-15T13:47:00-03:00"
+      }
+    },
+    {
+      "id": "212956321965",
+      "name": "Associações e CDL",
+      "rawName": "[PSA] Pesquisa - Inovação - Associações e CDL",
+      "delivered": 83,
+      "opens": 5,
+      "clicks": 1,
+      "openRate": 6.02,
+      "clickRate": 1.21,
+      "publishedAt": "2026-05-15T16:49:17Z",
+      "updatedAt": "2026-05-15T16:55:10.855Z",
+      "description": "Segmentação inferida: contatos vinculados a associações empresariais e CDLs.",
+      "badge": {
+        "label": "Volume baixo",
+        "kind": "a"
+      },
+      "form": {
+        "id": "snap-form-cdl",
+        "name": "Inovação | CDL",
+        "views": 16,
+        "submissions": 0,
+        "spam": 0,
+        "pageLocations": [],
+        "updatedAt": "2026-05-15T13:46:00-03:00"
+      }
+    },
+    {
+      "id": "212964220234",
+      "name": "Outros",
+      "rawName": "[PSA] Pesquisa - Inovação - Outros",
+      "delivered": 38,
+      "opens": 5,
+      "clicks": 0,
+      "openRate": 13.16,
+      "clickRate": 0,
+      "publishedAt": "2026-05-15T18:56:54Z",
+      "updatedAt": "2026-05-15T19:02:59.121Z",
+      "description": "Segmentação inferida: contatos que não se enquadram nos demais segmentos (residual da pesquisa).",
+      "badge": {
+        "label": "Volume baixo",
+        "kind": "a"
+      },
+      "form": {
+        "id": "snap-form-outros",
+        "name": "Inovação | Outros",
+        "views": 2,
+        "submissions": 0,
+        "spam": 0,
+        "pageLocations": [],
+        "updatedAt": "2026-05-15T13:46:00-03:00"
+      }
+    }
+  ],
+  "warnings": [
+    "Forms não puxados: Private App sem scope `forms`. Adicione em HubSpot > Settings > Private Apps > Scopes."
+  ]
+}

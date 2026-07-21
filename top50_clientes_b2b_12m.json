@@ -1,0 +1,714 @@
+{
+  "generated_at": "2026-05-26T22:22:53.534Z",
+  "window_start": "2025-05-26T22:22:44.753Z",
+  "pipelines_b2b": [
+    "807706157",
+    "881019761",
+    "883258246",
+    "default"
+  ],
+  "total_companies": 594,
+  "total_revenue_brl": 9809738.39,
+  "top50": [
+    {
+      "rank": 1,
+      "company_id": 41914831030,
+      "name": "SEBRAE/RR",
+      "domain": "sebrae.com.br",
+      "tipo_de_empresa": "Sistema S",
+      "segmento": "Serviços Profissionais",
+      "sum_amount_brl": 188644.82,
+      "deal_count": 35,
+      "last_closedate": "2026-05-15T21:14:37.015Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 2,
+      "company_id": 33667334259,
+      "name": "Sedec MT",
+      "domain": "sedec.mt.gov.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": null,
+      "sum_amount_brl": 187227.66,
+      "deal_count": 1,
+      "last_closedate": "2025-05-30T00:00:00Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 3,
+      "company_id": 54003331346,
+      "name": "ASAAS",
+      "domain": "asaas.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Financeiro",
+      "sum_amount_brl": 121429,
+      "deal_count": 2,
+      "last_closedate": "2026-05-12T17:41:33.479Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 4,
+      "company_id": 53391926687,
+      "name": "Sescoop Nacional",
+      "domain": "somoscooperativismo.coop.br",
+      "tipo_de_empresa": "Órgão Público",
+      "segmento": null,
+      "sum_amount_brl": 113676.69,
+      "deal_count": 3,
+      "last_closedate": "2026-05-06T20:04:45.191Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 5,
+      "company_id": 33590105409,
+      "name": "SEST SENAT MT",
+      "domain": null,
+      "tipo_de_empresa": null,
+      "segmento": null,
+      "sum_amount_brl": 111983.67,
+      "deal_count": 1,
+      "last_closedate": "2025-09-24T19:03:34.953Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 6,
+      "company_id": 51690642186,
+      "name": "Nexxus",
+      "domain": "nexxusengenharia.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Energia e Utilities",
+      "sum_amount_brl": 104240,
+      "deal_count": 6,
+      "last_closedate": "2026-02-06T14:13:17.960Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 7,
+      "company_id": 39482095267,
+      "name": "Cordis",
+      "domain": "cordisbrasil.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Serviços Profissionais",
+      "sum_amount_brl": 101500,
+      "deal_count": 2,
+      "last_closedate": "2025-06-25T00:00:00Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 8,
+      "company_id": 35360304489,
+      "name": "Auster Nutrição Animal",
+      "domain": "austernutri.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Agronegócio",
+      "sum_amount_brl": 101039.17,
+      "deal_count": 3,
+      "last_closedate": "2025-10-17T19:40:02.524Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 9,
+      "company_id": 35717658463,
+      "name": "Cresol",
+      "domain": "cresol.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": null,
+      "sum_amount_brl": 100690,
+      "deal_count": 6,
+      "last_closedate": "2026-04-14T21:41:16.445Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 10,
+      "company_id": 33511563522,
+      "name": "Cartê Marketing",
+      "domain": "carte.marketing",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Serviços Profissionais",
+      "sum_amount_brl": 93640,
+      "deal_count": 2,
+      "last_closedate": "2025-09-03T12:31:26.211Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 11,
+      "company_id": 40173550262,
+      "name": "Banco do Brasil",
+      "domain": "bb.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Financeiro",
+      "sum_amount_brl": 90806.63,
+      "deal_count": 7,
+      "last_closedate": "2025-11-28T22:01:18.638Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 12,
+      "company_id": 41298714410,
+      "name": "Aurora",
+      "domain": "auroraalimentos.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Indústria",
+      "sum_amount_brl": 89729.06,
+      "deal_count": 10,
+      "last_closedate": "2025-10-10T19:12:09.162Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 13,
+      "company_id": 48256069180,
+      "name": "Santillana",
+      "domain": "santillana.com",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Educação",
+      "sum_amount_brl": 89600,
+      "deal_count": 2,
+      "last_closedate": "2026-01-19T20:00:31.852Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 14,
+      "company_id": 33080867100,
+      "name": "Bears Marketing",
+      "domain": "bearsmkt.com",
+      "tipo_de_empresa": "Agência de Eventos",
+      "segmento": "Mídia e Conteúdo",
+      "sum_amount_brl": 85560,
+      "deal_count": 4,
+      "last_closedate": "2026-02-10T21:17:37.091Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 15,
+      "company_id": 44107453188,
+      "name": "Unimed Ribeirão Preto / Unimed Nordeste Paulista",
+      "domain": "unimedribeirao.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": null,
+      "sum_amount_brl": 82450,
+      "deal_count": 3,
+      "last_closedate": "2026-05-06T20:50:38.495Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 16,
+      "company_id": 39150609987,
+      "name": "FUNDACAO DE ARTE DE NITEROI",
+      "domain": null,
+      "tipo_de_empresa": "Órgão Público",
+      "segmento": "Cultura, Esporte e Entretenimento",
+      "sum_amount_brl": 80000,
+      "deal_count": 1,
+      "last_closedate": "2025-08-29T20:48:27.184Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 17,
+      "company_id": 54662971669,
+      "name": "Grupo Salta Educação",
+      "domain": "gruposaltaedu.com",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Educação",
+      "sum_amount_brl": 78405,
+      "deal_count": 3,
+      "last_closedate": "2026-03-31T12:05:17.684Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 18,
+      "company_id": 35717648565,
+      "name": "TOTVS SÃO PAULO ",
+      "domain": "crescimento.com",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": null,
+      "sum_amount_brl": 75500.01,
+      "deal_count": 3,
+      "last_closedate": "2025-07-16T00:00:00Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 19,
+      "company_id": 37321364876,
+      "name": "Grupo Comolatti",
+      "domain": "comolatti.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Varejo e Comércio",
+      "sum_amount_brl": 69290,
+      "deal_count": 2,
+      "last_closedate": "2025-12-01T20:58:55.145Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 20,
+      "company_id": 35718272795,
+      "name": "BlueMint",
+      "domain": "bluemint.com.br",
+      "tipo_de_empresa": "Órgão Público",
+      "segmento": "Indústria",
+      "sum_amount_brl": 67559,
+      "deal_count": 5,
+      "last_closedate": "2026-04-24T19:48:23.131Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 21,
+      "company_id": 40958899305,
+      "name": "Secretaria de Estado de Educação de Minas Gerais",
+      "domain": "saogotardo.educacao.mg.gov.br",
+      "tipo_de_empresa": "Órgão Público",
+      "segmento": "Público / Governo",
+      "sum_amount_brl": 66988.75,
+      "deal_count": 5,
+      "last_closedate": "2025-08-13T18:23:34.748Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 22,
+      "company_id": 37219928389,
+      "name": "TOTVS",
+      "domain": "totvs.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": null,
+      "sum_amount_brl": 65501,
+      "deal_count": 3,
+      "last_closedate": "2025-06-27T03:00:00Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 23,
+      "company_id": 41062448264,
+      "name": "PEARSON",
+      "domain": "pearson.com",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Educação",
+      "sum_amount_brl": 58505.04,
+      "deal_count": 4,
+      "last_closedate": "2026-04-16T13:19:22.677Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 24,
+      "company_id": 35163701298,
+      "name": "Stone",
+      "domain": "stone.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Financeiro",
+      "sum_amount_brl": 54200,
+      "deal_count": 2,
+      "last_closedate": "2025-11-05T20:49:00.380Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 25,
+      "company_id": 51632640596,
+      "name": "Planfer",
+      "domain": "planfer.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Agronegócio",
+      "sum_amount_brl": 54000,
+      "deal_count": 1,
+      "last_closedate": "2026-03-31T17:19:57.333Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 26,
+      "company_id": 37071686556,
+      "name": "Prefeitura de Penápolis",
+      "domain": "penapolis.sp.gov.br",
+      "tipo_de_empresa": "Órgão Público",
+      "segmento": null,
+      "sum_amount_brl": 53186,
+      "deal_count": 3,
+      "last_closedate": "2025-07-16T03:00:00Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 27,
+      "company_id": 40965677143,
+      "name": "SEPLAG MT",
+      "domain": "seplag.mt.gov.br",
+      "tipo_de_empresa": "Órgão Público",
+      "segmento": "Público / Governo",
+      "sum_amount_brl": 52561.04,
+      "deal_count": 4,
+      "last_closedate": "2026-05-06T21:44:15.303Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 28,
+      "company_id": 33049994109,
+      "name": "Gav Resorts",
+      "domain": "gavresorts.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Alimentação e Hospitalidade",
+      "sum_amount_brl": 50724,
+      "deal_count": 1,
+      "last_closedate": "2026-01-16T13:46:24.334Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 29,
+      "company_id": 33598334000,
+      "name": "Seja Alta Performance",
+      "domain": "sejaap.com.br",
+      "tipo_de_empresa": "Agência de Eventos",
+      "segmento": "Serviços Profissionais",
+      "sum_amount_brl": 50060,
+      "deal_count": 1,
+      "last_closedate": "2025-11-19T16:38:28.235Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 30,
+      "company_id": 43147717189,
+      "name": "ITAÚ UNIBANCO",
+      "domain": "itaubba.com",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Financeiro",
+      "sum_amount_brl": 48000,
+      "deal_count": 2,
+      "last_closedate": "2026-01-29T13:56:24.526Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 31,
+      "company_id": 41128109239,
+      "name": "Sicoob Cecresp",
+      "domain": "cecrespcorretora.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Financeiro",
+      "sum_amount_brl": 47017.5,
+      "deal_count": 4,
+      "last_closedate": "2025-12-23T23:03:31.717Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 32,
+      "company_id": 45942602124,
+      "name": "Citibank ",
+      "domain": "corporateportal.brazil.citibank.com",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Financeiro",
+      "sum_amount_brl": 46800,
+      "deal_count": 2,
+      "last_closedate": "2025-08-13T18:54:20.518Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 33,
+      "company_id": 33591653758,
+      "name": "SEST SENAT Nacional ",
+      "domain": "sestsenat.org.br",
+      "tipo_de_empresa": "Sistema S",
+      "segmento": "Serviços Profissionais",
+      "sum_amount_brl": 45848.94,
+      "deal_count": 6,
+      "last_closedate": "2026-01-19T21:28:59.956Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 34,
+      "company_id": 33511039891,
+      "name": "Roque Assessoria",
+      "domain": "roqueassessoria.com.br",
+      "tipo_de_empresa": "Agência de Palestrantes",
+      "segmento": null,
+      "sum_amount_brl": 45000,
+      "deal_count": 1,
+      "last_closedate": "2025-08-26T16:33:51.850Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 35,
+      "company_id": 33796801134,
+      "name": "Studio 7 produtora",
+      "domain": null,
+      "tipo_de_empresa": "Agência de Eventos",
+      "segmento": "Mídia e Conteúdo",
+      "sum_amount_brl": 44951.38,
+      "deal_count": 1,
+      "last_closedate": "2025-11-05T14:17:58.226Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 36,
+      "company_id": 53528776296,
+      "name": "UOL",
+      "domain": "uolinc.com",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Mídia e Conteúdo",
+      "sum_amount_brl": 44708.09,
+      "deal_count": 7,
+      "last_closedate": "2026-05-06T13:28:30.037Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 37,
+      "company_id": 49899017823,
+      "name": "Sindilojas Blumenau",
+      "domain": "sindilojasblumenau.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Varejo e Comércio",
+      "sum_amount_brl": 43000,
+      "deal_count": 1,
+      "last_closedate": "2026-02-11T13:48:35.262Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 38,
+      "company_id": 40528361331,
+      "name": "OAB RS",
+      "domain": "oabrs.org.br",
+      "tipo_de_empresa": "Órgão Público",
+      "segmento": "Terceiro Setor",
+      "sum_amount_brl": 42850,
+      "deal_count": 4,
+      "last_closedate": "2026-05-15T13:03:50.612Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 39,
+      "company_id": 40528361491,
+      "name": "Sicoob Uni",
+      "domain": "unisicoob.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": null,
+      "sum_amount_brl": 42500,
+      "deal_count": 1,
+      "last_closedate": "2025-06-06T00:00:00Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 40,
+      "company_id": 38224561760,
+      "name": "Prefeitura Municipal de Dois Vizinhos",
+      "domain": null,
+      "tipo_de_empresa": "Órgão Público",
+      "segmento": "Público / Governo",
+      "sum_amount_brl": 41123.04,
+      "deal_count": 2,
+      "last_closedate": "2025-06-04T03:00:00Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 41,
+      "company_id": 53768387640,
+      "name": "Equipe 10",
+      "domain": null,
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": null,
+      "sum_amount_brl": 40860.05,
+      "deal_count": 1,
+      "last_closedate": "2026-02-25T18:45:39.522Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 42,
+      "company_id": 48609677944,
+      "name": "Opia Marketing",
+      "domain": "opiamarketing.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": null,
+      "sum_amount_brl": 40450,
+      "deal_count": 3,
+      "last_closedate": "2026-01-29T18:53:29.999Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 43,
+      "company_id": 33512795017,
+      "name": "NSG Pilkington",
+      "domain": "br.nsg.com",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": null,
+      "sum_amount_brl": 40367.31,
+      "deal_count": 1,
+      "last_closedate": "2025-09-05T19:38:49.439Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 44,
+      "company_id": 50927585543,
+      "name": "Onlog",
+      "domain": "onlogexpress.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": null,
+      "sum_amount_brl": 39700,
+      "deal_count": 1,
+      "last_closedate": "2026-02-23T20:34:14.939Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 45,
+      "company_id": 35059279030,
+      "name": "Petrobras",
+      "domain": "petrobras.com.br",
+      "tipo_de_empresa": "Órgão Público",
+      "segmento": "Mineração e Extração",
+      "sum_amount_brl": 39670.45,
+      "deal_count": 3,
+      "last_closedate": "2026-04-24T19:35:23.503Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 46,
+      "company_id": 35274834049,
+      "name": "Tim Brasil",
+      "domain": "tim.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Tecnologia e Comunicação",
+      "sum_amount_brl": 38950,
+      "deal_count": 3,
+      "last_closedate": "2025-11-10T14:07:58.898Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 47,
+      "company_id": 33078907289,
+      "name": "Alvo Eventos",
+      "domain": "alvoeventos.com.br",
+      "tipo_de_empresa": "Agência de Eventos",
+      "segmento": "Serviços Administrativos",
+      "sum_amount_brl": 38950,
+      "deal_count": 2,
+      "last_closedate": "2026-01-20T21:00:05.690Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 48,
+      "company_id": 32983921997,
+      "name": "ALE Combustíveis",
+      "domain": "ale.com.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": null,
+      "sum_amount_brl": 38100,
+      "deal_count": 1,
+      "last_closedate": "2026-01-15T18:49:47.493Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 49,
+      "company_id": 33077512459,
+      "name": "Bracell",
+      "domain": "bracell.com",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Indústria",
+      "sum_amount_brl": 38070,
+      "deal_count": 2,
+      "last_closedate": "2026-01-19T18:55:57.307Z",
+      "pipelines": [
+        "default"
+      ]
+    },
+    {
+      "rank": 50,
+      "company_id": 37217696908,
+      "name": "Fecomércio-RS",
+      "domain": "fecomercio-rs.org.br",
+      "tipo_de_empresa": "Empresa Privada",
+      "segmento": "Terceiro Setor",
+      "sum_amount_brl": 37500,
+      "deal_count": 2,
+      "last_closedate": "2026-03-09T21:12:25.459Z",
+      "pipelines": [
+        "default"
+      ]
+    }
+  ]
+}

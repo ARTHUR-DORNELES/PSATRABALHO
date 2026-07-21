@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0C0C12;
+  --card: #131320;
+  --border: #1E1E2E;
+  --muted: #2A2A38;
+  --subtle: #9090A8;
+  --accent: #F5C842;
+}
+
+html, body {
+  background: var(--bg);
+  color: #fff;
+  font-family: Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.card {
+  @apply bg-card border border-border rounded-xl p-6;
+}
+
+.card-title {
+  @apply text-sm font-semibold uppercase tracking-wider text-subtle mb-4;
+}
+
+.metric-value {
+  @apply text-4xl font-black tabular-nums leading-none;
+}
+
+.metric-sub {
+  @apply text-subtle text-xs mt-1;
+}

@@ -1,0 +1,34 @@
+============================================================
+SANITIZAÇÃO DE E-MAIL ROBUSTA — corrige typos que travam o HubSpot
+(gmail.comi, gmail.vom, .con, .co, gmial.com, etc.)
+Aplicar nos nós "Não existe - Cria o contato" E "Não existe - Cria o contato1".
+============================================================
+
+OPÇÃO A — se o seu nó usa o IIFE com `const fixEmail = ...`:
+substitua TODA a função fixEmail por esta:
+
+  const fixEmail = raw => {
+    let e = String(raw||'').trim().toLowerCase().replace(/\s+/g,'');
+    const at = e.lastIndexOf('@'); if (at < 1) return e;
+    let u = e.slice(0,at), d = e.slice(at+1);
+    d = d.replace(/^(gmial|gmai|gmaill)\./,'gmail.');
+    d = d.replace(/^(gmail|hotmail|outlook|live|icloud)\.[a-z.]+$/,'$1.com');
+    d = d.replace(/\.(con|vom|comi|copm|cmo|ocm|c0m|om|cim)$/,'.com');
+    d = d.replace(/^yahoo\.(con|cm|vom)$/,'yahoo.com');
+    return u + '@' + d;
+  };
+
+============================================================
+OPÇÃO B — se o seu nó NÃO tem fixEmail (manda o e-mail cru, como no erro):
+no campo de e-mail E no "id" do upsert, troque
+  {{ $('Webhook').item.json.body.Customer.email }}
+por ESTA expressão (cole começando do {{, SEM "=" na frente):
+
+{{ (() => { let e=String($('Webhook').item.json.body.Customer.email||'').trim().toLowerCase().replace(/\s+/g,''); const at=e.lastIndexOf('@'); if(at<1) return e; let u=e.slice(0,at), d=e.slice(at+1); d=d.replace(/^(gmial|gmai|gmaill)\./,'gmail.').replace(/^(gmail|hotmail|outlook|live|icloud)\.[a-z.]+$/,'$1.com').replace(/\.(con|vom|comi|copm|cmo|ocm|c0m|om|cim)$/,'.com').replace(/^yahoo\.(con|cm|vom)$/,'yahoo.com'); return u+'@'+d; })() }}
+
+============================================================
+Observação: provedores gmail/hotmail/outlook/live/icloud são SEMPRE .com,
+então qualquer TLD errado vira .com. Yahoo tem .com.br, por isso só corrige
+os erros óbvios (.con/.cm/.vom). Se mesmo assim o e-mail for irrecuperável,
+o HubSpot recusa — aí o ideal é um nó que pula a criação e loga, em vez de quebrar.
+============================================================

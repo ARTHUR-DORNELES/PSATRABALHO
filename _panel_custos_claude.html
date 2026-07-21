@@ -1,0 +1,493 @@
+<style>
+  :root{
+    --paper:#F5F6F8; --surface:#FFFFFF; --surface-2:#FBFBFC;
+    --ink:#16181D; --ink-soft:#565B66; --ink-faint:#8A909B;
+    --line:#E4E7EC; --line-soft:#EEF0F3;
+    --accent:#B85A32; --accent-soft:#F3E4DB;
+    --value:#2E7D63; --value-soft:#E1F0EA;
+    --spend:#B5443A; --spend-soft:#F6E3E1;
+    --idle:#B07C1E; --idle-soft:#F5EBD4;
+    --shadow:0 1px 2px rgba(20,24,34,.05),0 4px 16px rgba(20,24,34,.05);
+    --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#0E1014; --surface:#171A20; --surface-2:#1C2027;
+      --ink:#ECEEF2; --ink-soft:#9AA1AD; --ink-faint:#6C737F;
+      --line:#282C34; --line-soft:#21252C;
+      --accent:#D97B4E; --accent-soft:#33241C;
+      --value:#54BE94; --value-soft:#16281F;
+      --spend:#E0685C; --spend-soft:#2C1B19;
+      --idle:#D6A94A; --idle-soft:#2A2413;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.28);
+    }
+  }
+  :root[data-theme="light"]{
+    --paper:#F5F6F8; --surface:#FFFFFF; --surface-2:#FBFBFC;
+    --ink:#16181D; --ink-soft:#565B66; --ink-faint:#8A909B;
+    --line:#E4E7EC; --line-soft:#EEF0F3;
+    --accent:#B85A32; --accent-soft:#F3E4DB;
+    --value:#2E7D63; --value-soft:#E1F0EA;
+    --spend:#B5443A; --spend-soft:#F6E3E1;
+    --idle:#B07C1E; --idle-soft:#F5EBD4;
+    --shadow:0 1px 2px rgba(20,24,34,.05),0 4px 16px rgba(20,24,34,.05);
+  }
+  :root[data-theme="dark"]{
+    --paper:#0E1014; --surface:#171A20; --surface-2:#1C2027;
+    --ink:#ECEEF2; --ink-soft:#9AA1AD; --ink-faint:#6C737F;
+    --line:#282C34; --line-soft:#21252C;
+    --accent:#D97B4E; --accent-soft:#33241C;
+    --value:#54BE94; --value-soft:#16281F;
+    --spend:#E0685C; --spend-soft:#2C1B19;
+    --idle:#D6A94A; --idle-soft:#2A2413;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.28);
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+    line-height:1.55;-webkit-font-smoothing:antialiased;font-size:15px}
+  .wrap{max-width:1120px;margin:0 auto;padding:32px 22px 80px}
+  .num{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+
+  header.top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:20px}
+  .brandmark{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .brandmark .dot{width:8px;height:8px;border-radius:2px;background:var(--accent)}
+  h1{font-size:clamp(26px,4vw,38px);line-height:1.08;letter-spacing:-.025em;font-weight:660;
+    margin:10px 0 8px;text-wrap:balance;max-width:20ch}
+  .sub{color:var(--ink-soft);max-width:60ch;font-size:14.5px}
+  .meta-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chip{font-family:var(--mono);font-size:11.5px;padding:4px 9px;border:1px solid var(--line);
+    border-radius:100px;color:var(--ink-soft);background:var(--surface)}
+  .chip b{color:var(--ink)}
+  .rightctrl{display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+  .themebtn{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);
+    border-radius:9px;padding:8px 12px;font-family:var(--mono);font-size:12px;cursor:pointer;white-space:nowrap}
+  .themebtn:hover{color:var(--ink);border-color:var(--ink-faint)}
+  .fxbox{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);
+    border-radius:10px;padding:8px 12px;font-size:12.5px;color:var(--ink-soft);white-space:nowrap}
+  .fxbox label{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
+  .fxbox input{width:60px;font-family:var(--mono);font-size:15px;font-weight:640;border:1px solid var(--line);
+    background:var(--surface-2);color:var(--ink);border-radius:6px;padding:3px 7px;text-align:right}
+
+  .scope{display:flex;gap:12px;align-items:flex-start;background:var(--idle-soft);
+    border:1px solid color-mix(in srgb,var(--idle) 40%,transparent);border-radius:12px;
+    padding:13px 16px;margin-bottom:26px;font-size:13.5px;color:var(--ink)}
+  .scope .ic{color:var(--idle);font-family:var(--mono);font-weight:700;flex:none;margin-top:1px}
+  .scope b{color:var(--ink)}
+
+  .hero{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:16px}
+  .hero>div{background:var(--surface);padding:22px 24px}
+  .hero .k-label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-faint);display:flex;align-items:center;gap:7px}
+  .hero .k-big{font-family:var(--mono);font-weight:640;letter-spacing:-.03em;line-height:1;margin-top:12px}
+  .k-primary .k-big{font-size:clamp(32px,5vw,52px);color:var(--accent)}
+  .k-big.sm{font-size:clamp(26px,3.6vw,36px)}
+  .k-note{color:var(--ink-soft);font-size:13px;margin-top:9px}
+  .k-note .num{color:var(--ink)}
+  .k-usd{font-family:var(--mono);font-size:13px;color:var(--ink-faint);margin-top:6px}
+  .ratio-tag{display:inline-block;font-family:var(--mono);font-size:12px;font-weight:600;
+    padding:3px 8px;border-radius:6px;background:var(--value-soft);color:var(--value);margin-top:10px}
+
+  section{margin-top:40px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;border-bottom:1px solid var(--line);padding-bottom:10px}
+  .sec-head h2{font-size:19px;letter-spacing:-.015em;font-weight:640;margin:0}
+  .sec-head .n{font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:600}
+  .sec-head .hint{margin-left:auto;font-size:12.5px;color:var(--ink-faint)}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+  .mbar-row{display:grid;grid-template-columns:150px 1fr auto;gap:14px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line-soft)}
+  .mbar-row:last-child{border-bottom:0}
+  .mbar-name{font-size:13.5px;font-weight:550}
+  .mbar-name span{display:block;font-family:var(--mono);font-size:11px;color:var(--ink-faint);font-weight:400;margin-top:1px}
+  .mbar-track{height:24px;background:var(--surface-2);border-radius:6px;overflow:hidden;position:relative}
+  .mbar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--accent),color-mix(in srgb,var(--accent) 62%,var(--paper)))}
+  .mbar-val{font-family:var(--mono);font-size:13.5px;text-align:right;min-width:96px}
+  .mbar-val b{color:var(--ink)}
+  .mbar-val span{display:block;font-size:11px;color:var(--ink-faint)}
+
+  #dailyChart{width:100%;height:220px;display:block}
+  .chart-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-size:12.5px;color:var(--ink-soft)}
+  .chart-legend span{display:inline-flex;align-items:center;gap:6px}
+  .lg-sw{width:11px;height:11px;border-radius:3px;flex:none}
+
+  .stat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:16px}
+  .stat-strip>div{background:var(--surface);padding:15px 16px}
+  .stat-strip .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+  .stat-strip .v{font-family:var(--mono);font-size:24px;font-weight:620;letter-spacing:-.02em;margin-top:6px}
+  .stat-strip .d{font-size:12px;color:var(--ink-soft);margin-top:4px}
+
+  .req-row{display:grid;grid-template-columns:26px 1fr 90px 64px;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line-soft)}
+  .req-row:last-child{border-bottom:0}
+  .req-rank{font-family:var(--mono);font-size:12px;color:var(--ink-faint)}
+  .req-name{font-size:13.5px;font-weight:520}
+  .req-name em{font-style:normal;color:var(--ink-faint);font-family:var(--mono);font-size:11px;margin-left:6px}
+  .req-track{height:8px;background:var(--surface-2);border-radius:100px;overflow:hidden}
+  .req-fill{height:100%;background:var(--ink-soft);border-radius:100px;opacity:.55}
+  .req-n{font-family:var(--mono);font-size:13px;text-align:right}
+
+  .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px}
+  .plan{border:1.5px solid var(--line);border-radius:12px;padding:15px;cursor:pointer;background:var(--surface);transition:border-color .15s,background .15s;position:relative}
+  .plan:hover{border-color:var(--ink-faint)}
+  .plan.on{border-color:var(--accent);background:var(--accent-soft)}
+  .plan .pn{font-size:14px;font-weight:600}
+  .plan .pp{font-family:var(--mono);font-size:19px;font-weight:640;margin-top:8px;letter-spacing:-.02em}
+  .plan .pp small{font-size:11px;color:var(--ink-faint);font-weight:400}
+  .plan .usd-sm{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-top:3px}
+  .plan input{width:88px;font-family:var(--mono);font-size:17px;font-weight:640;border:1px solid var(--line);
+    background:var(--surface-2);color:var(--ink);border-radius:6px;padding:2px 5px;margin-top:6px}
+  .plan .pd{font-size:11.5px;color:var(--ink-soft);margin-top:7px;line-height:1.4}
+  .plan .badge{position:absolute;top:-9px;right:10px;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;
+    text-transform:uppercase;background:var(--accent);color:#fff;padding:2px 7px;border-radius:5px;font-weight:600}
+  .verdict{margin-top:16px;background:var(--value-soft);border:1px solid color-mix(in srgb,var(--value) 35%,transparent);
+    border-radius:12px;padding:16px 18px}
+  .verdict .big{font-family:var(--mono);font-size:20px;font-weight:640;color:var(--value);letter-spacing:-.02em}
+  .verdict .txt{font-size:13.5px;color:var(--ink);margin-top:6px;line-height:1.5}
+
+  .tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);background:var(--surface)}
+  table{border-collapse:collapse;width:100%;min-width:860px;font-size:13.5px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line-soft)}
+  th{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);
+    font-weight:600;background:var(--surface-2);position:sticky;top:0}
+  td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+  tbody tr:last-child td{border-bottom:0}
+  tr.me{background:color-mix(in srgb,var(--accent-soft) 55%,transparent)}
+  tr.me td:first-child{font-weight:600}
+  .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;padding:2px 7px;border-radius:5px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-soft)}
+  .pos{color:var(--value);font-weight:600}
+  .neg{color:var(--spend);font-weight:600}
+  td [contenteditable],td select.cell{border:1px dashed var(--line);border-radius:5px;padding:2px 6px;min-width:56px;
+    display:inline-block;font-family:var(--mono);background:transparent;color:var(--ink);font-size:13px}
+  td [contenteditable]:focus{outline:none;border-color:var(--accent);border-style:solid;background:var(--surface-2)}
+  .addrow{margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .addbtn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:9px;padding:8px 14px;
+    font-size:13px;cursor:pointer;font-family:var(--mono)}
+  .addbtn:hover{border-color:var(--accent);color:var(--accent)}
+
+  .fine{font-size:12px;color:var(--ink-faint);margin-top:10px;line-height:1.5}
+  .fine code{font-family:var(--mono);background:var(--surface-2);padding:1px 5px;border-radius:4px;font-size:11px}
+  footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-faint);line-height:1.6}
+
+  @media (max-width:760px){
+    .hero{grid-template-columns:1fr}
+    .grid2{grid-template-columns:1fr}
+    .stat-strip{grid-template-columns:1fr 1fr}
+    .mbar-row{grid-template-columns:110px 1fr auto}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="brandmark"><span class="dot"></span>PSA · Telemetria de Custos Claude</div>
+      <h1>Quanto se paga, consome e deixa na mesa no Claude</h1>
+      <p class="sub">Custo × valor de Claude e Claude Code, em reais. Valores reais reconstruídos dos logs de <b>uma conta/máquina</b>; consumo medido em <b>valor-equivalente de API</b> — o que os mesmos tokens custariam no pay-as-you-go da Anthropic.</p>
+      <div class="meta-chips" id="metaChips"></div>
+    </div>
+    <div class="rightctrl">
+      <button class="themebtn" id="themeBtn">◐ tema</button>
+      <div class="fxbox"><label>US$→R$</label><input id="fx" type="number" value="5.40" step="0.01" class="num"></div>
+    </div>
+  </header>
+
+  <div class="scope">
+    <span class="ic">i</span>
+    <div><b>Escopo:</b> os números reais são de <b>UMA conta (esta máquina)</b> — não do grupo PSA inteiro. É o único log ao qual tenho acesso local. O uso das <b>demais contas PSA</b>, o preço real do plano e o faturamento ficam no Console da Anthropic (admin) e não consigo consultar daqui. <b>Divisão disponível:</b> por modelo, por dia e por tipo de request — <b>não</b> por pessoa (só há um usuário aqui). Para o time todo, use as linhas editáveis da tabela 05 com os números do Console. Câmbio no topo (edite) → tudo recalcula.</div>
+  </div>
+
+  <div class="hero" id="hero"></div>
+  <div class="stat-strip" id="statStrip"></div>
+
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>Consumo por modelo</h2>
+      <span class="hint">valor-equivalente de API · período completo</span></div>
+    <div class="card"><div id="modelBars"></div></div>
+    <p class="fine">Preços por 1M tokens: Opus 4.8/4.7 <code>US$5 in / US$25 out</code> · Sonnet 5/4.6 <code>US$3 / US$15</code> · Haiku 4.5 <code>US$1 / US$5</code> · Fable 5 <code>US$10 / US$50</code>. Leitura de cache ≈ <code>0,1×</code> e escrita ≈ <code>1,25×</code> do preço de entrada. O cache barateia bastante o custo real.</p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>Uso e ociosidade por dia</h2>
+      <span class="hint" id="dailyHint"></span></div>
+    <div class="card">
+      <canvas id="dailyChart"></canvas>
+      <div class="chart-legend">
+        <span><span class="lg-sw" style="background:var(--accent)"></span>valor consumido no dia (R$)</span>
+        <span><span class="lg-sw" style="background:var(--idle)"></span>dia ocioso (plano pago, sem uso)</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>Principais requests</h2>
+      <span class="hint">o que a conta mais executa · nº de chamadas</span></div>
+    <div class="grid2">
+      <div class="card"><div id="reqList"></div></div>
+      <div class="card">
+        <div id="reqCats"></div>
+        <p class="fine" style="margin-top:16px">Total de <b class="num" id="totalCalls"></b> chamadas de ferramenta em <b class="num" id="totalPrompts"></b> mensagens suas. Edição de arquivos e terminal dominam — perfil de <b>engenharia/automação</b> (dashboards, scripts n8n/HubSpot), não de chat.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="n">04</span><h2>Comparador de planos</h2>
+      <span class="hint">clique num plano · edite o preço se precisar</span></div>
+    <div class="card">
+      <div class="plans" id="planCards"></div>
+      <div class="verdict" id="verdict"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="n">05</span><h2>Contas por usuário — gasto e ociosidade</h2>
+      <span class="hint">linha 1 = dados reais · demais = editáveis</span></div>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr>
+          <th>Usuário</th><th>Plano</th><th class="num">Custo plano/mês</th>
+          <th class="num">Valor consumido</th><th class="num">Dias ativos</th>
+          <th class="num">Uso médio/dia</th><th class="num">Dias ociosos</th>
+          <th class="num">R$ pago sem uso</th><th class="num">ROI</th>
+        </tr></thead>
+        <tbody id="userRows"></tbody>
+      </table>
+    </div>
+    <div class="addrow">
+      <button class="addbtn" id="addUser">+ adicionar usuário PSA</button>
+      <span class="fine" style="margin:0">Preencha “Valor consumido (R$)” e “Dias ativos” de cada conta a partir do Console; ROI, uso/dia e R$ ocioso recalculam.</span>
+    </div>
+    <p class="fine"><b>“R$ pago sem uso”</b> = fração do plano paga em dias sem nenhuma sessão (custo diário do plano × dias ociosos) — o “quanto deixa de usar por dia” numa assinatura fixa. <b>ROI</b> = valor-equivalente consumido ÷ custo do plano no período.</p>
+  </section>
+
+  <footer id="foot"></footer>
+</div>
+
+<script>
+const DATA = {"range":{"first":"2026-04-28","last":"2026-07-15","spanDays":79,"activeDays":54},"totals":{"in":2388068,"out":47316219,"cacheR":10593077208,"cacheW":533343598,"msgs":27614},"totalTok":11176125093,"totalUSD":9324.292943449998,"sessions":41,"userPrompts":2018,"modelCost":{"claude-haiku-4-5-20251001":{"in":3569,"out":19489,"cacheR":4210182,"cacheW":643599,"msgs":142,"usd":1.32653095},"claude-sonnet-5":{"in":182045,"out":2953849,"cacheR":1325007711,"cacheW":49059471,"msgs":3185,"usd":626.3291995500001},"<synthetic>":{"in":0,"out":0,"cacheR":0,"cacheW":0,"msgs":31,"usd":0},"claude-opus-4-8":{"in":2164825,"out":31924009,"cacheR":5843535044,"cacheW":345685310,"msgs":14564,"usd":5891.2250595},"claude-opus-4-7":{"in":18574,"out":10289510,"cacheR":3235393967,"cacheW":127109316,"msgs":7752,"usd":2669.4608285},"claude-sonnet-4-6":{"in":3326,"out":2057603,"cacheR":181309244,"cacheW":10543491,"msgs":1891,"usd":124.80488745000002},"claude-fable-5":{"in":15729,"out":71759,"cacheR":3621060,"cacheW":302411,"msgs":49,"usd":11.1464375}},"byDay":{"2026-07-15":{"in":18022,"out":1028238,"cacheR":515902254,"cacheW":18795452,"msgs":1132},"2026-07-13":{"in":89203,"out":696953,"cacheR":138201461,"cacheW":4220843,"msgs":637},"2026-07-14":{"in":6158,"out":724734,"cacheR":259165257,"cacheW":9541973,"msgs":828},"2026-06-02":{"in":190778,"out":1223966,"cacheR":203696173,"cacheW":9961336,"msgs":975},"2026-06-03":{"in":161059,"out":2405898,"cacheR":340179259,"cacheW":20868694,"msgs":1151},"2026-06-04":{"in":604,"out":73252,"cacheR":14925640,"cacheW":5569232,"msgs":44},"2026-06-05":{"in":490715,"out":3199531,"cacheR":838186469,"cacheW":39532061,"msgs":1794},"2026-06-08":{"in":239326,"out":3779463,"cacheR":822631770,"cacheW":32788650,"msgs":1722},"2026-06-09":{"in":58569,"out":1481907,"cacheR":407703186,"cacheW":17304216,"msgs":937},"2026-06-10":{"in":131777,"out":1240462,"cacheR":166350760,"cacheW":17474143,"msgs":737},"2026-06-11":{"in":74137,"out":2027833,"cacheR":472276319,"cacheW":26131347,"msgs":857},"2026-06-12":{"in":86643,"out":1998515,"cacheR":379925251,"cacheW":30295197,"msgs":1018},"2026-06-16":{"in":158764,"out":2264795,"cacheR":250546307,"cacheW":18142828,"msgs":775},"2026-04-28":{"in":172,"out":101967,"cacheR":7496954,"cacheW":172219,"msgs":102},"2026-04-30":{"in":623,"out":675616,"cacheR":95972342,"cacheW":1725348,"msgs":388},"2026-05-04":{"in":872,"out":507362,"cacheR":258098130,"cacheW":4739910,"msgs":438},"2026-05-05":{"in":787,"out":522675,"cacheR":181265328,"cacheW":6311249,"msgs":372},"2026-05-06":{"in":6,"out":366,"cacheR":0,"cacheW":176816,"msgs":1},"2026-05-07":{"in":867,"out":562729,"cacheR":137734480,"cacheW":3202771,"msgs":372},"2026-05-08":{"in":460,"out":182353,"cacheR":128129233,"cacheW":3645763,"msgs":215},"2026-05-11":{"in":1364,"out":894373,"cacheR":285379128,"cacheW":5761836,"msgs":700},"2026-05-12":{"in":1450,"out":840717,"cacheR":501760551,"cacheW":6434911,"msgs":845},"2026-05-13":{"in":470,"out":194639,"cacheR":172008598,"cacheW":2033949,"msgs":195},"2026-05-14":{"in":1069,"out":772518,"cacheR":112876739,"cacheW":2685433,"msgs":659},"2026-05-15":{"in":1526,"out":666842,"cacheR":232236494,"cacheW":5039513,"msgs":533},"2026-05-21":{"in":483,"out":238634,"cacheR":87256944,"cacheW":3606565,"msgs":233},"2026-05-27":{"in":274,"out":295049,"cacheR":41460484,"cacheW":3659429,"msgs":124},"2026-05-28":{"in":284,"out":161282,"cacheR":110198998,"cacheW":9404165,"msgs":149},"2026-06-01":{"in":66,"out":33323,"cacheR":40868381,"cacheW":4465049,"msgs":51},"2026-06-15":{"in":121479,"out":3105053,"cacheR":395718310,"cacheW":20895089,"msgs":946},"2026-06-30":{"in":55670,"out":804487,"cacheR":255919693,"cacheW":16530286,"msgs":610},"2026-07-03":{"in":67079,"out":1266269,"cacheR":213496657,"cacheW":14084496,"msgs":1121},"2026-07-08":{"in":10089,"out":621964,"cacheR":168980181,"cacheW":8707492,"msgs":584},"2026-07-10":{"in":2015,"out":240687,"cacheR":108552783,"cacheW":3182611,"msgs":195},"2026-06-25":{"in":2326,"out":473705,"cacheR":48717165,"cacheW":4383484,"msgs":368},"2026-06-26":{"in":2599,"out":202001,"cacheR":35622647,"cacheW":2663994,"msgs":114},"2026-05-29":{"in":4,"out":352,"cacheR":47192,"cacheW":24856,"msgs":2},"2026-07-01":{"in":23561,"out":1430897,"cacheR":191681209,"cacheW":19152596,"msgs":549},"2026-05-18":{"in":988,"out":678471,"cacheR":43719627,"cacheW":2649081,"msgs":324},"2026-05-19":{"in":3184,"out":663169,"cacheR":55687139,"cacheW":6345394,"msgs":355},"2026-05-20":{"in":458,"out":415385,"cacheR":102423749,"cacheW":7182687,"msgs":268},"2026-05-22":{"in":97,"out":63316,"cacheR":24126155,"cacheW":1375545,"msgs":57},"2026-06-29":{"in":48540,"out":699807,"cacheR":160254078,"cacheW":11231082,"msgs":261},"2026-06-17":{"in":24946,"out":774843,"cacheR":176956340,"cacheW":9719643,"msgs":400},"2026-06-19":{"in":74164,"out":1374194,"cacheR":356581626,"cacheW":23888314,"msgs":731},"2026-06-23":{"in":61383,"out":1254857,"cacheR":114391932,"cacheW":10034226,"msgs":300},"2026-06-24":{"in":41146,"out":776828,"cacheR":86190327,"cacheW":6049102,"msgs":360},"2026-06-18":{"in":1604,"out":41365,"cacheR":14296947,"cacheW":1868641,"msgs":25},"2026-06-22":{"in":14853,"out":649823,"cacheR":206166335,"cacheW":13747265,"msgs":333},"2026-07-02":{"in":10931,"out":783496,"cacheR":133488016,"cacheW":3986209,"msgs":295},"2026-07-06":{"in":5571,"out":772223,"cacheR":140471478,"cacheW":11259072,"msgs":530},"2026-07-07":{"in":98109,"out":911197,"cacheR":231603211,"cacheW":11051044,"msgs":572},"2026-07-09":{"in":258,"out":113425,"cacheR":99444132,"cacheW":6296726,"msgs":129},"2026-05-26":{"in":486,"out":402413,"cacheR":26107389,"cacheW":3343765,"msgs":201}},"dayCost":{"2026-07-15":446.9736729055164,"2026-07-13":119.47948165475508,"2026-07-14":224.79347347629226,"2026-06-02":179.43577709557343,"2026-06-03":303.3656040204637,"2026-06-04":17.160585064162042,"2026-06-05":735.3634253341746,"2026-06-08":717.0341138023041,"2026-06-09":355.87087078777125,"2026-06-10":154.51083357856143,"2026-06-11":417.5775081478437,"2026-06-12":343.98847727452466,"2026-06-16":226.1905766540903,"2026-04-28":6.483641605652194,"2026-04-30":82.07382472559009,"2026-05-04":219.7110164667025,"2026-05-05":156.93273399462026,"2026-05-06":0.14782876930205618,"2026-05-07":118.05481221757992,"2026-05-08":110.09301140182063,"2026-05-11":243.64757263394003,"2026-05-12":424.69245221745643,"2026-05-13":145.3672836340781,"2026-05-14":97.05946271074005,"2026-05-15":198.51809444543053,"2026-05-21":76.00734294515152,"2026-05-27":37.89014180103866,"2026-05-28":99.92026826796555,"2026-06-01":37.84974727362541,"2026-06-15":350.2743995281294,"2026-06-30":228.02391269531574,"2026-07-03":190.98442873233128,"2026-07-08":148.7729735470792,"2026-07-10":93.42384428103202,"2026-06-25":44.6992723417505,"2026-06-26":32.113420694058554,"2026-05-29":0.06040699264366705,"2026-07-01":177.11308134050407,"2026-05-18":39.252503699616305,"2026-05-19":52.30997107021876,"2026-05-20":91.79209709674167,"2026-05-22":21.329092217633235,"2026-06-29":143.69521283826828,"2026-06-17":156.41190514432628,"2026-06-19":318.63620542743274,"2026-06-23":104.90746520887042,"2026-06-24":77.63822245262361,"2026-06-18":13.52287419843459,"2026-06-22":184.02947759356886,"2026-07-02":115.35817695450194,"2026-07-06":127.23841796179553,"2026-07-07":203.2896378218982,"2026-07-09":88.3149339744455,"2026-05-26":24.907374730051462},"byTool":{"WebFetch":32,"Bash":3104,"Glob":110,"Grep":485,"Read":1826,"WebSearch":16,"AskUserQuestion":87,"ToolSearch":186,"EnterPlanMode":2,"Agent":9,"ScheduleWakeup":15,"Write":827,"ExitPlanMode":2,"TaskCreate":67,"TaskUpdate":125,"Edit":3192,"mcp__Claude_Browser__preview_start":18,"mcp__Claude_Browser__preview_logs":30,"mcp__Claude_Browser__read_page":21,"mcp__Claude_Browser__navigate":54,"mcp__Claude_Browser__get_page_text":32,"mcp__Claude_Browser__read_console_messages":6,"mcp__Claude_Browser__computer":27,"mcp__Claude_Browser__find":3,"mcp__Claude_Browser__javascript_tool":45,"mcp__Claude_Browser__preview_stop":10,"mcp__Claude_Browser__preview_list":2,"mcp__Claude_Browser__form_input":2,"mcp__Claude_Browser__read_network_requests":5,"mcp__6ff435d4-a031-4da2-9c95-d686f83d3cd4__whoami":8,"mcp__6ff435d4-a031-4da2-9c95-d686f83d3cd4__get_metadata":2,"mcp__2d891e17-b0ee-45ce-b159-c5e47ec9500f__search_crm_objects":285,"mcp__2d891e17-b0ee-45ce-b159-c5e47ec9500f__search_properties":80,"mcp__2d891e17-b0ee-45ce-b159-c5e47ec9500f__tool_guidance":20,"mcp__2d891e17-b0ee-45ce-b159-c5e47ec9500f__query_crm_data":322,"Skill":14,"PowerShell":493,"mcp__visualize__read_me":7,"mcp__visualize__show_widget":14,"mcp__ccd_session__mark_chapter":11,"TaskStop":7,"mcp__Claude_Preview__preview_list":15,"mcp__Claude_Preview__preview_eval":501,"mcp__Claude_Preview__preview_start":69,"mcp__Claude_Preview__preview_screenshot":54,"mcp__Claude_Preview__preview_console_logs":57,"mcp__Claude_Preview__preview_snapshot":35,"mcp__Claude_Preview__preview_click":10,"TodoWrite":284,"mcp__bf7c680d-5fdc-5ef4-b4a0-abadb619bf0a__add_repo":1,"mcp__2d891e17-b0ee-45ce-b159-c5e47ec9500f__get_properties":23,"mcp__Claude_in_Chrome__navigate":7,"mcp__mcp-registry__list_connectors":1,"mcp__2d891e17-b0ee-45ce-b159-c5e47ec9500f__get_organization_details":1,"mcp__Claude_Preview__preview_stop":13,"mcp__Claude_Preview__preview_inspect":18,"mcp__Claude_Preview__preview_logs":34,"mcp__2d891e17-b0ee-45ce-b159-c5e47ec9500f__get_user_details":2,"mcp__ccd_session_mgmt__list_sessions":2,"mcp__ccd_session_mgmt__search_session_transcripts":5,"mcp__2d891e17-b0ee-45ce-b159-c5e47ec9500f__get_campaign_analytics":1,"mcp__Claude_in_Chrome__list_connected_browsers":2,"mcp__Claude_in_Chrome__select_browser":1,"mcp__Claude_in_Chrome__tabs_context_mcp":2,"mcp__Claude_in_Chrome__browser_batch":17,"StructuredOutput":31,"Workflow":2,"mcp__Claude_in_Chrome__read_page":1,"mcp__plugin_figma_figma__whoami":1,"mcp__ccd_session_mgmt__list_events":4,"mcp__plugin_figma_figma__get_metadata":1,"mcp__plugin_figma_figma__get_design_context":5,"mcp__Claude_Browser__resize_window":1,"mcp__plugin_figma_figma__use_figma":8,"mcp__Claude_Preview__preview_resize":9,"mcp__Claude_Preview__preview_network":7,"mcp__2d891e17-b0ee-45ce-b159-c5e47ec9500f__get_crm_objects":3,"Artifact":7,"mcp__Claude_in_Chrome__javascript_tool":3,"mcp__mcp-registry__search_mcp_registry":1,"mcp__claude-in-chrome__navigate":11,"mcp__claude-in-chrome__get_page_text":12,"mcp__claude-in-chrome__computer":8,"mcp__claude-in-chrome__read_network_requests":3,"mcp__claude-in-chrome__tabs_context_mcp":1,"mcp__claude-in-chrome__tabs_create_mcp":1,"mcp__claude-in-chrome__javascript_tool":3},"byProject":{"C--Users-Usu-rio-Desktop-Claude-Code":{"in":2387390,"out":47309586,"cacheR":10592069049,"cacheW":533181738,"msgs":27568},"C--WINDOWS-system32-hubspot-linkedin-dash":{"in":678,"out":6633,"cacheR":1008159,"cacheW":161860,"msgs":46}},"blendedRate":8.343046329438574e-7};
+</script>
+<script>
+(function(){
+  const D = DATA;
+  const fxEl = document.getElementById("fx");
+  const fx = () => parseFloat(fxEl.value)||5.40;
+
+  // BRL formatters (input is USD, converted at display)
+  const rBig = usd => "R$ "+(usd*fx()).toLocaleString("pt-BR",{maximumFractionDigits:0});
+  const r2   = usd => "R$ "+(usd*fx()).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+  const usdc = usd => "US$ "+usd.toLocaleString("en-US",{maximumFractionDigits:0});
+  const fmtInt = n => n.toLocaleString("pt-BR");
+  const fmtTok = n => n>=1e9?(n/1e9).toFixed(2)+"B":n>=1e6?(n/1e6).toFixed(1)+"M":n>=1e3?(n/1e3).toFixed(0)+"k":""+n;
+  const MODEL_LABEL={"claude-opus-4-8":"Opus 4.8","claude-opus-4-7":"Opus 4.7","claude-sonnet-5":"Sonnet 5",
+    "claude-sonnet-4-6":"Sonnet 4.6","claude-haiku-4-5-20251001":"Haiku 4.5","claude-fable-5":"Fable 5",
+    "<synthetic>":"sintético","unknown":"desconhecido"};
+
+  const totalTok=D.totalTok, totalUSD=D.totalUSD, months=D.range.spanDays/30.44;
+  const idleDays=D.range.spanDays-D.range.activeDays;
+  const dfmt=s=>{const[y,m,d]=s.split("-");return d+"/"+m+"/"+y.slice(2);};
+
+  // meta chips (static)
+  document.getElementById("metaChips").innerHTML=[
+    `período <b>${dfmt(D.range.first)} – ${dfmt(D.range.last)}</b>`,
+    `<b>${D.range.spanDays}</b> dias corridos`,`<b>${D.range.activeDays}</b> ativos`,
+    `<b>${fmtInt(D.sessions)}</b> sessões`,`<b>${fmtInt(D.totals.msgs)}</b> chamadas de modelo`,
+    `<b>${fmtTok(totalTok)}</b> tokens`
+  ].map(t=>`<span class="chip">${t}</span>`).join("");
+
+  const opus=(D.modelCost["claude-opus-4-8"]?.usd||0)+(D.modelCost["claude-opus-4-7"]?.usd||0);
+  const models=Object.entries(D.modelCost).filter(([m,v])=>v.usd>0.5).sort((a,b)=>b[1].usd-a[1].usd);
+  const maxM=models[0][1].usd;
+
+  function renderHero(){
+    document.getElementById("hero").innerHTML=`
+      <div class="k-primary">
+        <div class="k-label"><span class="lg-sw" style="width:8px;height:8px;border-radius:2px;background:var(--accent)"></span>Valor-equivalente consumido</div>
+        <div class="k-big">${rBig(totalUSD)}</div>
+        <div class="k-usd">${usdc(totalUSD)} · ≈ ${rBig(totalUSD/months)}/mês se fosse API</div>
+        <span class="ratio-tag" id="heroRatio">defina um plano ↓</span>
+      </div>
+      <div>
+        <div class="k-label">Uso médio / dia ativo</div>
+        <div class="k-big sm">${rBig(totalUSD/D.range.activeDays)}</div>
+        <div class="k-note"><span class="num">${rBig(totalUSD/D.range.spanDays)}</span> / dia corrido</div>
+      </div>
+      <div>
+        <div class="k-label">Dias ociosos</div>
+        <div class="k-big sm" style="color:var(--idle)">${idleDays}</div>
+        <div class="k-note"><span class="num">${(idleDays/D.range.spanDays*100).toFixed(0)}%</span> do período sem sessão</div>
+      </div>`;
+  }
+  function renderStrip(){
+    document.getElementById("statStrip").innerHTML=[
+      ["Leitura de cache",fmtTok(D.totals.cacheR),(D.totals.cacheR/totalTok*100).toFixed(0)+"% dos tokens — barateia o custo"],
+      ["Tokens de saída",fmtTok(D.totals.out),"o item mais caro por token"],
+      ["Modelo dominante","Opus",(opus/totalUSD*100).toFixed(0)+"% do valor consumido"],
+      ["Custo médio / sessão",rBig(totalUSD/D.sessions),fmtInt(Math.round(D.totals.msgs/D.sessions))+" chamadas/sessão"]
+    ].map(([l,v,d])=>`<div><div class="l">${l}</div><div class="v">${v}</div><div class="d">${d}</div></div>`).join("");
+  }
+  function renderModels(){
+    document.getElementById("modelBars").innerHTML=models.map(([m,v])=>{
+      const tok=v.in+v.out+v.cacheR+v.cacheW;
+      return `<div class="mbar-row">
+        <div class="mbar-name">${MODEL_LABEL[m]||m}<span>${fmtInt(v.msgs)} chamadas · ${fmtTok(tok)} tok</span></div>
+        <div class="mbar-track"><div class="mbar-fill" style="width:${Math.max(2,v.usd/maxM*100)}%"></div></div>
+        <div class="mbar-val"><b>${rBig(v.usd)}</b><span>${(v.usd/totalUSD*100).toFixed(1)}%</span></div></div>`;
+    }).join("");
+  }
+
+  // daily series
+  const first=new Date(D.range.first+"T00:00:00"), days=[];
+  for(let i=0;i<D.range.spanDays;i++){const dt=new Date(first);dt.setDate(dt.getDate()+i);
+    const key=dt.toISOString().slice(0,10);days.push({key,usd:D.dayCost[key]||0,active:!!D.byDay[key]});}
+  const maxDay=Math.max(...days.map(d=>d.usd),1);
+  document.getElementById("dailyHint").innerHTML=`${D.range.activeDays} dias com uso · ${idleDays} ociosos · pico ${rBig(maxDay)}`;
+  const cv=document.getElementById("dailyChart");
+  const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  function drawChart(){
+    const dpr=window.devicePixelRatio||1,W=cv.clientWidth,H=220;
+    cv.width=W*dpr;cv.height=H*dpr;const ctx=cv.getContext("2d");ctx.scale(dpr,dpr);ctx.clearRect(0,0,W,H);
+    const padB=26,padT=10,padL=4,padR=4,plotH=H-padB-padT,plotW=W-padL-padR;
+    const n=days.length,gap=2,bw=Math.max(2,(plotW-(n-1)*gap)/n);
+    const accent=css("--accent"),idle=css("--idle"),line=css("--line"),faint=css("--ink-faint");
+    ctx.strokeStyle=line;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(padL,padT+plotH+.5);ctx.lineTo(W-padR,padT+plotH+.5);ctx.stroke();
+    days.forEach((d,i)=>{const x=padL+i*(bw+gap);
+      if(d.active){const h=Math.max(2,d.usd/maxDay*plotH);ctx.fillStyle=accent;ctx.fillRect(x,padT+plotH-h,bw,h);}
+      else{ctx.fillStyle=idle;ctx.fillRect(x,padT+plotH-3,bw,3);}});
+    ctx.fillStyle=faint;ctx.font="11px ui-monospace,monospace";ctx.textAlign="center";const seen={};
+    days.forEach((d,i)=>{const mo=d.key.slice(0,7);if(!seen[mo]){seen[mo]=1;const x=padL+i*(bw+gap);
+      const lb=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"][+d.key.slice(5,7)-1];
+      ctx.fillText(lb,x+bw/2,H-8);}});
+  }
+
+  // requests
+  const TOOL_LABEL=t=>{
+    if(t.startsWith("mcp__2d891e17")||t.includes("crm"))return{n:t.replace(/^mcp__[^_]+__/,""),c:"HubSpot / CRM"};
+    if(t.startsWith("mcp__Claude_Preview")||t.startsWith("mcp__Claude_Browser")||t.startsWith("mcp__claude-in-chrome")||t.startsWith("mcp__Claude_in_Chrome"))return{n:t.replace(/^mcp__[^_]+__/,"").replace(/^Claude_?/i,""),c:"Preview / Browser"};
+    if(t.startsWith("mcp__plugin_figma")||t.startsWith("mcp__6ff435d4"))return{n:t.replace(/^mcp__[^_]+__/,""),c:"Figma"};
+    if(t.startsWith("mcp__"))return{n:t.replace(/^mcp__[^_]+__/,""),c:"Outros MCP"};
+    if(["Edit","Write","NotebookEdit"].includes(t))return{n:t,c:"Edição de arquivos"};
+    if(["Bash","PowerShell"].includes(t))return{n:t,c:"Terminal / shell"};
+    if(["Read","Grep","Glob"].includes(t))return{n:t,c:"Leitura & busca"};
+    if(["Task","TaskCreate","TaskUpdate","TaskStop","TodoWrite","ToolSearch"].includes(t))return{n:t,c:"Orquestração"};
+    return{n:t,c:"Núcleo"};};
+  const toolEntries=Object.entries(D.byTool).sort((a,b)=>b[1]-a[1]);
+  const totalCalls=toolEntries.reduce((s,[,v])=>s+v,0),maxTool=toolEntries[0][1];
+  document.getElementById("reqList").innerHTML=toolEntries.slice(0,14).map(([t,c],i)=>{const L=TOOL_LABEL(t);
+    return `<div class="req-row"><div class="req-rank">${(i+1).toString().padStart(2,"0")}</div>
+      <div class="req-name">${L.n}<em>${L.c}</em></div>
+      <div class="req-track"><div class="req-fill" style="width:${c/maxTool*100}%"></div></div>
+      <div class="req-n">${fmtInt(c)}</div></div>`;}).join("");
+  const cats={};toolEntries.forEach(([t,c])=>{const k=TOOL_LABEL(t).c;cats[k]=(cats[k]||0)+c;});
+  const catArr=Object.entries(cats).sort((a,b)=>b[1]-a[1]),maxCat=catArr[0][1];
+  document.getElementById("reqCats").innerHTML=`<div style="font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px">Por categoria</div>`+
+    catArr.map(([k,c])=>`<div class="req-row" style="grid-template-columns:150px 1fr 64px">
+      <div class="req-name">${k}</div><div class="req-track"><div class="req-fill" style="width:${c/maxCat*100}%;background:var(--accent);opacity:.75"></div></div>
+      <div class="req-n">${fmtInt(c)}</div></div>`).join("");
+  document.getElementById("totalCalls").textContent=fmtInt(totalCalls);
+  document.getElementById("totalPrompts").textContent=fmtInt(D.userPrompts);
+
+  // plans (prices in USD; displayed in BRL)
+  const plans=[
+    {id:"pro",n:"Pro",price:20,d:"1 usuário · uso leve"},
+    {id:"max5",n:"Max 5×",price:100,d:"5× o Pro · uso intenso"},
+    {id:"max20",n:"Max 20×",price:200,d:"20× o Pro · power user",rec:true},
+    {id:"team",n:"Team",price:30,d:"por usuário/mês (Premium)"},
+    {id:"api",n:"API",price:null,d:"pay-as-you-go = próprio consumo"}
+  ];
+  let selected="max20";
+  const planCards=document.getElementById("planCards");
+  function renderPlans(){
+    planCards.innerHTML=plans.map(p=>{
+      const priceHTML=p.id==="api"
+        ? `<div class="pp">${rBig(totalUSD/months)}<small>/mês</small></div><div class="usd-sm">${usdc(totalUSD/months)}/mês</div>`
+        : `<div class="pp"><input type="number" data-plan="${p.id}" value="${p.price}" step="1"> <small>US$/mês</small></div><div class="usd-sm">= ${rBig(p.price)}/mês</div>`;
+      return `<div class="plan ${selected===p.id?'on':''}" data-sel="${p.id}">
+        ${p.rec?'<span class="badge">típico power-user</span>':''}
+        <div class="pn">${p.n}</div>${priceHTML}<div class="pd">${p.d}</div></div>`;
+    }).join("");
+    planCards.querySelectorAll("[data-sel]").forEach(el=>{
+      el.addEventListener("click",e=>{if(e.target.tagName==="INPUT")return;selected=el.dataset.sel;renderPlans();renderVerdict();renderUsers();});});
+    planCards.querySelectorAll("input[data-plan]").forEach(inp=>{
+      inp.addEventListener("click",e=>e.stopPropagation());
+      inp.addEventListener("input",()=>{plans.find(x=>x.id===inp.dataset.plan).price=parseFloat(inp.value)||0;renderVerdict();renderUsers();renderPlans();});});
+  }
+  const planMonthlyUSD=()=>{const p=plans.find(x=>x.id===selected);return p.id==="api"?totalUSD/months:p.price;};
+  function renderVerdict(){
+    const pm=planMonthlyUSD(),planPeriod=pm*months,ratio=planPeriod>0?totalUSD/planPeriod:0;
+    const dayCost=pm/30.44,idleCost=dayCost*idleDays;
+    const v=document.getElementById("verdict"),tag=document.getElementById("heroRatio");
+    if(selected==="api"){
+      v.style.background="var(--spend-soft)";v.style.borderColor="color-mix(in srgb,var(--spend) 35%,transparent)";
+      v.innerHTML=`<div class="big" style="color:var(--spend)">API = ${rBig(totalUSD/months)}/mês (${usdc(totalUSD/months)})</div>
+        <div class="txt">No pay-as-you-go você paga exatamente o que consome — sem teto, sem desconto. É a <b>referência de valor</b>: qualquer assinatura abaixo disso te dá desconto sobre o uso real.</div>`;
+      tag.textContent="API = consumo cheio";tag.style.background="var(--spend-soft)";tag.style.color="var(--spend)";
+    }else{
+      const good=ratio>=1;
+      v.style.background=good?"var(--value-soft)":"var(--idle-soft)";
+      v.style.borderColor=good?"color-mix(in srgb,var(--value) 35%,transparent)":"color-mix(in srgb,var(--idle) 40%,transparent)";
+      v.innerHTML=`<div class="big" style="color:${good?'var(--value)':'var(--idle)'}">ROI ${ratio.toFixed(1)}× — ${good?'o plano se paga com folga':'plano subaproveitado'}</div>
+        <div class="txt">Plano <b>${plans.find(x=>x.id===selected).n}</b> = <span class="num">${rBig(pm)}</span>/mês (${usdc(pm)}). No período de ${D.range.spanDays} dias custaria <span class="num">${rBig(planPeriod)}</span>, contra <span class="num">${rBig(totalUSD)}</span> de valor consumido.
+        ${good?`Cada R$ 1 do plano rende <b>R$ ${ratio.toFixed(1)}</b> em uso.`:`Você usa menos do que o plano oferece — considere um tier abaixo.`}
+        <br>Custo diário do plano ≈ <span class="num">${r2(dayCost)}</span>; nos <b>${idleDays} dias ociosos</b> isso vira <span class="num">${r2(idleCost)}</span> pagos sem uso.</div>`;
+      tag.textContent=`ROI ${ratio.toFixed(1)}× vs ${plans.find(x=>x.id===selected).n}`;
+      tag.style.background=good?"var(--value-soft)":"var(--idle-soft)";tag.style.color=good?"var(--value)":"var(--idle)";
+    }
+  }
+
+  // users (consumed stored in USD internally)
+  const users=[{name:"Esta conta (relatório)",me:true,plan:"max20",consumedUSD:totalUSD,active:D.range.activeDays}];
+  const planUSD=id=>{const p=plans.find(x=>x.id===id);return p?(p.id==="api"?totalUSD/months:p.price):0;};
+  function renderUsers(){
+    users[0].plan=selected;
+    const tb=document.getElementById("userRows");
+    tb.innerHTML=users.map((u,i)=>{
+      const pm=planUSD(u.plan),planPeriod=pm*months,ratio=planPeriod>0?u.consumedUSD/planPeriod:0;
+      const perDay=u.active>0?u.consumedUSD/u.active:0,idle=Math.max(0,D.range.spanDays-u.active),idleCost=(pm/30.44)*idle;
+      const opts=plans.map(p=>`<option value="${p.id}" ${u.plan===p.id?'selected':''}>${p.n}</option>`).join("");
+      const roiCls=ratio>=1?"pos":"neg";
+      return `<tr class="${u.me?'me':''}" data-i="${i}">
+        <td>${u.me?u.name:`<span contenteditable data-f="name">${u.name}</span>`}</td>
+        <td><select data-f="plan" class="cell">${opts}</select></td>
+        <td class="num">${rBig(pm)}</td>
+        <td class="num">${u.me?rBig(u.consumedUSD):`R$ <span contenteditable data-f="consumedBRL">${Math.round(u.consumedUSD*fx())}</span>`}</td>
+        <td class="num">${u.me?u.active:`<span contenteditable data-f="active">${u.active}</span>`}</td>
+        <td class="num">${rBig(perDay)}</td>
+        <td class="num" style="color:var(--idle)">${idle}</td>
+        <td class="num">${r2(idleCost)}</td>
+        <td class="num ${roiCls}">${ratio.toFixed(1)}×</td></tr>`;
+    }).join("");
+    tb.querySelectorAll("tr").forEach(tr=>{const i=+tr.dataset.i;
+      tr.querySelectorAll("[contenteditable]").forEach(el=>{
+        el.addEventListener("blur",()=>{const f=el.dataset.f;
+          if(f==="name")users[i].name=el.textContent.trim();
+          else if(f==="consumedBRL"){const brl=parseFloat(el.textContent.replace(/[^\d.,]/g,"").replace(",","."))||0;users[i].consumedUSD=brl/fx();renderUsers();}
+          else{users[i][f]=parseFloat(el.textContent.replace(/[^\d.]/g,""))||0;renderUsers();}});
+        el.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();el.blur();}});});
+      const sel=tr.querySelector("select[data-f=plan]");
+      if(sel)sel.addEventListener("change",()=>{users[i].plan=sel.value;if(users[i].me){selected=sel.value;renderPlans();renderVerdict();}renderUsers();});});
+  }
+  document.getElementById("addUser").addEventListener("click",()=>{users.push({name:"nome@psa",plan:"pro",consumedUSD:0,active:0});renderUsers();});
+
+  document.getElementById("foot").innerHTML=
+    `Fonte: logs locais do Claude Code (${fmtInt(D.sessions)} sessões, ${fmtInt(D.totals.msgs)} chamadas de modelo) desta máquina, ${dfmt(D.range.first)}–${dfmt(D.range.last)}. `+
+    `“Valor consumido” = custo hipotético dos mesmos tokens nos preços de API vigentes (USD), convertido a R$ pelo câmbio do topo; o custo real depende do plano. `+
+    `Faturamento, preços de plano e uso das demais contas PSA precisam vir do Console da Anthropic (Manage → Billing / Usage).`;
+
+  function renderAll(){renderHero();renderStrip();renderModels();renderPlans();renderVerdict();renderUsers();drawChart();}
+  fxEl.addEventListener("input",renderAll);
+
+  const btn=document.getElementById("themeBtn");
+  btn.addEventListener("click",()=>{
+    const cur=document.documentElement.getAttribute("data-theme");
+    const sysDark=window.matchMedia("(prefers-color-scheme:dark)").matches;
+    document.documentElement.setAttribute("data-theme",cur?(cur==="dark"?"light":"dark"):(sysDark?"light":"dark"));
+    drawChart();});
+  window.addEventListener("resize",drawChart);
+
+  renderAll();
+})();
+</script>

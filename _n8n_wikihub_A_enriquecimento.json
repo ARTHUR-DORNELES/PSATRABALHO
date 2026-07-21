@@ -1,0 +1,300 @@
+{
+  "name": "Wiki Hub - A - Enriquecimento (score palestrante)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "7c69bb2f-96a0-40fc-a852-29c0d80bb94d",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e7be1a17-5d42-4885-860b-04c1843b8c9a",
+      "name": "Webhook",
+      "webhookId": "7c69bb2f-96a0-40fc-a852-29c0d80bb94d"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.hubapi.com/crm/v3/objects/contacts/{{ $json.body.hs_object_id }}?properties=firstname,lastname,palestrante_wiki_url,palestrante_wiki_final_url,tema,macro_tema,macro_tema_contato",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "hubspotAppToken",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "get-contato-01",
+      "name": "Get Contato",
+      "credentials": {
+        "hubspotAppToken": {
+          "id": "REPLACE_HUBSPOT_APP_TOKEN",
+          "name": "HubSpot PSA (App Token)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Entrada: resposta do \"Get Contato\" (HubSpot GET). Saida: id, nome, wikiUrl.\nconst j = $json;\nconst p = j.properties || {};\nconst wikiUrl = p.palestrante_wiki_final_url || p.palestrante_wiki_url || '';\nconst nome = ((p.firstname || '') + ' ' + (p.lastname || '')).trim();\nconst macroTemaHub = p.macro_tema_contato || p.macro_tema || ''; // tema humano vindo do arquivo importado\nreturn [{ json: { id: j.id, nome, wikiUrl, tema: p.tema || '', macroTemaHub } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        0
+      ],
+      "id": "prepara-01",
+      "name": "Prepara"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "cond-wiki",
+              "leftValue": "={{ $json.wikiUrl }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        660,
+        0
+      ],
+      "id": "tem-wiki-01",
+      "name": "Tem Wiki"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $json.wikiUrl }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        880,
+        -80
+      ],
+      "id": "baixa-wiki-01",
+      "name": "Baixa Wiki"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Entrada: resposta do \"Baixa Wiki\" (HTML em texto). Saida: wikiText + sysPrompt.\nconst prep = $('Prepara').first().json;\nconst html = $json.data || $json.body || $json.body?.data || '';\nconst wikiText = String(html)\n  .replace(/<script[\\s\\S]*?<\\/script>/gi, ' ')\n  .replace(/<style[\\s\\S]*?<\\/style>/gi, ' ')\n  .replace(/<[^>]+>/g, ' ')\n  .replace(/&nbsp;/gi, ' ')\n  .replace(/&amp;/gi, '&')\n  .replace(/\\s+/g, ' ')\n  .trim()\n  .slice(0, 40000); // wikis reais ~16k chars; 40k da folga sem estourar contexto\n\nconst sysPrompt = [\n  'Voce e curador da PSA. Recebe o texto da wiki (\"Dossie Operacional\", 7 dimensoes) de UM palestrante.',\n  'Avalie SOMENTE com base no texto fornecido. Nao invente nada. Onde estiver \"a coletar\" ou vazio, use nota baixa.',\n  '',\n  '1) Identifique o MACRO TEMA do palestrante e mapeie para UM destes 25 valores EXATOS (use o rotulo com o numero):',\n  '[1. AGRONEGOCIO, 2. COMUNICACAO, 3. DIVERSIDADE E INCLUSAO, 4. ECONOMIA / POLITICA, 5. EDUCACAO, 6. EMPREENDEDORISMO, 7. ESPORTE, 8. ETICA, 9. GESTAO, 10. GESTAO DE PESSOAS, 11. INOVACAO, 12. MOTIVACAO, 13. SAUDE, 14. SIPAT, 15. SUSTENTABILIDADE, 16. VENDAS, 17. CONSCIENTIZACAO (MESES), 18. OUTROS, 19. LIDERANCA, 20. COMPORTAMENTO, 21. COOPERATIVISMO, 22. EXPERIENCIA E ATENDIMENTO, 23. DATAS COMEMORATIVAS, 24. FINANCAS, 25. PROTAGONISMO FEMININO].',\n  'Se nao encaixar em nenhum, use \"18. OUTROS\".',\n  '',\n  '2) De nota INTEIRA de 0 a 5 a cada dimensao, com 1 frase curta de justificativa extraida da wiki:',\n  '- quem_e   (peso 3): trajetoria, credenciais, autoridade no tema',\n  '- defende  (peso 5): tese central, subtemas, perguntas que responde melhor',\n  '- entrega  (peso 4): estilo de palco, formatos, adaptabilidade a publicos',\n  '- pra_quem (peso 5): publicos onde brilha, setores fortes, empresa ideal, contra-indicacoes',\n  '- comprova (peso 3): NPS, historico real de contratacoes, recompra, depoimentos',\n  '- raiox    (peso 4): promessa declarada, tese autoral, tom, arquitetura narrativa',\n  '(A dimensao \"Quanto custa\" NAO deve ser avaliada.)',\n  '',\n  '3) Responda APENAS um JSON valido, sem texto fora dele, neste formato:',\n  '{\"macro_tema\":\"11. INOVACAO\",\"notas\":{\"quem_e\":0,\"defende\":0,\"entrega\":0,\"pra_quem\":0,\"comprova\":0,\"raiox\":0},\"justificativas\":{\"quem_e\":\"\",\"defende\":\"\",\"entrega\":\"\",\"pra_quem\":\"\",\"comprova\":\"\",\"raiox\":\"\"}}'\n].join('\\n');\n\nreturn [{ json: { id: prep.id, nome: prep.nome, wikiUrl: prep.wikiUrl, tema: prep.tema, macroTemaHub: prep.macroTemaHub, wikiText, sysPrompt } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1100,
+        -80
+      ],
+      "id": "prep-prompt-01",
+      "name": "Prepara Prompt"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "openAiApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'gpt-4o', temperature: 0, response_format: { type: 'json_object' }, messages: [ { role: 'system', content: $json.sysPrompt }, { role: 'user', content: 'PALESTRANTE: ' + $json.nome + '\\nTEMA HUBSPOT (dica): ' + ($json.tema || '-') + '\\n\\nWIKI:\\n' + $json.wikiText } ] }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1320,
+        -80
+      ],
+      "id": "openai-01",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "REPLACE_OPENAI",
+          "name": "OpenAI PSA"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Entrada: resposta do \"OpenAI\". Saida: registro pronto pro Redis (chave + valor JSON).\nconst prep = $('Prepara Prompt').first().json;\nlet content = ($json.choices && $json.choices[0] && $json.choices[0].message)\n  ? $json.choices[0].message.content\n  : ($json.content || '{}');\n\nlet d;\ntry { d = typeof content === 'string' ? JSON.parse(content) : content; }\ncatch (e) { d = { macro_tema: '18. OUTROS', notas: {}, justificativas: {} }; }\n\nconst pesos = { quem_e: 3, defende: 5, entrega: 4, pra_quem: 5, comprova: 3, raiox: 4 };\nconst notasIn = d.notas || {};\nconst notas = {};\nlet total = 0;\nfor (const k of Object.keys(pesos)) {\n  const n = Math.max(0, Math.min(5, Number(notasIn[k]) || 0));\n  notas[k] = n;\n  total += n * pesos[k];\n}\nconst compat = Math.round((total / 120) * 100); // 120 = soma_pesos(24) * nota_max(5)\n\nconst rec = {\n  id: prep.id,\n  nome: prep.nome,\n  macro_tema: prep.macroTemaHub || d.macro_tema || '18. OUTROS', // prioriza o tema humano do HubSpot\n  notas,\n  justificativas: d.justificativas || {},\n  pontuacao_total: total,\n  compatibilidade: compat,\n  wiki_url: prep.wikiUrl,\n  data_avaliacao: new Date().toISOString()\n};\n\nreturn [{ json: Object.assign({ redisKey: 'pcur:pal:' + prep.id, redisValue: JSON.stringify(rec) }, rec) }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1540,
+        -80
+      ],
+      "id": "monta-01",
+      "name": "Monta Registro"
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{ $json.redisKey }}",
+        "value": "={{ $json.redisValue }}",
+        "keyType": "string",
+        "expire": false
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        -80
+      ],
+      "id": "redis-set-01",
+      "name": "Redis Set",
+      "credentials": {
+        "redis": {
+          "id": "REPLACE_REDIS",
+          "name": "Redis PSA"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        880,
+        120
+      ],
+      "id": "sem-wiki-01",
+      "name": "Sem Wiki"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get Contato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Contato": {
+      "main": [
+        [
+          {
+            "node": "Prepara",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepara": {
+      "main": [
+        [
+          {
+            "node": "Tem Wiki",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tem Wiki": {
+      "main": [
+        [
+          {
+            "node": "Baixa Wiki",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Sem Wiki",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Baixa Wiki": {
+      "main": [
+        [
+          {
+            "node": "Prepara Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepara Prompt": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Monta Registro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Monta Registro": {
+      "main": [
+        [
+          {
+            "node": "Redis Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "tags": []
+}

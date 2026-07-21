@@ -1,0 +1,257 @@
+1. Visão Geral da Campanha
+
+Duas campanhas intercaladas em 3 semanas: NR-1 & Saúde Mental e The Best Speaker Brasil. Cada base
+recebe um único tema por semana. O e-mail abre o contexto; o WhatsApp repica com gancho direto para o
+curador entrar.
+
+Na semana 3, o e-mail continua a régua de NR-1, mas o WhatsApp do Farmers usa gancho do TBS --
+aproveitando o intervalo de 2 semanas para apresentar o produto sem saturar a base.
+
+Calendário de Disparos
+
+Semana Período        Campanha             E-mail                 WhatsApp
+Semana 1 17/06 (qua)  NR-1
+                                           PNO · PNV · Farmers    PNV + PNO: (qua 17/06)
+Semana 2 22/06 (seg)  TBS                  Tema: Saúde Mental /   PNV+ PNO: (qui 18/06)
+                                           NR-1 + IA              Farmers: (qui 18/06)
+Semana 3 29/06 (seg)  NR-1
+                                           PNO · PNV · Farmers    PNO: D+2 (qua 24/06)
+                                           Tema: The Best         PNV: D+3 (qui 25/06)
+                                           Speaker Brasil         Farmers: -- (sem disparo)
+
+                                           PNO · PNV · Farmers    PNO: D+2 (qua 01/07)
+                                           Tema: Curadoria PSA /  PNV: D+3 (qui 02/07)
+                                           NR-1                   Farmers: TBS -- D+3 (qui 02/07)
+
+2. Bases e Metas Esperadas
+
+Preencha com o tamanho de cada base e a meta de qualificados esperada por campanha. Referência: taxa de
+abertura de e-mail ~4%, taxa de resposta esperada 1­2% por toque.
+
+Base       Tamanho da       Abertura       Meta                   Meta           Meta total
+           base             e-mail         qualificados           qualificados   campanha
+PNO                         esperada       NR-1                   TBS
+PNV        [ preencher ]    (~4%)                                                [ preencher ]
+Carteira   [ preencher ]                   [ preencher ]          [ preencher ]  [ preencher ]
+(Farmers)  [ preencher ]    [ preencher ]  [ preencher ]          [ preencher ]  [ preencher ]
+                                           [ preencher ]          [ preencher ]
+                            [ preencher ]
+
+                            [ preencher ]
+
+3. Semana 1 -- NR-1 & Saúde Mental | 15/06
+E-MAIL -- Igual para PNO, PNV e Farmers
+
+PNO · PNV · Farmers -- Mesmo e-mail para as três bases
+
+E-MAIL
+
+Assunto: Seu time está em campo. A saúde mental também está?
+Preheader: A NR-1 tornou o risco psicossocial uma obrigação legal. Como está essa pauta na sua empresa?
+Corpo:
+{{first_name}},
+
+O futebol e as empresas têm uma coisa em comum: a pressão por resultados.
+
+Diferente dos atletas, que têm preparo psicológico como parte do treinamento, dentro das empresas esse
+cuidado costuma ser tratado como detalhe. Pelo menos até a NR-1 tornar isso uma obrigação legal.
+
+Palestras estratégicas de saúde mental ajudam o time a entender o que mudou e a trabalhar melhor sob
+pressão.
+
+Isso está no radar de vocês na {{company}}?
+Ângulo: Dor regulatória (NR-1) + gancho de copa + oportunidade de calendário
+
+WHATSAPP REPIQUE -- Distinto por base
+
+PNO + PNV
+
+WHATSAPP D+2 -- quarta 17/06
+Mensagem:
+
+Oi [nome],
+
+A gente conversou sobre palestras para a [Empresa], mas não chegamos a fechar nada.
+
+Com a NR-1 em vigor, muitas empresas estão estruturando ações de saúde mental agora, antes que os
+sintomas apareçam nas entregas.
+
+Faz sentido explorar isso aí?
+
+PNO + PNV - teste IA
+
+WHATSAPP D+3 -- quinta 18/06
+Prompt:
+Crie uma mensagem comercial personalizada para WhatsApp ou e-mail convidando um cliente da PSA a
+contratar palestras de NR1 e saúde mental.
+
+Contexto da campanha:
+Estamos no meio do ano, período de pressão acumulada, metas cobradas e energia em baixa. Nossa
+campanha de NR1 tem como proposta ajudar empresas a recuperar o fôlego dos colaboradores, oferecendo
+palestras que tratam saúde mental não como obrigação legal, mas como investimento em pessoas.
+
+A mensagem deve:
+Conectar o momento do ano (pressão de meio de ano, cansaço acumulado) com a necessidade da palestra
+Apresentar a NR1 como oportunidade estratégica, não só como compliance
+Mostrar que saúde mental e performance andam juntas
+ Ter um CTA claro: convidar para uma conversa, reunião ou envio de opções de palestrantes
+ Tom: consultivo, próximo e propositivo, como um parceiro que está trazendo uma solução no momento certo
+
+ A mensagem não deve:
+ Conter travessão ( -- ). Sempre que for necessário usar outro artifício como vírgula, dois pontos, ponto
+ final.Impor a ideia ou pressionar o cliente
+ Ter uma saudação como olá, bom dia, oi...
+
+ WhatsApp curto, direto, com 1 pergunta ou CTA no final
+
+Farmers -- Relacionamento ativo
+
+ WHATSAPP D+3 -- quinta 18/06
+ Mensagem:
+ Oi [nome],
+ Lembrei da [Empresa] pensando nas mudanças da NR-1.
+ Com o risco psicossocial agora como obrigação legal, muitas empresas estão buscando formas de abordar
+ saúde mental com os times de forma mais estruturada, além das ações internas de RH.
+ Tem algo planejado para esse momento aí? Posso mapear opções que se encaixam no contexto de vocês.
+
+4. Semana 2 -- The Best Speaker Brasil | 22/06
+
+E-MAIL -- Igual para PNO, PNV e Farmers
+
+PNO · PNV · Farmers -- Mesmo e-mail para as três bases
+
+ E-MAIL
+
+Assunto: Já contratou um palestrante para o seu evento?
+ Preheader: Com a PSA você tem palestrantes que vão além do currículo.
+ Corpo:
+ {{first_name}},
+
+ Em 14 anos no mercado de palestras, a PSA entendeu algo importante: os melhores conteúdos não estão
+ concentrados apenas nos palestrantes mais famosos.
+
+ Por isso criamos o The Best Speaker Brasil, o único reality show de palestrantes do mundo.
+
+ A lógica é simples: tirar novos talentos do anonimato e, por meio de um processo rigoroso de avaliação pública,
+ revelar quem está mais preparado para os palcos.
+
+ O resultado são nomes que provavelmente você ainda não ouviu falar, mas que chegam ao seu evento com
+ palestras transformadoras.
+
+ Temas como liderança, inovação, diversidade, vendas e comportamento: todos com profundidade e aplicação
+ prática.
+ Faz sentido eu te apresentar quem temos disponível para o contexto de vocês?
+ Ângulo: Credencial TBS + portfólio de novos talentos + CTA consultivo
+
+WHATSAPP REPIQUE -- PNO e PNV | Farmers sem disparo esta
+semana
+
+PNO | PNV
+
+ WHATSAPP D+2 -- quarta 24/06
+ Mensagem:
+ Oi [nome],
+
+ A PSA tem um processo diferente para revelar palestrantes: o The Best Speaker Brasil, o único reality show de
+ palestrantes do mundo.
+
+ São nomes que provavelmente você ainda não ouviu falar, mas que chegam ao evento com conteúdo testado e
+ profundidade de tema.
+
+ Vale eu te mostrar quem faz sentido para o contexto de vocês?
+
+Farmers -- sem WhatsApp esta semana
+Intervalo intencional. O Farmers receberá o WhatsApp TBS na semana 3 (D+3, quinta 02/07), mantendo 2
+semanas de distância entre os toques por WhatsApp para essa base.
+
+5. Semana 3 -- NR-1 (e-mail) + TBS Farmers (WhatsApp) | 29/06
+
+E-MAIL NR-1 -- Igual para PNO, PNV e Farmers
+
+PNO · PNV · Farmers -- Mesmo e-mail para as três bases
+
+ E-MAIL
+
+Assunto: Inteligência emocional e NR-1: onde as palestras ajudam
+ Preheader: Equipes sobrecarregadas têm sintomas antes dos afastamentos. Há formas de agir antes.
+ Corpo:
+ {{first_name}},
+
+ Equipes sobrecarregadas, comunicação travada e desânimo que afeta a qualidade das entregas. Esses
+ sintomas costumam aparecer antes dos afastamentos.
+
+ Palestras estratégicas de inteligência emocional e saúde mental desbloqueiam o que processos internos não
+ conseguem: uma mudança de olhar do time sobre o próprio trabalho.
+
+ Na PSA você tem acesso a palestrantes pensados para o perfil e o momento da sua empresa, sem precisar
+ começar do zero no briefing.
+
+ Vale uma conversa para entender o que faz sentido para a {{company}}?
+ Ângulo: Prevenção de afastamentos + NR-1 + processo PSA como diferencial
+WHATSAPP REPIQUE -- Distinto por base e tema
+
+PNV | PNO
+
+WHATSAPP D+3 -- quinta 02/07
+Mensagem:
+Oi [nome],
+
+Com o segundo semestre se aproximando, saúde mental e NR-1 estão no topo das demandas que recebemos.
+
+Se ainda há interesse em abordar esse tema na [Empresa], posso verificar disponibilidade e trazer opções
+alinhadas ao perfil de vocês.
+
+Faz sentido retomar?
+
+Farmers -- tema TBS
+
+WHATSAPP D+3 -- quinta 02/07
+Mensagem:
+Oi [nome],
+
+Queria te apresentar algo que a PSA criou para revelar novos talentos do mercado de palestras: o The Best
+Speaker Brasil.
+
+São palestrantes selecionados por voto popular e júri técnico, nomes que provavelmente a [Empresa] ainda
+não conhece, mas que chegam ao evento com conteúdo testado.
+
+Temas como liderança, inovação, diversidade e comportamento, com profundidade e aplicação prática.
+
+Faz sentido conhecer quem temos para o contexto de vocês?
+
+6. Perfis TBS -- Material de Apoio para o Farmer
+
+Nenhum nome de palestrante entra nos disparos automáticos. O Farmer usa esta tabela para escolher 2­3 perfis
+relevantes para o contexto da empresa e aborda em conversa ativa -- preferencialmente após abertura ou clique
+no e-mail TBS.
+
+Palestrante  Tema                Para quem indicar                Gancho de abordagem
+Bruna Félix
+             Inovação, cultura,  Empresas em transformação        Inovação que começa pela
+             autonomia feminina  cultural e equipes de liderança  cultura, não pela tecnologia.
+                                 que precisam conectar inovação
+                                 com comportamento.
+Betty Agi       Diversidade, impacto    Empresas com agenda ESG ou         Diversidade que muda o que
+                social, liderança       D&I que precisam ir além do        a empresa faz, não só o que
+                                        discurso e chegar na aplicação.    ela diz.
+Leandro Vidal   Inspiração,
+                comunicação, liderança  Kick-offs, convenções e encontros  Liderança que se comunica,
+                                        de liderança que precisam de       não que só cobra.
+Thiago          Liderança, conflito de  energia e clareza ao mesmo
+Athanazio       gerações, gestão de     tempo.                             Para o líder que gere baby
+                pessoas                                                    boomers e Gen Z no mesmo
+Lahire                                  Empresas com equipes               time, ao mesmo tempo.
+Cavallero       Vendas, comunicação     multigeracionais, líderes que
+                                        precisam gerir diferenças de       Vendas não é técnica. É a
+Larissa Chaves  Autoconhecimento,       mentalidade e ritmo.               forma como você se
+                disciplina,                                                comunica antes de
+                comportamento           Convenções e kick-offs de times    apresentar o produto.
+                                        comerciais que precisam de
+                                        conteúdo que vai além da           Autoconhecimento que
+                                        motivação.                         muda comportamento --
+                                                                           não que só emociona na
+                                        RH com agenda comportamental,      plateia.
+                                        equipes que precisam de
+                                        conteúdo sobre o que move e o
+                                        que trava as pessoas.
+

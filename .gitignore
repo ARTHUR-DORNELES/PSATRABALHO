@@ -1,0 +1,43 @@
+# ============================================================
+#  dependencias e builds  (recriar em casa com: npm install)
+# ============================================================
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+dist/
+build/
+out/
+**/dist/
+**/build/
+**/out/
+.turbo/
+*.tsbuildinfo
+.vercel/
+**/.vercel/
+
+# ============================================================
+#  SEGREDOS - nunca versionar (mesmo em repo privado)
+# ============================================================
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
+psa-credenciais.txt
+**/.credentials.json
+*.pem
+*.key
+**/settings.local.json
+
+# ============================================================
+#  lixo de SO / editor
+# ============================================================
+.DS_Store
+Thumbs.db
+*.log
+votos/
+
+# repo proprio - clonar separado (github.com/ARTHUR-DORNELES/psabonusdecomissao)
+psa-bonus-dashboard/

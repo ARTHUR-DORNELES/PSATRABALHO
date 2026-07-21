@@ -1,0 +1,1787 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plano de Recuperação · The Best School + Certificação PSA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e1116; --surface:#171b23; --surface-2:#1d222c; --line:#2a303d;
+    --ink:#eef2f8; --ink-2:#aab2c2; --ink-3:#7a8497;
+    --accent:#ff7a45; --accent-2:#ffb86b;
+    --red:#ef4444; --amber:#f59e0b; --green:#10b981; --blue:#60a5fa; --purple:#a78bfa;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  code,pre{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:56px 28px 120px}
+
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;font-size:13px;color:var(--ink-3);letter-spacing:.04em;text-transform:uppercase}
+  .top .pill{padding:5px 10px;border:1px solid var(--line);border-radius:999px;color:var(--ink-2)}
+
+  .hero h1{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:46px;line-height:1.05;letter-spacing:-.02em;margin:0 0 14px;color:var(--ink)}
+  .hero h1 em{color:var(--accent);font-style:normal}
+  .hero p.lead{font-size:17px;color:var(--ink-2);max-width:780px;margin:0 0 28px}
+  .meta{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:18px;margin-top:28px}
+  .meta b{color:var(--ink);font-weight:600}
+
+  h2{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:72px 0 6px;color:var(--ink)}
+  h2 .num{display:inline-block;width:34px;height:34px;border-radius:8px;background:var(--accent);color:#0e1116;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;line-height:34px;text-align:center;margin-right:12px;vertical-align:2px}
+  h3{font-size:18px;font-weight:600;color:var(--ink);margin:28px 0 10px}
+  h4{font-size:16px;font-weight:600;color:var(--ink);margin:18px 0 8px}
+  h5{font-size:14px;font-weight:600;color:var(--ink);margin:14px 0 6px}
+  p{margin:0 0 14px;color:var(--ink-2)}
+  .section-sub{color:var(--ink-3);font-size:13px;margin:0 0 24px;letter-spacing:.02em;text-transform:uppercase}
+
+  .grid-kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 8px}
+  .kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .kpi .v{font-family:'Fraunces',serif;font-size:30px;font-weight:600;color:var(--ink);line-height:1.1}
+  .kpi .l{font-size:11px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin-top:6px}
+  .kpi .sub{font-size:12px;color:var(--ink-3);margin-top:6px}
+  @media (max-width:720px){.grid-kpi{grid-template-columns:repeat(2,1fr)}}
+
+  .principle{background:linear-gradient(135deg,rgba(255,122,69,.08),rgba(255,184,107,.04));border:1px solid rgba(255,122,69,.25);border-radius:14px;padding:22px 26px;margin-top:18px}
+  .principle h4{margin:0 0 8px;font-size:16px;color:var(--accent)}
+  .principle p{margin:0;color:var(--ink-2);font-size:15px}
+
+  /* Opt-in sticky bar */
+  .sticky-bar{
+    position:sticky;top:0;z-index:100;
+    background:rgba(14,17,22,.95);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    margin:0 -28px 32px;padding:14px 28px;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+  }
+  .sticky-bar .counts{display:flex;gap:24px;font-size:13px;color:var(--ink-2)}
+  .sticky-bar .counts strong{color:var(--ink);font-weight:700;font-family:'Fraunces',serif;font-size:18px;display:block;line-height:1}
+  .sticky-bar .counts span{display:block;font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+  .sticky-bar .actions-bar{display:flex;gap:8px}
+  .sticky-bar button{
+    background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2);
+    padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;
+    font-family:inherit;transition:background .15s,color .15s,border-color .15s;
+  }
+  .sticky-bar button:hover{background:var(--surface);color:var(--ink);border-color:var(--accent)}
+  .sticky-bar button.primary{background:var(--accent);color:#0e1116;border-color:var(--accent)}
+  .sticky-bar button.primary:hover{background:var(--accent-2);color:#0e1116}
+
+  /* Diagnostic block */
+  .diag{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+  .diag .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+  .diag .card.r{border-left:3px solid var(--red)}
+  .diag .card.a{border-left:3px solid var(--amber)}
+  .diag h4{margin:0 0 10px;font-size:14px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+  .diag p{margin:0;font-size:14px;color:var(--ink)}
+  .diag ul{margin:0;padding:0;list-style:none}
+  .diag ul li{padding:6px 0 6px 18px;font-size:14px;color:var(--ink-2);position:relative}
+  .diag ul li::before{content:"•";position:absolute;left:0;color:var(--ink-3)}
+  @media (max-width:760px){.diag{grid-template-columns:1fr}}
+
+  /* Action cards w/ opt-in */
+  .actions{display:flex;flex-direction:column;gap:14px;margin-top:18px}
+  .action{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 26px;transition:border-color .2s,background .2s}
+  .action.selected{border-color:var(--accent);background:linear-gradient(180deg,rgba(255,122,69,.04),transparent 40%)}
+  .action-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+  .action-title{display:flex;align-items:center;gap:12px;flex-wrap:wrap;flex:1}
+  .action-title h4{margin:0;font-size:18px;color:var(--ink);font-weight:700}
+  .action-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2);font-size:12px;font-weight:700}
+
+  .badges{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:4px 10px;border-radius:5px}
+  .badge.t-quick{background:rgba(16,185,129,.15);color:var(--green)}
+  .badge.t-mid{background:rgba(255,122,69,.15);color:var(--accent)}
+  .badge.t-long{background:rgba(96,165,250,.15);color:var(--blue)}
+  .badge.s1{background:rgba(16,185,129,.15);color:var(--green)}
+  .badge.s2{background:rgba(167,139,250,.15);color:var(--purple)}
+  .badge.s3{background:rgba(96,165,250,.15);color:var(--blue)}
+  .badge.s4{background:rgba(245,158,11,.15);color:var(--amber)}
+
+  /* Checkbox styled */
+  .optin{
+    display:flex;align-items:center;gap:8px;cursor:pointer;
+    padding:6px 12px;border:1px solid var(--line);border-radius:8px;
+    background:var(--surface-2);transition:background .15s,border-color .15s;
+    font-size:12px;font-weight:600;color:var(--ink-2);user-select:none;
+  }
+  .optin:hover{border-color:var(--accent);color:var(--ink)}
+  .optin input{display:none}
+  .optin .box{
+    width:18px;height:18px;border:2px solid var(--ink-3);border-radius:5px;
+    display:flex;align-items:center;justify-content:center;transition:all .15s;
+    background:transparent;flex-shrink:0;
+  }
+  .optin input:checked + .box{background:var(--accent);border-color:var(--accent)}
+  .optin input:checked + .box::after{content:"✓";color:#0e1116;font-size:13px;font-weight:900}
+  .optin input:checked ~ .label{color:var(--accent)}
+
+  .action-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .action-cell{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .action-cell .l{font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:6px}
+  .action-cell .v{font-size:14px;color:var(--ink);line-height:1.5}
+  .action-cell.full{grid-column:1/-1;border-left:3px solid var(--accent)}
+  .action-cell.full .v{font-size:14.5px}
+  @media (max-width:760px){.action-grid{grid-template-columns:1fr}}
+
+  /* Material preparado — expandable */
+  .material{margin-top:16px}
+  .material-toggle{
+    width:100%;display:flex;justify-content:space-between;align-items:center;
+    background:var(--surface-2);border:1px solid var(--line);border-radius:10px;
+    padding:12px 16px;cursor:pointer;font-family:inherit;color:var(--ink);
+    font-size:13px;font-weight:600;text-align:left;transition:background .15s,border-color .15s;
+  }
+  .material-toggle:hover{background:rgba(255,122,69,.06);border-color:var(--accent)}
+  .material-toggle .label-row{display:flex;align-items:center;gap:10px}
+  .material-toggle .icon{
+    display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;
+    border-radius:6px;background:rgba(255,122,69,.15);color:var(--accent);font-weight:900;font-size:14px;
+  }
+  .material-toggle .arrow{color:var(--ink-3);transition:transform .2s;font-size:14px}
+  .material[open] .material-toggle .arrow{transform:rotate(180deg)}
+  .material-body{
+    padding:24px 22px;background:var(--surface-2);border:1px solid var(--line);border-top:0;
+    border-radius:0 0 10px 10px;margin-top:-1px;
+  }
+  .material-body h5{font-family:'Fraunces',serif;font-size:18px;color:var(--ink);font-weight:600;margin:24px 0 10px}
+  .material-body h5:first-child{margin-top:0}
+  .material-body h6{font-size:13px;color:var(--accent);font-weight:700;margin:16px 0 6px;text-transform:uppercase;letter-spacing:.04em}
+  .material-body p{font-size:14px;color:var(--ink-2);line-height:1.6}
+  .material-body ul,.material-body ol{padding-left:22px;font-size:14px;color:var(--ink-2);line-height:1.7}
+  .material-body li{margin-bottom:6px}
+  .material-body li::marker{color:var(--ink-3)}
+  .material-body strong{color:var(--ink)}
+  .material-body em{color:var(--ink);font-style:normal;font-weight:500}
+
+  .copy-block{
+    background:#0a0d12;border:1px solid var(--line);border-radius:10px;
+    padding:16px 20px;margin:10px 0 14px;font-family:'JetBrains Mono',monospace;
+    font-size:13px;color:#e0e7ef;line-height:1.65;white-space:pre-wrap;
+    position:relative;overflow-x:auto;
+  }
+  .copy-block .copy-label{
+    position:absolute;top:8px;right:12px;font-size:9px;color:var(--ink-3);
+    text-transform:uppercase;letter-spacing:.08em;font-family:'Inter',sans-serif;font-weight:600;
+  }
+
+  .data-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0}
+  .data-grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .data-card{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+  .data-card .l{font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;font-weight:600}
+  .data-card .v{font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--ink);line-height:1.1}
+  .data-card .v.small{font-size:16px;font-family:'Inter',sans-serif;font-weight:600}
+  .data-card .sub{font-size:11px;color:var(--ink-3);margin-top:4px}
+  @media (max-width:760px){.data-grid,.data-grid.cols-3{grid-template-columns:1fr}}
+
+  .gap-item{background:rgba(239,68,68,.05);border-left:3px solid var(--red);padding:14px 16px;border-radius:0 8px 8px 0;margin:8px 0}
+  .gap-item h6{color:var(--red);margin:0 0 6px;font-size:13px}
+  .gap-item p{margin:0;font-size:13.5px}
+  .gap-item .quote{font-style:italic;color:var(--ink-3);font-size:12px;margin-top:6px;display:block;padding-left:8px;border-left:2px solid var(--line)}
+
+  .pillar-item{background:rgba(16,185,129,.05);border-left:3px solid var(--green);padding:14px 16px;border-radius:0 8px 8px 0;margin:8px 0}
+  .pillar-item h6{color:var(--green);margin:0 0 6px;font-size:13px}
+  .pillar-item p{margin:0;font-size:13.5px}
+
+  .next-step{
+    background:linear-gradient(135deg,rgba(255,122,69,.08),transparent 80%);
+    border:1px solid rgba(255,122,69,.3);border-radius:10px;
+    padding:14px 18px;margin-top:18px;
+  }
+  .next-step h6{color:var(--accent);font-size:12px;margin:0 0 6px;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+  .next-step p{margin:0;font-size:13.5px;color:var(--ink)}
+
+  .blocker{
+    background:rgba(245,158,11,.05);border:1px dashed rgba(245,158,11,.3);
+    border-radius:8px;padding:12px 16px;margin-top:14px;
+  }
+  .blocker h6{color:var(--amber);font-size:11px;margin:0 0 6px;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+  .blocker p{margin:0;font-size:13px;color:var(--ink-2)}
+
+  /* Roadmap */
+  .roadmap{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 26px}
+  .roadmap h4{margin:0 0 16px;font-size:13px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+  .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .phase{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:14px 16px;position:relative}
+  .phase::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);border-radius:10px 10px 0 0}
+  .phase.p1::before{background:var(--green)}
+  .phase.p2::before{background:var(--accent)}
+  .phase.p3::before{background:var(--purple)}
+  .phase.p4::before{background:var(--blue)}
+  .phase .when{font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+  .phase .what{font-size:13.5px;color:var(--ink);font-weight:600;line-height:1.4;margin-bottom:6px}
+  .phase .out{font-size:12px;color:var(--ink-3);line-height:1.45}
+  @media (max-width:760px){.timeline{grid-template-columns:1fr}}
+
+  .product-header{display:flex;align-items:center;gap:14px;margin:18px 0 0}
+  .product-badge{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:5px 12px;border-radius:6px}
+  .product-badge.tbs{background:rgba(167,139,250,.15);color:var(--purple)}
+  .product-badge.cert{background:rgba(96,165,250,.15);color:var(--blue)}
+
+  .source-list{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 22px;font-size:13px;margin-top:14px}
+  .source-list a{display:block;padding:6px 0;color:var(--ink-2);border-bottom:1px solid var(--line)}
+  .source-list a:last-child{border-bottom:0}
+  .source-list a:hover{color:var(--accent)}
+
+  /* Metrics */
+  .metrics{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+  .metric-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+  .metric-card h4{margin:0 0 14px;font-size:14px;font-weight:600;color:var(--ink)}
+  .metric-card h4 .tag{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 8px;border-radius:5px;margin-right:8px}
+  .metric-card.tbs h4 .tag{background:rgba(167,139,250,.15);color:var(--purple)}
+  .metric-card.cert h4 .tag{background:rgba(96,165,250,.15);color:var(--blue)}
+  .metric-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;gap:14px}
+  .metric-row:last-child{border-bottom:0}
+  .metric-row .l{color:var(--ink-2)}
+  .metric-row .v{color:var(--ink);font-weight:600;text-align:right;white-space:nowrap}
+  @media (max-width:760px){.metrics{grid-template-columns:1fr}}
+
+  .footnote{font-size:12px;color:var(--ink-3);margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <span>Grupo de Inovação · PSA</span>
+    <span class="pill">v2 · 2026-05-18 · Material adiantado</span>
+  </div>
+
+  <header class="hero">
+    <h1>Plano de recuperação <em>The Best School</em> + <em>Certificação PSA</em></h1>
+    <p class="lead">Versão executável: para cada uma das 10 ações, adiantamos tudo que não depende do grupo de inovação — análises, scripts, copies, templates e currículos. Selecione abaixo as ações que vai rodar e veja o esforço/custo agregado em tempo real.</p>
+    <div class="meta">
+      <span><b>2</b> produtos em foco</span>
+      <span><b>10</b> ações com material pronto</span>
+      <span><b>~370h</b> esforço total</span>
+      <span><b>~R$ 12–47k</b> custo direto estimado</span>
+      <span>Atualizado: <b>2026-05-18</b></span>
+    </div>
+  </header>
+
+  <!-- ============================================ Sticky opt-in bar ============================================ -->
+  <div class="sticky-bar">
+    <div class="counts">
+      <div><strong id="cnt-actions">0</strong><span>Ações selecionadas</span></div>
+      <div><strong id="cnt-hours">0h</strong><span>Esforço estimado</span></div>
+      <div><strong id="cnt-cost">R$ 0</strong><span>Custo direto</span></div>
+      <div><strong id="cnt-revenue">R$ 0</strong><span>Receita projetada</span></div>
+    </div>
+    <div class="actions-bar">
+      <button onclick="toggleAll(true)">Selecionar todas</button>
+      <button onclick="toggleAll(false)">Limpar</button>
+      <button onclick="selectQuickWins()" class="primary">Só quick wins</button>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <h2><span class="num">1</span>Por que o método precisa mudar</h2>
+  <p class="section-sub">Diagnóstico do gargalo atual</p>
+
+  <p>Hoje a estratégia de validação dos dois produtos depende de uma única fonte de sinal: pesquisa quantitativa via formulário. Em B2B, com produto que ainda não existe, esse é o método mais fraco da hierarquia de evidência. Os números falam por si: <b>43 visualizações de form em 4 campanhas, zero envios reais</b>. Continuar dependendo só desse canal significa decidir o futuro de dois produtos no escuro.</p>
+
+  <div class="principle">
+    <h4>Princípio orientador</h4>
+    <p>Sinais de validação de produto formam uma hierarquia: <b>cliente paga &gt; LOI assinada &gt; tempo investido &gt; entrevista qualificada &gt; survey &gt; abertura de e-mail</b>. Cada uma das 10 ações abaixo busca sinal acima do nível "survey", complementando — e não substituindo — a pesquisa que já roda.</p>
+  </div>
+
+  <div class="grid-kpi" style="margin-top:24px">
+    <div class="kpi"><div class="v">5</div><div class="l">Ações The Best School</div><div class="sub">~165h estimadas</div></div>
+    <div class="kpi"><div class="v">5</div><div class="l">Ações Certificação</div><div class="sub">~205h estimadas</div></div>
+    <div class="kpi"><div class="v">3</div><div class="l">Quick wins (≤1 semana)</div><div class="sub">retorno em dias</div></div>
+    <div class="kpi"><div class="v">2</div><div class="l">Pilotos pagos</div><div class="sub">geram caixa antes da decisão</div></div>
+  </div>
+
+  <!-- ============================================ TBS ============================================ -->
+  <h2><span class="num">2</span>The Best School</h2>
+  <p class="section-sub">Escola de oratória e comunicação · concorrente da Vox2you</p>
+
+  <div class="product-header">
+    <span class="product-badge tbs">TBS</span>
+    <span style="color:var(--ink-3);font-size:13px">5 ações · ~165h · 8 semanas</span>
+  </div>
+
+  <div class="diag">
+    <div class="card r">
+      <h4>O que fazemos hoje</h4>
+      <ul>
+        <li>Pesquisa via form "Formulário - The Best School" em 2 LPs</li>
+        <li>Disparo de e-mail para base ex-TBW (5.663 contatos, 87% do volume)</li>
+        <li>Aguardando respostas para definir formato, público e preço</li>
+        <li>Sem MVP rodando, sem aluno pagante, sem cronograma</li>
+      </ul>
+    </div>
+    <div class="card a">
+      <h4>O que esperávamos</h4>
+      <ul>
+        <li>Validar se existe demanda para uma escola de comunicação com a marca PSA</li>
+        <li>Mapear perfil ideal de aluno (executivos, palestrantes em formação, vendedores)</li>
+        <li>Calibrar formato (online, presencial, híbrido) e preço aceitável</li>
+        <li>Receber sinais suficientes em 30 dias para decidir construir ou parar</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:36px">5 ações de recuperação · material pronto</h3>
+
+  <div class="actions">
+
+    <!-- ====== TBS-01 ====== -->
+    <div class="action" id="action-tbs-01" data-hours="8" data-cost="0" data-revenue="0">
+      <div class="action-head">
+        <div class="action-title">
+          <div class="action-num">01</div>
+          <h4>Mineração de reviews da Vox2you</h4>
+        </div>
+        <div class="badges">
+          <span class="badge t-quick">Quick win · 3–5 dias</span>
+          <span class="badge s2">Sinal nível 4</span>
+          <label class="optin">
+            <input type="checkbox" data-action="tbs-01">
+            <span class="box"></span>
+            <span class="label">Selecionar</span>
+          </label>
+        </div>
+      </div>
+      <div class="action-grid">
+        <div class="action-cell"><div class="l">O que fazemos</div><div class="v">Coletar e classificar reviews públicos da Vox2you (Reclame Aqui, Google, YouTube, Glassdoor).</div></div>
+        <div class="action-cell"><div class="l">O que esperamos</div><div class="v">Mapa de gaps onde a concorrência falha. Cada gap vira pilar de posicionamento da TBS.</div></div>
+        <div class="action-cell"><div class="l">Como melhorar</div><div class="v">Estruturar por categoria de queixa com frequência e severidade. Usar como copy da próxima LP.</div></div>
+        <div class="action-cell full"><div class="l">Investimento estimado</div><div class="v"><b>~8h de trabalho · R$0 de custo.</b> Pode ser feito por estagiário. Resultado: documento com tese de diferenciação fundamentada em dados reais.</div></div>
+      </div>
+
+      <details class="material">
+        <summary class="material-toggle">
+          <span class="label-row"><span class="icon">✓</span> Material já preparado · análise Vox2you completa</span>
+          <span class="arrow">▾</span>
+        </summary>
+        <div class="material-body">
+
+          <h5>Diagnóstico Vox2you · números reais</h5>
+          <p>Dados coletados em 18/Mai/2026 via Reclame Aqui, Glassdoor e Portal do Franchising.</p>
+
+          <div class="data-grid">
+            <div class="data-card"><div class="l">Nota Reclame Aqui</div><div class="v">6,0<span style="font-size:13px;color:var(--ink-3)">/10</span></div><div class="sub">"regular" · zona crítica</div></div>
+            <div class="data-card"><div class="l">Reclamações totais</div><div class="v">33</div><div class="sub">65,2% resolvidas em 1d11h</div></div>
+            <div class="data-card"><div class="l">Franquias vendidas</div><div class="v">250</div><div class="sub">130 em operação</div></div>
+            <div class="data-card"><div class="l">Alunos formados</div><div class="v">90k+</div><div class="sub">desde 2013</div></div>
+            <div class="data-card"><div class="l">Faturamento 2025 (proj)</div><div class="v small">R$ 200M</div><div class="sub">+50% vs 2024</div></div>
+            <div class="data-card"><div class="l">Clientes B2B citados</div><div class="v small">XP · BR Malls</div><div class="sub">Augusto Cury · AGCO</div></div>
+          </div>
+
+          <h5>Top 6 gaps identificados (oportunidades para TBS)</h5>
+
+          <div class="gap-item">
+            <h6>1. Pressão de vendas agressiva e promessas enganosas</h6>
+            <p>Vendedores afirmam características que não existem (turmas em vários horários, bônus prometidos). Cliente fecha sob pressão e descobre incongruência depois.</p>
+            <span class="quote">"Eles fazem você fechar sob pressão com promessas..." · "Pressão psicológica e falta de informações claras na venda" · Reclame Aqui</span>
+          </div>
+
+          <div class="gap-item">
+            <h6>2. Calendário inconsistente / turmas adiadas</h6>
+            <p>Após pagamento, cliente descobre que turma só inicia 1 mês depois. Disponibilidade prometida ≠ disponibilidade real.</p>
+            <span class="quote">"Comprei um curso presencial, o curso não aconteceu e não querem estornar meu dinheiro" · Reclame Aqui</span>
+          </div>
+
+          <div class="gap-item">
+            <h6>3. Política de reembolso opaca e demorada</h6>
+            <p>Múltiplas reclamações sobre dificuldade em conseguir restituição após desistência. Reembolso vira novela.</p>
+            <span class="quote">"Desistência de curso de oratória Vox2You e demora na restituição do valor pago" · Reclame Aqui</span>
+          </div>
+
+          <div class="gap-item">
+            <h6>4. Plataforma online com bugs</h6>
+            <p>Login falhando, lentidão excessiva, links de mentoria não enviados, sem horários disponíveis no painel. Produto digital é afterthought.</p>
+            <span class="quote">"Plataforma funciona muito mal, impossibilidade de acesso" · Reclame Aqui</span>
+          </div>
+
+          <div class="gap-item">
+            <h6>5. Pós-venda inexistente</h6>
+            <p>Descaso, falta de organização, ausência de profissionalismo no suporte. Vendedor desaparece após fechamento.</p>
+            <span class="quote">"Descaso, falta de respeito e descumprimento contratual" · Reclame Aqui</span>
+          </div>
+
+          <div class="gap-item">
+            <h6>6. Cultura interna estressante (Glassdoor)</h6>
+            <p>Funcionários relatam carga horária extensa, trabalho fora do horário, alta rotatividade. Equipe esgotada afeta qualidade da entrega ao cliente.</p>
+            <span class="quote">"Carga horária bem extensa e exaustiva, promoção de muito trabalho fora do horário" · Glassdoor</span>
+          </div>
+
+          <h5>6 pilares de diferenciação para a TBS</h5>
+
+          <div class="pillar-item">
+            <h6>1. Venda consultiva, sem high-pressure</h6>
+            <p>Modelo de inscrição livre via LP. Sem ligação de vendedor agressivo. Quem quer, compra. Quem não tem fit, é redirecionado pra conteúdo gratuito. Conversão menor no curto prazo, NPS imensamente maior.</p>
+          </div>
+
+          <div class="pillar-item">
+            <h6>2. Calendário público e datas fixas</h6>
+            <p>Próximas turmas com datas publicadas na LP, vagas restantes visíveis. Se a turma é adiada, refund automático sem fricção. Transparência radical é o oposto exato da queixa #2 da Vox2you.</p>
+          </div>
+
+          <div class="pillar-item">
+            <h6>3. Reembolso 7 dias, sem perguntar</h6>
+            <p>Política "money-back" amplamente divulgada. Não é diferencial de produto — é hygiene factor que a concorrente não entrega. Use em copy: "Diferente das escolas tradicionais, aqui você desiste em 7 dias e recebe de volta automaticamente."</p>
+          </div>
+
+          <div class="pillar-item">
+            <h6>4. Mentor sênior, não vendedor convertido</h6>
+            <p>Cada turma tem um palestrante PSA reconhecido como mentor principal (Buchmann, Caio Carneiro, Junqueira). Vox2you escala com instrutores formados em massa; TBS escala com expertise PSA. Comunique isso explicitamente.</p>
+          </div>
+
+          <div class="pillar-item">
+            <h6>5. Foco executivo / B2B premium</h6>
+            <p>Vox2you é mass market (R$3-8k típico). TBS posiciona no segmento executivo (R$8-25k) com conteúdo voltado a pitch corporativo, comunicação C-level, apresentação para investidor. Menos volume, ticket maior, NPS maior.</p>
+          </div>
+
+          <div class="pillar-item">
+            <h6>6. Plataforma simples e estável (não app fancy)</h6>
+            <p>Não tentar competir em features digitais. Notion + Loom + Zoom + WhatsApp já bate o app travado da Vox2you. Tempo gasto em infraestrutura volta como tempo gasto na entrega.</p>
+          </div>
+
+          <div class="next-step">
+            <h6>Como usar esse material</h6>
+            <p>Esses 6 gaps + 6 pilares são a fundação do copy da próxima LP (TBS-03) e do positioning de venda. Para fechar essa ação, falta apenas: (a) confirmar com sócios se o posicionamento premium B2B faz sentido pra marca, (b) decidir qual dos 6 pilares vira headline principal. Recomendo "Reembolso 7 dias, sem perguntar" como gancho do hero — é o que mais dói nas reviews da concorrência.</p>
+          </div>
+
+          <h5>Fontes consultadas</h5>
+          <div class="source-list">
+            <a href="https://www.reclameaqui.com.br/empresa/vox2you/" target="_blank">Reclame Aqui · Perfil Vox2you</a>
+            <a href="https://www.reclameaqui.com.br/empresa/vox2you/lista-reclamacoes/" target="_blank">Reclame Aqui · Lista de reclamações</a>
+            <a href="https://www.glassdoor.com.br/Avalia%C3%A7%C3%B5es/Vox2You-Avalia%C3%A7%C3%B5es-E2843568.htm" target="_blank">Glassdoor · Avaliações Vox2You</a>
+            <a href="https://www.portaldofranchising.com.br/noticias/vox2you-consolida-lideranca/" target="_blank">Portal do Franchising · Vox2you consolida liderança</a>
+            <a href="https://franquias.portaldofranchising.com.br/franquia-vox2you-escolas-de-oratoria/" target="_blank">Franquia Vox2You · Dados do negócio</a>
+            <a href="https://vox2you.com.br/cursos/" target="_blank">Vox2you · Página de cursos</a>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- ====== TBS-02 ====== -->
+    <div class="action" id="action-tbs-02" data-hours="6" data-cost="0" data-revenue="0">
+      <div class="action-head">
+        <div class="action-title">
+          <div class="action-num">02</div>
+          <h4>Audit interno: oratória já vendida pela rede PSA</h4>
+        </div>
+        <div class="badges">
+          <span class="badge t-quick">Quick win · 2 dias</span>
+          <span class="badge s1">Sinal nível 1 (existente)</span>
+          <label class="optin">
+            <input type="checkbox" data-action="tbs-02">
+            <span class="box"></span>
+            <span class="label">Selecionar</span>
+          </label>
+        </div>
+      </div>
+      <div class="action-grid">
+        <div class="action-cell"><div class="l">O que fazemos</div><div class="v">Levantar quais palestrantes da rede PSA já vendem treinamento corporativo de oratória/comunicação hoje.</div></div>
+        <div class="action-cell"><div class="l">O que esperamos</div><div class="v">Descobrir mercado adjacente já passando pela PSA mas não capturado. Validação sem pesquisa.</div></div>
+        <div class="action-cell"><div class="l">Como melhorar</div><div class="v">Entrevistar 5 palestrantes de maior volume. Avaliar acordo white-label com revenue split.</div></div>
+        <div class="action-cell full"><div class="l">Investimento estimado</div><div class="v"><b>~6h de trabalho · R$0 de custo.</b> Pode descobrir operação de R$500k–R$2M/ano já passando pela rede.</div></div>
+      </div>
+
+      <details class="material">
+        <summary class="material-toggle">
+          <span class="label-row"><span class="icon">✓</span> Material já preparado · template de audit + script de entrevista</span>
+          <span class="arrow">▾</span>
+        </summary>
+        <div class="material-body">
+
+          <h5>Estrutura de planilha para mapeamento (Google Sheets)</h5>
+          <p>Crie um Sheet com as colunas abaixo. Comece preenchendo com os palestrantes PSA já conhecidos pelos comerciais como ativos em treinamento corporativo.</p>
+
+          <div class="copy-block"><span class="copy-label">Sheet · Audit Oratória PSA</span>Palestrante | Tema/Especialidade | Empresas-cliente (últimos 12m) | Turmas/mês média | Ticket médio R$ | Receita anual estimada | Formato (in-company / aberto / online) | Disponibilidade pra parceria TBS | Notas / observações
+─── EXEMPLO ─────────────────────
+Tiago Brunet | Comunicação executiva | Itaú, BR Distribuidora, Stone | 2 | R$ 18.000 | R$ 432.000 | In-company | A entrevistar | Já fez ações com C-level
+Buchmann | Storytelling corporativo | XP, NuBank, Hospital Albert E. | 3 | R$ 25.000 | R$ 900.000 | Híbrido | Conversa preliminar OK | Tem método próprio formatado
+[Adicionar mais 10–15 linhas]</div>
+
+          <h5>Script de entrevista com palestrante PSA (15–20 min)</h5>
+          <p>Objetivo: validar volume, ticket, fit e abertura pra parceria. Roteiro conversacional.</p>
+
+          <div class="copy-block"><span class="copy-label">Script · Audit Oratória</span>Abertura (2 min)
+─────────
+"Oi [nome], obrigado pelo tempo. A gente tá mapeando uma oportunidade que parece já estar passando pela rede PSA mas a gente nunca consolidou. Queria entender melhor o que você faz nessa frente e ver se faz sentido pensarmos algo em conjunto. Posso te perguntar umas coisas rápidas, uns 15 min?"
+
+Bloco 1 · Operação atual (5 min)
+─────────
+1. Você dá treinamento de comunicação/oratória pra empresas hoje? Há quanto tempo?
+2. Qual é o formato típico? (workshop 1 dia, trilha de 8 semanas, mentoria 1:1, in-company)
+3. Quantas turmas/ações você fechou nos últimos 12 meses?
+4. Qual o ticket médio? (faixa, sem precisão)
+
+Bloco 2 · Mercado e demanda (5 min)
+─────────
+5. Quem te procura? (RH, marketing, CEO direto, agência intermediária)
+6. Qual a maior dor que essas empresas trazem?
+7. Você consegue dar mais turmas se houvesse pipeline pré-qualificado chegando pra você?
+8. Tem espaço pra escalar isso ou seu modelo é manual demais?
+
+Bloco 3 · Parceria TBS (5 min)
+─────────
+9. Se a PSA criasse uma marca/escola dedicada a isso (The Best School) e canalizasse demanda pra você como mentor sênior, isso te interessaria?
+10. Que tipo de modelo financeiro funcionaria pra você? (revenue share, fee fixo, equity da marca)
+
+Fechamento (2 min)
+─────────
+"Top, isso me ajudou bastante. Vou consolidar com 4–5 outros nomes e te volto em 2 semanas com uma proposta de formato. Posso te mandar 1 ou 2 perguntas pelo WhatsApp se aparecer algo nas próximas semanas?"</div>
+
+          <h5>Critério de priorização (quem entrevistar primeiro)</h5>
+          <ol>
+            <li><strong>Quem já fez muito treinamento corporativo</strong> via PSA (puxar do CRM ou perguntar pros comerciais)</li>
+            <li><strong>Nomes com fit de marca premium</strong> (executivo, C-level audience, não palestrante motivacional)</li>
+            <li><strong>Quem demonstrou abertura a parcerias</strong> em outras frentes da PSA</li>
+            <li><strong>Quem tem método/conteúdo já estruturado</strong> (acelera virada para TBS)</li>
+          </ol>
+
+          <h5>Saída esperada</h5>
+          <p>Documento de 1 página com:</p>
+          <ul>
+            <li>Receita anual <em>estimada</em> que já passa pela rede PSA em treinamento de oratória</li>
+            <li>3–5 palestrantes-âncora candidatos a virarem mentores TBS</li>
+            <li>Tese inicial de revenue split aceitável (ex.: 60% palestrante / 40% TBS)</li>
+            <li>Decisão: vale a pena ou o mercado adjacente é pequeno demais</li>
+          </ul>
+
+          <div class="blocker">
+            <h6>⚠ Depende de vocês</h6>
+            <p>Acesso ao CRM PSA para puxar lista inicial de palestrantes que mais fizeram treinamento corporativo nos últimos 12 meses. Sugerimos perguntar aos 2–3 comerciais sêniores: "quem mais bate na nossa porta pedindo treinamento de comunicação?". Esse atalho substitui o relatório do CRM.</p>
+          </div>
+
+          <div class="next-step">
+            <h6>Próximo passo concreto</h6>
+            <p>Hoje à tarde: criar o Sheet com a estrutura acima. Amanhã: 1 ligação rápida pro head comercial perguntando os 5–10 nomes. Em 48h: 5 entrevistas marcadas. Em 1 semana: documento de 1 página fechado e apresentado ao grupo de inovação.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- ====== TBS-03 ====== -->
+    <div class="action" id="action-tbs-03" data-hours="40" data-cost="15000" data-revenue="30000">
+      <div class="action-head">
+        <div class="action-title">
+          <div class="action-num">03</div>
+          <h4>Workshop pop-up pago de 1 dia</h4>
+        </div>
+        <div class="badges">
+          <span class="badge t-mid">Médio · 2–3 semanas</span>
+          <span class="badge s1">Sinal nível 1 (cliente paga)</span>
+          <label class="optin">
+            <input type="checkbox" data-action="tbs-03">
+            <span class="box"></span>
+            <span class="label">Selecionar</span>
+          </label>
+        </div>
+      </div>
+      <div class="action-grid">
+        <div class="action-cell"><div class="l">O que fazemos</div><div class="v">Workshop pago de 4–6h com palestrante PSA reconhecido. Plataforma: Sympla. R$497–R$1.997.</div></div>
+        <div class="action-cell"><div class="l">O que esperamos</div><div class="v">30 vagas em 14 dias = R$15–60k de caixa + base real de clientes pagantes para Concierge.</div></div>
+        <div class="action-cell"><div class="l">Como melhorar</div><div class="v">Palestrante com nome + tema nichado. Vagas limitadas com escassez visível. Upsell mentoria.</div></div>
+        <div class="action-cell full"><div class="l">Investimento estimado</div><div class="v"><b>~40h trabalho + cachê palestrante (R$3–15k) + tráfego (R$2–5k) = R$8–22k.</b> Mesmo no pior cenário cobre custo e gera dados.</div></div>
+      </div>
+
+      <details class="material">
+        <summary class="material-toggle">
+          <span class="label-row"><span class="icon">✓</span> Material já preparado · copy completo + emails + ads + agenda</span>
+          <span class="arrow">▾</span>
+        </summary>
+        <div class="material-body">
+
+          <h5>Tema sugerido (3 alternativas em ordem de força)</h5>
+          <ol>
+            <li><strong>"Pitch Executivo: como apresentar pra board, investidor e cliente em até 7 minutos"</strong> — nichado em alto cargo, vocabulário corporativo, dói no público certo. Ticket R$ 1.497.</li>
+            <li><strong>"Comunicação de Crise: o que dizer quando o cenário explode"</strong> — tema quente em 2026, atrai RH e diretores de comunicação. Ticket R$ 1.997.</li>
+            <li><strong>"Storytelling para Lideranças: contar histórias que mobilizam time"</strong> — mais soft, mais volume potencial. Ticket R$ 997.</li>
+          </ol>
+
+          <h5>Copy completo da landing page</h5>
+
+          <h6>Hero · Headline</h6>
+          <div class="copy-block"><span class="copy-label">H1 · LP Workshop</span>Pitch Executivo: apresente pra board, investidor e cliente em até 7 minutos.
+
+Workshop intensivo de 6 horas com [Nome do Palestrante], 30 vagas, sábado 14/jun.
+R$ 1.497 — 1ª turma. Próxima edição em setembro custa R$ 2.497.</div>
+
+          <h6>Subhead</h6>
+          <div class="copy-block"><span class="copy-label">Subhead</span>Você fala bem no 1:1 mas trava na reunião decisiva? Esse workshop não é sobre oratória.
+É sobre ter a tese pronta antes da reunião e a coragem de defender ela quando perguntam.</div>
+
+          <h6>3 bullets de promessa</h6>
+          <div class="copy-block"><span class="copy-label">Bullets</span>→ A estrutura de 7 minutos: como abrir, sustentar e fechar no tempo certo
+→ Como responder a pergunta hostil sem perder a tese (e sem dar a resposta errada)
+→ Os 4 erros que matam pitch de C-level — e que praticamente todos cometem</div>
+
+          <h6>Prova social / autoridade</h6>
+          <div class="copy-block"><span class="copy-label">Trust</span>Quem ministra: [Nome do palestrante PSA]
+Palestrante há [X] anos. Já apresentou para [empresa cliente reconhecida], [empresa cliente reconhecida], [empresa cliente reconhecida].
+Membro da rede PSA — +1.500 palestrantes profissionais.</div>
+
+          <h6>CTA principal</h6>
+          <div class="copy-block"><span class="copy-label">CTA</span>[Botão grande] Garantir uma das 30 vagas →
+Pagamento 1× R$1.497 ou 3× R$ 499. Pix com 10% off.
+Reembolso integral até 7 dias antes do evento, sem perguntar.</div>
+
+          <h5>Email 1 · Anúncio (D-21)</h5>
+          <div class="copy-block"><span class="copy-label">Email · Anúncio</span>Assunto: 30 vagas. R$1.497. Pitch executivo em 7 min.
+
+[Nome], oi.
+
+Sábado 14/jun a gente está abrindo a primeira edição de um workshop curto sobre uma coisa que ninguém ensina direito: como apresentar uma tese para board, investidor ou cliente em até 7 minutos sem perder a defesa.
+
+Quem ministra é [palestrante PSA], que faz isso há anos com C-level.
+
+6 horas, 30 vagas, R$1.497.
+
+Se você fica travado em reunião decisiva mesmo sendo bom no 1:1, vai te servir.
+
+[Garantir uma vaga →]
+
+Abraço,
+[seu nome]
+PSA</div>
+
+          <h5>Email 2 · Lembrete (D-7)</h5>
+          <div class="copy-block"><span class="copy-label">Email · D-7</span>Assunto: 7 dias pro Pitch Executivo. 8 vagas restantes.
+
+[Nome], só pra avisar — sobraram 8 vagas pro Workshop Pitch Executivo de sábado que vem.
+
+Quem se inscreveu até agora: head de marketing de [empresa], CFO de [empresa], 3 sócios de consultoria, 2 fundadores de startup.
+
+Esse é o tipo de gente que vai estar na sala. Se você quer estar do lado, ainda dá tempo.
+
+[Garantir vaga →]
+
+Pagamento 3x sem juros ou Pix com 10%.</div>
+
+          <h5>Email 3 · Última chamada (D-2)</h5>
+          <div class="copy-block"><span class="copy-label">Email · D-2</span>Assunto: 3 vagas. Sábado.
+
+[Nome], última.
+
+Sábado começa 9h. R$1.497. 3 vagas físicas.
+
+[Última vaga →]
+
+Se passar dessa, próxima edição é em setembro a R$ 2.497.</div>
+
+          <h5>3 variações de anúncio Instagram (A/B test)</h5>
+
+          <h6>Versão A · Pergunta provocativa</h6>
+          <div class="copy-block"><span class="copy-label">IG Ad · A</span>Você fala bem em 1 contra 1 mas trava na reunião decisiva?
+
+Não é oratória que falta. É estrutura.
+
+Workshop Pitch Executivo · 1 dia · 30 vagas · R$1.497
+14 de junho · com [palestrante PSA]
+
+→ Garantir vaga</div>
+
+          <h6>Versão B · Dor específica</h6>
+          <div class="copy-block"><span class="copy-label">IG Ad · B</span>O CFO perguntou. Você travou.
+A board reverteu sua proposta porque você não conseguiu defender.
+O investidor desinteressou no minuto 3.
+
+Sábado 14/jun, a gente conserta isso.
+
+Workshop Pitch Executivo · R$1.497 · 30 vagas
+
+→ Garantir vaga</div>
+
+          <h6>Versão C · Autoridade</h6>
+          <div class="copy-block"><span class="copy-label">IG Ad · C</span>[Palestrante PSA] passou 15 anos apresentando para conselho.
+Em 14 de junho, ele ensina a estrutura em 6 horas.
+
+30 vagas · R$1.497 · sábado
+
+→ Garantir vaga</div>
+
+          <h5>Agenda sugerida do workshop (6h)</h5>
+          <div class="copy-block"><span class="copy-label">Agenda · 14/jun</span>09:00 — Café de boas-vindas (15 min)
+09:15 — Bloco 1: A estrutura dos 7 minutos (90 min)
+       · Open · Tese · Sustentação · Fechamento
+       · Por que 7 min e não 5 nem 10
+10:45 — Coffee break (15 min)
+11:00 — Bloco 2: Defesa sob fogo (90 min)
+       · Como responder pergunta hostil
+       · Quando recuar e quando segurar a tese
+       · Simulação 1: cada aluno apresenta 3 min, sala desafia
+12:30 — Almoço (60 min, no local)
+13:30 — Bloco 3: Os 4 erros de C-level (60 min)
+       · Erro 1: começar pela conclusão
+       · Erro 2: jargão como muleta
+       · Erro 3: dado sem narrativa
+       · Erro 4: não fechar pedindo decisão
+14:30 — Bloco 4: Simulação final (90 min)
+       · Cada aluno apresenta 5 min com cenário real do trabalho
+       · Feedback individual gravado
+16:00 — Encerramento + upsell mentoria 1:1 (30 min)</div>
+
+          <h5>Pricing strategy (3 cenários)</h5>
+          <div class="data-grid cols-3">
+            <div class="data-card"><div class="l">Conservador</div><div class="v small">R$ 997 × 30</div><div class="sub">R$ 29.910 receita · ROI 36%</div></div>
+            <div class="data-card"><div class="l">Recomendado</div><div class="v small">R$ 1.497 × 30</div><div class="sub">R$ 44.910 receita · ROI 104%</div></div>
+            <div class="data-card"><div class="l">Premium</div><div class="v small">R$ 1.997 × 20</div><div class="sub">R$ 39.940 receita · seletivo</div></div>
+          </div>
+
+          <div class="blocker">
+            <h6>⚠ Depende de vocês</h6>
+            <p>(1) Escolha do palestrante âncora — sugestão: Buchmann, Caio Carneiro ou Tiago Brunet (ou similar). (2) Definição da data exata (sábado mais próximo a 4 semanas no futuro). (3) Aprovação do cachê do palestrante. (4) Definição do local (estúdio PSA ou espaço alugado em SP/POA).</p>
+          </div>
+
+          <div class="next-step">
+            <h6>Próximo passo concreto</h6>
+            <p>Esta semana: alinhar palestrante (1 ligação) + data + local. Semana 2: subir LP, anunciar nos canais PSA, ligar tráfego pago. Semana 3: D-21 do evento, primeiro disparo. Em 14 dias o sinal de mercado tá medido — com caixa entrando ou não.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- ====== TBS-04 ====== -->
+    <div class="action" id="action-tbs-04" data-hours="25" data-cost="2000" data-revenue="0">
+      <div class="action-head">
+        <div class="action-title">
+          <div class="action-num">04</div>
+          <h4>10 entrevistas qualitativas com RH/L&D</h4>
+        </div>
+        <div class="badges">
+          <span class="badge t-mid">Médio · 1–2 semanas</span>
+          <span class="badge s2">Sinal nível 4</span>
+          <label class="optin">
+            <input type="checkbox" data-action="tbs-04">
+            <span class="box"></span>
+            <span class="label">Selecionar</span>
+          </label>
+        </div>
+      </div>
+      <div class="action-grid">
+        <div class="action-cell"><div class="l">O que fazemos</div><div class="v">10 conversas 30–45 min com RH, head de L&D, sócios de empresa média.</div></div>
+        <div class="action-cell"><div class="l">O que esperamos</div><div class="v">Confirmar/destruir hipótese de que treinamento de comunicação é dor priorizada.</div></div>
+        <div class="action-cell"><div class="l">Como melhorar</div><div class="v">Recrutar via rede PSA + LinkedIn. Roteiro estruturado. Gravar e transcrever.</div></div>
+        <div class="action-cell full"><div class="l">Investimento estimado</div><div class="v"><b>~25h de trabalho · R$0–R$2k em ferramenta de transcrição.</b> Vale 1.000 surveys.</div></div>
+      </div>
+
+      <details class="material">
+        <summary class="material-toggle">
+          <span class="label-row"><span class="icon">✓</span> Material já preparado · script completo + outreach + framework</span>
+          <span class="arrow">▾</span>
+        </summary>
+        <div class="material-body">
+
+          <h5>Critério de recrutamento (perfil ideal)</h5>
+          <ul>
+            <li><strong>Cargo:</strong> Head de RH, Head de L&D, Head de Talent Development, Diretor de Pessoas. Em empresas pequenas: CEO ou COO.</li>
+            <li><strong>Porte da empresa:</strong> 100–2.000 funcionários. Acima disso, decisão é diluída; abaixo, não tem budget de treinamento.</li>
+            <li><strong>Setor:</strong> Diverso — banking, varejo, tecnologia, indústria, consultoria. Não cluster setorial.</li>
+            <li><strong>Região:</strong> Sudeste e Sul (onde está a base PSA). Evita complicar logística.</li>
+            <li><strong>Relação prévia:</strong> Preferir quem já comprou PSA, ou indicação direta. Cold outreach com cargo C-level tem 5% de taxa de resposta — não dá pra escalar.</li>
+          </ul>
+
+          <h5>Mensagem outreach LinkedIn (3 variações)</h5>
+
+          <h6>Versão A · Para quem já é cliente PSA</h6>
+          <div class="copy-block"><span class="copy-label">LinkedIn · A</span>Oi [nome], tudo bem? Sou [seu nome], faço parte do time de inovação da PSA — vocês trabalharam com a gente no [evento/ação X] em [data].
+
+Estamos desenhando uma nova frente sobre treinamento de comunicação executiva, e queria muito ouvir como vocês pensam essa pauta na [empresa]. 30 min de conversa, sem agenda comercial — só pra aprender com quem decide.
+
+Top pra você?</div>
+
+          <h6>Versão B · Cold outreach com referência</h6>
+          <div class="copy-block"><span class="copy-label">LinkedIn · B</span>Oi [nome], me indicaram seu nome como referência em L&D na [setor/região]. Sou [seu nome] da PSA — a gente trabalha com palestrantes corporativos há 5 anos.
+
+Estamos pesquisando o que empresas grandes estão olhando em comunicação executiva pra 2027. 30 min de conversa com 10 líderes de RH, sem agenda comercial. Aprendizado mútuo.
+
+Você toparia?</div>
+
+          <h6>Versão C · Curto e direto</h6>
+          <div class="copy-block"><span class="copy-label">LinkedIn · C</span>Oi [nome], pergunta rápida: vocês compram treinamento de comunicação/oratória pra liderança hoje? Tô fazendo 10 conversas de 30 min sobre o tema (PSA, sem agenda comercial). Vale conversar?</div>
+
+          <h5>Roteiro completo da entrevista (30–45 min)</h5>
+
+          <div class="copy-block"><span class="copy-label">Script · Entrevista RH/L&D</span>Abertura (3 min)
+─────────
+"Oi [nome], obrigado pelo tempo. Antes de começar, queria deixar uma coisa clara: não tô aqui vendendo nada. A PSA tá olhando uma nova frente e antes de gastar tempo construindo, queremos entender melhor como vocês pensam essa pauta. Se aparecer algo que faz sentido como conversa comercial depois, a gente combina separado. OK?
+
+Tudo gravado pra eu não tomar nota? Você prefere câmera aberta ou pode ser só áudio?"
+
+Bloco 1 · Como funciona o programa de desenvolvimento (10 min)
+─────────
+1. Conta um pouco do programa de treinamento e desenvolvimento de vocês hoje. O que vocês fazem nessa frente?
+2. Quem é o público-alvo principal? Lideranças? Gestores médios? Todo mundo?
+3. Como vocês decidem onde investir? Quem define a pauta — vocês, o CEO, demanda dos líderes?
+4. Qual é o orçamento anual de L&D, em termos de ordem de grandeza? (não precisa ser exato)
+
+Bloco 2 · Comunicação e oratória especificamente (15 min)
+─────────
+5. Vocês já contrataram treinamento de comunicação, oratória, pitch ou apresentação?
+   [SE SIM]
+   5.1 Com quem? Por quê com eles?
+   5.2 Qual foi o tema/abordagem?
+   5.3 Quanto custou?
+   5.4 Que avaliação ficou? Vocês contratariam de novo?
+   [SE NÃO]
+   5.5 Por que nunca contrataram? Não é prioridade? Não acharam fornecedor que serviu?
+6. Se você tivesse R$200k pra investir esse ano só em comunicação/oratória, em que gastaria?
+7. Qual é o nível em que comunicação mais dói pra vocês? CEO/diretoria, gestor médio, comercial, atendimento?
+8. Que sinais te dizem que alguém precisa de treinamento de comunicação? (qualquer coisa: feedback, NPS, performance, etc)
+
+Bloco 3 · O concorrente Vox2you (5 min)
+─────────
+9. Vocês conhecem ou já usaram Vox2you?
+   [SE SIM] O que funcionou e o que não funcionou?
+   [SE NÃO] Já ouviram falar?
+10. Qual outro fornecedor desse tipo vocês conhecem?
+
+Bloco 4 · A tese TBS (5 min — só agora apresenta)
+─────────
+"Pra contexto: a PSA tá pensando em montar uma escola de comunicação executiva, premium, com palestrantes da rede como mentores. Foco em pitch, comunicação de crise, storytelling pra liderança. Modelo principal: trilha de 8 semanas, R$ 8–15k por aluno, B2B in-company ou turmas abertas.
+
+11. Como soa pra você essa ideia?
+12. Que dúvida ou objeção te vem na cabeça primeiro?
+13. Se a gente desenhasse isso direito, vocês colocariam X% do budget aí?
+
+Fechamento (2 min)
+─────────
+"Top, isso ajudou muito. Eu posso te voltar daqui a 1 mês com o que evoluiu? E se vier algum nome de colega seu que também pensa essa pauta e poderia me ajudar com 30 min, mando o pedido pra você."</div>
+
+          <h5>Framework de síntese (planilha após entrevistas)</h5>
+          <div class="copy-block"><span class="copy-label">Sheet · Síntese Entrevistas TBS</span>Entrevistado | Empresa | Cargo | Setor | Já comprou treinamento de comunicação? | Fornecedor anterior | Ticket médio pago | Maior dor mencionada | Reação à tese TBS (1–5) | Comprariam? (1–5) | Citação-chave | Conexões indicadas
+─── Sintetizar em 3 perguntas finais ───
+1. Quais 3 dores aparecem em 5+ das 10 entrevistas?
+2. Qual ticket apareceu mais? (média e mediana)
+3. Quais palavras o cliente usou pra descrever a dor? (copy do produto sai daí)</div>
+
+          <h5>Tag/coding system (codificar respostas)</h5>
+          <ul>
+            <li><code>#dor-pitch</code> — dificuldade em apresentar pra board/cliente</li>
+            <li><code>#dor-crise</code> — comunicação em momento difícil</li>
+            <li><code>#dor-feedback</code> — gestor que não sabe dar feedback</li>
+            <li><code>#dor-presença</code> — falta de "presença executiva"</li>
+            <li><code>#objeção-preço</code> — "caro demais"</li>
+            <li><code>#objeção-tempo</code> — "ninguém tem 8 semanas"</li>
+            <li><code>#objeção-online</code> — "isso só funciona presencial"</li>
+            <li><code>#sinal-positivo</code> — entrevistado pediu pra ser avisado quando lançar</li>
+          </ul>
+
+          <div class="blocker">
+            <h6>⚠ Depende de vocês</h6>
+            <p>(1) Lista inicial de 20–30 candidatos a entrevistar (sócios, comerciais e marketing PSA ajudam a montar). (2) Confirmação de quem do grupo de inovação vai conduzir as entrevistas — recomendo 1 pessoa fixa pra manter consistência metodológica.</p>
+          </div>
+
+          <div class="next-step">
+            <h6>Próximo passo concreto</h6>
+            <p>Esta semana: montar lista de 30 candidatos. Mandar 30 mensagens LinkedIn na segunda. Confirmar 10 reuniões pra próxima semana. Rodar entrevistas em 5–7 dias úteis. Síntese e apresentação ao grupo de inovação na 3ª semana.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- ====== TBS-05 ====== -->
+    <div class="action" id="action-tbs-05" data-hours="60" data-cost="12000" data-revenue="20000">
+      <div class="action-head">
+        <div class="action-title">
+          <div class="action-num">05</div>
+          <h4>Concierge MVP — 1 turma de 5 alunos</h4>
+        </div>
+        <div class="badges">
+          <span class="badge t-long">Longo · 6–8 semanas</span>
+          <span class="badge s1">Sinal nível 1 (cliente paga)</span>
+          <label class="optin">
+            <input type="checkbox" data-action="tbs-05">
+            <span class="box"></span>
+            <span class="label">Selecionar</span>
+          </label>
+        </div>
+      </div>
+      <div class="action-grid">
+        <div class="action-cell"><div class="l">O que fazemos</div><div class="v">Primeira turma da TBS na unha: 5 alunos pagantes em programa de 8 semanas com mentoria 1:1 + 4 encontros em grupo.</div></div>
+        <div class="action-cell"><div class="l">O que esperamos</div><div class="v">R$15–25k de caixa + aprendizado profundo + NPS desses 5 vira combustível pra captação da turma 2.</div></div>
+        <div class="action-cell"><div class="l">Como melhorar</div><div class="v">Curriculum estruturado. Gravar TODAS as sessões. Pedir referral ao final.</div></div>
+        <div class="action-cell full"><div class="l">Investimento estimado</div><div class="v"><b>~60h de trabalho + 1 mentor sênior (R$8–15k).</b> Receita R$15–25k, ROI direto positivo.</div></div>
+      </div>
+
+      <details class="material">
+        <summary class="material-toggle">
+          <span class="label-row"><span class="icon">✓</span> Material já preparado · currículo 8 semanas + application + onboarding</span>
+          <span class="arrow">▾</span>
+        </summary>
+        <div class="material-body">
+
+          <h5>Currículo de 8 semanas (1 tema por semana)</h5>
+          <div class="copy-block"><span class="copy-label">Currículo · Concierge MVP TBS</span>Semana 1 · Diagnóstico de comunicação executiva
+        Encontro 1:1 (60 min) com cada aluno — diagnóstico individual gravado
+        Conteúdo do mentor: "O modelo dos 4 pilares da presença executiva"
+        Tarefa: gravar pitch de 3 min apresentando o trabalho atual
+
+Semana 2 · A estrutura da tese
+        Grupo (90 min) · primeira sessão coletiva
+        Conteúdo: "Open · Tese · Sustentação · Fechamento"
+        Tarefa: reestruturar o pitch da semana 1 nessa estrutura
+
+Semana 3 · Storytelling executivo
+        1:1 (45 min) com cada aluno
+        Conteúdo do mentor: "Como dado vira história"
+        Tarefa: 1 case de trabalho real virou narrativa de 2 min
+
+Semana 4 · Pergunta hostil e defesa sob fogo
+        Grupo (90 min) · sessão prática intensa
+        Conteúdo: simulação de board com perguntas críticas
+        Tarefa: gravar resposta a 5 perguntas críticas pré-enviadas
+
+Semana 5 · Presença física e voz
+        1:1 (60 min) com mentor convidado especialista (não o mentor principal)
+        Conteúdo: postura, respiração, pausa, ritmo
+        Tarefa: regravar pitch da semana 2 aplicando os ajustes
+
+Semana 6 · Comunicação escrita (memo, email C-level)
+        Grupo (90 min)
+        Conteúdo: "O memo de 1 página · estrutura BLUF"
+        Tarefa: escrever 1 memo real do trabalho seguindo template
+
+Semana 7 · Apresentação final · ensaio
+        1:1 (60 min) com mentor para ensaio do pitch final
+        Cada aluno tem 5 min pra apresentar tese final do programa
+
+Semana 8 · Apresentação final · público
+        Grupo (3h) · evento de fechamento
+        Cada aluno apresenta 5 min para audiência convidada (família, time, mentores)
+        Feedback individual gravado
+        Entrega do certificado físico + roteiro de continuidade</div>
+
+          <h5>Pricing (3 tiers)</h5>
+          <div class="data-grid cols-3">
+            <div class="data-card"><div class="l">Standard</div><div class="v small">R$ 3.997</div><div class="sub">Grupo + 2 sessões 1:1</div></div>
+            <div class="data-card"><div class="l">Premium (recomendado)</div><div class="v small">R$ 5.997</div><div class="sub">Grupo + 5 sessões 1:1 + gravações</div></div>
+            <div class="data-card"><div class="l">VIP</div><div class="v small">R$ 9.997</div><div class="sub">Tudo + mentor próprio + intensivo presencial</div></div>
+          </div>
+          <p style="font-size:13px;color:var(--ink-3)">Meta: 5 alunos no Premium = R$ 29.985 bruto. Custos: mentor (R$8–12k) + estúdio/Zoom Pro (R$500) + materiais (R$500). Lucro líquido ~R$17–20k da turma 1.</p>
+
+          <h5>Application form (perguntas pra triagem)</h5>
+          <div class="copy-block"><span class="copy-label">Application · Concierge TBS</span>1. Nome completo
+2. E-mail e WhatsApp
+3. Empresa atual e cargo
+4. Em 3 linhas: por que você quer fazer esse programa AGORA?
+5. Qual situação específica você quer ser melhor em comunicar? (board, time, cliente, investidor, mídia)
+6. Quando foi a última vez que você apresentou pra um grupo de 10+ pessoas?
+7. O que mais te frustra na sua comunicação atual?
+8. Qual investimento você fez em desenvolvimento pessoal nos últimos 12 meses?
+9. Disponibilidade: 2h/semana de programa + 3h/semana de tarefa. Cabe?
+10. Como você soube da TBS?
+
+[Triagem pelo time TBS — não aceitar todos. Critério: maturidade da resposta nas perguntas 4-7]</div>
+
+          <h5>Welcome email (D-0, pós-pagamento)</h5>
+          <div class="copy-block"><span class="copy-label">Email · Welcome</span>Assunto: Bem-vindo à turma piloto da The Best School
+
+[Nome], confirmado.
+
+Você é um dos 5 da primeira turma da TBS. Estamos honrados — vocês 5 vão ajudar a definir como esse programa funciona pras próximas turmas.
+
+Próximos passos:
+1. Bloco 1:1 de 60 min com [mentor] na semana 1 — link abaixo pra escolher horário
+2. Pré-tarefa: grave um pitch de 3 min apresentando seu trabalho atual e mande pelo link X. Sem produção, áudio do celular. Isso vai servir de baseline.
+3. Grupo de WhatsApp da turma: [link]. Acesso primeiro a tudo, contato direto com [mentor].
+
+[Calendar link]
+
+Qualquer dúvida, responde esse email.
+
+[seu nome]
+TBS / PSA</div>
+
+          <h5>NPS + upsell (D+56, fim da turma)</h5>
+          <div class="copy-block"><span class="copy-label">NPS · Fim do programa</span>Assunto: 1 pergunta · NPS da turma 1 TBS
+
+[Nome], turma 1 fechada.
+
+Você acabou. Antes da gente seguir, 1 pergunta:
+
+"Em uma escala de 0 a 10, o quanto você indicaria a TBS pra um colega de cargo similar?"
+
+[Botão: 0]  [1]  [2]  ...  [10]
+
+E uma resposta livre: "Em 1 linha, o que mais te ajudou?"
+
+Próxima turma abre em [data]. Como aluno fundador, você tem 2 cupons de R$ 1.000 de desconto pra indicar — link aqui.
+
+Obrigado pela aposta.
+[seu nome]</div>
+
+          <h5>Assets a coletar durante a turma</h5>
+          <ul>
+            <li><strong>Gravações</strong> de todas as sessões 1:1 e grupo (vira asset de curso futuro)</li>
+            <li><strong>Pitches dos alunos</strong> antes e depois (vira case de marketing autorizado)</li>
+            <li><strong>Depoimentos em vídeo</strong> na semana 8 (3 min por aluno, gravado profissional)</li>
+            <li><strong>NPS + comentário livre</strong> final</li>
+            <li><strong>Lista de referrals</strong> que cada aluno indica</li>
+          </ul>
+
+          <div class="blocker">
+            <h6>⚠ Depende de vocês</h6>
+            <p>(1) Confirmar mentor principal e cachê (depende de TBS-02). (2) Decidir se primeira turma é online, híbrida ou presencial (recomendo híbrida: 1:1 online + 2 encontros presenciais SP/POA). (3) Definir critério de quem entra na turma 1 — recomendo manualmente, não automático: vocês triam aplicações.</p>
+          </div>
+
+          <div class="next-step">
+            <h6>Próximo passo concreto</h6>
+            <p>Mês 1: confirmar mentor, publicar application form, captação da turma. Mês 2 (semana 4 do plano): turma rodando. Mês 3 (semana 8 do plano): NPS final, vídeos prontos, captação da turma 2 já aberta usando os depoimentos da 1.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+
+  </div>
+
+  <div class="roadmap">
+    <h4>Roadmap TBS · 8 semanas</h4>
+    <div class="timeline">
+      <div class="phase p1"><div class="when">Semana 1–2</div><div class="what">Mineração Vox2you + Audit interno</div><div class="out">Tese de diferenciação + adjacência já passando pela rede.</div></div>
+      <div class="phase p2"><div class="when">Semana 2–3</div><div class="what">Workshop pop-up no ar</div><div class="out">Caixa + clientes reais pra recrutar Concierge.</div></div>
+      <div class="phase p3"><div class="when">Semana 3–4</div><div class="what">10 entrevistas qualitativas</div><div class="out">Vocabulário e dores do cliente.</div></div>
+      <div class="phase p4"><div class="when">Semana 4–8</div><div class="what">Concierge MVP turma 1</div><div class="out">5 clientes pagando · case validado.</div></div>
+    </div>
+  </div>
+
+  <!-- ============================================ CERT ============================================ -->
+  <h2><span class="num">3</span>Certificação PSA</h2>
+  <p class="section-sub">Certificação para empresas que indicam PSA · CDLs, agências, advogados, associações</p>
+
+  <div class="product-header">
+    <span class="product-badge cert">CERT</span>
+    <span style="color:var(--ink-3);font-size:13px">5 ações · ~205h · 8 semanas</span>
+  </div>
+
+  <div class="diag">
+    <div class="card r">
+      <h4>O que fazemos hoje</h4>
+      <ul>
+        <li>3 LPs no ar (CDL, Agência, Outros) com form de 5 perguntas</li>
+        <li>43 views totais nos forms, 0 envios reais, 6 spam</li>
+        <li>Aguardando respostas pra calibrar formato e modelo comercial</li>
+        <li>Sem partner pilot, sem LOI assinada, sem indicação real gerada</li>
+      </ul>
+    </div>
+    <div class="card a">
+      <h4>O que esperávamos</h4>
+      <ul>
+        <li>Identificar empresas-parceiras dispostas a se certificar e indicar PSA</li>
+        <li>Validar disposição a pagar (ou aceitar contrapartida)</li>
+        <li>Mapear funcionalidades obrigatórias da plataforma de certificação</li>
+        <li>Dimensionar pipeline de indicações em potencial</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:36px">5 ações de recuperação · material pronto</h3>
+
+  <div class="actions">
+
+    <!-- ====== CERT-01 ====== -->
+    <div class="action" id="action-cert-01" data-hours="10" data-cost="0" data-revenue="0">
+      <div class="action-head">
+        <div class="action-title">
+          <div class="action-num">01</div>
+          <h4>Audit de parceiros que já indicam PSA</h4>
+        </div>
+        <div class="badges">
+          <span class="badge t-quick">Quick win · 3–5 dias</span>
+          <span class="badge s1">Sinal nível 1 (existente)</span>
+          <label class="optin">
+            <input type="checkbox" data-action="cert-01">
+            <span class="box"></span>
+            <span class="label">Selecionar</span>
+          </label>
+        </div>
+      </div>
+      <div class="action-grid">
+        <div class="action-cell"><div class="l">O que fazemos</div><div class="v">Mapear quem indica clientes para PSA hoje. Quantos, quanto fecham/ano, que tipo de empresa.</div></div>
+        <div class="action-cell"><div class="l">O que esperamos</div><div class="v">5–20 parceiros informais já existem. Candidatos óbvios para v1 da certificação.</div></div>
+        <div class="action-cell"><div class="l">Como melhorar</div><div class="v">Entrevistar 3 parceiros sobre POR QUE indicam — desenha o modelo.</div></div>
+        <div class="action-cell full"><div class="l">Investimento estimado</div><div class="v"><b>~10h de trabalho · R$0 de custo.</b> Lista nominal de parceiros + matriz de motivações redefine o produto.</div></div>
+      </div>
+
+      <details class="material">
+        <summary class="material-toggle">
+          <span class="label-row"><span class="icon">✓</span> Material já preparado · estrutura de planilha + script "por que indica"</span>
+          <span class="arrow">▾</span>
+        </summary>
+        <div class="material-body">
+
+          <h5>Estrutura de planilha para mapeamento</h5>
+          <div class="copy-block"><span class="copy-label">Sheet · Audit Parceiros Indicadores</span>Empresa parceira | Categoria (CDL/Agência/Advogado/Associação/Outro) | Contato decisor | Como nos conheceu | Indicações geradas em 12m | Valor fechado a partir das indicações | Frequência (1x, mensal, recorrente) | Tipo de cliente que indica (perfil) | Já recebeu algo em troca? (cachê, % comissão, gentileza) | Relação (1–5) | Abertura pra parceria formal (1–5)
+─── EXEMPLO ─────────────────────
+CDL Caxias | CDL | João Silva (diretor) | Evento conjunto 2024 | 3 | R$ 75.000 | 1 a cada 4 meses | Empresas locais 100–500 func | Não | 5 | 5
+Agência ABC | Agência marketing | Maria S (sócia) | Comercial Renan | 7 | R$ 180.000 | Mensal | Eventos corporativos médio porte | 10% comissão informal | 4 | 4
+[Adicionar mais 5–20 linhas]</div>
+
+          <h5>Script de entrevista com parceiro atual (20 min)</h5>
+          <p>Foco: descobrir POR QUE indica. A resposta é o coração do produto Certificação.</p>
+
+          <div class="copy-block"><span class="copy-label">Script · Por que indica</span>Abertura (2 min)
+─────────
+"Oi [nome], obrigado pelo tempo. A gente percebeu que você tem indicado clientes pra PSA com frequência e isso pra nós é muito valioso. Eu queria entender melhor o que te motiva a fazer isso. Não é venda — é genuína curiosidade pra desenhar uma frente nova com você como referência. 20 min, posso?"
+
+Bloco 1 · Motivação (10 min)
+─────────
+1. Como funciona pra você indicar um fornecedor pra cliente seu? O que você considera?
+2. Por que a PSA passou nesse filtro? O que te dá confiança em indicar?
+3. Quando você indica, o que você ganha? (financeiro, prestígio, gratidão, nenhum dos três)
+4. Tem fornecedor parecido que você JÁ NÃO indica mais? Por quê parou?
+
+Bloco 2 · O que melhoraria (5 min)
+─────────
+5. Se a PSA criasse um programa formal de certificação pra parceiros como você, o que você gostaria que tivesse?
+6. O que NÃO pode ter de jeito nenhum? (red flags)
+7. Faria sentido aparecer publicamente como "parceiro certificado PSA"?
+
+Bloco 3 · Fechamento (3 min)
+─────────
+8. Em escala 1 a 5, você toparia entrar como Founding Partner numa primeira leva?
+9. Quem mais você conhece que indica fornecedor desse jeito e poderia conversar comigo?</div>
+
+          <h5>Matriz de motivações (preencher após 3 entrevistas)</h5>
+          <div class="copy-block"><span class="copy-label">Matriz · Motivação parceiros</span>Motivação | Parceiro 1 | Parceiro 2 | Parceiro 3 | Frequência
+Comissão financeira | sim/não | sim/não | sim/não | X/3
+Prestígio / status público | sim/não | sim/não | sim/não | X/3
+Reciprocidade (PSA também indica eles) | sim/não | sim/não | sim/não | X/3
+Gratidão / relação pessoal | sim/não | sim/não | sim/não | X/3
+Acesso a conteúdo / network PSA | sim/não | sim/não | sim/não | X/3
+
+─── A motivação mais frequente vira a base do modelo da certificação ───
+Ex.: se 3/3 falam "comissão", modelo é revenue share.
+Ex.: se 3/3 falam "prestígio", modelo é selo + listagem pública sem dinheiro.
+Ex.: se 3/3 falam "reciprocidade", modelo é troca de leads bidirecional.</div>
+
+          <div class="blocker">
+            <h6>⚠ Depende de vocês</h6>
+            <p>(1) Acesso a comerciais e palestrantes da PSA pra perguntar quem indica clientes. (2) Decisão de quem entrevista (recomendo Arthur ou um sócio, pra dar peso à conversa).</p>
+          </div>
+
+          <div class="next-step">
+            <h6>Próximo passo concreto</h6>
+            <p>Hoje: Sheet criado. Amanhã: 3 ligações curtas pros comerciais sêniores listando indicadores. Em 48h: 5–10 parceiros mapeados. Em 1 semana: 3 entrevistas rodadas + matriz de motivações fechada.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- ====== CERT-02 ====== -->
+    <div class="action" id="action-cert-02" data-hours="15" data-cost="500" data-revenue="0">
+      <div class="action-head">
+        <div class="action-title">
+          <div class="action-num">02</div>
+          <h4>Reverse market mapping (50 → 10)</h4>
+        </div>
+        <div class="badges">
+          <span class="badge t-mid">Médio · 1–2 semanas</span>
+          <span class="badge s3">Sinal nível 3 (resposta a pitch)</span>
+          <label class="optin">
+            <input type="checkbox" data-action="cert-02">
+            <span class="box"></span>
+            <span class="label">Selecionar</span>
+          </label>
+        </div>
+      </div>
+      <div class="action-grid">
+        <div class="action-cell"><div class="l">O que fazemos</div><div class="v">Listar 50 empresas-alvo. Priorizar 10. Ligar ou marcar reunião direta — sem form.</div></div>
+        <div class="action-cell"><div class="l">O que esperamos</div><div class="v">Resposta direta a pitch verbal. Identificar 3–5 candidatos quentes pra Partner Pilot.</div></div>
+        <div class="action-cell"><div class="l">Como melhorar</div><div class="v">Priorizar por proximidade + book de clientes + afinidade prévia. Levar protótipo visual.</div></div>
+        <div class="action-cell full"><div class="l">Investimento estimado</div><div class="v"><b>~15h de trabalho · R$0–R$500 em ferramentas.</b> Saída: pipeline qualificado de 3–5 prospects.</div></div>
+      </div>
+
+      <details class="material">
+        <summary class="material-toggle">
+          <span class="label-row"><span class="icon">✓</span> Material já preparado · lista de 50 alvos + script de ligação + email</span>
+          <span class="arrow">▾</span>
+        </summary>
+        <div class="material-body">
+
+          <h5>Lista de 50 alvos por categoria (refinar com PSA)</h5>
+
+          <h6>CDLs (15 alvos · priorizar Sul e Sudeste)</h6>
+          <div class="copy-block"><span class="copy-label">CDLs · 15 alvos</span>1.  CDL Caxias do Sul (RS)        — relação prévia provável, base ativa
+2.  CDL Porto Alegre (RS)         — capital, grande book
+3.  CDL Florianópolis (SC)
+4.  CDL Curitiba (PR)
+5.  CDL Joinville (SC)
+6.  CDL São Paulo (SP)            — grande, mas distante e político
+7.  CDL Campinas (SP)
+8.  CDL Belo Horizonte (MG)
+9.  CDL Goiânia (GO)
+10. CDL Recife (PE)
+11. CDL Salvador (BA)
+12. CDL Brasília (DF)
+13. CDL Maringá (PR)
+14. CDL Ribeirão Preto (SP)
+15. CDL Londrina (PR)
+
+Critério: as 5 primeiras são prioridade.</div>
+
+          <h6>Agências de marketing/eventos (15 alvos)</h6>
+          <div class="copy-block"><span class="copy-label">Agências · 15 alvos</span>1.  Top 5 agências de eventos corporativos do Sul/Sudeste (consultar ABEOC)
+2.  Top 10 agências de marketing B2B com cliente C-level (consultar ANJ ou ranking Meio&Mensagem)
+3.  Agências que produzem convenções (Estapar, BR Distribuidora, redes varejistas)
+4.  Produtoras independentes que entregam para C-level
+5.  Agências de comunicação corporativa (PR + treinamento integrado)
+
+[Listar nominalmente as 15 priorizadas após consulta com comerciais PSA]</div>
+
+          <h6>Escritórios de advocacia (10 alvos)</h6>
+          <div class="copy-block"><span class="copy-label">Advocacia · 10 alvos</span>1. Escritórios full-service com book corporativo (não advocacia de massa)
+2. Marcas regionais com 30–200 advogados
+3. Sócios que falam em eventos / aparecem na mídia (mais propensos a valorizar a marca)
+4. Escritórios que atendem startups e scaleups (mais culturalmente abertos)
+
+Exemplos de perfil ideal:
+- Stocche Forbes, Mattos Filho, BMA, Pinheiro Neto (top tier · difícil acesso)
+- Lefosse, Cescon, Demarest (top mid · viável)
+- Escritórios médios regionais do Sul/Sudeste (maior fit + maior probabilidade de fechar)</div>
+
+          <h6>Associações setoriais (10 alvos)</h6>
+          <div class="copy-block"><span class="copy-label">Associações · 10 alvos</span>1. FIESP, FIRJAN, FIESC, FIEP — federações de indústria
+2. ABRAS (supermercados), ABRAFARMA (farmácias), ABRH (RH)
+3. Associações de franchising (ABF)
+4. Câmaras de comércio bilaterais (Brasil-USA, Brasil-Alemanha)
+5. Associações de classe (CRECI, CRA, CFA, CFC)
+
+Critério: associações com programa de educação executiva pra associados (essas já compram palestra hoje).</div>
+
+          <h5>Critério de priorização (50 → 10)</h5>
+          <ol>
+            <li><strong>Proximidade geográfica e cultural:</strong> Sul/Sudeste, capitais que vocês já têm trânsito</li>
+            <li><strong>Tamanho do book de clientes:</strong> mais clientes do parceiro = mais indicações em potencial</li>
+            <li><strong>Afinidade prévia:</strong> alguém da PSA já fala com eles? prioridade máxima</li>
+            <li><strong>Cultura aberta a parceria:</strong> empresas que já têm programas de parceiro ou afiliado</li>
+            <li><strong>Visibilidade pública:</strong> presença em mídia, conferências — valorizam selo público</li>
+          </ol>
+
+          <h5>Script de ligação (2 min · cold call adaptado)</h5>
+          <div class="copy-block"><span class="copy-label">Cold call · 2 min</span>"[Nome do contato]? Aqui é [seu nome] da PSA, plataforma de palestrantes — a gente trabalha com [exemplo de cliente reconhecido por eles].
+
+Tô te ligando porque a gente tá lançando um programa fechado de Certificação pra empresas como a sua. A ideia é: vocês indicam PSA pros seus clientes em momentos relevantes, ganham comissão e selo público de 'parceiro certificado'. A gente tá fechando os 3 primeiros parceiros agora.
+
+Antes de te mandar material — você tem 15 min essa semana pra eu te apresentar a tese e ver se faz sentido?
+
+[Aguarda]
+
+→ SIM: 'Top, agendo agora. Manhã ou tarde?'
+→ NÃO TENHO TEMPO: 'Sem problema, posso mandar 1 página de resumo e você me responde?'
+→ NÃO TENHO INTERESSE: 'Entendo. Posso te perguntar 1 coisa pra eu não errar nas próximas — o que faria você considerar?'"</div>
+
+          <h5>Email follow-up (D+1 pós-ligação)</h5>
+          <div class="copy-block"><span class="copy-label">Email · Follow-up call</span>Assunto: PSA Certificação · Resumo de 1 página
+
+[Nome], como combinamos na ligação.
+
+Em 1 página:
+
+→ O que é: Programa de Certificação PSA para empresas que indicam fornecedores premium (palestrantes, eventos, treinamento) pros seus clientes.
+
+→ Como funciona: vocês ganham (a) comissão sobre fechamento via indicação, (b) selo público de Parceiro Certificado, (c) acesso preferencial à rede PSA.
+
+→ Pra quem: estamos fechando 3 Founding Partners agora. CDL, agência, escritório ou associação com book de cliente corporativo.
+
+→ Tempo de vocês: 1 reunião inicial (1h), assinatura de termsheet (não contrato), e a partir daí indicações fluem orgânicas.
+
+[Link · marcar reunião de 30 min]
+
+[seu nome]
+PSA</div>
+
+          <div class="blocker">
+            <h6>⚠ Depende de vocês</h6>
+            <p>(1) Refinar a lista de 50 com input dos comerciais — alguns nomes vão sair, outros entrar. (2) Decidir quem faz as 10 ligações (1 pessoa fixa pra consistência). (3) Aprovação do modelo comercial (% comissão sugerida) antes de oferecer.</p>
+          </div>
+
+          <div class="next-step">
+            <h6>Próximo passo concreto</h6>
+            <p>Semana 1: refinar lista + priorizar 10. Semana 2: 10 ligações distribuídas em 5 dias úteis. Semana 3: 3–5 reuniões agendadas. Cada reunião pode virar entrevista qualitativa (CERT-03) e/ou pitch de LOI (CERT-04).</p>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- ====== CERT-03 ====== -->
+    <div class="action" id="action-cert-03" data-hours="30" data-cost="1500" data-revenue="0">
+      <div class="action-head">
+        <div class="action-title">
+          <div class="action-num">03</div>
+          <h4>10 entrevistas qualitativas profundas</h4>
+        </div>
+        <div class="badges">
+          <span class="badge t-mid">Médio · 2 semanas</span>
+          <span class="badge s2">Sinal nível 4</span>
+          <label class="optin">
+            <input type="checkbox" data-action="cert-03">
+            <span class="box"></span>
+            <span class="label">Selecionar</span>
+          </label>
+        </div>
+      </div>
+      <div class="action-grid">
+        <div class="action-cell"><div class="l">O que fazemos</div><div class="v">10 conversas 30–45 min com decisores das categorias-alvo. Sem mencionar PSA até o último bloco.</div></div>
+        <div class="action-cell"><div class="l">O que esperamos</div><div class="v">Entender como geram negócio e o que ELES ganhariam indicando. Validar tese.</div></div>
+        <div class="action-cell"><div class="l">Como melhorar</div><div class="v">Gravar e transcrever. Padrões repetidos viram requisitos. Apresentar tese só no final.</div></div>
+        <div class="action-cell full"><div class="l">Investimento estimado</div><div class="v"><b>~30h de trabalho · R$500–R$2k em transcrição.</b> Saída: hipóteses validadas + features obrigatórias.</div></div>
+      </div>
+
+      <details class="material">
+        <summary class="material-toggle">
+          <span class="label-row"><span class="icon">✓</span> Material já preparado · roteiro 3 fases + outreach</span>
+          <span class="arrow">▾</span>
+        </summary>
+        <div class="material-body">
+
+          <h5>Mensagem outreach (LinkedIn ou e-mail)</h5>
+          <div class="copy-block"><span class="copy-label">Outreach · Cert qualitativa</span>Oi [nome],
+
+Sou [seu nome] da PSA. Estamos pesquisando como [CDLs/agências/escritórios/associações] como a [empresa] geram valor pros seus clientes hoje — quero entender melhor o ecossistema antes de qualquer conversa comercial.
+
+São 30 min de conversa exploratória, sem agenda de venda. Já fizemos isso com [exemplo de empresa similar caso tenha], e o aprendizado tem sido grande dos dois lados.
+
+Pode ser na próxima semana?</div>
+
+          <h5>Roteiro completo · 3 fases (40 min)</h5>
+          <div class="copy-block"><span class="copy-label">Script · Entrevista Cert qualitativa</span>Abertura (3 min)
+─────────
+"Oi [nome], obrigado por aceitar. Antes de tudo — não é uma conversa comercial. A PSA tá explorando como empresas como a sua agregam valor aos clientes hoje, e queremos aprender. Se aparecer algo que faz sentido comercial depois, agendamos separado. Posso gravar pra eu não tomar nota?"
+
+Fase 1 · CONTEXTO (12 min)
+─────────
+1. Conta um pouco do dia a dia da [empresa]. Qual é o produto/serviço core que vocês entregam pra cliente?
+2. Quantos clientes ativos vocês têm hoje, em ordem de grandeza?
+3. Qual é a frequência típica de interação com cada cliente? (mensal, trimestral, eventual)
+4. Como vocês são percebidos pelo cliente? Fornecedor, consultor, parceiro estratégico?
+
+Fase 2 · DOR E COMPORTAMENTO (15 min)
+─────────
+5. Quando seu cliente precisa de um serviço que vocês não entregam diretamente, o que vocês fazem?
+   [DEIXA ELE FALAR LIVRE — É AQUI QUE TÁ A OURO]
+6. Vocês já indicam fornecedor pro seu cliente hoje? Em que situações?
+   [SE SIM] → Que tipo de fornecedor? Como escolhem quem indicar? O que vocês ganham?
+   [SE NÃO] → Por que não? É falta de fornecedor confiável ou risco percebido?
+7. Já aconteceu de uma indicação dar errado? O que aconteceu?
+8. Se você pudesse oferecer 1 serviço a mais hoje sem precisar entregar você mesmo, qual seria?
+
+Fase 3 · TESE PSA (10 min — só agora apresenta)
+─────────
+"Pra contexto: estamos desenhando um programa de Certificação PSA. Empresas como a sua, com book de cliente corporativo, virariam Parceiras Certificadas — vocês indicariam PSA em momentos relevantes, recebem comissão sobre fechamento + selo público + acesso preferencial à nossa rede.
+
+9. Como soa pra você?
+10. Que objeção te vem na cabeça primeiro?
+11. Numa escala 1–5, você se imagina aceitando entrar como Founding Partner?
+12. Se sim, o que precisaria estar claro pra você assinar uma carta de intenção sem dinheiro envolvido?
+
+Fechamento (2 min)
+─────────
+"Top, isso ajudou demais. Eu volto com você em 2–3 semanas com o que evoluiu. Posso te chamar pra um próximo passo se fizer sentido pros dois lados?"</div>
+
+          <h5>Framework de síntese · 3 perguntas finais</h5>
+          <ol>
+            <li><strong>Qual padrão de motivação se repete em 6+ das 10?</strong> (comissão? prestígio? reciprocidade?) → Define modelo comercial.</li>
+            <li><strong>Quais 3 objeções aparecem em metade ou mais?</strong> → Define o que precisa estar resolvido na v1.</li>
+            <li><strong>Quantos dos 10 toparam ouvir sobre Founding Partner?</strong> → Pipeline real pra LOIs (CERT-04).</li>
+          </ol>
+
+          <h5>Tag/coding system</h5>
+          <ul>
+            <li><code>#motivacao-comissao</code> · <code>#motivacao-prestigio</code> · <code>#motivacao-reciprocidade</code> · <code>#motivacao-acesso</code></li>
+            <li><code>#objecao-marca</code> · <code>#objecao-tempo</code> · <code>#objecao-conflito-cliente</code> · <code>#objecao-modelo</code></li>
+            <li><code>#sinal-quente</code> (perguntou quando começa) · <code>#sinal-morno</code> (educado) · <code>#sinal-frio</code> (não vê fit)</li>
+          </ul>
+
+          <div class="blocker">
+            <h6>⚠ Depende de vocês</h6>
+            <p>(1) Lista de 20 candidatos a entrevistar (sai do reverse market mapping CERT-02 + audit de parceiros CERT-01). (2) 1 pessoa fixa do grupo de inovação pra conduzir (consistência metodológica). (3) Ferramenta de transcrição (Otter, Tactiq, Fireflies — R$200/mês resolve).</p>
+          </div>
+
+          <div class="next-step">
+            <h6>Próximo passo concreto</h6>
+            <p>Semana 1: 20 mensagens disparadas. Semana 1–2: 10 entrevistas marcadas e realizadas. Semana 3: síntese, matriz de padrões, lista de 3–5 "sinal quente" prontos pra pitch de LOI.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- ====== CERT-04 ====== -->
+    <div class="action" id="action-cert-04" data-hours="30" data-cost="2000" data-revenue="0">
+      <div class="action-head">
+        <div class="action-title">
+          <div class="action-num">04</div>
+          <h4>3 Letters of Intent (LOIs)</h4>
+        </div>
+        <div class="badges">
+          <span class="badge t-mid">Médio · 4 semanas</span>
+          <span class="badge s2">Sinal nível 2 (commitment)</span>
+          <label class="optin">
+            <input type="checkbox" data-action="cert-04">
+            <span class="box"></span>
+            <span class="label">Selecionar</span>
+          </label>
+        </div>
+      </div>
+      <div class="action-grid">
+        <div class="action-cell"><div class="l">O que fazemos</div><div class="v">Antes de construir, fechar 3 LOIs com empresas que se comprometem a entrar na certificação.</div></div>
+        <div class="action-cell"><div class="l">O que esperamos</div><div class="v">3 assinaturas = sinal infinitamente mais forte que 100 surveys positivos.</div></div>
+        <div class="action-cell"><div class="l">Como melhorar</div><div class="v">Termsheet de 1 página. Cláusula "no charge during MVP". Listar como Founding Partners.</div></div>
+        <div class="action-cell full"><div class="l">Investimento estimado</div><div class="v"><b>~30h de trabalho + jurídico (R$1–3k).</b> 3 logos de "founding partners" reduzem CAC futuro pela metade.</div></div>
+      </div>
+
+      <details class="material">
+        <summary class="material-toggle">
+          <span class="label-row"><span class="icon">✓</span> Material já preparado · termsheet 1 página + cover letter + pitch deck</span>
+          <span class="arrow">▾</span>
+        </summary>
+        <div class="material-body">
+
+          <h5>Termsheet de 1 página (template)</h5>
+          <div class="copy-block"><span class="copy-label">LOI · Termsheet PSA Certificação</span>CARTA DE INTENÇÃO
+Programa Founding Partner · PSA Certificação
+
+PARTES
+PSA Plataforma de Palestrantes Ltda. ("PSA")
+[Razão social da empresa parceira] ("Parceiro Fundador")
+
+OBJETO
+Esta carta formaliza a intenção mútua de estabelecer relação comercial no âmbito do programa "PSA Certificação · Founding Partner", a ser celebrada em contrato definitivo dentro de [180] dias contados da assinatura desta.
+
+CONDIÇÕES PRINCIPAIS (NÃO-VINCULANTES)
+1. PSA concederá ao Parceiro Fundador status de "Founding Partner Certificado", com selo público para uso em comunicações comerciais e marketing.
+2. PSA não cobrará qualquer taxa, mensalidade ou contribuição do Parceiro Fundador durante a fase MVP (12 meses a partir da assinatura do contrato definitivo).
+3. Parceiro Fundador concorda em (a) indicar PSA aos seus clientes em momentos relevantes de demanda por palestrantes/eventos/treinamento, (b) participar de até 3 reuniões trimestrais de feedback de produto.
+4. PSA pagará ao Parceiro Fundador comissão de [10–15]% sobre o valor líquido fechado a partir de cada indicação atribuída.
+5. Parceiro Fundador autoriza o uso de sua marca/logo em material institucional do programa, sujeito a aprovação prévia.
+
+NATUREZA
+Este documento é uma manifestação de intenção. Não cria obrigação financeira ou comercial vinculante até a celebração de contrato definitivo. Qualquer parte pode encerrar a intenção a qualquer tempo, mediante comunicação por escrito.
+
+ASSINATURAS
+PSA: ____________________________  Data: ___/___/____
+Parceiro Fundador: __________________ Data: ___/___/____</div>
+
+          <h5>Cover letter (apresentação do termsheet)</h5>
+          <div class="copy-block"><span class="copy-label">Cover · LOI</span>Prezado [Nome],
+
+Como conversamos na nossa última reunião, segue a Carta de Intenção formalizando o convite para a [empresa] entrar como Founding Partner do PSA Certificação.
+
+Pontos a destacar:
+
+→ Carta de INTENÇÃO, não contrato. Não há obrigação financeira ou jurídica até celebrarmos contrato definitivo em até 180 dias.
+
+→ Durante o MVP (12 primeiros meses), a [empresa] não paga nada e ainda recebe comissão sobre fechamentos via indicação.
+
+→ O selo "Founding Partner Certificado" pode ser usado a partir da assinatura, em material comercial e institucional.
+
+A intenção desse formato é simples: queremos validar o modelo com vocês como parceiros sêniores antes de abrir programa público. Vocês moldam como funciona; vocês saem com a melhor janela comercial.
+
+Posso agendar 30 min pra alinhar últimos pontos e assinar? Tenho disponibilidade [datas].
+
+Abraço,
+[seu nome]
+PSA · Grupo de Inovação</div>
+
+          <h5>Talking points pra reunião de assinatura</h5>
+          <ul>
+            <li><strong>Repetir 2x:</strong> "É uma carta de intenção. Não compromete financeiramente, não tem cláusula vinculante." Reduz fricção jurídica.</li>
+            <li><strong>O ganho deles agora:</strong> selo público + comissão sem custo + influência no produto.</li>
+            <li><strong>O que vocês querem deles:</strong> assinatura + 3 reuniões trimestrais + indicações orgânicas.</li>
+            <li><strong>Por que "Founding":</strong> só 3 vagas. Quando abrir público, os Founding têm condições e visibilidade superiores.</li>
+            <li><strong>Se hesitar:</strong> "Que pergunta ou cláusula te deixaria mais tranquilo pra assinar hoje?". Aborda objeção específica, não genérica.</li>
+          </ul>
+
+          <h5>Pitch deck mínimo (5 slides)</h5>
+          <ol>
+            <li><strong>Capa:</strong> "PSA Certificação · Programa Founding Partner"</li>
+            <li><strong>Problema:</strong> empresas-parceiras indicam fornecedores informalmente, sem retorno estruturado</li>
+            <li><strong>Solução:</strong> Certificação formal com selo público + comissão + acesso preferencial</li>
+            <li><strong>Como funciona:</strong> 3 passos (assinar, indicar, ganhar)</li>
+            <li><strong>Por que vocês primeiro:</strong> 3 vagas Founding, condições superiores, voz no produto</li>
+          </ol>
+
+          <h5>Founding Partner Badge (mockup descrição)</h5>
+          <p>Selo digital + físico fornecido após assinatura:</p>
+          <ul>
+            <li>SVG transparente do selo "PSA Certified Partner · Founding Member 2026"</li>
+            <li>Placa de acrílico/madeira física pra parede do escritório (custo ~R$300/unid)</li>
+            <li>Página pública no site PSA listando os 3 founding partners (alto SEO)</li>
+            <li>Selo digital pra assinatura de e-mail e materiais comerciais do parceiro</li>
+          </ul>
+
+          <div class="blocker">
+            <h6>⚠ Depende de vocês</h6>
+            <p>(1) Validação jurídica do termsheet (jurídico interno ou advogado externo, R$1–3k). (2) Aprovação dos sócios sobre o % de comissão (10–15% é faixa de mercado). (3) Mockup gráfico do selo "Founding Partner" (designer interno, 4h).</p>
+          </div>
+
+          <div class="next-step">
+            <h6>Próximo passo concreto</h6>
+            <p>Semana 1: termsheet revisado pelo jurídico. Semana 2: pitch deck pronto + selo desenhado. Semana 3–4: 5–6 reuniões com candidatos quentes da CERT-02/03. Meta: 3 LOIs assinadas até semana 6.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- ====== CERT-05 ====== -->
+    <div class="action" id="action-cert-05" data-hours="120" data-cost="3500" data-revenue="50000">
+      <div class="action-head">
+        <div class="action-title">
+          <div class="action-num">05</div>
+          <h4>Partner Pilot com 1 CDL próxima</h4>
+        </div>
+        <div class="badges">
+          <span class="badge t-long">Longo · 6–8 semanas</span>
+          <span class="badge s1">Sinal nível 1 (operação real)</span>
+          <label class="optin">
+            <input type="checkbox" data-action="cert-05">
+            <span class="box"></span>
+            <span class="label">Selecionar</span>
+          </label>
+        </div>
+      </div>
+      <div class="action-grid">
+        <div class="action-cell"><div class="l">O que fazemos</div><div class="v">Construir certificação real só pra 1 CDL próxima. Versão 0.1: certificado físico + página + protocolo de indicação.</div></div>
+        <div class="action-cell"><div class="l">O que esperamos</div><div class="v">Em 60 dias, 3+ indicações reais geradas. KPI: N de indicações qualificadas/mês.</div></div>
+        <div class="action-cell"><div class="l">Como melhorar</div><div class="v">KPI claro antes. Reunião quinzenal pra ajustar. Documentar tudo — case vende todos os outros.</div></div>
+        <div class="action-cell full"><div class="l">Investimento estimado</div><div class="v"><b>~120h ao longo de 8 semanas · R$2–5k em material.</b> Asset vale R$50–200k em CAC evitado.</div></div>
+      </div>
+
+      <details class="material">
+        <summary class="material-toggle">
+          <span class="label-row"><span class="icon">✓</span> Material já preparado · pilot agreement + KPI dashboard + protocolo</span>
+          <span class="arrow">▾</span>
+        </summary>
+        <div class="material-body">
+
+          <h5>Critério de seleção da CDL parceira (matriz)</h5>
+          <ul>
+            <li><strong>Proximidade física:</strong> ≤ 200 km do escritório principal PSA · max peso</li>
+            <li><strong>Tamanho do book:</strong> ≥ 200 empresas associadas ativas</li>
+            <li><strong>Relação prévia:</strong> alguém da PSA já conhece a diretoria</li>
+            <li><strong>Diretoria aberta a inovar:</strong> 1 conversa de 15 min com o diretor diz</li>
+            <li><strong>Velocidade de decisão:</strong> não estatutária pesada, decisão executiva</li>
+          </ul>
+          <p>Recomendação inicial: <strong>CDL Caxias do Sul</strong> ou <strong>CDL Porto Alegre</strong>.</p>
+
+          <h5>Pilot agreement (estrutura)</h5>
+          <div class="copy-block"><span class="copy-label">Pilot Agreement · Estrutura</span>1. PARTES E ESCOPO
+   PSA + CDL [cidade]
+   Pilot de 90 dias do programa "PSA Parceiro Certificado"
+
+2. RESPONSABILIDADES DA CDL
+   2.1 Indicar PSA aos associados em momentos relevantes (eventos, palestras, treinamentos)
+   2.2 Publicar selo "PSA Parceiro Certificado · Founding" em comunicações próprias
+   2.3 Participar de 1 reunião quinzenal de check-in (30 min)
+   2.4 Permitir uso da marca CDL em material institucional PSA durante o pilot
+
+3. RESPONSABILIDADES DA PSA
+   3.1 Fornecer certificado físico + selo digital
+   3.2 Pagar comissão de 15% sobre valor líquido fechado via indicação
+   3.3 Atender com prioridade qualquer demanda originada da CDL
+   3.4 Co-investir em 1 evento conjunto no período de pilot
+
+4. KPIs DO PILOT
+   4.1 Número de indicações qualificadas/mês: meta ≥ 3
+   4.2 Valor total fechado a partir de indicações: meta ≥ R$ 50k em 90 dias
+   4.3 NPS da CDL sobre a experiência ao final: meta ≥ 8
+
+5. ENCERRAMENTO E PRÓXIMOS PASSOS
+   Ao final dos 90 dias:
+   - Revisão conjunta de KPIs
+   - Decisão: encerrar / renovar / formalizar contrato definitivo</div>
+
+          <h5>Protocolo de indicação (operação)</h5>
+          <div class="copy-block"><span class="copy-label">Protocolo · Indicação CDL → PSA</span>FLUXO PADRÃO
+
+1. CDL identifica oportunidade no associado
+   Trigger típico: associado comenta evento futuro, treinamento, palestra
+2. CDL envia indicação via formulário simples PSA
+   Campos: empresa, contato, demanda, urgência, valor estimado
+3. PSA atribui responsável e responde em até 24h
+4. PSA atualiza CDL sobre status semanalmente (Sheet compartilhado)
+5. No fechamento, comissão é calculada e paga em 30 dias
+
+FERRAMENTAS
+- Formulário de indicação: Tally ou Google Form embed
+- Sheet compartilhado: Google Sheets com 1 aba por mês
+- Comunicação operacional: 1 grupo WhatsApp com 2 pessoas de cada lado
+- Reunião quinzenal: Google Meet 30 min, agenda fixa</div>
+
+          <h5>KPI dashboard (estrutura)</h5>
+          <div class="copy-block"><span class="copy-label">Dashboard · Pilot CDL</span>SEMANA | INDICAÇÕES RECEBIDAS | QUALIFICADAS | EM NEGOCIAÇÃO | FECHADAS | R$ FECHADO | COMISSÃO ACUMULADA
+S1     | 0                    | 0            | 0             | 0        | R$ 0       | R$ 0
+S2     | 1                    | 1            | 1             | 0        | R$ 0       | R$ 0
+S3     | 2                    | 2            | 2             | 1        | R$ 18k     | R$ 2,7k
+...
+S12    | -                    | -            | -             | -        | -          | -
+
+META    | 3+/mês               | 80%+         | -             | 50%+     | R$ 50k+    | R$ 7,5k+ acumulado
+
+MEETING NOTES (quinzenal)
+- Quais indicações deram retorno mais rápido? Por quê?
+- Quais sumiram? Diagnóstico
+- Ajuste de protocolo (se preciso)
+- Próximos passos PSA + CDL</div>
+
+          <h5>Agenda da reunião quinzenal (30 min)</h5>
+          <ol>
+            <li><strong>5 min · Numbers update:</strong> dashboard de indicações, fechamentos, comissão</li>
+            <li><strong>10 min · Wins e learnings:</strong> o que funcionou bem, o que não funcionou</li>
+            <li><strong>10 min · Próximas 2 semanas:</strong> ações concretas de ambos os lados</li>
+            <li><strong>5 min · Blockers:</strong> qualquer coisa que precise destravar</li>
+          </ol>
+
+          <h5>Marketing assets pra entregar à CDL</h5>
+          <ul>
+            <li>Certificado físico de parede (placa acrílico/madeira ~R$300)</li>
+            <li>Selo digital SVG transparente em 3 versões (light/dark/transparent)</li>
+            <li>Banner pra rodapé de e-mail (template editável)</li>
+            <li>Post Instagram/LinkedIn pronto pra publicação no dia da assinatura</li>
+            <li>Press release de 1 página pra usar em mídia local</li>
+            <li>Página pública no site PSA listando como Founding Partner</li>
+          </ul>
+
+          <div class="blocker">
+            <h6>⚠ Depende de vocês</h6>
+            <p>(1) Escolha da CDL (recomendação acima). (2) Aprovação do orçamento (R$2–5k para materiais + ~30h/mês de operação). (3) Pessoa fixa do PSA responsável pelo pilot (recomendo comercial sênior + Arthur como sponsor). (4) Validação jurídica do pilot agreement.</p>
+          </div>
+
+          <div class="next-step">
+            <h6>Próximo passo concreto</h6>
+            <p>Semana 1: escolha + 1ª conversa com diretoria CDL. Semana 2: pilot agreement assinado. Semana 3: protocolo + dashboard operacional + assets entregues. Semana 4–12: operação rodando, reunião quinzenal, KPI medido. Mês 3: review de pilot e decisão sobre contrato definitivo.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+
+  </div>
+
+  <div class="roadmap">
+    <h4>Roadmap CERT · 8 semanas</h4>
+    <div class="timeline">
+      <div class="phase p1"><div class="when">Semana 1</div><div class="what">Audit parceiros + Reverse market mapping</div><div class="out">5–20 parceiros + 10 prospects priorizados.</div></div>
+      <div class="phase p2"><div class="when">Semana 1–3</div><div class="what">10 entrevistas qualitativas</div><div class="out">Tese validada/refutada com vocabulário do cliente.</div></div>
+      <div class="phase p3"><div class="when">Semana 2–6</div><div class="what">Captação de 3 LOIs</div><div class="out">3 founding partners assinados.</div></div>
+      <div class="phase p4"><div class="when">Semana 2–8</div><div class="what">Partner Pilot CDL</div><div class="out">Case real gerando indicações em 60 dias.</div></div>
+    </div>
+  </div>
+
+  <!-- ============================================ Plan 2 semanas ============================================ -->
+  <h2><span class="num">4</span>Plano consolidado · 2 semanas iniciais</h2>
+  <p class="section-sub">O que acontece nos próximos 14 dias se rodar tudo em paralelo</p>
+
+  <div class="roadmap">
+    <h4>Próximos 14 dias</h4>
+    <div class="timeline">
+      <div class="phase p1"><div class="when">Dia 1–3</div><div class="what">Kick-off + 2 audits paralelos</div><div class="out">TBS · audit interno · CERT · audit parceiros indicadores.</div></div>
+      <div class="phase p2"><div class="when">Dia 3–7</div><div class="what">Mineração Vox2you</div><div class="out">Doc 5–10 pp com tese de diferenciação TBS.</div></div>
+      <div class="phase p3"><div class="when">Dia 5–10</div><div class="what">Reverse market mapping CERT</div><div class="out">50 listados, 10 priorizados, 3 ligações marcadas.</div></div>
+      <div class="phase p4"><div class="when">Dia 7–14</div><div class="what">Workshop TBS anúncio + venda</div><div class="out">LP no ar, tráfego pago, meta 10 vendas em 7 dias.</div></div>
+    </div>
+  </div>
+
+  <!-- ============================================ Métricas ============================================ -->
+  <h2><span class="num">5</span>Métricas de sucesso</h2>
+  <p class="section-sub">O que vai medir se cada produto deve continuar</p>
+
+  <div class="metrics">
+    <div class="metric-card tbs">
+      <h4><span class="tag">TBS</span>The Best School</h4>
+      <div class="metric-row"><span class="l">Workshop pop-up: vagas vendidas em 14 dias</span><span class="v">≥ 20</span></div>
+      <div class="metric-row"><span class="l">Concierge MVP: alunos pagantes na turma 1</span><span class="v">≥ 5</span></div>
+      <div class="metric-row"><span class="l">Receita gerada nas 8 semanas</span><span class="v">≥ R$ 30k</span></div>
+      <div class="metric-row"><span class="l">NPS dos alunos do Concierge ao final</span><span class="v">≥ 50</span></div>
+      <div class="metric-row"><span class="l">Adjacência descoberta no audit interno</span><span class="v">≥ R$ 500k/ano</span></div>
+      <div class="metric-row"><span class="l">Sinal mínimo pra GO continuar</span><span class="v">3 dos 5 acima</span></div>
+    </div>
+    <div class="metric-card cert">
+      <h4><span class="tag">CERT</span>Certificação PSA</h4>
+      <div class="metric-row"><span class="l">Parceiros atuais identificados no audit</span><span class="v">≥ 5</span></div>
+      <div class="metric-row"><span class="l">Entrevistas com sinal positivo</span><span class="v">≥ 6 de 10</span></div>
+      <div class="metric-row"><span class="l">LOIs assinadas em 8 semanas</span><span class="v">≥ 3</span></div>
+      <div class="metric-row"><span class="l">Indicações reais geradas pelo Partner Pilot</span><span class="v">≥ 3 em 60 dias</span></div>
+      <div class="metric-row"><span class="l">Valor fechado a partir das indicações</span><span class="v">≥ R$ 50k</span></div>
+      <div class="metric-row"><span class="l">Sinal mínimo pra GO continuar</span><span class="v">3 dos 5 acima</span></div>
+    </div>
+  </div>
+
+  <p class="footnote">Critério de decisão proposto: ao final das 8 semanas, cada produto precisa ter atingido pelo menos 3 das 5 métricas acima para continuar recebendo investimento. Produtos que ficam em 2 ou menos entram em revisão de tese ou pausa programada.</p>
+
+  <!-- ============================================ Resumo ============================================ -->
+  <h2><span class="num">6</span>Resumo de uma linha</h2>
+  <p class="section-sub">Pra levar à reunião do grupo de inovação</p>
+
+  <div class="principle" style="margin-top:8px">
+    <h4>Decisão proposta</h4>
+    <p>Em vez de esperar mais 60 dias por sinal de pesquisa, redirecionar <b>~370h de esforço</b> em <b>10 ações paralelas</b> nas próximas 8 semanas. Material para todas as ações já está preparado. <b>Em 2 semanas vocês têm 3 audits e a primeira venda do workshop</b>; em 8 semanas têm operação rodando nos dois produtos. Pesquisa continua no fundo como sinal complementar.</p>
+  </div>
+
+  <p class="footnote" style="margin-top:36px">Relatório v2 elaborado em 2026-05-18. Material adiantado: análise Vox2you completa (TBS-01), templates de audit (TBS-02, CERT-01), copies completos do workshop (TBS-03), scripts de entrevista (TBS-04, CERT-03), lista de 50 alvos (CERT-02), termsheet de LOI (CERT-04), pilot agreement e dashboard (CERT-05), currículo Concierge 8 semanas (TBS-05). Estimativas de horas são orientativas; custos diretos são aproximações de mercado. Atualizar este documento ao final de cada checkpoint quinzenal.</p>
+
+</div>
+
+<script>
+  const STORAGE_KEY = 'psa-recuperacao-selected';
+  const actions = document.querySelectorAll('.action[data-hours]');
+  const checkboxes = document.querySelectorAll('input[type=checkbox][data-action]');
+
+  function fmt(n) { return Number(n || 0).toLocaleString('pt-BR'); }
+  function fmtBR(n) { return 'R$ ' + (n >= 1000 ? (n/1000).toFixed(0) + 'k' : Number(n).toLocaleString('pt-BR')); }
+
+  function updateSummary() {
+    let actions = 0, hours = 0, cost = 0, revenue = 0;
+    checkboxes.forEach(cb => {
+      if (cb.checked) {
+        const card = cb.closest('.action');
+        card.classList.add('selected');
+        actions++;
+        hours += Number(card.dataset.hours || 0);
+        cost += Number(card.dataset.cost || 0);
+        revenue += Number(card.dataset.revenue || 0);
+      } else {
+        cb.closest('.action').classList.remove('selected');
+      }
+    });
+    document.getElementById('cnt-actions').textContent = actions;
+    document.getElementById('cnt-hours').textContent = hours + 'h';
+    document.getElementById('cnt-cost').textContent = fmtBR(cost);
+    document.getElementById('cnt-revenue').textContent = fmtBR(revenue);
+    saveState();
+  }
+
+  function saveState() {
+    const state = {};
+    checkboxes.forEach(cb => { state[cb.dataset.action] = cb.checked; });
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch {}
+  }
+
+  function loadState() {
+    try {
+      const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      checkboxes.forEach(cb => { if (state[cb.dataset.action]) cb.checked = true; });
+    } catch {}
+  }
+
+  function toggleAll(value) {
+    checkboxes.forEach(cb => { cb.checked = value; });
+    updateSummary();
+  }
+
+  function selectQuickWins() {
+    checkboxes.forEach(cb => {
+      const card = cb.closest('.action');
+      const isQuick = card.querySelector('.badge.t-quick') !== null;
+      cb.checked = isQuick;
+    });
+    updateSummary();
+  }
+
+  checkboxes.forEach(cb => cb.addEventListener('change', updateSummary));
+  loadState();
+  updateSummary();
+</script>
+
+</body>
+</html>

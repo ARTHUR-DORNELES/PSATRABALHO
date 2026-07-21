@@ -1,0 +1,460 @@
+1. Visão Geral da Campanha
+
+Duas campanhas paralelas estruturadas em torno de datas do calendário de saúde corporativa: Setembro
+Amarelo (saúde mental) e Outubro Rosa (saúde da mulher e diversidade). Os disparos começam em julho para
+garantir antecedência na contratação dos palestrantes, escalando em urgência conforme as datas se aproximam.
+
+Nenhum nome de palestrante é comunicado nos disparos. O gancho é sempre pelo tema -- cada curador da
+PSA indica os perfis ideais conforme a realidade de cada empresa.
+
+Calendário de Disparos
+
+Semana  Data               Campanha          Canais ativos                Gancho principal
+                           Setembro Amarelo
+Semana 1 13/07                               E-mail (PNO/PNV/Carteira)    Abertura: saúde
+                    (seg)                    WhatsApp repique             mental como pauta
+                                             (PNO/PNV/Carteira)           corporativa urgente
+Semana 2 20/07             Outubro Rosa      E-mail (PNO/PNV)
+                    (seg)                    WhatsApp repique (PNO/PNV)   Abertura: saúde da
+                                                                          mulher no
+Semana 3 27/07             Setembro Amarelo  E-mail (PNO/PNV/Carteira)    ambiente de
+                    (seg)                                                 trabalho
+                                             E-mail (PNO/PNV/Carteira)
+Semana 4 03/08             Outubro Rosa      WhatsApp repique (Carteira)  Antecedência:
+                    (seg)                                                 melhores
+                                             E-mail (PNO/PNV/Carteira)    palestrantes já
+Semana 5 10/08             Setembro Amarelo  WhatsApp repique (PNO/PNV)   estão sendo
+                    (seg)                                                 contratados
+                                             E-mail (PNO/PNV/Carteira)
+Semana 6 17/08             Outubro Rosa      WhatsApp repique (PNO/PNV)   Antecedência:
+                    (seg)                                                 agenda de outubro
+                                             E-mail (PNO/PNV/Carteira)    se fecha com 60
+Semana 7 24/08             Setembro Amarelo                               dias de lead
+                    (seg)                    WhatsApp (PNO/PNV/Carteira)
+                                                                          Urgência
+Semana 8 31/08             Setembro Amarelo                               moderada:
+                    (seg)                                                 setembro se
+                                                                          aproxima, vagas
+                                                                          reduzindo
+
+                                                                          Urgência
+                                                                          moderada: outubro
+                                                                          rosa exige
+                                                                          planejamento com
+                                                                          6+ semanas
+
+                                                                          Urgência alta:
+                                                                          última semana de
+                                                                          agosto, setembro
+                                                                          em 7 dias
+
+                                                                          Virada: setembro
+                                                                          começa amanhã,
+Semana 9 08/09             Outubro Rosa     E-mail (PNO/PNV/Carteira)   reforço por
+                    (seg)                   WhatsApp repique (PNO/PNV)  WhatsApp
+
+                                                                        Urgência alta:
+                                                                        outubro em 3
+                                                                        semanas, janela
+                                                                        de contratação
+                                                                        fechando
+
+2. Bases e Metas Esperadas
+
+Preencha os campos abaixo com o tamanho de cada base e a meta de oportunidades qualificadas esperadas
+por campanha. As metas devem considerar taxa de abertura de e-mail (~4%), taxa de resposta esperada por
+segmento e histórico de conversão da base.
+
+Base                       Tamanho da base  Meta de                Meta de
+                                            oportunidades(Setembr  oportunidades(Outubro
+                                            o Amarelo)             Rosa)
+
+PNO                        [ preencher ]    [ preencher ]          [ preencher ]
+PNV                        [ preencher ]    [ preencher ]          [ preencher ]
+Carteira (Farmers)         [ preencher ]    [ preencher ]          [ preencher ]
+
+3. Temas e Ângulos de Conteúdo
+
+Temas e Ângulos de Conteúdo por Campanha
+
+ Setembro Amarelo -- Saúde Mental Corporativa
+
+Contexto de mercado:
+A NR-1 (atualização 2025) incluiu riscos psicossociais como obrigação legal das empresas. Setembro Amarelo
+deixou de ser ação de comunicação e passou a ser oportunidade de demonstrar ação concreta sobre saúde
+mental no trabalho.
+
+Ângulo                     Descrição
+Saúde mental e NR-1
+                           Obrigação legal que a palestra pode ajudar a endereçar de forma visível e
+                           consistente
+Prevenção de burnout         Times sob pressão precisam de mais que campanhas internas --
+                             precisam de repertório
+
+Liderança e saúde emocional  O líder como fator de risco ou proteção da saúde mental do time
+
+Comunicação não-violenta     Ferramentas práticas para relações de trabalho mais saudáveis
+
+Cultura psicologicamente segura Como criar ambientes onde as pessoas conseguem ser produtivas sem
+                                                    adoecer
+
+ Outubro Rosa -- Saúde da Mulher e Diversidade
+
+Contexto de mercado:
+Outubro Rosa expandiu seu escopo nas organizações. Além da saúde feminina, é hoje uma das principais portas
+de entrada para pautas de diversidade, inclusão e ESG dentro do ambiente corporativo.
+
+Ângulo                       Descrição
+Saúde da mulher no trabalho
+Liderança feminina           Impactos do ciclo hormonal, da dupla jornada e do ambiente na
+Diversidade e inclusão       produtividade e bem-estar feminino
+Autocuidado e prevenção
+ESG e agenda social          Trajetórias, desafios e o papel da empresa na construção de ambientes
+                             que promovam mulheres
+
+                             Outubro Rosa como porta de entrada para uma pauta mais ampla de
+                             equidade corporativa
+
+                             Educação sobre prevenção do câncer de mama no contexto de bem-estar
+                             corporativo
+
+                             Como a pauta de saúde da mulher conecta a empresa à sua estratégia de
+                             impacto social
+
+4. Ganchos por Semana e por Base
+
+Cada bloco abaixo detalha o gancho do e-mail e do WhatsApp para cada combinação de semana × base. As
+copies completas serão desenvolvidas a partir destes ganchos.
+
+  Semana 1 13/07 (seg) Setembro Amarelo
+
+  Gancho central: Abertura: saúde mental como pauta corporativa urgente
+   Canais ativos: E-mail (PNO/PNV/Carteira) | WhatsApp repique (PNO/PNV)
+PNV + PNO
+
+ E-MAIL (segunda-feira)
+
+ Assunto: Saúde mental voltou para o topo da pauta de RH
+ Gancho: Desde que conversamos, o tema ganhou novo peso com a NR-1. Empresas que antes tratavam
+ setembro amarelo como uma ação de comunicação agora precisam mostrar ação concreta. Uma palestra bem
+ escolhida é a forma mais rápida de dar substância a essa pauta.
+ Ângulo: Retomada + mudança de contexto regulatório
+
+ WHATSAPP REPIQUE (quarta-feira)
+ Lembrei da [Empresa] agora que Setembro Amarelo está chegando. Muitas empresas estão usando a data
+ para abordar saúde mental com os times -- queria entender se faz sentido para vocês também.
+
+Carteira (Farmers) -- Relacionamento ativo
+
+ E-MAIL (segunda-feira)
+
+ Assunto: Setembro Amarelo: algum momento planejado para o time?
+ Gancho: Lembrei de vocês pensando no Setembro Amarelo. A [Empresa] já trabalhou conteúdo com a PSA --
+ e esse costuma ser um dos meses mais procurados por quem quer abordar saúde mental de forma qualificada
+ com os colaboradores.
+ Ângulo: Relacionamento + sugestão consultiva
+
+ WHATSAPP REPIQUE (quarta-feira)
+ Pensando aqui no calendário de vocês -- Setembro Amarelo está chegando. Tem algum momento planejado
+ para o time nessa linha?
+
+Semana 2 20/07 (seg) Outubro Rosa
+
+Gancho central: Abertura: saúde da mulher no ambiente de trabalho
+Canais ativos: E-mail (PNO/PNV/Carteira) | WhatsApp repique (PNO/PNV)
+
+PNV + PNO
+
+ E-MAIL (segunda-feira)
+
+ Assunto: Outubro Rosa virou pauta de diversidade nas empresas
+ Gancho: O Outubro Rosa deixou de ser apenas uma ação de conscientização em saúde da mulher. Para
+ muitas empresas, virou uma oportunidade de abordar temas de diversidade, inclusão e bem-estar feminino
+ com os times de forma consistente. Se não há nada planejado para outubro, ainda é cedo o suficiente para
+ fazer bem feito.
+ Ângulo: Relevância corporativa do tema + oportunidade de calendário
+
+ WHATSAPP REPIQUE (quarta-feira)
+ Lembrei da [Empresa] pensando no Outubro Rosa. Muitas empresas estão usando a data para abordar saúde
+ da mulher e diversidade com os times -- faz sentido explorar isso aí?
+
+Semana 3 27/07 (seg) Setembro Amarelo
+
+Gancho central: Antecedência: melhores palestrantes já estão sendo contratados
+Canais ativos: E-mail (PNO/PNV/Carteira)
+PNV + PNO
+
+ E-MAIL (segunda-feira)
+
+ Assunto: Agosto é o mês certo para fechar setembro
+ Gancho: Agosto é a janela ideal para garantir um palestrante de saúde mental com tempo de briefing,
+ alinhamento e preparação. Depois da primeira semana de agosto, a disponibilidade cai. Queria entender se
+ ainda há algo em aberto para setembro no calendário de vocês.
+ Ângulo: Senso de prazo + curadoria com antecedência
+
+Carteira (Farmers) -- Relacionamento ativo
+
+ E-MAIL (segunda-feira)
+
+ Assunto: Garantindo o palestrante certo para setembro
+ Gancho: Já vi algumas empresas perdendo os melhores palestrantes de saúde mental por deixar a
+ contratação para a última semana. Se tiver algo planejado para setembro, vale adiantar o processo -- posso
+ mapear opções para o perfil de vocês agora.
+ Ângulo: Sugestão de curador + senso de prazo
+
+Semana 4 03/08 (seg) Outubro Rosa
+
+Gancho central: Antecedência: agenda de outubro se fecha com 60 dias de lead
+
+Canais ativos: E-mail (PNO/PNV/Carteira)
+
+PNO -- Orçou, não fechou
+
+ E-MAIL (segunda-feira)
+
+ Assunto: Quem fecha outubro em agosto não escolhe com pressa
+ Gancho: Outubro Rosa começa em seis semanas. Quem fecha o palestrante agora tem tempo de briefing,
+ alinhamento com a liderança e personalização do conteúdo para a realidade da empresa. Quem deixa para
+ setembro chega com opções limitadas e sem margem de preparo.
+ Ângulo: Vantagem de contratar com antecedência
+
+PNV -- Proposta perdida
+
+ E-MAIL (segunda-feira)
+
+ Assunto: Agosto ainda permite fazer outubro bem feito
+ Gancho: A janela ideal para contratar um palestrante para outubro é agosto. Com dois meses de
+ antecedência, dá para fazer briefing, alinhamento de tema e personalização. Se houver interesse em abordar
+ saúde da mulher ou diversidade com o time, o momento de avançar é agora.
+ Ângulo: Senso de prazo + qualidade de processo
+
+Carteira (Farmers) -- Relacionamento ativo
+
+ E-MAIL (segunda-feira)
+
+ Assunto: Garantindo o melhor palestrante para outubro
+ Gancho: Com dois meses pela frente, ainda dá para fechar outubro com margem de preparo. Para temas de
+ saúde da mulher e diversidade, os melhores nomes têm agenda competitiva. Se fizer sentido explorar opções
+ para a [Empresa], consigo mapear agora.
+ Ângulo: Curador proativo + senso de prazo
+Semana 5 10/08 (seg) Setembro Amarelo
+
+Gancho central: Urgência moderada: setembro se aproxima, vagas reduzindo
+Canais ativos: E-mail (PNO/PNV/Carteira) | WhatsApp repique (PNO/PNV)
+
+PNO -- Orçou, não fechou
+
+ E-MAIL (segunda-feira)
+
+ Assunto: Setembro em três semanas -- e a agenda fecha
+ Gancho: Setembro Amarelo começa em menos de três semanas. Ainda dá tempo de fechar um palestrante
+ com alinhamento mínimo -- mas a margem está diminuindo. Se houver intenção de fazer algo com o time,
+ esse é o momento de avançar.
+ Ângulo: Contagem regressiva + CTA direto
+
+ WHATSAPP REPIQUE (quarta-feira)
+ Setembro Amarelo em menos de três semanas. Agenda dos palestrantes de saúde mental quase cheia. Vocês
+ têm algo planejado?
+
+PNV -- Proposta perdida
+
+ E-MAIL (segunda-feira)
+
+ Assunto: Ainda dá tempo -- mas está ficando curto
+ Gancho: Setembro está chegando e a maioria das empresas que agem em cima da hora não conseguem o
+ perfil de palestrante que precisam. Se houver interesse em abordar saúde mental com o time esse mês, posso
+ verificar disponibilidade agora.
+ Ângulo: Urgência + facilidade de processo
+
+ WHATSAPP REPIQUE (quarta-feira)
+ Ainda dá tempo para setembro, mas a agenda está ficando curta. Quer que eu verifique disponibilidade para
+ vocês?
+
+Carteira (Farmers) -- Relacionamento ativo
+
+ E-MAIL (segunda-feira)
+
+ Assunto: Setembro Amarelo: ainda dá tempo de fechar
+ Gancho: Pensando no calendário de vocês -- setembro está a menos de três semanas. Se houver qualquer
+ demanda de conteúdo para o time nesse período, consigo verificar opções com agilidade.
+ Ângulo: Proatividade de curador + urgência leve
+
+ WHATSAPP REPIQUE (quarta-feira)
+ Setembro Amarelo a três semanas. Se houver alguma demanda, consigo verificar opções rapidinho. Faz
+ sentido falar?
+
+Semana 6 17/08 (seg) Outubro Rosa
+
+Gancho central: Urgência moderada: outubro rosa exige planejamento com 6+ semanas
+Canais ativos: E-mail (PNO/PNV/Carteira) | WhatsApp repique (PNO/PNV)
+
+PNO -- Orçou, não fechou
+
+ E-MAIL (segunda-feira)
+
+ Assunto: Outubro Rosa em menos de seis semanas -- agenda está fechando
+ Gancho: Outubro Rosa começa em menos de seis semanas. A partir de agora, os palestrantes mais
+ procurados nesse tema já estão com agenda comprometida. Ainda há boas opções disponíveis -- mas a
+ margem está diminuindo. Se houver intenção de fechar algo para outubro, o momento de avançar é essa
+ semana.
+ Ângulo: Urgência + janela em fechamento
+
+ WHATSAPP REPIQUE (quarta-feira)
+ Outubro Rosa em menos de seis semanas. Agenda dos palestrantes de saúde da mulher já está quase cheia.
+ Vocês têm algo no calendário?
+
+PNV -- Proposta perdida
+
+ E-MAIL (segunda-feira)
+
+ Assunto: A janela boa para outubro está fechando
+ Gancho: Sei que talvez o timing não fosse ideal quando conversamos antes. Mas outubro se aproxima e,
+ nesse tema, os perfis mais qualificados somem rápido. Se ainda houver intenção de fechar algo, posso
+ verificar disponibilidade agora.
+ Ângulo: Urgência + abertura para retomada
+
+ WHATSAPP REPIQUE (quarta-feira)
+ A janela boa para fechar outubro está acabando. Se ainda houver interesse, posso verificar disponibilidade
+ rapidinho.
+
+Carteira (Farmers) -- Relacionamento ativo
+
+ E-MAIL (segunda-feira)
+
+ Assunto: Outubro Rosa: seis semanas e a agenda fecha
+ Gancho: Passando para ver se tem algo planejado para outubro na [Empresa]. Com seis semanas pela frente,
+ ainda dá para garantir um nome de qualidade -- mas daqui a duas semanas as opções reduzem bastante.
+ Ângulo: Curador ativo + urgência de prazo
+
+ WHATSAPP REPIQUE (quarta-feira)
+ Outubro Rosa a seis semanas. Tem algo planejado para o time? Antes que a agenda dos palestrantes feche
+ de vez.
+
+Semana 7 24/08 (seg) Setembro Amarelo
+
+Gancho central: Urgência alta: última semana de agosto, setembro em 7 dias
+Canais ativos: E-mail (PNO/PNV/Carteira)
+
+PNO -- Orçou, não fechou
+
+ E-MAIL (segunda-feira)
+ Assunto: Setembro começa domingo -- última chance real de planejar
+ Gancho: Em sete dias começa setembro. Ainda há palestrantes disponíveis para a segunda e terceira
+ semanas do mês -- mas a janela de briefing está no limite. Se houver qualquer intenção de abordar saúde
+ mental com o time esse mês, a hora de falar é agora.
+ Ângulo: Urgência máxima + janela estreita
+
+PNV -- Proposta perdida
+
+ E-MAIL (segunda-feira)
+
+ Assunto: Uma semana para setembro -- ainda tem janela
+ Gancho: Sei que o calendário pode mudar -- e às vezes uma demanda aparece em cima da hora. Se surgiu
+ alguma necessidade de conteúdo para setembro, posso verificar disponibilidade agora e montar uma opção
+ rápida.
+ Ângulo: Abertura para demanda de última hora
+
+Carteira (Farmers) -- Relacionamento ativo
+
+ E-MAIL (segunda-feira)
+
+ Assunto: Setembro em sete dias -- tem algo em aberto?
+ Gancho: Passando para ver se tem algum momento planejado para setembro que ainda precise de conteúdo.
+ Com uma semana de antecedência, ainda consigo mapear opções viáveis para o perfil de vocês.
+ Ângulo: Curador ativo + janela final
+
+Semana 8 31/08 (seg) Setembro Amarelo
+
+Gancho central: Virada: setembro começa amanhã, reforço por WhatsApp
+Canais ativos: WhatsApp (PNO/PNV)
+
+PNO -- Orçou, não fechou
+
+ WHATSAPP REPIQUE (quarta-feira)
+ Setembro começa amanhã. Se ainda houver intenção de abordar saúde mental com o time esse mês, posso
+ verificar disponibilidade agora. Não precisa ser nada grande -- às vezes o momento certo faz mais diferença
+ que o formato.
+
+PNV -- Proposta perdida
+
+ WHATSAPP REPIQUE (quarta-feira)
+ Setembro Amarelo começa amanhã. Se surgiu alguma demanda no calendário de vocês, ainda há opções. Só
+ me avisam que verifico na hora.
+
+Carteira (Farmers) -- Relacionamento ativo
+
+ WHATSAPP REPIQUE (quarta-feira)
+ Setembro começa amanhã -- só passando para ver se tem algum momento que precisaria de conteúdo sobre
+ saúde mental ainda esse mês.
+  Semana 9 08/09 (seg) Outubro Rosa
+
+  Gancho central: Urgência alta: outubro em 3 semanas, janela de contratação fechando
+   Canais ativos: E-mail (PNO/PNV/Carteira) | WhatsApp repique (PNO/PNV)
+
+  PNO -- Orçou, não fechou
+
+     E-MAIL (segunda-feira)
+
+    Assunto: Outubro começa em três semanas -- ainda tem janela
+    Gancho: Outubro Rosa começa em menos de três semanas. Ainda há disponibilidade para a segunda e
+    terceira semana do mês -- mas o processo de briefing precisa começar agora para que o conteúdo chegue
+    alinhado. Se houver alguma demanda em aberto, esse é o momento.
+    Ângulo: Urgência máxima + processo ágil
+
+     WHATSAPP REPIQUE (quarta-feira)
+    Outubro começa em três semanas. Ainda dá para fechar com alinhamento mínimo de conteúdo. Vocês têm
+    alguma demanda em aberto?
+
+  PNV -- Proposta perdida
+
+     E-MAIL (segunda-feira)
+
+    Assunto: Três semanas para outubro -- última janela
+    Gancho: Com três semanas pela frente, ainda é viável fechar um palestrante para outubro com o mínimo de
+    alinhamento necessário. Se surgiu qualquer demanda de conteúdo para esse tema na empresa, posso
+    verificar opções agora.
+    Ângulo: Última oportunidade + facilidade de processo
+
+     WHATSAPP REPIQUE (quarta-feira)
+    Três semanas para Outubro Rosa. Se surgiu alguma demanda, ainda há opções. Verifico disponibilidade
+    agora?
+
+  Carteira (Farmers) -- Relacionamento ativo
+
+     E-MAIL (segunda-feira)
+
+    Assunto: Outubro em três semanas -- última chance de fechar bem
+    Gancho: Passando para ver se tem alguma demanda em aberto para outubro na [Empresa]. Com três
+    semanas, ainda consigo encontrar boas opções -- mas o processo precisa começar essa semana.
+    Ângulo: Curador proativo + última janela
+
+     WHATSAPP REPIQUE (quarta-feira)
+    Outubro em três semanas. Tem alguma demanda para o time que eu possa ajudar a fechar? Verifico opções
+    agora.
+
+ 5. Regras Operacionais
+
+Regras Operacionais
+Cadência geral
+Máximo 1 disparo por semana por base. E-mail na segunda-feira. WhatsApp repique na quarta-feira
+(apenas PNO e PNV).
+
+Tom por segmento
+PNO e PNV: direto e consultivo, ângulo de dor ou oportunidade perdida. Carteira: relacional e
+proativo, como farmer que lembrou da empresa ao ver o tema, não como vendedor buscando fechar
+contrato.
+
+Sobre palestrantes
+Nenhum nome de palestrante deve ser citado nos disparos. A abordagem é pelo tema, cada curador
+indica os melhores perfis conforme a realidade de cada empresa. O copy nunca deve criar
+expectativa de um nome específico.
+
+Conteúdo do e-mail
+Tom informativo sobre a relevância do tema (Setembro Amarelo / Outubro Rosa) para o contexto
+corporativo. Nunca começar com apresentação da PSA. A empresa e seus produtos aparecem
+depois da dor ou do contexto.
+
+Conteúdo do WhatsApp
+Gancho do e-mail + CTA para encontrar palestrantes sobre o tema. Estrutura: contexto em 1 frase 
+relevância em 1-2 frases  CTA de baixo comprometimento. Máximo 5-7 linhas.
+

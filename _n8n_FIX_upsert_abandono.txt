@@ -1,0 +1,30 @@
+// ===== NÓ "Upsert Negócio Abandono" — MESMA chave do "Upsert do Negócio" (fixEmail) =====
+// É ISSO que faz o evento de pagamento ACHAR e PROMOVER o negócio de abandono (em vez de órfão).
+// Cola no campo JSON Body (começa em {{, sem "=" na frente).
+{{ (() => {
+  const w = $('Webhook').item.json.body;
+  const fixEmail = raw => { let e=String(raw||'').trim().toLowerCase().replace(/\s+/g,'');
+    const at=e.lastIndexOf('@'); if(at<1) return e;
+    let u=e.slice(0,at), d=e.slice(at+1);
+    d=d.replace(/^(gmial|gmai|gmaill)\./,'gmail.');
+    d=d.replace(/^(gmail|hotmail|outlook|live|icloud)\.[a-z.]+$/,'$1.com');
+    d=d.replace(/\.(con|vom|comi|copm|cmo|ocm|c0m|om|cim)$/,'.com');
+    d=d.replace(/^yahoo\.(con|cm|vom)$/,'yahoo.com');
+    return u+'@'+d; };
+  const email = fixEmail(w.email ?? w.Customer?.email);
+  const productId = w.product_id ?? w.Product?.product_id;
+  const chave = email + "_" + productId;
+  return JSON.stringify({
+    inputs: [{
+      idProperty: "kiwify_chave",
+      id: chave,
+      properties: {
+        kiwify_chave: chave,
+        dealname: (w.name ?? w.Customer?.full_name) + " - " + (w.product_name ?? w.Product?.product_name),
+        pipeline: "904543067",
+        dealstage: "1372708678",
+        tbschool__produto_de_interesse: (w.product_name ?? w.Product?.product_name)
+      }
+    }]
+  });
+})() }}

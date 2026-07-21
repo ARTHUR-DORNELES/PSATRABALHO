@@ -1,0 +1,32 @@
+{{ (() => {
+  const w = $('Webhook').item.json.body;
+  // Chave = order_id (único por transação). PIX→aprovada compartilham o MESMO order_id
+  // (então continuam atualizando o mesmo negócio), mas uma 2ª compra de verdade tem
+  // order_id diferente → vira um negócio novo. Fallback p/ email_produto se faltar order_id.
+  const chave = w.order_id ? String(w.order_id) : (w.Customer.email + "_" + w.Product.product_id);
+  return JSON.stringify({
+    inputs: [
+      {
+        idProperty: "kiwify_chave",
+        id: chave,
+        properties: Object.assign(
+          {
+            kiwify_chave: chave,
+            kiwify_order_id: w.order_id,
+            dealname: w.Customer.full_name + " - " + w.Product.product_name,
+            amount: String((w.Commissions?.my_commission ?? 0) / 100),
+            pipeline: "904543067",
+            dealstage: w.webhook_event_type === "order_approved"
+              ? (({ paid: "1372708683", refused: "1372708684", refunded: "1372708684", chargedback: "1372708684" })[w.order_status] ?? "1372708679")
+              : "1372708679",
+            tbschool__forma_de_pagamento: w.payment_method,
+            tbschool__produto_de_interesse: w.Product.product_name,
+            tbschool__valor_da_compra: String((w.Commissions?.charge_amount ?? 0) / 100)
+          },
+          w.pix_code ? { tbschool__codigo_do_pix: w.pix_code } : {},
+          w.boleto_barcode ? { tbschool__codigo_do_boleto: w.boleto_barcode } : {}
+        )
+      }
+    ]
+  });
+})() }}

@@ -1,0 +1,12 @@
+node_modules
+.next
+.env
+.env.local
+*.log
+
+.vercel
+.env*.local
+
+# credenciais Kiwify (diagnóstico) — nunca commitar
+kiwify-credenciais.txt
+_kiwify_sales.json

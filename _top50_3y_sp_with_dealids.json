@@ -1,0 +1,611 @@
+[
+  {
+    "cnpj": "1559455000104",
+    "razao": "Unimed Nordeste Paulista – Federação Intrafederativa das Cooperativas Médicas",
+    "nomes": "Unimed Ribeirão | Unimed Ribeirão Preto | Unimed Nordeste Paulista- Federação Intrafederativa das Cooperativas Médicas | Unimed",
+    "deals_count": 13,
+    "sum_amount": 382850,
+    "deal_ids": [
+      59168637246,
+      37429364573,
+      37442747736,
+      41660929670,
+      40008830486,
+      37438538834,
+      37430915171,
+      37449602671,
+      37426519871,
+      37441788590,
+      37442747203,
+      37429365387,
+      37428376383
+    ]
+  },
+  {
+    "cnpj": "53113791000122",
+    "razao": "TOTVS S.A.",
+    "nomes": "TOTVS | Totvs",
+    "deals_count": 9,
+    "sum_amount": 138001.01,
+    "deal_ids": [
+      40328187301,
+      41660573471,
+      41660259174,
+      39379306621,
+      41660916638,
+      41660897440,
+      37444831118,
+      41660899978,
+      41661136294
+    ]
+  },
+  {
+    "cnpj": "1404158000190",
+    "razao": "Pearson Education do Brasil Ltda",
+    "nomes": "Pearson Education do Brasil Ltda | PEARSON | Pearson ( Yazagi ) | Yazigi",
+    "deals_count": 7,
+    "sum_amount": 120817.04000000001,
+    "deal_ids": [
+      42715801889,
+      40686437888,
+      37426207357,
+      37449137732,
+      37433484044,
+      37439313507,
+      41660926482
+    ]
+  },
+  {
+    "cnpj": "60701190000104",
+    "razao": "Itaú Unibanco S.A.",
+    "nomes": "Itaú | Banco Itaú | Banco Itau Unibanco S/A",
+    "deals_count": 7,
+    "sum_amount": 101232.8,
+    "deal_ids": [
+      58798308901,
+      37426519396,
+      37445590074,
+      37430450965,
+      42394854532,
+      42362991914,
+      42398870390
+    ]
+  },
+  {
+    "cnpj": "62931522000164",
+    "razao": "CENTRAL DAS COOPERATIVAS DE CREDITO DO ESTADO DE SAO PAULO - SICOOB CENTRAL CECRESP",
+    "nomes": "Sicoob Cecresp | Cecresp/Gemac | Sicoob Cecresp Seguros",
+    "deals_count": 6,
+    "sum_amount": 62517.5,
+    "deal_ids": [
+      40767495682,
+      43098961206,
+      43063255177,
+      37436337195,
+      37433483952,
+      37439776869
+    ]
+  },
+  {
+    "cnpj": "27733374000172",
+    "razao": "Qualiconsig promotora de vendas",
+    "nomes": "Qualiconsig | Grupo QUALICONSIG",
+    "deals_count": 5,
+    "sum_amount": 92000,
+    "deal_ids": [
+      41656730536,
+      37433793057,
+      37426982317,
+      41660919224,
+      41656036510
+    ]
+  },
+  {
+    "cnpj": "46578514000120",
+    "razao": "Prefeitura Municipal da Estância Balneária de Peruíbe",
+    "nomes": "Prefeitura de Peruíbe | MEMP",
+    "deals_count": 5,
+    "sum_amount": 46600,
+    "deal_ids": [
+      37450373296,
+      37443369128,
+      41660926480,
+      37440857660,
+      37426982229
+    ]
+  },
+  {
+    "cnpj": "48424807000188",
+    "razao": "EDITORA ALIANCA DIVERGENTE LTDA",
+    "nomes": "ALIANÇA DIVERGENTE | Aliança Divergente",
+    "deals_count": 4,
+    "sum_amount": 69200,
+    "deal_ids": [
+      41187106202,
+      37431780734,
+      37441633052,
+      39993402946
+    ]
+  },
+  {
+    "cnpj": "1961898000399",
+    "razao": "CARGILL ALIMENTOS LTDA CAMPINAS - SP",
+    "nomes": "Cargill | Maria Eugênia Ciaramicoli",
+    "deals_count": 4,
+    "sum_amount": 57043,
+    "deal_ids": [
+      59157137255,
+      41660083827,
+      37439001859,
+      37429365142
+    ]
+  },
+  {
+    "cnpj": "73196438000160",
+    "razao": "Vetnil Ind. e Com. de Produtos Veterinários Ltda",
+    "nomes": "Vetnil",
+    "deals_count": 4,
+    "sum_amount": 45800,
+    "deal_ids": [
+      41656011016,
+      37434103332,
+      37438539160,
+      41656713565
+    ]
+  },
+  {
+    "cnpj": "13551543000149",
+    "razao": "AGPRODUCA SERVICOS LTDA",
+    "nomes": "Agência Produca | HP",
+    "deals_count": 4,
+    "sum_amount": 33350,
+    "deal_ids": [
+      41660921269,
+      37432245389,
+      41656732848,
+      41656713559
+    ]
+  },
+  {
+    "cnpj": "8713221000119",
+    "razao": "Casar.com",
+    "nomes": "Casar | Casar.com",
+    "deals_count": 4,
+    "sum_amount": 26000,
+    "deal_ids": [
+      41656891292,
+      37442280318,
+      41660950969,
+      37444212380
+    ]
+  },
+  {
+    "cnpj": "48539407000118",
+    "razao": "Basf SA",
+    "nomes": "BASF",
+    "deals_count": 4,
+    "sum_amount": 25000,
+    "deal_ids": [
+      40007990892,
+      37444980041,
+      40008895399,
+      37431780677
+    ]
+  },
+  {
+    "cnpj": "9287895000161",
+    "razao": "Thermo Fisher",
+    "nomes": "Thermo Fisher",
+    "deals_count": 4,
+    "sum_amount": 18700,
+    "deal_ids": [
+      37450988183,
+      38258338164,
+      38267492749,
+      38266259894
+    ]
+  },
+  {
+    "cnpj": "10461302000110",
+    "razao": "SOLIDES TECNOLOGIA SA",
+    "nomes": "Solides | Sólides",
+    "deals_count": 3,
+    "sum_amount": 81700,
+    "deal_ids": [
+      41656891294,
+      37426671189,
+      37432553749
+    ]
+  },
+  {
+    "cnpj": "19214237000101",
+    "razao": "GP Treinamento Brasil Ltda",
+    "nomes": "",
+    "deals_count": 3,
+    "sum_amount": 79000,
+    "deal_ids": [
+      40009980023,
+      40003625558,
+      40007944060
+    ]
+  },
+  {
+    "cnpj": "3779133000104",
+    "razao": "Serviço Social da Indústria - SESI/DR SP",
+    "nomes": "SESI SP | Sesi São Paulo | SESI - Presidente Epitácio/SP",
+    "deals_count": 3,
+    "sum_amount": 53825,
+    "deal_ids": [
+      58692035074,
+      37434102927,
+      41660911931
+    ]
+  },
+  {
+    "cnpj": "3820295000130",
+    "razao": "Associação dos Lojistas do Litoral Plaza",
+    "nomes": "Litoral Plaza Shopping",
+    "deals_count": 3,
+    "sum_amount": 31600,
+    "deal_ids": [
+      40009991467,
+      37438539130,
+      40009969579
+    ]
+  },
+  {
+    "cnpj": "48114367000162",
+    "razao": "MDS CORRETORA E ADMINISTRADORA DE SEGUROS S.A.",
+    "nomes": "MDS Group | Fast Shop | Outback",
+    "deals_count": 3,
+    "sum_amount": 18950,
+    "deal_ids": [
+      38960363893,
+      37434946453,
+      37428684216
+    ]
+  },
+  {
+    "cnpj": "43818418000113",
+    "razao": "Nouryon Pulp and Performance Indústria Química Ltda.",
+    "nomes": "Nouryon Almeida | Nouryon",
+    "deals_count": 3,
+    "sum_amount": 6600,
+    "deal_ids": [
+      39993863546,
+      37441169449,
+      37440858026
+    ]
+  },
+  {
+    "cnpj": "8184082000183",
+    "razao": "Timlog Logistica LTDA",
+    "nomes": "Timlog Logística | TeamLLog",
+    "deals_count": 3,
+    "sum_amount": 5851.05,
+    "deal_ids": [
+      58295432325,
+      42399862690,
+      37435254199
+    ]
+  },
+  {
+    "cnpj": "8185386000165",
+    "razao": "AK NETWORKS COMERCIO E IMPORTACAO DE SOFTWARE LTDA",
+    "nomes": "AK Networks",
+    "deals_count": 2,
+    "sum_amount": 65000,
+    "deal_ids": [
+      37429984369,
+      41656024618
+    ]
+  },
+  {
+    "cnpj": "28719203000151",
+    "razao": "OSTEO21 DISTRIBUIDORA E IMPORTADORA DE PRODUTOS MÉDICOS",
+    "nomes": "OSTEO21 DISTRIBUIDORA E IMPORTADORA DE PRODUTOS MÉDICOS",
+    "deals_count": 2,
+    "sum_amount": 61000,
+    "deal_ids": [
+      41660904531,
+      37430450564
+    ]
+  },
+  {
+    "cnpj": "35755699000184",
+    "razao": "TRACTIAN TECNOLOGIA LTD",
+    "nomes": "",
+    "deals_count": 2,
+    "sum_amount": 56700,
+    "deal_ids": [
+      40008830484,
+      40008873117
+    ]
+  },
+  {
+    "cnpj": "59952259000185",
+    "razao": "Assembleia Legislativa do Estado de Sao Paulo",
+    "nomes": "ALESP | Alesp",
+    "deals_count": 2,
+    "sum_amount": 43515,
+    "deal_ids": [
+      59728052265,
+      58524129350
+    ]
+  },
+  {
+    "cnpj": "61532644000115",
+    "razao": "ITAUSA S.A.",
+    "nomes": "J2A Eventos",
+    "deals_count": 2,
+    "sum_amount": 42040,
+    "deal_ids": [
+      40008890272,
+      37433173867
+    ]
+  },
+  {
+    "cnpj": "58454222000164",
+    "razao": "DSM FIRMENICH BRASIL LTDA",
+    "nomes": "DSM-Firmenich",
+    "deals_count": 2,
+    "sum_amount": 40000,
+    "deal_ids": [
+      41661145254,
+      37444830900
+    ]
+  },
+  {
+    "cnpj": "60746948000112",
+    "razao": "BANCO BRADESCO S.A",
+    "nomes": "Banco Bradesco - Departamento Next",
+    "deals_count": 2,
+    "sum_amount": 30300,
+    "deal_ids": [
+      40008825361,
+      37431224749
+    ]
+  },
+  {
+    "cnpj": "49389307000115",
+    "razao": "Cooperativa de Crédito Cooplivre",
+    "nomes": "Sicoob cooplivre",
+    "deals_count": 2,
+    "sum_amount": 27000,
+    "deal_ids": [
+      40009647369,
+      37441169583
+    ]
+  },
+  {
+    "cnpj": "35825580000130",
+    "razao": "MOTZ TRANSPORTES LTDA",
+    "nomes": "",
+    "deals_count": 2,
+    "sum_amount": 24000,
+    "deal_ids": [
+      40008809576,
+      40008830487
+    ]
+  },
+  {
+    "cnpj": "5830454000103",
+    "razao": "AMVAC do Brasil 3P LTDA",
+    "nomes": "AMVAC",
+    "deals_count": 2,
+    "sum_amount": 23000,
+    "deal_ids": [
+      37428684150,
+      40009050037
+    ]
+  },
+  {
+    "cnpj": "22811775000180",
+    "razao": "C.Blindados S/A",
+    "nomes": "Carbon Blindados",
+    "deals_count": 2,
+    "sum_amount": 22400,
+    "deal_ids": [
+      40009991460,
+      37444212286
+    ]
+  },
+  {
+    "cnpj": "18627195000160",
+    "razao": "Master Ind. E Comercio Ltda.",
+    "nomes": "Master Indústria e Comércio",
+    "deals_count": 2,
+    "sum_amount": 22016,
+    "deal_ids": [
+      41656736938,
+      37841961775
+    ]
+  },
+  {
+    "cnpj": "36402446000190",
+    "razao": "TRILLIO TECNOLOGIA EDUCACIONAL LTDA",
+    "nomes": "Trillio | Trillio Academy",
+    "deals_count": 2,
+    "sum_amount": 22000,
+    "deal_ids": [
+      37435873886,
+      41656891295
+    ]
+  },
+  {
+    "cnpj": "43708379000100",
+    "razao": "FAST SHOP S.A",
+    "nomes": "Fast Shop",
+    "deals_count": 2,
+    "sum_amount": 21560,
+    "deal_ids": [
+      41657082638,
+      37426672284
+    ]
+  },
+  {
+    "cnpj": "27231185000100",
+    "razao": "DIMENSA S.A",
+    "nomes": "Dimensa | Maite Bluhu",
+    "deals_count": 2,
+    "sum_amount": 21236.5,
+    "deal_ids": [
+      54020673960,
+      37447577394
+    ]
+  },
+  {
+    "cnpj": "26109297000111",
+    "razao": "NORTIS INCORPORADORA E CONSTRUTORA S/A",
+    "nomes": "Grupo Nortis",
+    "deals_count": 2,
+    "sum_amount": 21080,
+    "deal_ids": [
+      57344690718,
+      41348612882
+    ]
+  },
+  {
+    "cnpj": "45751427000160",
+    "razao": "Camara Municipal de Paulinia",
+    "nomes": "Camara municipal paulinia | Câmara Municipal de Paulínia",
+    "deals_count": 2,
+    "sum_amount": 21028.93,
+    "deal_ids": [
+      43542956605,
+      37450834968
+    ]
+  },
+  {
+    "cnpj": "8879643000169",
+    "razao": "Simbiose Industria e Comercio de Fertilizantes e Insumos Microbiologicos Ltda.",
+    "nomes": "Cogny | Simbiose",
+    "deals_count": 2,
+    "sum_amount": 21000,
+    "deal_ids": [
+      37450989381,
+      41656031888
+    ]
+  },
+  {
+    "cnpj": "30306294000226",
+    "razao": "Banco BTG Pactual S/A",
+    "nomes": "BTG PACTUAL | Banco BTG Pactual S/A",
+    "deals_count": 2,
+    "sum_amount": 20000,
+    "deal_ids": [
+      41656548635,
+      41655996467
+    ]
+  },
+  {
+    "cnpj": "40432544000147",
+    "razao": "CLARO S.A",
+    "nomes": "Claro",
+    "deals_count": 2,
+    "sum_amount": 18700,
+    "deal_ids": [
+      46257026932,
+      47814558236
+    ]
+  },
+  {
+    "cnpj": "47080619001199",
+    "razao": "TEREOS ACUCAR E ENERGIA BRASIL S.A.",
+    "nomes": "Tereos",
+    "deals_count": 2,
+    "sum_amount": 18500,
+    "deal_ids": [
+      37430760019,
+      40008841350
+    ]
+  },
+  {
+    "cnpj": "47698553000123",
+    "razao": "MOB COMUNICAÇÃO EVENTOS E MARKETING LTDA",
+    "nomes": "Azul Viagens",
+    "deals_count": 2,
+    "sum_amount": 18000,
+    "deal_ids": [
+      41656003463,
+      38567293502
+    ]
+  },
+  {
+    "cnpj": "6234133000109",
+    "razao": "Rough Promoções e Eventos",
+    "nomes": "Midea Carrier",
+    "deals_count": 2,
+    "sum_amount": 18000,
+    "deal_ids": [
+      40008784675,
+      37433018643
+    ]
+  },
+  {
+    "cnpj": "23412247000110",
+    "razao": "Amazon AWS Serviços Brasil Ltda",
+    "nomes": "Amazon",
+    "deals_count": 2,
+    "sum_amount": 16500,
+    "deal_ids": [
+      40008857361,
+      37444980004
+    ]
+  },
+  {
+    "cnpj": "47067525000108",
+    "razao": "Louis Dreyfus company Brasil",
+    "nomes": "",
+    "deals_count": 2,
+    "sum_amount": 16500,
+    "deal_ids": [
+      40009975360,
+      40009975357
+    ]
+  },
+  {
+    "cnpj": "22741985000149",
+    "razao": "Bem São Paulo",
+    "nomes": "Bem São Paulo | BEM São Paulo Eventos e Turismo LTDA",
+    "deals_count": 2,
+    "sum_amount": 14720,
+    "deal_ids": [
+      37442900573,
+      37435406911
+    ]
+  },
+  {
+    "cnpj": "43646030000182",
+    "razao": "ESCOLA VIVA LTDA",
+    "nomes": "Koru",
+    "deals_count": 2,
+    "sum_amount": 14400,
+    "deal_ids": [
+      40006447218,
+      37444674897
+    ]
+  },
+  {
+    "cnpj": "4298106000174",
+    "razao": "S.I.N. Implant System Ltda",
+    "nomes": "S.I.N. Implant System",
+    "deals_count": 2,
+    "sum_amount": 14400,
+    "deal_ids": [
+      41660919225,
+      37449291858
+    ]
+  },
+  {
+    "cnpj": "52243680000178",
+    "razao": "specialty product technologies",
+    "nomes": "SPTECH",
+    "deals_count": 2,
+    "sum_amount": 13950,
+    "deal_ids": [
+      40009969571,
+      37440087886
+    ]
+  }
+]

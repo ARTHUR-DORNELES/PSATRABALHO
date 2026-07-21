@@ -1,0 +1,127 @@
+{
+  "name": "Wiki Hub - C - Ranking pro Drive (agendado)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 1
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "sched-01",
+      "name": "A cada 1h"
+    },
+    {
+      "parameters": {
+        "operation": "keys",
+        "keyPattern": "pcur:pal:*",
+        "getValues": true
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        240,
+        0
+      ],
+      "id": "redis-keys-c",
+      "name": "Redis Keys",
+      "credentials": {
+        "redis": {
+          "id": "d4VAHvJKHzL9Pr8p",
+          "name": "Redis Profissionais SA"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Lê TODOS os scores do Redis (nó \"Redis Keys\" com Get Values) e monta 1 CSV consolidado,\n// ranqueado dentro de cada macro tema, e devolve como arquivo binário (data) pro Google Drive.\nconst recs = [];\nfunction pushParsed(v) {\n  let r = v;\n  if (typeof v === 'string') { try { r = JSON.parse(v); } catch (e) { return; } }\n  if (r && r.id) recs.push(r);\n}\nfor (const it of items) {\n  const j = it.json || {};\n  if (j.value !== undefined && (j.key || j.name)) pushParsed(j.value);       // formato {key, value}\n  else for (const [k, v] of Object.entries(j)) if (k.indexOf('pcur:pal:') === 0) pushParsed(v); // {chave: valor}\n}\n\n// agrupa por macro tema\nconst byTema = {};\nfor (const r of recs) { const t = r.macro_tema || '18. OUTROS'; (byTema[t] = byTema[t] || []).push(r); }\n// ordena temas pelo número do rótulo (1..25)\nconst temas = Object.keys(byTema).sort((a, b) => (parseInt(a) || 999) - (parseInt(b) || 999));\n\nfunction esc(v) { const s = String(v == null ? '' : v); return /[\",\\n;]/.test(s) ? '\"' + s.replace(/\"/g, '\"\"') + '\"' : s; }\nconst header = ['macro_tema', 'rank', 'nome', 'pontuacao_total', 'compatibilidade_pct', 'quem_e', 'defende', 'entrega', 'pra_quem', 'comprova', 'raiox', 'hubspot_id', 'wiki_url'];\nconst out = [header.join(',')];\nfor (const t of temas) {\n  const lst = byTema[t].slice().sort((a, b) => (b.pontuacao_total || 0) - (a.pontuacao_total || 0));\n  lst.forEach((r, i) => {\n    const n = r.notas || {};\n    out.push([\n      esc(t), i + 1, esc(r.nome), r.pontuacao_total, r.compatibilidade,\n      n.quem_e, n.defende, n.entrega, n.pra_quem, n.comprova, n.raiox,\n      r.id, esc(r.wiki_url)\n    ].join(','));\n  });\n}\nconst csv = '﻿' + out.join('\\r\\n'); // BOM + CRLF: Excel abre com acento certo\nconst base64 = Buffer.from(csv, 'utf8').toString('base64');\n\nreturn [{\n  json: { total_avaliados: recs.length, temas: temas.length },\n  binary: { data: { data: base64, mimeType: 'text/csv', fileName: 'ranking_palestrantes.csv' } }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ],
+      "id": "monta-csv-c",
+      "name": "Monta CSV"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "fileId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "COLE_O_ID_DO_ARQUIVO_DRIVE"
+        },
+        "changeFileContent": true,
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        720,
+        0
+      ],
+      "id": "gdrive-c",
+      "name": "Salva no Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "REPLACE_GDRIVE",
+          "name": "Google Drive"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "A cada 1h": {
+      "main": [
+        [
+          {
+            "node": "Redis Keys",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis Keys": {
+      "main": [
+        [
+          {
+            "node": "Monta CSV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Monta CSV": {
+      "main": [
+        [
+          {
+            "node": "Salva no Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "tags": []
+}

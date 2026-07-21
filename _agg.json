@@ -1,0 +1,486 @@
+{
+  "windowStart": "2025-06-01",
+  "windowEnd": "2025-08-31",
+  "totalDealsWithMicro": 79,
+  "totalRevenue": 831672.26,
+  "microByCount": [
+    {
+      "tema": "12.2 Inspiração",
+      "count": 13,
+      "sumAmount": 116757.84
+    },
+    {
+      "tema": "12.3 Engajamento",
+      "count": 11,
+      "sumAmount": 100472.28
+    },
+    {
+      "tema": "12.5 IA - Inteligência Artificial",
+      "count": 4,
+      "sumAmount": 24171
+    },
+    {
+      "tema": "13.2 Saúde Mental",
+      "count": 4,
+      "sumAmount": 19613.5
+    },
+    {
+      "tema": "6.9 Negócios",
+      "count": 3,
+      "sumAmount": 66200
+    },
+    {
+      "tema": "10.3 Gestão de Liderança",
+      "count": 2,
+      "sumAmount": 68750
+    },
+    {
+      "tema": "2.2 Comunicação Interna",
+      "count": 2,
+      "sumAmount": 50500.01
+    },
+    {
+      "tema": "1.5 Tecnologia",
+      "count": 2,
+      "sumAmount": 25760
+    },
+    {
+      "tema": "9.4 Finanças",
+      "count": 2,
+      "sumAmount": 21375
+    },
+    {
+      "tema": "16.2 Alta Performance em Vendas",
+      "count": 2,
+      "sumAmount": 20997.5
+    },
+    {
+      "tema": "3.3 Inclusão",
+      "count": 2,
+      "sumAmount": 18893.06
+    },
+    {
+      "tema": "10.8 Gestão de Conflitos",
+      "count": 2,
+      "sumAmount": 16319.85
+    },
+    {
+      "tema": "5.3 Educação Infanto-juvenil",
+      "count": 2,
+      "sumAmount": 15350
+    },
+    {
+      "tema": "10.4 Gestão de Equipes",
+      "count": 1,
+      "sumAmount": 48500
+    },
+    {
+      "tema": "4.6 Economia Criativa",
+      "count": 1,
+      "sumAmount": 22500
+    },
+    {
+      "tema": "9.5 Mercado",
+      "count": 1,
+      "sumAmount": 20050
+    },
+    {
+      "tema": "6.3 Empreendedorismo Sustentável",
+      "count": 1,
+      "sumAmount": 19500
+    },
+    {
+      "tema": "11.3 Métodos Ágeis",
+      "count": 1,
+      "sumAmount": 15536.47
+    },
+    {
+      "tema": "4.9 Cenário Socioeconômico",
+      "count": 1,
+      "sumAmount": 11250
+    },
+    {
+      "tema": "5.2 EJA - Educação de Jovens e Adultos",
+      "count": 1,
+      "sumAmount": 10551.55
+    }
+  ],
+  "microByAmount": [
+    {
+      "tema": "12.2 Inspiração",
+      "count": 13,
+      "sumAmount": 116757.84
+    },
+    {
+      "tema": "12.3 Engajamento",
+      "count": 11,
+      "sumAmount": 100472.28
+    },
+    {
+      "tema": "10.3 Gestão de Liderança",
+      "count": 2,
+      "sumAmount": 68750
+    },
+    {
+      "tema": "6.9 Negócios",
+      "count": 3,
+      "sumAmount": 66200
+    },
+    {
+      "tema": "2.2 Comunicação Interna",
+      "count": 2,
+      "sumAmount": 50500.01
+    },
+    {
+      "tema": "10.4 Gestão de Equipes",
+      "count": 1,
+      "sumAmount": 48500
+    },
+    {
+      "tema": "1.5 Tecnologia",
+      "count": 2,
+      "sumAmount": 25760
+    },
+    {
+      "tema": "12.5 IA - Inteligência Artificial",
+      "count": 4,
+      "sumAmount": 24171
+    },
+    {
+      "tema": "4.6 Economia Criativa",
+      "count": 1,
+      "sumAmount": 22500
+    },
+    {
+      "tema": "9.4 Finanças",
+      "count": 2,
+      "sumAmount": 21375
+    },
+    {
+      "tema": "16.2 Alta Performance em Vendas",
+      "count": 2,
+      "sumAmount": 20997.5
+    },
+    {
+      "tema": "9.5 Mercado",
+      "count": 1,
+      "sumAmount": 20050
+    },
+    {
+      "tema": "13.2 Saúde Mental",
+      "count": 4,
+      "sumAmount": 19613.5
+    },
+    {
+      "tema": "6.3 Empreendedorismo Sustentável",
+      "count": 1,
+      "sumAmount": 19500
+    },
+    {
+      "tema": "3.3 Inclusão",
+      "count": 2,
+      "sumAmount": 18893.06
+    },
+    {
+      "tema": "10.8 Gestão de Conflitos",
+      "count": 2,
+      "sumAmount": 16319.85
+    },
+    {
+      "tema": "11.3 Métodos Ágeis",
+      "count": 1,
+      "sumAmount": 15536.47
+    },
+    {
+      "tema": "5.3 Educação Infanto-juvenil",
+      "count": 2,
+      "sumAmount": 15350
+    },
+    {
+      "tema": "4.9 Cenário Socioeconômico",
+      "count": 1,
+      "sumAmount": 11250
+    },
+    {
+      "tema": "5.2 EJA - Educação de Jovens e Adultos",
+      "count": 1,
+      "sumAmount": 10551.55
+    }
+  ],
+  "macroByCount": [
+    {
+      "tema": "12. MOTIVAÇÃO",
+      "count": 19,
+      "sumAmount": 219515.84
+    },
+    {
+      "tema": "18. OUTROS",
+      "count": 15,
+      "sumAmount": 161110.97
+    },
+    {
+      "tema": "11. INOVAÇÃO",
+      "count": 12,
+      "sumAmount": 132701.99
+    },
+    {
+      "tema": "19. LIDERANÇA",
+      "count": 6,
+      "sumAmount": 87265.98
+    },
+    {
+      "tema": "5. EDUCAÇÃO",
+      "count": 5,
+      "sumAmount": 38509.8
+    },
+    {
+      "tema": "16. VENDAS",
+      "count": 3,
+      "sumAmount": 25497.5
+    },
+    {
+      "tema": "13. SAÚDE",
+      "count": 3,
+      "sumAmount": 15113.5
+    },
+    {
+      "tema": "3. DIVERSIDADE E INCLUSÃO",
+      "count": 3,
+      "sumAmount": 23513.04
+    },
+    {
+      "tema": "4. ECONOMIA / POLÍTICA",
+      "count": 3,
+      "sumAmount": 51750
+    },
+    {
+      "tema": "10. GESTÃO DE PESSOAS",
+      "count": 2,
+      "sumAmount": 26713.33
+    },
+    {
+      "tema": "1. AGRONEGÓCIO",
+      "count": 2,
+      "sumAmount": 7850
+    },
+    {
+      "tema": "6. EMPREENDEDORISMO",
+      "count": 2,
+      "sumAmount": 26980.31
+    },
+    {
+      "tema": "7. ESPORTE",
+      "count": 1,
+      "sumAmount": 3000
+    },
+    {
+      "tema": "8. ÉTICA",
+      "count": 1,
+      "sumAmount": 4500
+    },
+    {
+      "tema": "15. SUSTENTABILIDADE",
+      "count": 1,
+      "sumAmount": 3150
+    },
+    {
+      "tema": "14. SIPAT",
+      "count": 1,
+      "sumAmount": 4500
+    }
+  ],
+  "alignedCount": 41,
+  "misalignedCount": 38,
+  "misalignments": [
+    {
+      "macro": "16. VENDAS",
+      "micro": "12.2 Inspiração",
+      "amount": "4500"
+    },
+    {
+      "macro": "19. LIDERANÇA",
+      "micro": "12.3 Engajamento",
+      "amount": "4374.43"
+    },
+    {
+      "macro": "18. OUTROS",
+      "micro": "10.6 Recursos Humanos",
+      "amount": "600"
+    },
+    {
+      "macro": "19. LIDERANÇA",
+      "micro": "10.3 Gestão de Liderança",
+      "amount": "15750"
+    },
+    {
+      "macro": "19. LIDERANÇA",
+      "micro": "12.3 Engajamento",
+      "amount": "2700"
+    },
+    {
+      "macro": "18. OUTROS",
+      "micro": "16.6 Jornada do Cliente",
+      "amount": "2600"
+    },
+    {
+      "macro": "18. OUTROS",
+      "micro": "9.4 Finanças",
+      "amount": "3375"
+    },
+    {
+      "macro": "18. OUTROS",
+      "micro": "2.2 Comunicação Interna",
+      "amount": "50500"
+    },
+    {
+      "macro": "8. ÉTICA",
+      "micro": "9.11 Ética",
+      "amount": "4500"
+    },
+    {
+      "macro": "18. OUTROS",
+      "micro": "2.2 Comunicação Interna",
+      "amount": "0.01"
+    },
+    {
+      "macro": "10. GESTÃO DE PESSOAS",
+      "micro": "12.3 Engajamento",
+      "amount": "6713.33"
+    },
+    {
+      "macro": "10. GESTÃO DE PESSOAS",
+      "micro": "12.3 Engajamento",
+      "amount": "20000"
+    },
+    {
+      "macro": "12. MOTIVAÇÃO",
+      "micro": "10.3 Gestão de Liderança",
+      "amount": "53000"
+    },
+    {
+      "macro": "11. INOVAÇÃO",
+      "micro": "12.5 IA - Inteligência Artificial",
+      "amount": "7100"
+    },
+    {
+      "macro": "19. LIDERANÇA",
+      "micro": "10.4 Gestão de Equipes",
+      "amount": "48500"
+    },
+    {
+      "macro": "11. INOVAÇÃO",
+      "micro": "1.5 Tecnologia",
+      "amount": "5760"
+    },
+    {
+      "macro": "18. OUTROS",
+      "micro": "4.7 Comércio Exterior",
+      "amount": "6566.1"
+    },
+    {
+      "macro": "18. OUTROS",
+      "micro": "4.12 Direito Eleitoral",
+      "amount": "9350"
+    },
+    {
+      "macro": "18. OUTROS",
+      "micro": "12.2 Inspiração",
+      "amount": "4500"
+    },
+    {
+      "macro": "5. EDUCAÇÃO",
+      "micro": "3.3 Inclusão",
+      "amount": "8770.02"
+    },
+    {
+      "macro": "11. INOVAÇÃO",
+      "micro": "12.3 Engajamento",
+      "amount": "13184.52"
+    },
+    {
+      "macro": "11. INOVAÇÃO",
+      "micro": "12.3 Engajamento",
+      "amount": "9800"
+    },
+    {
+      "macro": "11. INOVAÇÃO",
+      "micro": "6.9 Negócios",
+      "amount": "13500"
+    },
+    {
+      "macro": "18. OUTROS",
+      "micro": "10.8 Gestão de Conflitos",
+      "amount": "10319.85"
+    },
+    {
+      "macro": "11. INOVAÇÃO",
+      "micro": "12.5 IA - Inteligência Artificial",
+      "amount": "5871"
+    },
+    {
+      "macro": "11. INOVAÇÃO",
+      "micro": "12.5 IA - Inteligência Artificial",
+      "amount": "3700"
+    },
+    {
+      "macro": "18. OUTROS",
+      "micro": "6.9 Negócios",
+      "amount": "42500"
+    },
+    {
+      "macro": "12. MOTIVAÇÃO",
+      "micro": "13.9 Gestão de Saúde",
+      "amount": "10000"
+    },
+    {
+      "macro": "19. LIDERANÇA",
+      "micro": "10.1 Cultura Organizacional",
+      "amount": "5441.55"
+    },
+    {
+      "macro": "4. ECONOMIA / POLÍTICA",
+      "micro": "9.4 Finanças",
+      "amount": "18000"
+    },
+    {
+      "macro": "14. SIPAT",
+      "micro": "13.2 Saúde Mental",
+      "amount": "4500"
+    },
+    {
+      "macro": "18. OUTROS",
+      "micro": "12.5 IA - Inteligência Artificial",
+      "amount": "7500"
+    },
+    {
+      "macro": "18. OUTROS",
+      "micro": "10.8 Gestão de Conflitos",
+      "amount": "6000"
+    },
+    {
+      "macro": "3. DIVERSIDADE E INCLUSÃO",
+      "micro": "13.10 Qualidade de Vida",
+      "amount": "4890"
+    },
+    {
+      "macro": "19. LIDERANÇA",
+      "micro": "2.3 Comunicação de Lideranças",
+      "amount": "10500"
+    },
+    {
+      "macro": "11. INOVAÇÃO",
+      "micro": "9.5 Mercado",
+      "amount": "20050"
+    },
+    {
+      "macro": "11. INOVAÇÃO",
+      "micro": "1.5 Tecnologia",
+      "amount": "20000"
+    },
+    {
+      "macro": "11. INOVAÇÃO",
+      "micro": "6.9 Negócios",
+      "amount": "10200"
+    }
+  ]
+}

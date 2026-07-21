@@ -1,0 +1,38 @@
+// ===== NÓ "Upsert do Negócio" (pix/approved/billet) — chave UNIFICADA com fixEmail =====
+// Cola no campo JSON Body (começa em {{, sem "=" na frente).
+{{ (() => {
+  const w = $('Webhook').item.json.body;
+  const fixEmail = raw => { let e=String(raw||'').trim().toLowerCase().replace(/\s+/g,'');
+    const at=e.lastIndexOf('@'); if(at<1) return e;
+    let u=e.slice(0,at), d=e.slice(at+1);
+    d=d.replace(/^(gmial|gmai|gmaill)\./,'gmail.');
+    d=d.replace(/^(gmail|hotmail|outlook|live|icloud)\.[a-z.]+$/,'$1.com');
+    d=d.replace(/\.(con|vom|comi|copm|cmo|ocm|c0m|om|cim)$/,'.com');
+    d=d.replace(/^yahoo\.(con|cm|vom)$/,'yahoo.com');
+    return u+'@'+d; };
+  // funciona tanto pro payload aninhado (Customer/Product) quanto pro plano (email/product_id)
+  const email = fixEmail(w.Customer?.email ?? w.email);
+  const productId = w.Product?.product_id ?? w.product_id;
+  const chave = email + "_" + productId;
+  return JSON.stringify({
+    inputs: [{
+      idProperty: "kiwify_chave",
+      id: chave,
+      properties: Object.assign({
+        kiwify_chave: chave,
+        kiwify_order_id: w.order_id,
+        dealname: (w.Customer?.full_name ?? w.name) + " - " + (w.Product?.product_name ?? w.product_name),
+        amount: String((w.Commissions?.my_commission ?? 0) / 100),
+        pipeline: "904543067",
+        dealstage: w.webhook_event_type === "order_approved"
+          ? (({ paid: "1372708683", refused: "1372708684", refunded: "1372708684", chargedback: "1372708684" })[w.order_status] ?? "1372708679")
+          : "1372708679",
+        tbschool__forma_de_pagamento: w.payment_method,
+        tbschool__produto_de_interesse: (w.Product?.product_name ?? w.product_name),
+        tbschool__valor_da_compra: String((w.Commissions?.charge_amount ?? 0) / 100)
+      },
+      w.pix_code ? { tbschool__codigo_do_pix: w.pix_code } : {},
+      w.boleto_barcode ? { tbschool__codigo_do_boleto: w.boleto_barcode } : {})
+    }]
+  });
+})() }}
