@@ -673,7 +673,7 @@ const linksBar = links.length ? ('<section class="summary-band" style="padding-t
 // Botao para o Diagnostico do Lead (pagina lead-facing, para o closer enviar)
 let diagUrl = '';
 try { diagUrl = ($('[LEAD-DIAG] Upload').first().json.url) || ''; } catch(e){}
-const diagBtn = diagUrl ? ('<div style="max-width:1100px;margin:20px auto 0;padding:0 48px"><a href="' + esc(diagUrl) + '" target="_blank" rel="noopener" class="control-btn" style="text-decoration:none;background:var(--ink);color:var(--paper);font-weight:700">Diagnostico do Lead (pagina para enviar) &rarr;</a></div>') : '';
+const diagBtn = diagUrl ? ('<div style="max-width:1100px;margin:20px auto 0;padding:0 48px"><a href="' + esc(diagUrl) + '" target="_blank" rel="noopener" class="control-btn" style="text-decoration:none;background:#FF6A00;border-color:#FF6A00;color:#fff;font-weight:700">Diagnostico do Lead (pagina para enviar) &rarr;</a></div>') : '';
 
 const article = '<article class="dossier">' + statsRow + controls + conteudo + comoFunciona + '</article>';
 const fonts = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">';
