@@ -148,7 +148,7 @@ add("[HUBSPOT] Get Contato", "n8n-nodes-base.httpRequest", {
   url: "=https://api.hubapi.com/crm/v3/objects/contacts/{{ $('⚙️ CONFIG (pesos e cortes)').item.json.lead.id_contato }}",
   authentication: "predefinedCredentialType", nodeCredentialType: "httpHeaderAuth",
   sendQuery: true,
-  queryParameters: { parameters: [{ name: "properties", value: "firstname,lastname,email,phone,mobilephone,jobtitle,company,city,state,estado_tbs,estado__menu_suspenso_,qual_a_sua_idade,qual_sua_idade_,seu_momento_profissional_atual,e_palestrante,qual_sua_urgncia_em_se_desenvolver_como_palestrante,tema,macro_tema,linkedin_url,hs_linkedin_url,linkedinbio,qual_o_perfil_do_instagram_ou_linkedin_dele_a__,hs_lead_status,lifecyclestage,recent_conversion_event_name,createdate" }] },
+  queryParameters: { parameters: [{ name: "properties", value: "firstname,lastname,email,phone,mobilephone,jobtitle,company,city,state,estado_tbs,estado__menu_suspenso_,qual_a_sua_idade,qual_sua_idade_,seu_momento_profissional_atual,e_palestrante,qual_sua_urgncia_em_se_desenvolver_como_palestrante,tema,macro_tema,linkedin,instagram,linkedin_url,hs_linkedin_url,linkedin_profile_link,qual_o_link_do_seu_linkedin_,qual_seu_instagram___link_,linkedinbio,qual_o_perfil_do_instagram_ou_linkedin_dele_a__,hs_lead_status,lifecyclestage,recent_conversion_event_name,createdate" }] },
   options: { response: { response: { neverError: true, responseFormat: "json" } } },
 }, { typeVersion: 4.2, position: [240, 420], credentials: CRED.hsHeader });
 conn("⚙️ CONFIG (pesos e cortes)", "[HUBSPOT] Get Contato");
@@ -162,8 +162,8 @@ return [{ json: {
     email: c.email || '',
     firstname: c.firstname || '',
     lastname: c.lastname || '',
-    linkedin_url: c.linkedin_url || c.hs_linkedin_url || '',
-    instagram_url: c.qual_o_perfil_do_instagram_ou_linkedin_dele_a__ || '',
+    linkedin_url: c.linkedin || c.linkedin_url || c.hs_linkedin_url || c.linkedin_profile_link || c.qual_o_link_do_seu_linkedin_ || '',
+    instagram_url: c.instagram || c.qual_seu_instagram___link_ || c.qual_o_perfil_do_instagram_ou_linkedin_dele_a__ || '',
     idade: c.qual_a_sua_idade || c.qual_sua_idade_ || '',
     estado: c.estado_tbs || c.estado__menu_suspenso_ || c.state || '',
     atuacao_hoje: c.seu_momento_profissional_atual || '',

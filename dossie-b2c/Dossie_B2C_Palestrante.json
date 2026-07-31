@@ -42,7 +42,7 @@
           "parameters": [
             {
               "name": "properties",
-              "value": "firstname,lastname,email,phone,mobilephone,jobtitle,company,city,state,estado_tbs,estado__menu_suspenso_,qual_a_sua_idade,qual_sua_idade_,seu_momento_profissional_atual,e_palestrante,qual_sua_urgncia_em_se_desenvolver_como_palestrante,tema,macro_tema,linkedin_url,hs_linkedin_url,linkedinbio,qual_o_perfil_do_instagram_ou_linkedin_dele_a__,hs_lead_status,lifecyclestage,recent_conversion_event_name,createdate"
+              "value": "firstname,lastname,email,phone,mobilephone,jobtitle,company,city,state,estado_tbs,estado__menu_suspenso_,qual_a_sua_idade,qual_sua_idade_,seu_momento_profissional_atual,e_palestrante,qual_sua_urgncia_em_se_desenvolver_como_palestrante,tema,macro_tema,linkedin,instagram,linkedin_url,hs_linkedin_url,linkedin_profile_link,qual_o_link_do_seu_linkedin_,qual_seu_instagram___link_,linkedinbio,qual_o_perfil_do_instagram_ou_linkedin_dele_a__,hs_lead_status,lifecyclestage,recent_conversion_event_name,createdate"
             }
           ]
         },
@@ -72,7 +72,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const CFG = $('⚙️ CONFIG (pesos e cortes)').first().json;\nconst c = ($('[HUBSPOT] Get Contato').first().json.properties) || {};\nreturn [{ json: {\n  cfg: CFG.cfg,\n  lead: {\n    id_contato: CFG.lead.id_contato,\n    email: c.email || '',\n    firstname: c.firstname || '',\n    lastname: c.lastname || '',\n    linkedin_url: c.linkedin_url || c.hs_linkedin_url || '',\n    instagram_url: c.qual_o_perfil_do_instagram_ou_linkedin_dele_a__ || '',\n    idade: c.qual_a_sua_idade || c.qual_sua_idade_ || '',\n    estado: c.estado_tbs || c.estado__menu_suspenso_ || c.state || '',\n    atuacao_hoje: c.seu_momento_profissional_atual || '',\n    ja_palestrante: c.e_palestrante || '',\n    urgencia: c.qual_sua_urgncia_em_se_desenvolver_como_palestrante || '',\n    tema: c.tema || c.macro_tema || '',\n    cargo: c.jobtitle || '',\n    empresa: c.company || '',\n    dominio_email: (c.email || '').split('@')[1] || ''\n  },\n  contato_props: c\n}}];"
+        "jsCode": "const CFG = $('⚙️ CONFIG (pesos e cortes)').first().json;\nconst c = ($('[HUBSPOT] Get Contato').first().json.properties) || {};\nreturn [{ json: {\n  cfg: CFG.cfg,\n  lead: {\n    id_contato: CFG.lead.id_contato,\n    email: c.email || '',\n    firstname: c.firstname || '',\n    lastname: c.lastname || '',\n    linkedin_url: c.linkedin || c.linkedin_url || c.hs_linkedin_url || c.linkedin_profile_link || c.qual_o_link_do_seu_linkedin_ || '',\n    instagram_url: c.instagram || c.qual_seu_instagram___link_ || c.qual_o_perfil_do_instagram_ou_linkedin_dele_a__ || '',\n    idade: c.qual_a_sua_idade || c.qual_sua_idade_ || '',\n    estado: c.estado_tbs || c.estado__menu_suspenso_ || c.state || '',\n    atuacao_hoje: c.seu_momento_profissional_atual || '',\n    ja_palestrante: c.e_palestrante || '',\n    urgencia: c.qual_sua_urgncia_em_se_desenvolver_como_palestrante || '',\n    tema: c.tema || c.macro_tema || '',\n    cargo: c.jobtitle || '',\n    empresa: c.company || '',\n    dominio_email: (c.email || '').split('@')[1] || ''\n  },\n  contato_props: c\n}}];"
       },
       "id": "n004",
       "name": "[LEAD] Base",
