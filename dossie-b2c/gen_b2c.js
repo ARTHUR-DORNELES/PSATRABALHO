@@ -644,7 +644,7 @@ const comoFunciona =
   '<li><strong>Coleta em 3 frentes ao mesmo tempo:</strong> HubSpot (formulario + CRM), Apollo (cargo e trajetoria) e Pesquisador Web (LinkedIn, Instagram, Google).</li>' +
   '<li><strong>Sintese (IA):</strong> cruza as 3 fontes e da nota 0 a 100 a cada um dos 5 eixos, com justificativa por evidencia.</li>' +
   '<li><strong>Nota final e Perfil:</strong> o fluxo aplica os pesos configurados. Pesos atuais: Audiencia ' + P.audiencia + '%, Repertorio/Palco ' + P.repertorio_palco + '%, Autoridade ' + P.autoridade_tema + '%, Ambicao x Realismo ' + P.ambicao_realismo + '%, Urgencia/Timing ' + P.urgencia_timing + '%. Cortes: Escala (>= ' + C.escala + '), Profissionalize-se (' + C.profissionalize + ' a ' + (C.escala - 1) + '), Iniciante (< ' + C.profissionalize + ').</li>' +
-  '<li><strong>Gravacao:</strong> o link deste dossie, o Score e o closer sugerido sao gravados no Contato (hunter_dossie_html_url, score_dossie, closer_da_agenda).</li>' +
+  '<li><strong>Gravacao:</strong> o link deste dossie, o Score e o closer sugerido sao gravados no Contato (dossie_b2c_html_url, score_dossie, closer_da_agenda).</li>' +
   '</ul>' +
   '<p class="footnote">Resultado calculado por IA a partir de fontes publicas + CRM. Use como apoio; confirme dados sensiveis na conversa.</p>' +
   '</div></div></div>';
@@ -688,7 +688,7 @@ conn("[RENDER] Convert to File", "[RENDER] Upload Dossie");
 const montaProps = `const ps = $('[SINTESE] Parse + Score').first().json;
 const cfg = $('⚙️ CONFIG (pesos e cortes)').first().json.cfg;
 const url = ($('[RENDER] Upload Dossie').first().json.url) || '';
-const props = { hunter_dossie_html_url: url, score_dossie: ps.score_final, status_do_dossie: cfg.STATUS_VALUE };
+const props = { dossie_b2c_html_url: url, score_dossie: ps.score_final, status_do_dossie: cfg.STATUS_VALUE };
 if (ps.closer_id) props.closer_da_agenda = ps.closer_id;
 if (cfg.PERFIL_NO_CONTATO) props.perfil = ps.perfil; // so grava se voce criou a prop no contato
 const contactId = String($('[LEAD] Base').first().json.lead.id_contato);
@@ -747,7 +747,7 @@ add("[HUBSPOT] Patch Deal Perfil", "n8n-nodes-base.httpRequest", {
 conn("[DEAL] Escolhe B2C", "[HUBSPOT] Patch Deal Perfil");
 
 // (Nota removida: o escopo de Notas nao esta disponivel para chaves de servico deste portal
-//  ("isn't available for public use"). O link do dossie ja fica no contato em hunter_dossie_html_url,
+//  ("isn't available for public use"). O link do dossie ja fica no contato em dossie_b2c_html_url,
 //  entao a Nota era apenas conveniencia. [HUBSPOT] Patch Contato e o ultimo no do fluxo.)
 // (Respond to Webhook tambem removido: o Webhook B2C responde 200 no recebimento.)
 
@@ -758,7 +758,7 @@ function sticky(content, pos, size, color) { add("Nota_" + uid(), "n8n-nodes-bas
 sticky("## ⚙️ PAINEL DE CONTROLE\\nPesos, cortes, status, flag de Perfil e mapa Perfil→Closer estão DENTRO do nó `⚙️ CONFIG` (com a tabela owner→ID pronta pra colar).\\nO gatilho é o workflow do HubSpot que dispara quando o Negócio B2C entra em 'Reunião Agendada'. Só o **ID do contato** precisa chegar no webhook.", [-260, 180], [460, 200], 6);
 sticky("## 📥 4 COLETORES\\nTudo parte do **contato** (Get Contato → LEAD Base).\\nHubSpot = form+CRM · Apollo = cargo/trajetória · Web = Google/imprensa · **Apify = Instagram** (nº reais de seguidores/engajamento).\\nApify: cole token no CONFIG. Sem token, o fluxo roda e marca 'Instagram não coletado'. IG privado → dossiê avisa que está bloqueado.", [720, 20], [460, 170], 5);
 sticky("## 🧮 SÍNTESE → SCORE → PERFIL\\nIA dá nota 0-100 por eixo → workflow aplica os pesos → nota final → Perfil → closer.", [2000, 260], [420, 120], 7);
-sticky("## 📄 RENDER + WRITE-BACK (CONTATO)\\nGera HTML (design B2B + 'Como funciona') e sobe pro board.\\nGrava no **Contato**: `hunter_dossie_html_url`, `score_dossie`, `status_do_dossie`, `closer_da_agenda` (+ `perfil` se o flag estiver ligado).\\nVocê copia do contato pro Negócio manualmente.", [3040, 180], [480, 170], 3);
+sticky("## 📄 RENDER + WRITE-BACK (CONTATO)\\nGera HTML (design B2B + 'Como funciona') e sobe pro board.\\nGrava no **Contato**: `dossie_b2c_html_url`, `score_dossie`, `status_do_dossie`, `closer_da_agenda` (+ `perfil` se o flag estiver ligado).\\nVocê copia do contato pro Negócio manualmente.", [3040, 180], [480, 170], 3);
 
 // ============================================================
 const workflow = {
