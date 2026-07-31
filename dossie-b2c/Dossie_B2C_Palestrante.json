@@ -5,7 +5,9 @@
       "parameters": {
         "httpMethod": "POST",
         "path": "dossie-b2c-palestrante",
-        "responseMode": "responseNode",
+        "responseMode": "onReceived",
+        "responseCode": 200,
+        "responseData": "Dossie B2C recebido, processando.",
         "options": {}
       },
       "id": "n001",
@@ -725,28 +727,13 @@
     },
     {
       "parameters": {
-        "respondWith": "json",
-        "responseBody": "={{ JSON.stringify({ ok: true, perfil: $('[SINTESE] Parse + Score').first().json.perfil, score: $('[SINTESE] Parse + Score').first().json.score_final, dossie_url: ($('[RENDER] Upload Dossie').first().json.url)||null }) }}",
-        "options": {}
-      },
-      "id": "n032",
-      "name": "Respond to Webhook",
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [
-        3640,
-        420
-      ]
-    },
-    {
-      "parameters": {
         "content": "## ⚙️ PAINEL DE CONTROLE\\nPesos, cortes, status, flag de Perfil e mapa Perfil→Closer estão DENTRO do nó `⚙️ CONFIG` (com a tabela owner→ID pronta pra colar).\\nO gatilho é o workflow do HubSpot que dispara quando o Negócio B2C entra em 'Reunião Agendada'. Só o **ID do contato** precisa chegar no webhook.",
         "height": 200,
         "width": 460,
         "color": 6
       },
-      "id": "n034",
-      "name": "Nota_n033",
+      "id": "n033",
+      "name": "Nota_n032",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
@@ -761,8 +748,8 @@
         "width": 460,
         "color": 5
       },
-      "id": "n036",
-      "name": "Nota_n035",
+      "id": "n035",
+      "name": "Nota_n034",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
@@ -777,8 +764,8 @@
         "width": 420,
         "color": 7
       },
-      "id": "n038",
-      "name": "Nota_n037",
+      "id": "n037",
+      "name": "Nota_n036",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
@@ -793,8 +780,8 @@
         "width": 480,
         "color": 3
       },
-      "id": "n040",
-      "name": "Nota_n039",
+      "id": "n039",
+      "name": "Nota_n038",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
@@ -1143,17 +1130,6 @@
         [
           {
             "node": "[HUBSPOT] Cria Nota Dossie",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "[HUBSPOT] Cria Nota Dossie": {
-      "main": [
-        [
-          {
-            "node": "Respond to Webhook",
             "type": "main",
             "index": 0
           }

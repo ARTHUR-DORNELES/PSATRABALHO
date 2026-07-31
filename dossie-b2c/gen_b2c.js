@@ -51,7 +51,9 @@ const CSS_ESCAPED = injB2B.match(/const css = "([\s\S]*?)";\s*\n\s*const footer/
 // ============================================================
 // 0. TRIGGER (recebe webhook do workflow do HubSpot)
 // ============================================================
-add("Webhook B2C", "n8n-nodes-base.webhook", { httpMethod: "POST", path: "dossie-b2c-palestrante", responseMode: "responseNode", options: {} },
+// responseMode "onReceived": responde 200 IMEDIATAMENTE ao HubSpot e segue processando em background.
+// Evita o loop de retry do HubSpot (timeout de segundos vs. fluxo de ~2min).
+add("Webhook B2C", "n8n-nodes-base.webhook", { httpMethod: "POST", path: "dossie-b2c-palestrante", responseMode: "onReceived", responseCode: 200, responseData: "Dossie B2C recebido, processando.", options: {} },
   { typeVersion: 2, position: [-220, 420] });
 
 // ============================================================
@@ -610,12 +612,8 @@ add("[HUBSPOT] Cria Nota Dossie", "n8n-nodes-base.httpRequest", {
 }, { typeVersion: 4.2, position: [3440, 520], credentials: CRED.hsHeader });
 conn("[HUBSPOT] Monta Nota", "[HUBSPOT] Cria Nota Dossie");
 
-add("Respond to Webhook", "n8n-nodes-base.respondToWebhook", {
-  respondWith: "json",
-  responseBody: "={{ JSON.stringify({ ok: true, perfil: $('[SINTESE] Parse + Score').first().json.perfil, score: $('[SINTESE] Parse + Score').first().json.score_final, dossie_url: ($('[RENDER] Upload Dossie').first().json.url)||null }) }}",
-  options: {},
-}, { typeVersion: 1.1, position: [3640, 420] });
-conn("[HUBSPOT] Cria Nota Dossie", "Respond to Webhook");
+// (Respond to Webhook removido: o Webhook B2C ja responde 200 no recebimento.
+//  [HUBSPOT] Cria Nota Dossie e o ultimo no do fluxo.)
 
 // ============================================================
 // STICKY NOTES
