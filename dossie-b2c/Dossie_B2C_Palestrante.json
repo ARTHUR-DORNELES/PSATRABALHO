@@ -1,0 +1,1173 @@
+{
+  "name": "Dossiê B2C — Palestrante Candidato",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "dossie-b2c-palestrante",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "n001",
+      "name": "Webhook B2C",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -220,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// =====================================================================\n//  PAINEL DE CONTROLE DO DOSSIE B2C  ->  EDITE SOMENTE ESTE BLOCO\n// =====================================================================\n// PESOS de cada eixo (soma = 100). O LLM avalia cada eixo 0-100 e o workflow calcula:\n//   nota_final = SOMA(eixo * peso) / 100\nconst PESOS = {\n  audiencia:          30,\n  repertorio_palco:   25,\n  autoridade_tema:    20,\n  ambicao_realismo:   15,\n  urgencia_timing:    10\n};\n\n// CORTES -> Perfil (nota 0-100)\nconst CORTES = { escala: 75, profissionalize: 45 }; // >=75 Escala | 45..74 Profissionalize-se | <45 Iniciante\n\n// Valor gravado em status_do_dossie (campo so aceita: \"Atualizado\" ou \"Desatualizado\")\nconst STATUS_VALUE = \"Atualizado\";\n\n// APIFY (Instagram). Cole seu token. Enquanto vazio, o fluxo roda sem os numeros do IG.\n// Actor padrao: instagram-profile-scraper (aceita \"usernames\": [handle]).\nconst APIFY_TOKEN = \"\";                                  // <- cole aqui o seu token Apify\nconst APIFY_ACTOR = \"apify~instagram-profile-scraper\";   // ou troque pelo Actor ID que preferir\n\n// Gravar o Perfil no CONTATO? So funciona depois que voce criar uma propriedade\n// \"perfil\" (dropdown: Escala / Profissionalize-se / Iniciante) no objeto Contato.\n// Enquanto false, o Perfil sai apenas na Nota. Vire true quando criar a propriedade.\nconst PERFIL_NO_CONTATO = false;\n\n// MAPA Perfil -> Closer (value = ID do owner em closer_da_agenda). \"\" = nao grava.\nconst CLOSER_POR_PERFIL = {\n  \"Escala\":            \"\",\n  \"Profissionalize-se\":\"\",\n  \"Iniciante\":         \"\"\n};\n// ---- TABELA owner -> ID (para preencher o mapa acima) ---------------\n// Ricardo Palma=61352275 | Eduardo Tavares=79405596 | Renato Claser Denck=79453133\n// Leonardo Marcondes Moreira=79453134 | Amanda de Oliveira=79760676 | Diego Conceicao=79760744\n// Thiago Berto=79760745 | Mayda Quadros=79760746 | Aline Maurente=79990679\n// Leonardo Bonetti Kirsch=80169105 | Lucas Oliveira=80169395 | Jhuly Correa de Carvalho=80228367\n// Eduardo Pereira Freitas=80343399 | Marcio Spagnolo=80436289 | Nicollas Lenuzza=80454573\n// Eduardo Vince=80454576 | Daniel Bento Sias=80454577 | Katyeli Ceroni Madril=80454582\n// Gabriela Vielmo Miranda=80454583 | Cesar Filho=80454584 | Leandro Bengochea=80454585\n// Rafael Teixeira=80454586 | Joao Gabriel Marins Pereira=80454588 | Leticia Silva dos Santos=80454607\n// Catarina Varoni Borges=80651489 | Rafael Brack=80688884 | Elenice Dias=80959643\n// Gustavo Pacheco=81033487 | Camila Fay=81035544 | Igor Oliveira=81043824 | Luciana Freitas=81191551\n// Enzo Albornoz Braga=81528369 | Bruna Dias Simoni=81609856 | Arthur Dorneles=81780832\n// Audren Ferrao=81878113 | Max=82068976 | Giovana Bastos da Fontoura=82603870 | Priscila Beckel=83754977\n// Amanda Mendonca Duarte=84015882 | Tercio Ferreira da Silva=84249251 | Vitoria Garcia Schaeffer=84497577\n// Bernardo Luiz Haab=84612836 | Victor Okajima=84740875 | Rafael de Azevedo Charlau=84793065\n// Bruna Machado=85002012 | Francielle Lenz=85846971 | Daniela Silva=85846972 | Yaskara Concato=86184663\n// =====================================================================\n//  FIM DO PAINEL DE CONTROLE\n// =====================================================================\n\n// Extrai o ID do contato do payload do HubSpot (formato varia). Tenta varias chaves.\nconst b = $('Webhook B2C').first().json.body || $('Webhook B2C').first().json || {};\nconst props = b.properties || {};\nconst pick = (o, k) => (o && o[k] != null ? (typeof o[k] === 'object' && o[k].value != null ? o[k].value : o[k]) : null);\nconst id_contato = String(\n  b.id_contato || b.contactId || b.objectId || b.vid || b.hs_object_id ||\n  pick(props, 'hs_object_id') || b['Record ID'] || ''\n);\n\nreturn [{ json: { cfg: { PESOS, CORTES, STATUS_VALUE, PERFIL_NO_CONTATO, CLOSER_POR_PERFIL, APIFY_TOKEN, APIFY_ACTOR }, lead: { id_contato } } }];"
+      },
+      "id": "n002",
+      "name": "⚙️ CONFIG (pesos e cortes)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        0,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.hubapi.com/crm/v3/objects/contacts/{{ $('⚙️ CONFIG (pesos e cortes)').item.json.lead.id_contato }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "properties",
+              "value": "firstname,lastname,email,phone,mobilephone,jobtitle,company,city,state,estado_tbs,estado__menu_suspenso_,qual_a_sua_idade,qual_sua_idade_,seu_momento_profissional_atual,e_palestrante,qual_sua_urgncia_em_se_desenvolver_como_palestrante,tema,macro_tema,linkedin_url,hs_linkedin_url,linkedinbio,qual_o_perfil_do_instagram_ou_linkedin_dele_a__,hs_lead_status,lifecyclestage,recent_conversion_event_name,createdate"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "n003",
+      "name": "[HUBSPOT] Get Contato",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        420
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "in5KFjziH1wjm6Cx",
+          "name": "Hunter B2B HubSpot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const CFG = $('⚙️ CONFIG (pesos e cortes)').first().json;\nconst c = ($('[HUBSPOT] Get Contato').first().json.properties) || {};\nreturn [{ json: {\n  cfg: CFG.cfg,\n  lead: {\n    id_contato: CFG.lead.id_contato,\n    email: c.email || '',\n    firstname: c.firstname || '',\n    lastname: c.lastname || '',\n    linkedin_url: c.linkedin_url || c.hs_linkedin_url || '',\n    instagram_url: c.qual_o_perfil_do_instagram_ou_linkedin_dele_a__ || '',\n    idade: c.qual_a_sua_idade || c.qual_sua_idade_ || '',\n    estado: c.estado_tbs || c.estado__menu_suspenso_ || c.state || '',\n    atuacao_hoje: c.seu_momento_profissional_atual || '',\n    ja_palestrante: c.e_palestrante || '',\n    urgencia: c.qual_sua_urgncia_em_se_desenvolver_como_palestrante || '',\n    tema: c.tema || c.macro_tema || '',\n    cargo: c.jobtitle || '',\n    empresa: c.company || '',\n    dominio_email: (c.email || '').split('@')[1] || ''\n  },\n  contato_props: c\n}}];"
+      },
+      "id": "n004",
+      "name": "[LEAD] Base",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.hubapi.com/crm/v4/objects/contacts/{{ $('[LEAD] Base').item.json.lead.id_contato }}/associations/notes",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "n005",
+      "name": "[HUBSPOT] Assoc Notas",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        760,
+        200
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "in5KFjziH1wjm6Cx",
+          "name": "Hunter B2B HubSpot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const lb = $('[LEAD] Base').first().json;\nlet notas = [];\ntry { notas = ($('[HUBSPOT] Assoc Notas').first().json.results || []).map(r => r.toObjectId); } catch(e){}\nreturn [{ json: { hubspot: {\n  form_declarado: lb.lead,\n  contato_props: lb.contato_props,\n  ids_notas: notas\n} }}];"
+      },
+      "id": "n006",
+      "name": "[HUBSPOT] Normaliza Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1000,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apollo.io/api/v1/people/match",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Cache-Control",
+              "value": "no-cache"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('[LEAD] Base').item.json.lead.email }}\",\n  \"first_name\": \"{{ $('[LEAD] Base').item.json.lead.firstname }}\",\n  \"last_name\": \"{{ $('[LEAD] Base').item.json.lead.lastname }}\",\n  \"linkedin_url\": \"{{ $('[LEAD] Base').item.json.lead.linkedin_url }}\",\n  \"reveal_personal_emails\": false,\n  \"reveal_phone_number\": false\n}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "n007",
+      "name": "[APOLLO] People Match",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        760,
+        420
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "sCYqAEZD63JgxpLV",
+          "name": "Apollo API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const p = ($json.person) || ($json.people && $json.people[0]) || {};\nconst emp = (p.employment_history || []).slice(0,6).map(e => ({ periodo: (e.start_date||'')+' a '+(e.end_date||'atual'), cargo: e.title, org: e.organization_name }));\nreturn [{ json: { apollo: {\n  nome: [p.first_name,p.last_name].filter(Boolean).join(' '),\n  cargo_atual: p.title || '', empresa_atual: (p.organization && p.organization.name) || '',\n  cidade: [p.city,p.state,p.country].filter(Boolean).join(', '),\n  linkedin_url: p.linkedin_url || '', headline: p.headline || '', seniority: p.seniority || '',\n  funcoes: p.functions || [], trajetoria: emp\n} }}];"
+      },
+      "id": "n008",
+      "name": "[APOLLO] Normaliza Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1000,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "w1",
+              "name": "firstname",
+              "value": "={{ $('[LEAD] Base').item.json.lead.firstname }}",
+              "type": "string"
+            },
+            {
+              "id": "w2",
+              "name": "lastname",
+              "value": "={{ $('[LEAD] Base').item.json.lead.lastname }}",
+              "type": "string"
+            },
+            {
+              "id": "w3",
+              "name": "linkedin_url",
+              "value": "={{ $('[LEAD] Base').item.json.lead.linkedin_url }}",
+              "type": "string"
+            },
+            {
+              "id": "w4",
+              "name": "instagram_url",
+              "value": "={{ $('[LEAD] Base').item.json.lead.instagram_url }}",
+              "type": "string"
+            },
+            {
+              "id": "w5",
+              "name": "tema",
+              "value": "={{ $('[LEAD] Base').item.json.lead.tema }}",
+              "type": "string"
+            },
+            {
+              "id": "w6",
+              "name": "cidade",
+              "value": "={{ $('[LEAD] Base').item.json.lead.estado }}",
+              "type": "string"
+            },
+            {
+              "id": "w7",
+              "name": "cargo",
+              "value": "={{ $('[LEAD] Base').item.json.lead.cargo }}",
+              "type": "string"
+            },
+            {
+              "id": "w8",
+              "name": "empresa",
+              "value": "={{ $('[LEAD] Base').item.json.lead.empresa }}",
+              "type": "string"
+            },
+            {
+              "id": "w9",
+              "name": "dominio_email",
+              "value": "={{ $('[LEAD] Base').item.json.lead.dominio_email }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "n009",
+      "name": "[WEB] Prepara Input",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        760,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Pesquise sobre a pessoa ESPECIFICA abaixo. Aplique a TRAVA DE IDENTIDADE.\n\nNome: {{ $json.firstname }} {{ $json.lastname }}\nTema declarado: {{ $json.tema }}\n\nANCORAS DE IDENTIDADE (use para confirmar que os resultados sao dela):\n- LinkedIn: {{ $json.linkedin_url }}\n- Instagram informado: {{ $json.instagram_url }}\n- Cargo: {{ $json.cargo }}\n- Empresa: {{ $json.empresa }}\n- Cidade/estado: {{ $json.cidade }}\n- Dominio de email: {{ $json.dominio_email }}\n\nDescarte qualquer resultado que nao confirme ao menos um ancora. Preencha os 7 buckets (+ descartados_por_homonimo). JSON puro.",
+        "options": {
+          "systemMessage": "Voce e o Pesquisador Web do Dossie B2C da PSA (curadoria de palestrantes). Alvo: UMA PESSOA especifica candidata a palestrante.\n\n=== TRAVA DE IDENTIDADE (REGRA #1, ACIMA DE TUDO) ===\nNomes se repetem. Existe risco ALTO de homonimo (outra pessoa com o mesmo nome). Sua prioridade #1 e garantir que TODA informacao pertence a ESTA pessoa, identificada pelos ancoras abaixo (recebidos no input): LinkedIn, Instagram, cargo, empresa, cidade, dominio de email.\n\nREGRAS:\n1. So atribua um fato a pessoa se a fonte CONFIRMAR pelo menos um ancora forte (mesmo perfil de LinkedIn/Instagram informado, OU mesma empresa + cidade, OU mesmo dominio de email).\n2. Se um resultado tem o nome certo mas NAO confirma nenhum ancora (empresa/cidade/handle diferentes), trate como OUTRA PESSOA e DESCARTE. Registre em \"descartados_por_homonimo\".\n3. NUNCA chute o Instagram/LinkedIn por nome. So use handles que (a) foram informados no input, ou (b) voce confirmou que pertencem a esta pessoa (bio cita a empresa/cargo/cidade certos). Se nao houver Instagram informado nem confirmavel, deixe \"nao captado\".\n4. Na duvida entre atribuir ou descartar, DESCARTE. Melhor um bucket vazio do que um fato de outra pessoa.\n5. Nunca invente: ausencia e informacao (\"nao captado\").\n\nFILOSOFIA: dentro da trava de identidade, busque fundo. Capture bastante, mas SO desta pessoa.\n\nFERRAMENTAS: web_search (Tavily, queries curtas 2-6 palavras pt-BR, aceita site: e frase exata) e web_fetch (Jina, le a pagina inteira; use apos achar URL, minimo 8 fetches).\n\nDATA ATUAL: julho de 2026. Priorize 2025-2026.\n\n7 BUCKETS (retorne JSON puro com estas chaves):\n1. audiencia_social: seguidores Instagram e LinkedIn (numeros), plataformas ativas, frequencia de post, engajamento aparente. Handles/URLs.\n2. producao_conteudo: sobre o que posta/fala, formatos, consistencia, 3 temas recorrentes.\n3. repertorio_palco: evidencias de ja ter palestrado (fotos em palco, eventos, cursos, portfolio, canal, livro), cada um com URL.\n4. autoridade_tema: formacao, certificacoes, cargos, premios, mencoes em imprensa/podcasts, cada um com fonte.\n5. referencias_citadas: quem admira/cita/segue; linguagem/tom que usa.\n6. momento_de_vida: transicao de carreira, lancamento recente, o que a empolga hoje.\n7. ultimos_posts: 3 a 5 posts recentes com 1 linha de resumo e link cada.\n+ \"ancoras_verificaveis\": lista de fatos datados e com fonte que o closer pode citar.",
+          "maxIterations": 40
+        }
+      },
+      "id": "n010",
+      "name": "[WEB] Pesquisador Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        1000,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1"
+        },
+        "options": {}
+      },
+      "id": "n011",
+      "name": "[WEB] Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        960,
+        880
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "xsLRnqjf6a6ia2JG",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "description": "Busca na web via Tavily. Queries curtas 2-6 palavras, pt-BR. Aceita site: e frase exata.",
+        "workflowId": {
+          "__rl": true,
+          "cachedResultName": "[SUB] Tavily Search",
+          "mode": "list",
+          "value": "OLMdRptl3QZjtqxY"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "matchingColumns": [],
+          "schema": [
+            {
+              "canBeUsedToMatch": true,
+              "display": true,
+              "displayName": "query",
+              "id": "query",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "value": {
+            "query": "={{ $fromAI('query', 'Termo curto 2-6 palavras, sem aspas duplas', 'string') }}"
+          }
+        }
+      },
+      "id": "n012",
+      "name": "web_search",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1100,
+        880
+      ]
+    },
+    {
+      "parameters": {
+        "description": "Le o conteudo completo de uma pagina web (markdown) via Jina. Use apos achar URL no web_search.",
+        "workflowId": {
+          "__rl": true,
+          "cachedResultName": "[SUB] Jina Fetch",
+          "mode": "list",
+          "value": "8H1bPjUktvfgoUzD"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "matchingColumns": [],
+          "schema": [
+            {
+              "canBeUsedToMatch": true,
+              "display": true,
+              "displayName": "url",
+              "id": "url",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "value": {
+            "url": "={{ $fromAI('url', 'URL publica completa', 'string') }}"
+          }
+        }
+      },
+      "id": "n013",
+      "name": "web_fetch",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1240,
+        880
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $json.output || $json.text || '';\nlet parsed = null;\ntry { parsed = JSON.parse(String(raw).replace(/^\\`\\`\\`json\\s*/i,'').replace(/\\`\\`\\`\\s*$/,'').trim()); } catch(e){ parsed = { _raw: String(raw).slice(0,8000) }; }\nreturn [{ json: { web: parsed } }];"
+      },
+      "id": "n014",
+      "name": "[WEB] Normaliza Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1400,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// extrai o @handle do que veio no cadastro (URL, @handle ou texto)\nconst raw = String(($('[LEAD] Base').first().json.lead.instagram_url) || '').trim();\nlet u = raw\n  .replace(/^https?:\\/\\/(www\\.)?instagram\\.com\\//i, '')\n  .replace(/^@/, '')\n  .replace(/[/?#].*$/, '')\n  .trim();\nconst cfg = $('⚙️ CONFIG (pesos e cortes)').first().json.cfg;\nreturn [{ json: { username: u, tem_handle: !!u, token: cfg.APIFY_TOKEN || '', actor: cfg.APIFY_ACTOR || 'apify~instagram-profile-scraper' } }];"
+      },
+      "id": "n015",
+      "name": "[APIFY] Prepara",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        760,
+        1080
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.apify.com/v2/acts/{{ $json.actor }}/run-sync-get-dataset-items?token={{ $json.token }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ usernames: [ $json.username ] }) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          },
+          "timeout": 120000
+        }
+      },
+      "id": "n016",
+      "name": "[APIFY] Instagram",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1000,
+        1080
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const prep = $('[APIFY] Prepara').first().json;\nconst resp = $json;\n// sem handle no cadastro -> nada a buscar\nif (!prep.tem_handle) {\n  return [{ json: { apify: { instagram: { status: 'sem_handle', nota: 'Nenhum Instagram informado no cadastro.' } } } }];\n}\n// sem token configurado -> nao rodou\nif (!prep.token) {\n  return [{ json: { apify: { instagram: { status: 'apify_nao_configurado', username: prep.username, nota: 'Apify sem token configurado (preencha no CONFIG).' } } } }];\n}\nconst arr = Array.isArray(resp) ? resp : (resp && Array.isArray(resp.items) ? resp.items : (resp ? [resp] : []));\nconst p = arr[0] || {};\n// erro / perfil nao encontrado\nif (!p || p.error || (p.username == null && p.followersCount == null)) {\n  return [{ json: { apify: { instagram: { status: 'nao_encontrado', username: prep.username, nota: 'Perfil nao encontrado ou retorno vazio do Apify.' } } } }];\n}\nconst priv = (p.private === true) || (p.isPrivate === true);\nconst posts = (p.latestPosts || p.posts || []).slice(0,6).map(x => ({\n  legenda: String(x.caption || '').slice(0,140),\n  curtidas: (x.likesCount != null ? x.likesCount : null),\n  comentarios: (x.commentsCount != null ? x.commentsCount : null),\n  url: x.url || '', data: x.timestamp || x.takenAt || ''\n}));\nconst comEng = posts.filter(x => x.curtidas != null);\nconst engaj = comEng.length ? Math.round(comEng.reduce((a,x)=>a+((x.curtidas||0)+(x.comentarios||0)),0)/comEng.length) : null;\nreturn [{ json: { apify: { instagram: {\n  status: priv ? 'privado_bloqueado' : 'ok',\n  username: p.username || prep.username,\n  seguidores: (p.followersCount != null ? p.followersCount : null),\n  seguindo: (p.followsCount != null ? p.followsCount : null),\n  posts_total: (p.postsCount != null ? p.postsCount : null),\n  verificado: !!(p.verified || p.isVerified),\n  bio: p.biography || '',\n  engajamento_medio: engaj,\n  ultimos_posts: priv ? [] : posts,\n  nota: priv ? 'Perfil PRIVADO/bloqueado: seguidores visiveis, mas posts nao acessiveis.' : ''\n} } } }];"
+      },
+      "id": "n017",
+      "name": "[APIFY] Normaliza Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1240,
+        1080
+      ]
+    },
+    {
+      "parameters": {
+        "numberInputs": 4
+      },
+      "id": "n018",
+      "name": "Merge 4 Ramos",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.1,
+      "position": [
+        1640,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const safe=(n)=>{try{return $(n).first().json||{};}catch(e){return{};}};\nconst hubspot=(safe('[HUBSPOT] Normaliza Output').hubspot)||{};\nconst apollo=(safe('[APOLLO] Normaliza Output').apollo)||{};\nconst web=(safe('[WEB] Normaliza Output').web)||{};\nconst apify=(safe('[APIFY] Normaliza Output').apify)||{};\nconst sz=(o)=>JSON.stringify(o,null,2).length; const MAX=280000;\nconst trim=(o,m)=>{const s=JSON.stringify(o,null,2);return s.length<=m?o:{_truncado:true,conteudo:s.slice(0,m)};};\nlet web2=trim(web, Math.max(40000, MAX - sz(apollo) - sz(hubspot) - sz(apify)));\nreturn [{ json: { input_consolidado: { hubspot, apollo, web: web2, apify } } }];"
+      },
+      "id": "n019",
+      "name": "[SINTESE] Aggrega",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1840,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=INPUT CONSOLIDADO (3 blocos):\n\n{{ JSON.stringify($json.input_consolidado, null, 2) }}\n\nGere o dossie JSON conforme o system message.",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Voce e o Agente de Sintese do Dossie B2C da PSA. Recebe 3 blocos brutos (hubspot, apollo, web) sobre UMA pessoa candidata a palestrante e produz um dossie estruturado que ajuda o closer na reuniao.\n\nINPUT: JSON com chaves hubspot, apollo, web, apify. Qualquer bloco pode estar parcial/vazio. Ausencia e informacao (\"nao captado\"), nunca invente.\n\nFONTE DO INSTAGRAM (bloco apify.instagram): e a fonte CONFIAVEL de seguidores/engajamento (numeros reais). Use-a com prioridade sobre o que a web disser sobre Instagram. Trate o campo apify.instagram.status:\n- \"ok\": use seguidores, engajamento_medio e ultimos_posts nas notas e no dossie.\n- \"privado_bloqueado\": DIGA no dossie que o Instagram e privado/bloqueado (use os seguidores se vierem, mas avise que os posts nao sao acessiveis).\n- \"nao_encontrado\": diga \"Instagram nao encontrado\".\n- \"sem_handle\": diga \"Instagram nao informado no cadastro\".\n- \"apify_nao_configurado\": diga \"Instagram nao coletado (integracao Apify pendente)\".\nSempre registre o status do Instagram em fontes_e_entraves.entraves quando nao for \"ok\".\n\nOUTPUT: SOMENTE JSON puro (sem markdown). Estrutura fixa:\n{\n  \"meta\": { \"lead_nome\": \"\", \"atuacao_hoje\": \"\", \"ja_palestrante\": \"\", \"tema_principal\": \"\", \"estado\": \"\", \"idade\": \"\", \"fontes_consultadas\": 0 },\n  \"avaliacao_eixos\": { \"audiencia\": 0, \"repertorio_palco\": 0, \"autoridade_tema\": 0, \"ambicao_realismo\": 0, \"urgencia_timing\": 0 },\n  \"justificativa_eixos\": { \"audiencia\": \"\", \"repertorio_palco\": \"\", \"autoridade_tema\": \"\", \"ambicao_realismo\": \"\", \"urgencia_timing\": \"\" },\n  \"resumo_executivo\": \"\",\n  \"ganchos_conexao\": { \"tres_topicos\": [], \"referencias_citadas\": [], \"ultimos_posts\": [{ \"resumo\": \"\", \"link\": \"\" }], \"momento_de_vida\": \"\", \"tom_da_pessoa\": \"\" },\n  \"gancho_abordagem\": \"\",\n  \"fontes_e_entraves\": { \"fontes\": [], \"entraves\": [] }\n}\n\nREGRAS:\n1. Use \"voce\", nunca \"tu\". ZERO travessoes (parenteses/virgula/ponto).\n2. Cada eixo 0-100 baseado em EVIDENCIA. Sem evidencia -> nota baixa + justificativa \"sem evidencia captada\".\n3. NAO calcule nota final nem perfil (o workflow faz depois com os pesos). Voce so avalia os 5 eixos.\n4. Cruze fontes: fato em >1 fonte = confie; em 1 so = sinalize.\n5. TRAVA DE IDENTIDADE: os dados declarados (bloco hubspot) sao a verdade sobre quem a pessoa e. Se o bloco web trouxer profissao/trajetoria que CONTRADIZ o declarado (ex.: web diz \"barbeiro\" mas o declarado e outra area), trate como possivel homonimo: NAO use esse fato e registre em fontes_e_entraves.entraves (\"possivel homonimo descartado: ...\"). Prefira sempre o declarado no HubSpot. Nunca misture duas pessoas no mesmo dossie."
+            }
+          ]
+        }
+      },
+      "id": "n020",
+      "name": "[SINTESE] Chain",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.6,
+      "position": [
+        2040,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "id",
+          "value": "claude-sonnet-4-5-20250929"
+        },
+        "options": {
+          "maxTokensToSample": 8000,
+          "temperature": 0.2
+        }
+      },
+      "id": "n021",
+      "name": "[SINTESE] Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        2000,
+        640
+      ],
+      "credentials": {
+        "anthropicApi": {
+          "id": "nKIdBl0STB9kFSez",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $json.output || $json.text || '';\nlet D = null;\ntry { D = JSON.parse(String(raw).replace(/^\\`\\`\\`json\\s*/i,'').replace(/\\`\\`\\`\\s*$/,'').trim()); } catch(e){ D = null; }\nconst cfg = $('⚙️ CONFIG (pesos e cortes)').first().json.cfg;\nconst P = cfg.PESOS, C = cfg.CORTES, MAP = cfg.CLOSER_POR_PERFIL;\nlet nota = 0, perfil = 'Iniciante', closer = '';\nif (D && D.avaliacao_eixos) {\n  const e = D.avaliacao_eixos;\n  const somaPesos = Object.values(P).reduce((a,b)=>a+b,0) || 100;\n  nota = Math.round(((e.audiencia||0)*P.audiencia + (e.repertorio_palco||0)*P.repertorio_palco + (e.autoridade_tema||0)*P.autoridade_tema + (e.ambicao_realismo||0)*P.ambicao_realismo + (e.urgencia_timing||0)*P.urgencia_timing) / somaPesos);\n  if (nota >= C.escala) perfil = 'Escala'; else if (nota >= C.profissionalize) perfil = 'Profissionalize-se'; else perfil = 'Iniciante';\n  closer = (MAP && MAP[perfil]) || '';\n}\nreturn [{ json: { dossier: D, parse_error: D?null:'JSON invalido', raw_response: D?null:String(raw).slice(0,4000), score_final: nota, perfil, closer_id: closer, pesos_usados: P, cortes_usados: C } }];"
+      },
+      "id": "n022",
+      "name": "[SINTESE] Parse + Score",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2240,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Dossie avaliado (JSON):\n\n{{ JSON.stringify({ dossier: $json.dossier, score_final: $json.score_final, perfil: $json.perfil }, null, 2) }}\n\nGere os 5 accordions conforme o system message.",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Voce e o gerador de conteudo HTML do Dossie B2C da PSA. Recebe o dossie JSON ja avaliado (score_final e perfil ja calculados) e devolve APENAS os accordions de conteudo (cabecalho, placar e rodape sao montados por fora). Portugues do Brasil, use \"voce\", ZERO travessoes.\n\nSAIDA: SOMENTE uma sequencia de blocos .accordion (sem <html>/<head>/<body>/masthead/stats-row/footer). Use EXATAMENTE estas classes:\n\n<div class=\"accordion open\">\n  <button class=\"accordion-header\" onclick=\"toggleAccordion(this)\">\n    <span class=\"accordion-icon\">+</span>\n    <span class=\"accordion-title\">TITULO</span>\n    <span class=\"accordion-tag success\">ROTULO</span>\n  </button>\n  <div class=\"accordion-body\"><div class=\"accordion-content\"> ... </div></div>\n</div>\n\nComponentes disponiveis dentro de .accordion-content:\n- <p>, <strong>, <em>\n- <ul class=\"refined-list\"><li>...</li></ul>\n- <table class=\"data-table\"><thead><tr><th>..</th></tr></thead><tbody><tr><td>..</td></tr></tbody></table>\n- <span class=\"pill pill-green|pill-amber|pill-red|pill-gray\">texto</span>\n- <div class=\"message-card\"><div class=\"message-card-header\"><span class=\"message-card-title\">Gancho de abordagem</span></div><div class=\"message-card-body\">MENSAGEM</div></div>\n- <div class=\"subsection-intro\">nota em italico</div>\n- <div class=\"callout callout-info|callout-success|callout-warning|callout-critical\"><div class=\"callout-label\">ROTULO</div><p>...</p></div>\n- <ul class=\"sources-list\"><li><span class=\"source-num\">1</span><span class=\"source-title\">fonte</span><span class=\"source-conf\">alta</span></li></ul>\n\nGERE EXATAMENTE ESTES 5 ACCORDIONS, NESTA ORDEM:\n1. (open, tag success) \"Como abordar\" -> message-card com gancho_abordagem; refined-list dos 3 topicos; referencias citadas; tom; momento de vida.\n2. (tag info) \"Audiencia e conteudo\" -> numeros de seguidores/engajamento (pills); ultimos_posts como refined-list com link.\n3. (tag info) \"Repertorio e autoridade\" -> evidencias de palco, formacao, mencoes (com links).\n4. (open, tag info) \"Placar por eixo\" -> data-table Eixo | Nota (0-100) | Justificativa, uma linha por eixo.\n5. (tag gray) \"Fontes e entraves\" -> sources-list das fontes; refined-list dos entraves.\n\nSem evidencia: escreva \"Nao captado nesta versao\". Devolva SOMENTE os 5 blocos .accordion."
+            }
+          ]
+        }
+      },
+      "id": "n023",
+      "name": "[RENDER] Agent Dossie HTML",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.6,
+      "position": [
+        2440,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "id",
+          "value": "claude-sonnet-4-5-20250929"
+        },
+        "options": {
+          "maxTokensToSample": 20000,
+          "temperature": 0.2
+        }
+      },
+      "id": "n024",
+      "name": "[RENDER] Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        2400,
+        640
+      ],
+      "credentials": {
+        "anthropicApi": {
+          "id": "nKIdBl0STB9kFSez",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const css = \":root{--ink:#0a0a0a;--ink-soft:#1a1a1a;--paper:#faf8f3;--paper-warm:#f3efe6;--paper-cream:#ebe6d8;--rule:#cdc6b3;--rule-soft:#e0dbcb;--accent:#c63d2f;--accent-deep:#8b1e0e;--gold:#b8893d;--gold-soft:#e6c878;--green:#2f6b3a;--green-soft:#5a9168;--amber:#c08b1f;--muted:#6b6657;--highlight:#fff3a8;--serif:'Fraunces',Georgia,serif;--sans:'Manrope',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}.masthead{background:var(--ink);color:var(--paper);padding:32px 48px 24px;border-bottom:4px solid var(--accent)}.masthead-meta{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold-soft);margin-bottom:16px}.masthead-title{font-family:var(--serif);font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-0.02em;font-variation-settings:\\\"opsz\\\" 96}.masthead-title em{font-style:italic;font-weight:400;color:var(--gold-soft)}.masthead-subtitle{font-family:var(--sans);font-size:14px;font-weight:400;color:rgba(250,248,243,0.7);margin-top:12px;max-width:720px;line-height:1.55}.summary-band{background:var(--paper-warm);border-bottom:1px solid var(--rule);padding:32px 48px}.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px}.summary-cell{border-left:2px solid var(--ink);padding-left:16px}.summary-cell-label{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin-bottom:6px}.summary-cell-value{font-family:var(--serif);font-size:28px;font-weight:500;line-height:1.1;margin-bottom:4px}.summary-cell-note{font-size:12px;color:var(--muted);font-style:italic}.dossier{max-width:1100px;margin:0 auto;padding:48px 32px 96px}.dossier-header{border-bottom:2px solid var(--ink);padding-bottom:32px;margin-bottom:32px}.dossier-version{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.18em;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:12px}.dossier-version::before{content:'';width:32px;height:1px;background:var(--accent)}.dossier-title{font-family:var(--serif);font-size:clamp(28px,4vw,48px);font-weight:400;line-height:1.1;letter-spacing:-0.015em;font-variation-settings:\\\"opsz\\\" 96;color:var(--ink);margin-bottom:16px}.dossier-title em{font-style:italic;color:var(--accent-deep)}.dossier-lede{font-family:var(--serif);font-size:18px;line-height:1.55;color:var(--ink-soft);max-width:720px;font-weight:400}.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;margin-bottom:48px;padding:24px;background:var(--paper-warm);border:1px solid var(--rule-soft)}.stat-label{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin-bottom:6px}.stat-value{font-family:var(--serif);font-size:26px;font-weight:500;line-height:1.1;color:var(--ink)}.stat-value.green{color:var(--green)}.stat-value.amber{color:var(--amber)}.stat-value.accent{color:var(--accent)}.stat-sub{font-size:11px;color:var(--muted);margin-top:4px;font-style:italic}.section-group-title{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted);margin:40px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--rule)}.accordion{border-bottom:1px solid var(--rule-soft)}.accordion-header{display:flex;align-items:flex-start;gap:16px;width:100%;background:none;border:none;padding:18px 0;cursor:pointer;text-align:left;font-family:var(--sans);transition:all 0.15s ease}.accordion-header:hover{padding-left:8px}.accordion-icon{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--accent);width:32px;flex-shrink:0;text-align:center;transition:transform 0.2s ease}.accordion.open .accordion-icon{transform:rotate(45deg)}.accordion-title{flex:1;font-family:var(--serif);font-size:19px;font-weight:500;line-height:1.3;color:var(--ink)}.accordion-tag{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;padding:4px 10px;border-radius:2px;background:var(--paper-cream);color:var(--muted);flex-shrink:0;margin-top:4px}.accordion-tag.critical{background:var(--accent);color:white}.accordion-tag.warning{background:var(--amber);color:white}.accordion-tag.success{background:var(--green);color:white}.accordion-tag.info{background:var(--ink);color:var(--gold-soft)}.accordion-body{max-height:0;overflow:hidden;transition:max-height 0.3s ease}.accordion.open .accordion-body{max-height:20000px}.accordion-content{padding:8px 0 32px 48px;font-size:14.5px;line-height:1.7;color:var(--ink-soft)}.accordion-content p{margin-bottom:14px}.accordion-content strong{font-weight:600;color:var(--ink)}.accordion-content em{font-style:italic;color:var(--accent-deep)}.subsection-intro{background:var(--paper-warm);padding:14px 18px;border-left:3px solid var(--gold);margin:12px 0 20px;font-style:italic;font-size:13.5px;color:var(--ink-soft)}.data-table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:13.5px;background:var(--paper-warm)}.data-table th{background:var(--ink);color:var(--paper);text-align:left;padding:12px 16px;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.12em;font-weight:500}.data-table td{padding:12px 16px;border-bottom:1px solid var(--rule-soft);vertical-align:top}.data-table tr:last-child td{border-bottom:none}.data-table tr:hover{background:var(--paper-cream)}.pill{display:inline-block;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;padding:3px 8px;border-radius:2px;font-weight:500}.pill-green{background:rgba(47,107,58,0.12);color:var(--green)}.pill-amber{background:rgba(192,139,31,0.12);color:var(--amber)}.pill-red{background:rgba(198,61,47,0.12);color:var(--accent)}.pill-gray{background:var(--paper-cream);color:var(--muted)}.match-score-box{background:var(--paper-warm);border:1px solid var(--rule);padding:24px;margin:20px 0;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center}.match-score-number{font-family:var(--serif);font-size:72px;font-weight:300;line-height:1;color:var(--accent);font-variation-settings:\\\"opsz\\\" 144}.match-score-number small{font-size:28px;color:var(--muted);font-weight:400}.match-score-label{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin-bottom:6px}.match-score-title{font-family:var(--serif);font-size:18px;font-weight:500;color:var(--ink);margin-bottom:8px}.match-score-rationale{font-size:13px;color:var(--ink-soft);line-height:1.55}.message-card{background:var(--paper-warm);border-left:3px solid var(--accent);padding:24px;margin:24px 0;position:relative}.message-card-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;padding-bottom:12px;border-bottom:1px dashed var(--rule);gap:12px;flex-wrap:wrap}.message-card-title{font-family:var(--serif);font-style:italic;font-size:18px;font-weight:500;color:var(--ink)}.message-card-meta{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap}.message-card-meta span{padding:3px 8px;background:white;border:1px solid var(--rule)}.message-card-gancho{font-size:12.5px;color:var(--muted);margin-bottom:16px;font-style:italic;line-height:1.5}.message-card-body{background:white;padding:20px;font-family:var(--serif);font-size:15px;line-height:1.65;color:var(--ink-soft);border:1px solid var(--rule-soft);white-space:pre-line}.timeline{border-left:2px solid var(--rule);padding-left:24px;margin:20px 0}.timeline-item{position:relative;padding-bottom:24px}.timeline-item::before{content:'';position:absolute;left:-30px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--paper);border:2px solid var(--ink)}.timeline-item.critical::before{background:var(--accent);border-color:var(--accent-deep)}.timeline-date{font-family:var(--mono);font-size:11px;color:var(--accent);font-weight:500;margin-bottom:4px}.timeline-event{font-family:var(--serif);font-size:15px;line-height:1.4;color:var(--ink)}.timeline-event small{display:block;margin-top:4px;font-family:var(--sans);font-size:12.5px;color:var(--muted);font-style:italic}.sources-list{list-style:none;margin:16px 0}.sources-list li{padding:10px 0;border-bottom:1px solid var(--rule-soft);font-size:13px;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:baseline}.sources-list li:last-child{border-bottom:none}.source-num{font-family:var(--mono);font-size:11px;color:var(--muted);width:24px}.source-title{color:var(--ink-soft)}.source-title em{font-style:italic;color:var(--accent-deep)}.source-conf{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em}.callout{padding:20px 24px;margin:20px 0;border-left:3px solid;background:var(--paper-warm)}.callout-critical{border-color:var(--accent);background:rgba(198,61,47,0.05)}.callout-warning{border-color:var(--amber);background:rgba(192,139,31,0.05)}.callout-success{border-color:var(--green);background:rgba(47,107,58,0.05)}.callout-info{border-color:var(--ink)}.callout-label{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;font-weight:600}.callout-critical .callout-label{color:var(--accent)}.callout-warning .callout-label{color:var(--amber)}.callout-success .callout-label{color:var(--green)}.controls{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}.control-btn{background:var(--paper-warm);border:1px solid var(--rule);padding:8px 16px;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);cursor:pointer;transition:all 0.15s ease}.control-btn:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}.footnote{font-size:11px;color:var(--muted);font-style:italic;margin-top:6px}ul.refined-list{list-style:none;padding-left:0;margin:12px 0}ul.refined-list li{padding:6px 0 6px 24px;position:relative}ul.refined-list li::before{content:'\\u203a';position:absolute;left:0;color:var(--accent);font-weight:600;font-size:18px;line-height:1;top:8px}@media print{.controls{display:none}.accordion-body{max-height:none !important}.accordion.open .accordion-icon{transform:none}body{background:white}}@media (max-width:768px){.masthead,.summary-band{padding-left:24px;padding-right:24px}.dossier{padding:32px 20px 64px}.accordion-header{gap:8px}.accordion-content{padding-left:24px}.data-table{font-size:12px}.data-table th,.data-table td{padding:8px 10px}.match-score-box{grid-template-columns:1fr}}\";\n\nconst conteudo = ($json.text) || ($json.output) || '';\nconst ps = $('[SINTESE] Parse + Score').first().json;\nconst D = ps.dossier || {}; const meta = D.meta || {}; const eixos = D.avaliacao_eixos || {};\nconst P = ps.pesos_usados || {}; const C = ps.cortes_usados || {};\nconst lb = $('[LEAD] Base').first().json.lead;\nconst esc = (s) => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');\nconst nome = meta.lead_nome || [lb.firstname, lb.lastname].filter(Boolean).join(' ') || 'Lead';\nconst tema = meta.tema_principal || lb.tema || '';\nconst perfil = ps.perfil || 'Iniciante';\nconst score = (ps.score_final != null ? ps.score_final : 0);\nconst resumo = D.resumo_executivo || 'Resumo executivo nao captado nesta versao.';\nconst d = new Date();\nconst dataPt = String(d.getDate()).padStart(2,'0') + '.' + String(d.getMonth()+1).padStart(2,'0') + '.' + d.getFullYear();\n\nconst masthead =\n  '<header class=\"masthead\"><div class=\"masthead-meta\"><span>Dossie B2C &middot; Candidato a Palestrante</span><span>Gerado em ' + dataPt + '</span></div>' +\n  '<h1 class=\"masthead-title\">Dossie <em>B2C</em> &middot; ' + esc(nome) + '</h1>' +\n  '<p class=\"masthead-subtitle\">' + esc(resumo) + '</p></header>';\n\nconst summary =\n  '<section class=\"summary-band\"><div class=\"summary-grid\">' +\n  '<div class=\"summary-cell\"><div class=\"summary-cell-label\">Perfil</div><div class=\"summary-cell-value\">' + esc(perfil) + '</div><div class=\"summary-cell-note\">Escala &middot; Profissionalize-se &middot; Iniciante</div></div>' +\n  '<div class=\"summary-cell\"><div class=\"summary-cell-label\">Score do Dossie</div><div class=\"summary-cell-value\">' + score + '<small style=\"font-size:16px;color:var(--muted)\"> /100</small></div><div class=\"summary-cell-note\">ponderado pelos 5 eixos</div></div>' +\n  '<div class=\"summary-cell\"><div class=\"summary-cell-label\">Atuacao hoje</div><div class=\"summary-cell-value\" style=\"font-size:20px\">' + esc(meta.atuacao_hoje || lb.atuacao_hoje || 'n/d') + '</div><div class=\"summary-cell-note\">' + esc((meta.ja_palestrante||lb.ja_palestrante) ? ('Ja palestrante: ' + (meta.ja_palestrante||lb.ja_palestrante)) : '') + '</div></div>' +\n  '<div class=\"summary-cell\"><div class=\"summary-cell-label\">Tema / Local</div><div class=\"summary-cell-value\" style=\"font-size:20px\">' + esc(tema || 'n/d') + '</div><div class=\"summary-cell-note\">' + esc([meta.estado||lb.estado, (meta.idade||lb.idade) ? ((meta.idade||lb.idade) + ' anos') : ''].filter(Boolean).join(' &middot; ')) + '</div></div>' +\n  '</div></section>';\n\nconst stat = (label, val) => { const v = (val == null ? 0 : val); const cls = v >= 70 ? 'green' : (v >= 45 ? 'amber' : 'accent'); return '<div><div class=\"stat-label\">' + label + '</div><div class=\"stat-value ' + cls + '\">' + v + '<small style=\"font-size:13px;color:var(--muted)\">/100</small></div></div>'; };\nconst statsRow = '<div class=\"stats-row\">' + stat('Audiencia', eixos.audiencia) + stat('Repertorio/Palco', eixos.repertorio_palco) + stat('Autoridade', eixos.autoridade_tema) + stat('Ambicao x Realismo', eixos.ambicao_realismo) + stat('Urgencia/Timing', eixos.urgencia_timing) + '</div>';\n\nconst controls = '<div class=\"controls\"><button class=\"control-btn\" onclick=\"toggleAll(true)\">Expandir tudo</button><button class=\"control-btn\" onclick=\"toggleAll(false)\">Recolher tudo</button></div>';\n\nconst comoFunciona =\n  '<div class=\"accordion\"><button class=\"accordion-header\" onclick=\"toggleAccordion(this)\"><span class=\"accordion-icon\">+</span><span class=\"accordion-title\">Como este dossie foi gerado</span><span class=\"accordion-tag info\">Metodo</span></button>' +\n  '<div class=\"accordion-body\"><div class=\"accordion-content\">' +\n  '<p>Montado automaticamente por um fluxo (n8n) quando o lead B2C e qualificado (entra na etapa Reuniao Agendada do funil B2C). Etapas:</p>' +\n  '<ul class=\"refined-list\">' +\n  '<li><strong>Coleta em 3 frentes ao mesmo tempo:</strong> HubSpot (formulario + CRM), Apollo (cargo e trajetoria) e Pesquisador Web (LinkedIn, Instagram, Google).</li>' +\n  '<li><strong>Sintese (IA):</strong> cruza as 3 fontes e da nota 0 a 100 a cada um dos 5 eixos, com justificativa por evidencia.</li>' +\n  '<li><strong>Nota final e Perfil:</strong> o fluxo aplica os pesos configurados. Pesos atuais: Audiencia ' + P.audiencia + '%, Repertorio/Palco ' + P.repertorio_palco + '%, Autoridade ' + P.autoridade_tema + '%, Ambicao x Realismo ' + P.ambicao_realismo + '%, Urgencia/Timing ' + P.urgencia_timing + '%. Cortes: Escala (>= ' + C.escala + '), Profissionalize-se (' + C.profissionalize + ' a ' + (C.escala - 1) + '), Iniciante (< ' + C.profissionalize + ').</li>' +\n  '<li><strong>Gravacao:</strong> o link deste dossie, o Score e o closer sugerido sao gravados no Contato (hunter_dossie_html_url, score_dossie, closer_da_agenda).</li>' +\n  '</ul>' +\n  '<p class=\"footnote\">Resultado calculado por IA a partir de fontes publicas + CRM. Use como apoio; confirme dados sensiveis na conversa.</p>' +\n  '</div></div></div>';\n\nconst footer = '<footer style=\"background:var(--ink);color:var(--paper);padding:32px 48px;margin-top:64px\"><div style=\"max-width:1100px;margin:0 auto;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:rgba(250,248,243,0.6)\"><p style=\"margin-bottom:8px\">Profissionais SA &middot; Dossie B2C &middot; Candidato a Palestrante</p><p>Construido em ' + dataPt + ' &middot; ' + esc(nome) + ' &middot; Uso interno</p></div></footer>';\n\nconst script = '<' + 'script>function toggleAccordion(b){b.parentElement.classList.toggle(\"open\");}function toggleAll(e){document.querySelectorAll(\".accordion\").forEach(a=>{e?a.classList.add(\"open\"):a.classList.remove(\"open\");});}<' + '/script>';\n\nconst article = '<article class=\"dossier\">' + statsRow + controls + conteudo + comoFunciona + '</article>';\nconst fonts = '<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700;800&display=swap\" rel=\"stylesheet\">';\nconst html = '<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Dossie B2C - ' + esc(nome) + '</title>' + fonts + '<style>' + css + '</style></head><body>' + masthead + summary + article + footer + script + '</body></html>';\nreturn [{ json: { text: html, lead_nome: nome, perfil: perfil, score: score } }];"
+      },
+      "id": "n025",
+      "name": "[RENDER] Inject Template",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2640,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "text",
+        "options": {
+          "fileName": "=dossie_b2c_{{ $now.toFormat('yyyyMMdd_HHmmss') }}.html"
+        }
+      },
+      "id": "n026",
+      "name": "[RENDER] Convert to File",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        2840,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://psa-ia-board.vercel.app/api/dossie",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer 671cadd1060dc205d21f0bf991c6ceae2ca2f8a7091036f1ddd1609ae626d674"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"html\": $('[RENDER] Inject Template').first().json.text, \"lead\": $('[RENDER] Inject Template').first().json.lead_nome, \"empresa\": \"B2C\" } }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "n027",
+      "name": "[RENDER] Upload Dossie",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3040,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const ps = $('[SINTESE] Parse + Score').first().json;\nconst cfg = $('⚙️ CONFIG (pesos e cortes)').first().json.cfg;\nconst url = ($('[RENDER] Upload Dossie').first().json.url) || '';\nconst props = { hunter_dossie_html_url: url, score_dossie: ps.score_final, status_do_dossie: cfg.STATUS_VALUE };\nif (ps.closer_id) props.closer_da_agenda = ps.closer_id;\nif (cfg.PERFIL_NO_CONTATO) props.perfil = ps.perfil; // so grava se voce criou a prop no contato\nconst contactId = String($('[LEAD] Base').first().json.lead.id_contato);\nreturn [{ json: { contactProps: props, contactId } }];"
+      },
+      "id": "n028",
+      "name": "[HUBSPOT] Monta Props",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.hubapi.com/crm/v3/objects/contacts/{{ $json.contactId }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ properties: $json.contactProps }) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "n029",
+      "name": "[HUBSPOT] Patch Contato",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3440,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "in5KFjziH1wjm6Cx",
+          "name": "Hunter B2B HubSpot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const ps = $('[SINTESE] Parse + Score').first().json;\nconst url = ($('[RENDER] Upload Dossie').first().json.url) || '';\nconst nome = ($('[RENDER] Inject Template').first().json.lead_nome) || 'Lead';\nconst contactId = String($('[LEAD] Base').first().json.lead.id_contato);\nconst esc=(s)=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');\nconst body = '<div><h2>📄 Dossie B2C — '+esc(nome)+'</h2>'+\n  '<p><b>Perfil:</b> '+esc(ps.perfil)+'<br><b>Score:</b> '+esc(ps.score_final)+'/100</p>'+\n  (url? '<p><a href=\"'+esc(url)+'\" target=\"_blank\"><b>👉 Abrir dossie completo</b></a></p>':'<p><i>(dossie sem link de upload)</i></p>')+\n  '<p><em>Gerado automaticamente</em></p></div>';\nreturn [{ json: { hs_note_body: body, hs_timestamp: Date.now(), contactId } }];"
+      },
+      "id": "n030",
+      "name": "[HUBSPOT] Monta Nota",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3240,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.hubapi.com/crm/v3/objects/notes",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ properties: { hs_note_body: $json.hs_note_body, hs_timestamp: $json.hs_timestamp }, associations: [ { to: { id: $json.contactId }, types: [ { associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 202 } ] } ] }) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "n031",
+      "name": "[HUBSPOT] Cria Nota Dossie",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3440,
+        520
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "in5KFjziH1wjm6Cx",
+          "name": "Hunter B2B HubSpot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ ok: true, perfil: $('[SINTESE] Parse + Score').first().json.perfil, score: $('[SINTESE] Parse + Score').first().json.score_final, dossie_url: ($('[RENDER] Upload Dossie').first().json.url)||null }) }}",
+        "options": {}
+      },
+      "id": "n032",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        3640,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## ⚙️ PAINEL DE CONTROLE\\nPesos, cortes, status, flag de Perfil e mapa Perfil→Closer estão DENTRO do nó `⚙️ CONFIG` (com a tabela owner→ID pronta pra colar).\\nO gatilho é o workflow do HubSpot que dispara quando o Negócio B2C entra em 'Reunião Agendada'. Só o **ID do contato** precisa chegar no webhook.",
+        "height": 200,
+        "width": 460,
+        "color": 6
+      },
+      "id": "n034",
+      "name": "Nota_n033",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -260,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 📥 4 COLETORES\\nTudo parte do **contato** (Get Contato → LEAD Base).\\nHubSpot = form+CRM · Apollo = cargo/trajetória · Web = Google/imprensa · **Apify = Instagram** (nº reais de seguidores/engajamento).\\nApify: cole token no CONFIG. Sem token, o fluxo roda e marca 'Instagram não coletado'. IG privado → dossiê avisa que está bloqueado.",
+        "height": 170,
+        "width": 460,
+        "color": 5
+      },
+      "id": "n036",
+      "name": "Nota_n035",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        720,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 🧮 SÍNTESE → SCORE → PERFIL\\nIA dá nota 0-100 por eixo → workflow aplica os pesos → nota final → Perfil → closer.",
+        "height": 120,
+        "width": 420,
+        "color": 7
+      },
+      "id": "n038",
+      "name": "Nota_n037",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2000,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 📄 RENDER + WRITE-BACK (CONTATO)\\nGera HTML (design B2B + 'Como funciona') e sobe pro board.\\nGrava no **Contato**: `hunter_dossie_html_url`, `score_dossie`, `status_do_dossie`, `closer_da_agenda` (+ `perfil` se o flag estiver ligado) + Nota com link.\\nVocê copia do contato pro Negócio manualmente.",
+        "height": 170,
+        "width": 480,
+        "color": 3
+      },
+      "id": "n040",
+      "name": "Nota_n039",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3040,
+        180
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook B2C": {
+      "main": [
+        [
+          {
+            "node": "⚙️ CONFIG (pesos e cortes)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "⚙️ CONFIG (pesos e cortes)": {
+      "main": [
+        [
+          {
+            "node": "[HUBSPOT] Get Contato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[HUBSPOT] Get Contato": {
+      "main": [
+        [
+          {
+            "node": "[LEAD] Base",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[LEAD] Base": {
+      "main": [
+        [
+          {
+            "node": "[HUBSPOT] Assoc Notas",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "[APOLLO] People Match",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "[WEB] Prepara Input",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "[APIFY] Prepara",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[HUBSPOT] Assoc Notas": {
+      "main": [
+        [
+          {
+            "node": "[HUBSPOT] Normaliza Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[APOLLO] People Match": {
+      "main": [
+        [
+          {
+            "node": "[APOLLO] Normaliza Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[WEB] Prepara Input": {
+      "main": [
+        [
+          {
+            "node": "[WEB] Pesquisador Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[WEB] Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "[WEB] Pesquisador Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "web_search": {
+      "ai_tool": [
+        [
+          {
+            "node": "[WEB] Pesquisador Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "web_fetch": {
+      "ai_tool": [
+        [
+          {
+            "node": "[WEB] Pesquisador Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[WEB] Pesquisador Agent": {
+      "main": [
+        [
+          {
+            "node": "[WEB] Normaliza Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[APIFY] Prepara": {
+      "main": [
+        [
+          {
+            "node": "[APIFY] Instagram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[APIFY] Instagram": {
+      "main": [
+        [
+          {
+            "node": "[APIFY] Normaliza Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[HUBSPOT] Normaliza Output": {
+      "main": [
+        [
+          {
+            "node": "Merge 4 Ramos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[APOLLO] Normaliza Output": {
+      "main": [
+        [
+          {
+            "node": "Merge 4 Ramos",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "[WEB] Normaliza Output": {
+      "main": [
+        [
+          {
+            "node": "Merge 4 Ramos",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "[APIFY] Normaliza Output": {
+      "main": [
+        [
+          {
+            "node": "Merge 4 Ramos",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Merge 4 Ramos": {
+      "main": [
+        [
+          {
+            "node": "[SINTESE] Aggrega",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[SINTESE] Aggrega": {
+      "main": [
+        [
+          {
+            "node": "[SINTESE] Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[SINTESE] Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "[SINTESE] Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[SINTESE] Chain": {
+      "main": [
+        [
+          {
+            "node": "[SINTESE] Parse + Score",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[SINTESE] Parse + Score": {
+      "main": [
+        [
+          {
+            "node": "[RENDER] Agent Dossie HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[RENDER] Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "[RENDER] Agent Dossie HTML",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[RENDER] Agent Dossie HTML": {
+      "main": [
+        [
+          {
+            "node": "[RENDER] Inject Template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[RENDER] Inject Template": {
+      "main": [
+        [
+          {
+            "node": "[RENDER] Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[RENDER] Convert to File": {
+      "main": [
+        [
+          {
+            "node": "[RENDER] Upload Dossie",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[RENDER] Upload Dossie": {
+      "main": [
+        [
+          {
+            "node": "[HUBSPOT] Monta Props",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[HUBSPOT] Monta Props": {
+      "main": [
+        [
+          {
+            "node": "[HUBSPOT] Patch Contato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[HUBSPOT] Patch Contato": {
+      "main": [
+        [
+          {
+            "node": "[HUBSPOT] Monta Nota",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[HUBSPOT] Monta Nota": {
+      "main": [
+        [
+          {
+            "node": "[HUBSPOT] Cria Nota Dossie",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[HUBSPOT] Cria Nota Dossie": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateId": "b2c-dossie"
+  },
+  "tags": []
+}
