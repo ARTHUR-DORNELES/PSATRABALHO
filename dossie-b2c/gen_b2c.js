@@ -94,6 +94,9 @@ const IMERSAO = {
 // Funil de Vendas B2C. Usado para gravar o Perfil no negocio CERTO quando o contato tem varios negocios.
 const PIPELINE_B2C = "725182862";
 
+// Custo estimado exibido no topo do dossie (edite conforme sua medicao real).
+const CUSTO_ESTIMADO = { tokens: "~40k tokens", valor: "~US$ 0,70 por lead" };
+
 // Gravar o Perfil no CONTATO? So funciona depois que voce criar uma propriedade
 // "perfil" (dropdown: Escala / Profissionalize-se / Iniciante) no objeto Contato.
 // Enquanto false, o Perfil sai apenas na Nota. Vire true quando criar a propriedade.
@@ -134,7 +137,7 @@ const id_contato = String(
   pick(props, 'hs_object_id') || b['Record ID'] || ''
 );
 
-return [{ json: { cfg: { PESOS, CORTES, STATUS_VALUE, PERFIL_NO_CONTATO, CLOSER_POR_PERFIL, APIFY_TOKEN, APIFY_ACTOR, IMERSAO, PIPELINE_B2C }, lead: { id_contato } } }];`;
+return [{ json: { cfg: { PESOS, CORTES, STATUS_VALUE, PERFIL_NO_CONTATO, CLOSER_POR_PERFIL, APIFY_TOKEN, APIFY_ACTOR, IMERSAO, PIPELINE_B2C, CUSTO_ESTIMADO }, lead: { id_contato }, t0: Date.now() } }];`;
 add("⚙️ CONFIG (pesos e cortes)", "n8n-nodes-base.code", { jsCode: configCode }, { typeVersion: 2, position: [0, 420] });
 conn("Webhook B2C", "⚙️ CONFIG (pesos e cortes)");
 
@@ -641,7 +644,6 @@ const masthead =
 const summary =
   '<section class="summary-band"><div class="summary-grid">' +
   '<div class="summary-cell"><div class="summary-cell-label">Perfil</div><div class="summary-cell-value">' + esc(perfil) + '</div><div class="summary-cell-note">Escala &middot; Profissionalize-se &middot; Iniciante</div></div>' +
-  '<div class="summary-cell"><div class="summary-cell-label">Score do Dossie</div><div class="summary-cell-value">' + score + '<small style="font-size:16px;color:var(--muted)"> /100</small></div><div class="summary-cell-note">ponderado pelos 5 eixos</div></div>' +
   '<div class="summary-cell"><div class="summary-cell-label">Atuacao hoje</div><div class="summary-cell-value" style="font-size:20px">' + esc(clean(meta.atuacao_hoje || lb.atuacao_hoje) || 'n/d') + '</div><div class="summary-cell-note">' + (clean(meta.ja_palestrante||lb.ja_palestrante) ? ('Ja palestrante: ' + esc(clean(meta.ja_palestrante||lb.ja_palestrante))) : '') + '</div></div>' +
   '<div class="summary-cell"><div class="summary-cell-label">Tema / Local</div><div class="summary-cell-value" style="font-size:20px">' + esc(clean(tema) || 'n/d') + '</div><div class="summary-cell-note">' + [clean(meta.estado||lb.estado), (clean(meta.idade||lb.idade) ? (clean(meta.idade||lb.idade) + ' anos') : '')].filter(Boolean).map(esc).join(' &middot; ') + '</div></div>' +
   '</div></section>';
@@ -668,6 +670,26 @@ const footer = '<footer style="background:var(--ink);color:var(--paper);padding:
 
 const script = '<' + 'script>function toggleAccordion(b){b.parentElement.classList.toggle("open");}function toggleAll(e){document.querySelectorAll(".accordion").forEach(a=>{e?a.classList.add("open"):a.classList.remove("open");});}<' + '/script>';
 
+// Faixa de meta do topo (custo, tempo, score, fontes) - estilo Hunter B2B
+const cfg = $('⚙️ CONFIG (pesos e cortes)').first().json.cfg || {};
+const t0 = $('⚙️ CONFIG (pesos e cortes)').first().json.t0 || Date.now();
+const safe = (n) => { try { return $(n).first().json || {}; } catch (e) { return {}; } };
+const apo = safe('[APOLLO] Normaliza Output').apollo || {};
+const w = safe('[WEB] Normaliza Output').web || {};
+const ig = (safe('[APIFY] Normaliza Output').apify || {}).instagram || {};
+const fontesList = ['HubSpot', (apo.nome || apo.cargo_atual) ? 'Apollo' : null, (w && Object.keys(w).length > 1) ? 'Web' : null, (ig.status === 'ok' || ig.status === 'privado_bloqueado') ? 'Instagram' : null].filter(Boolean);
+const segs = Math.max(1, Math.round((Date.now() - t0) / 1000));
+const tempoTxt = segs >= 60 ? ('~' + Math.round(segs / 60) + ' min') : ('~' + segs + 's');
+const confiab = fontesList.length >= 4 ? 'Alta confiabilidade' : (fontesList.length === 3 ? 'Boa confiabilidade' : 'Confiabilidade limitada');
+const custo = cfg.CUSTO_ESTIMADO || { tokens: '', valor: '' };
+const metaBand =
+  '<section class="summary-band"><div class="summary-grid">' +
+  '<div class="summary-cell"><div class="summary-cell-label">Custo estimado</div><div class="summary-cell-value">' + esc(custo.tokens) + '</div><div class="summary-cell-note">' + esc(custo.valor) + '</div></div>' +
+  '<div class="summary-cell"><div class="summary-cell-label">Tempo de processamento</div><div class="summary-cell-value">' + tempoTxt + '</div><div class="summary-cell-note">' + fontesList.length + ' fontes consultadas</div></div>' +
+  '<div class="summary-cell"><div class="summary-cell-label">Score do dossie</div><div class="summary-cell-value">' + score + '<small style="font-size:16px;color:var(--muted)">/100</small></div><div class="summary-cell-note">' + esc(confiab) + '</div></div>' +
+  '<div class="summary-cell"><div class="summary-cell-label">Fontes consultadas</div><div class="summary-cell-value">' + fontesList.length + '</div><div class="summary-cell-note">' + fontesList.map(esc).join(' &middot; ') + '</div></div>' +
+  '</div></section>';
+
 // Links clicaveis (Instagram, LinkedIn, noticias, sites) que a pesquisa achou
 const links = Array.isArray(D.links) ? D.links.filter(l => l && l.url) : [];
 const linksBar = links.length ? ('<section class="summary-band" style="padding-top:0"><div style="max-width:1100px;margin:0 auto;padding:8px 48px 20px"><div class="summary-cell-label">Perfis e fontes</div><div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px">' + links.map(l => '<a href="' + esc(l.url) + '" target="_blank" rel="noopener" class="control-btn" style="text-decoration:none">' + esc(l.label || l.url) + '</a>').join('') + '</div></div></section>') : '';
@@ -679,7 +701,7 @@ const diagBtn = diagUrl ? ('<div style="max-width:1100px;margin:20px auto 0;padd
 
 const article = '<article class="dossier">' + statsRow + controls + conteudo + comoFunciona + '</article>';
 const fonts = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">';
-const html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Dossie B2C - ' + esc(nome) + '</title>' + fonts + '<style>' + css + '</style></head><body>' + masthead + summary + diagBtn + linksBar + article + footer + script + '</body></html>';
+const html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Dossie B2C - ' + esc(nome) + '</title>' + fonts + '<style>' + css + '</style></head><body>' + masthead + metaBand + summary + diagBtn + linksBar + article + footer + script + '</body></html>';
 return [{ json: { text: html, lead_nome: nome, perfil: perfil, score: score } }];`;
 add("[RENDER] Inject Template", "n8n-nodes-base.code", { jsCode: injectCode }, { typeVersion: 2, position: [2640, 420] });
 conn("[LEAD-DIAG] Upload", "[RENDER] Inject Template");
