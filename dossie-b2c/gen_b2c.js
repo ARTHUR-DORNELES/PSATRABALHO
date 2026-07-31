@@ -592,19 +592,21 @@ const esc = (s) => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g
 const nome = meta.lead_nome || [lb.firstname, lb.lastname].filter(Boolean).join(' ') || 'Voce';
 const fortes = (J.pontos_fortes || []).map(x => '<li>' + esc(x) + '</li>').join('');
 const dev = (J.a_desenvolver || []).map(x => '<div class="card"><div class="card-t">' + esc(x.ponto) + '</div><div class="card-b">' + esc(x.como_tbw_ajuda) + '</div></div>').join('');
-const css = 'body{margin:0;background:#0b0b0d;color:#f5f5f5;font-family:Manrope,Arial,sans-serif;line-height:1.55}.wrap{max-width:840px;margin:0 auto;padding:56px 28px}.kick{color:#FF6A00;font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:12px}h1{font-size:40px;line-height:1.05;margin:12px 0 8px;font-weight:800}h1 em{color:#FF6A00;font-style:normal}.lead{font-size:19px;color:#cfcfcf;margin-bottom:16px}h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#FF6A00;margin:40px 0 14px}ul{padding-left:0;list-style:none;margin:0}ul li{padding:12px 0 12px 30px;border-bottom:1px solid #1f1f22;position:relative}ul li:before{content:"";position:absolute;left:0;top:18px;width:12px;height:12px;background:#FF6A00;border-radius:2px}.card{background:#141417;border-left:3px solid #FF6A00;border-radius:8px;padding:18px 20px;margin-bottom:14px}.card-t{font-weight:700;font-size:17px;margin-bottom:6px}.card-b{color:#c9c9c9;font-size:15px}.p{font-size:17px;color:#e6e6e6}.cta{margin-top:48px;background:linear-gradient(135deg,#FF6A00,#ff8c3a);color:#0b0b0d;border-radius:12px;padding:28px;text-align:center}.cta .f{font-size:22px;font-weight:800;margin-bottom:16px}.cta a{display:inline-block;background:#0b0b0d;color:#fff;text-decoration:none;font-weight:700;padding:14px 28px;border-radius:8px}.ft{margin-top:48px;color:#6a6a6a;font-size:12px;letter-spacing:.1em;text-transform:uppercase}';
-const html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Diagnostico de Palestrante - ' + esc(nome) + '</title><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"><style>' + css + '</style></head><body><div class="wrap">' +
-  '<div class="kick">Diagnostico de Perfil de Palestrante</div>' +
-  '<h1>' + esc(nome) + ', <em>seu palco te espera</em></h1>' +
-  '<p class="lead">' + esc(J.abertura || '') + '</p>' +
-  '<h2>Seus pontos fortes</h2><ul>' + fortes + '</ul>' +
-  '<h2>Onde voce pode evoluir</h2>' + dev +
-  '<h2>Seu potencial</h2><p class="p">' + esc(J.potencial || '') + '</p>' +
-  '<h2>Posicionamento sugerido</h2><p class="p">' + esc(J.posicionamento || '') + '</p>' +
-  '<div class="cta"><div class="f">' + esc(J.fecho_aspiracional || 'Vamos construir isso juntos.') + '</div><a href="' + esc(IM.url || '#') + '" target="_blank" rel="noopener">Conhecer ' + esc(IM.nome || 'a imersao') + '</a></div>' +
-  '<div class="ft">Profissionais SA &middot; ' + esc(IM.nome || '') + '</div>' +
-  '</div></body></html>';
-return [{ json: { text: html, lead_nome: nome } }];`;
+const css = 'body{margin:0;background:#0b0b0d;color:#f5f5f5;font-family:Manrope,Arial,sans-serif;line-height:1.55}.wrap{max-width:840px;margin:0 auto;padding:56px 28px}.kick{color:#FF6A00;font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:12px}h1{font-size:40px;line-height:1.05;margin:12px 0 8px;font-weight:800}h1 em{color:#FF6A00;font-style:normal}.lead{font-size:19px;color:#cfcfcf;margin-bottom:16px}h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#FF6A00;margin:40px 0 14px}ul{padding-left:0;list-style:none;margin:0}ul li{padding:12px 0 12px 30px;border-bottom:1px solid #1f1f22;position:relative}ul li:before{content:"";position:absolute;left:0;top:18px;width:12px;height:12px;background:#FF6A00;border-radius:2px}.card{background:#141417;border-left:3px solid #FF6A00;border-radius:8px;padding:18px 20px;margin-bottom:14px}.card-t{font-weight:700;font-size:17px;margin-bottom:6px}.card-b{color:#c9c9c9;font-size:15px}.p{font-size:17px;color:#e6e6e6}.cta{margin-top:48px;background:linear-gradient(135deg,#FF6A00,#ff8c3a);color:#0b0b0d;border-radius:12px;padding:28px;text-align:center}.cta .f{font-size:22px;font-weight:800;margin-bottom:16px}.cta a{display:inline-block;background:#0b0b0d;color:#fff;text-decoration:none;font-weight:700;padding:14px 28px;border-radius:8px}.ft{margin-top:48px;color:#6a6a6a;font-size:12px;letter-spacing:.1em;text-transform:uppercase}.blur{filter:blur(7px);opacity:.9;user-select:none;pointer-events:none}.lock{margin-top:40px;background:#141417;border:1px dashed #FF6A00;border-radius:12px;padding:28px;text-align:center}.lock .l{color:#FF6A00;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}.lock .m{font-size:18px;color:#e6e6e6;margin-bottom:18px}.lock a{display:inline-block;background:#FF6A00;color:#0b0b0d;text-decoration:none;font-weight:800;padding:14px 28px;border-radius:8px}';
+const head = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Diagnostico de Palestrante - ' + esc(nome) + '</title><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"><style>' + css + '</style></head><body><div class="wrap">';
+const bAbertura = '<div class="kick">Diagnostico de Perfil de Palestrante</div><h1>' + esc(nome) + ', <em>seu palco te espera</em></h1><p class="lead">' + esc(J.abertura || '') + '</p>';
+const bFortes = '<h2>Seus pontos fortes</h2><ul>' + fortes + '</ul>';
+const bDev = '<h2>Onde voce pode evoluir</h2>' + dev;
+const bPot = '<h2>Seu potencial</h2><p class="p">' + esc(J.potencial || '') + '</p>';
+const bPos = '<h2>Posicionamento diagnosticado</h2><p class="p">' + esc(J.posicionamento || '') + '</p>';
+const ctaFull = '<div class="cta"><div class="f">' + esc(J.fecho_aspiracional || 'Vamos construir isso juntos.') + '</div><a href="' + esc(IM.url || '#') + '" target="_blank" rel="noopener">Conhecer ' + esc(IM.nome || 'a imersao') + '</a></div>';
+const ft = '<div class="ft">Profissionais SA &middot; ' + esc(IM.nome || '') + '</div></div></body></html>';
+// versao completa (para o closer)
+const html = head + bAbertura + bFortes + bDev + bPot + bPos + ctaFull + ft;
+// versao teaser (para enviar ao lead): mostra abertura + pontos fortes; borra o resto; CTA para a reuniao
+const lock = '<div class="lock"><div class="l">Diagnostico completo</div><div class="m">Seu potencial, seu posicionamento e o plano de evolucao completo voce destrava na sua reuniao com a PSA.</div><a href="' + esc(IM.url || '#') + '" target="_blank" rel="noopener">Quero ver na reuniao</a></div>';
+const htmlTeaser = head + bAbertura + bFortes + '<div class="blur">' + bDev + bPot + bPos + '</div>' + lock + ft;
+return [{ json: { text: html, text_teaser: htmlTeaser, lead_nome: nome } }];`;
 add("[LEAD-DIAG] Inject", "n8n-nodes-base.code", { jsCode: diagInject }, { typeVersion: 2, position: [2640, 900] });
 conn("[LEAD-DIAG] Agent", "[LEAD-DIAG] Inject");
 
@@ -616,6 +618,15 @@ add("[LEAD-DIAG] Upload", "n8n-nodes-base.httpRequest", {
   options: { response: { response: { neverError: true, responseFormat: "json" } } },
 }, { typeVersion: 4.2, position: [2840, 900] });
 conn("[LEAD-DIAG] Inject", "[LEAD-DIAG] Upload");
+
+add("[LEAD-DIAG] Upload Teaser", "n8n-nodes-base.httpRequest", {
+  method: "POST", url: DOSSIE_ENDPOINT,
+  sendHeaders: true, headerParameters: { parameters: [{ name: "Authorization", value: "=Bearer " + DOSSIE_TOKEN }] },
+  sendBody: true, specifyBody: "json",
+  jsonBody: "={{ { \"html\": $('[LEAD-DIAG] Inject').first().json.text_teaser, \"lead\": $('[LEAD-DIAG] Inject').first().json.lead_nome + ' - Convite', \"empresa\": \"B2C-CONVITE\" } }}",
+  options: { response: { response: { neverError: true, responseFormat: "json" } } },
+}, { typeVersion: 4.2, position: [3040, 900] });
+conn("[LEAD-DIAG] Upload", "[LEAD-DIAG] Upload Teaser");
 
 const injectCode = 'const css = "' + CSS_ESCAPED + '";\n' + String.raw`
 let conteudo = ($('[RENDER] Agent Dossie HTML').first().json.text) || ($('[RENDER] Agent Dossie HTML').first().json.output) || '';
@@ -694,17 +705,19 @@ const metaBand =
 const links = Array.isArray(D.links) ? D.links.filter(l => l && l.url) : [];
 const linksBar = links.length ? ('<section class="summary-band" style="padding-top:0"><div style="max-width:1100px;margin:0 auto;padding:8px 48px 20px"><div class="summary-cell-label">Perfis e fontes</div><div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px">' + links.map(l => '<a href="' + esc(l.url) + '" target="_blank" rel="noopener" class="control-btn" style="text-decoration:none">' + esc(l.label || l.url) + '</a>').join('') + '</div></div></section>') : '';
 
-// Botao para o Diagnostico do Lead (pagina lead-facing, para o closer enviar)
-let diagUrl = '';
+// Botoes: diagnostico completo (interno, para o closer) + convite com blur (para enviar ao lead)
+let diagUrl = '', teaserUrl = '';
 try { diagUrl = ($('[LEAD-DIAG] Upload').first().json.url) || ''; } catch(e){}
-const diagBtn = diagUrl ? ('<div style="max-width:1100px;margin:20px auto 0;padding:0 48px"><a href="' + esc(diagUrl) + '" target="_blank" rel="noopener" class="control-btn" style="text-decoration:none;background:#FF6A00;border-color:#FF6A00;color:#fff;font-weight:700">Diagnostico do Lead (pagina para enviar) &rarr;</a></div>') : '';
+try { teaserUrl = ($('[LEAD-DIAG] Upload Teaser').first().json.url) || ''; } catch(e){}
+const btn = (url, label, bg, fg) => url ? ('<a href="' + esc(url) + '" target="_blank" rel="noopener" class="control-btn" style="text-decoration:none;background:' + bg + ';border-color:' + bg + ';color:' + fg + ';font-weight:700">' + label + ' &rarr;</a>') : '';
+const diagBtn = (diagUrl || teaserUrl) ? ('<div style="max-width:1100px;margin:20px auto 0;padding:0 48px;display:flex;gap:12px;flex-wrap:wrap">' + btn(diagUrl, 'Diagnostico completo (interno)', 'var(--ink)', 'var(--paper)') + btn(teaserUrl, 'Convite do lead (com blur, para enviar)', '#FF6A00', '#fff') + '</div>') : '';
 
 const article = '<article class="dossier">' + statsRow + controls + conteudo + comoFunciona + '</article>';
 const fonts = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">';
 const html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Dossie B2C - ' + esc(nome) + '</title>' + fonts + '<style>' + css + '</style></head><body>' + masthead + metaBand + summary + diagBtn + linksBar + article + footer + script + '</body></html>';
 return [{ json: { text: html, lead_nome: nome, perfil: perfil, score: score } }];`;
 add("[RENDER] Inject Template", "n8n-nodes-base.code", { jsCode: injectCode }, { typeVersion: 2, position: [2640, 420] });
-conn("[LEAD-DIAG] Upload", "[RENDER] Inject Template");
+conn("[LEAD-DIAG] Upload Teaser", "[RENDER] Inject Template");
 
 add("[RENDER] Convert to File", "n8n-nodes-base.convertToFile", { operation: "toText", sourceProperty: "text", options: { fileName: "=dossie_b2c_{{ $now.toFormat('yyyyMMdd_HHmmss') }}.html" } },
   { typeVersion: 1.1, position: [2840, 420] });
