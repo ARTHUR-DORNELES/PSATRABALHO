@@ -434,7 +434,8 @@ OUTPUT: SOMENTE JSON puro (sem markdown). Estrutura fixa:
   "gancho_abordagem": "",
   "rapport_sugestoes": ["", "", ""],
   "pontes_imersao": ["", "", ""],
-  "fontes_e_entraves": { "fontes": [], "entraves": [] }
+  "fontes_e_entraves": { "fontes": [], "entraves": [] },
+  "links": [{ "label": "", "url": "" }]
 }
 
 REGRAS:
@@ -451,7 +452,8 @@ REGRAS:
    - Na duvida sobre o cargo atual, prefira descrever a AREA/atuacao ("atua com inovacao e novos negocios") em vez de cravar empresa e titulo especificos que podem estar velhos.
 7. RAPPORT: preencha rapport_sugestoes com ATE 3 aberturas de conversa CURTAS e ESPECIFICAS, cada uma ancorada num fato real e DIFERENTE desta pessoa (trajetoria, pauta, conteudo, momento), no tom dela. Nada generico ("vi seu trabalho") - cite algo concreto. Se so houver base para 1 ou 2, gere 1 ou 2 - NAO repita o mesmo gancho reescrito.
 8. PONTES PARA A IMERSAO: preencha pontes_imersao com ATE 3 formas de conectar ESTA pessoa a IMERSAO descrita no input (nome + descricao). Cada ponte parte de algo concreto e DIFERENTE do perfil dela (um gap, uma ambicao, um momento de vida, o descompasso entre autoridade e vitrine) e mostra como a imersao resolve. Use "voce". Se o perfil for "Escala", foque em escalar/monetizar o que ela ja faz; se "Profissionalize-se", foque em estruturar e profissionalizar; se "Iniciante", foque em comecar do zero com metodo. Se faltar base, gere menos pontes em vez de repetir.
-9. NAO REPITA (regra de qualidade): cada secao (resumo_executivo, justificativa_eixos, ganchos_conexao, gancho_abordagem, rapport, pontes) deve trazer um angulo NOVO. NUNCA reescreva o mesmo fato em varias secoes so para preencher. Quando ha POUCA informacao captada, seja BREVE e honesto: um dossie curto e verdadeiro vale mais que paragrafos redundantes. Prefira dizer "informacao limitada nesta versao" a repetir os 2-3 fatos que voce tem. Densidade > volume.`;
+9. NAO REPITA (regra de qualidade): cada secao (resumo_executivo, justificativa_eixos, ganchos_conexao, gancho_abordagem, rapport, pontes) deve trazer um angulo NOVO. NUNCA reescreva o mesmo fato em varias secoes so para preencher. Quando ha POUCA informacao captada, seja BREVE e honesto: um dossie curto e verdadeiro vale mais que paragrafos redundantes. Prefira dizer "informacao limitada nesta versao" a repetir os 2-3 fatos que voce tem. Densidade > volume.
+10. LINKS (para o dossie deixar clicavel): preencha links com os enderecos REAIS encontrados sobre ESTA pessoa (Instagram, LinkedIn, site pessoal, materia de imprensa, canal YouTube, perfil institucional). Cada item = { label curto (ex.: "Instagram", "LinkedIn", "Materia na Exame"), url completa }. So URLs confirmadas desta pessoa (trava de identidade); nao invente. Se nao houver, deixe [].`;
 add("[SINTESE] Chain", "@n8n/n8n-nodes-langchain.chainLlm", {
   promptType: "define",
   text: "=INPUT CONSOLIDADO (3 blocos):\n\n{{ JSON.stringify($json.input_consolidado, null, 2) }}\n\nIMERSAO (produto B2C, use para gerar pontes_imersao):\n{{ JSON.stringify($('⚙️ CONFIG (pesos e cortes)').first().json.cfg.IMERSAO, null, 2) }}\n\nGere o dossie JSON conforme o system message.",
@@ -527,8 +529,80 @@ add("[RENDER] Chat Model", "@n8n/n8n-nodes-langchain.lmChatAnthropic", {
 }, { typeVersion: 1.3, position: [2400, 640], credentials: CRED.anthropic });
 sub("[RENDER] Chat Model", "[RENDER] Agent Dossie HTML", "ai_languageModel");
 
+// ============================================================
+// DIAGNOSTICO DO LEAD (pagina lead-facing, preto/laranja PSA) - chamariz da reuniao
+// Roda entre o Render interno e o Inject: gera o diagnostico, sobe e devolve a URL,
+// que o Inject do dossie interno embute como botao.
+// ============================================================
+const diagSystem = `Voce escreve o "Diagnostico de Perfil de Palestrante" da PSA, um material LEAD-FACING (a propria pessoa vai ler). Objetivo: ser o chamariz que faz o lead querer ir a reuniao. Tom aspiracional, generoso, profissional, cara de apresentacao de produto premium. Portugues do Brasil, "voce", ZERO travessoes.
+
+REGRAS CRITICAS:
+- NUNCA exponha score, nota, perfil interno (Escala/Profissionalize-se/Iniciante), closer, nem linguagem de CRM/vendas. Isto e para o LEAD ver.
+- Nada de julgamento negativo. "Pontos a desenvolver" sao OPORTUNIDADES, sempre ligadas ao que a IMERSAO (no input) resolve.
+- So use fatos reais do dossie recebido. Nao invente. Com pouca info, seja conciso e aspiracional, sem encher.
+- Fale COM a pessoa (2a pessoa), reconhecendo a jornada dela.
+
+OUTPUT: SOMENTE JSON puro (sem markdown):
+{
+  "abertura": "1-2 frases que reconhecem quem a pessoa e e criam identificacao",
+  "pontos_fortes": ["3 a 4 forcas reais dela como potencial palestrante"],
+  "a_desenvolver": [{ "ponto": "oportunidade de evolucao", "como_tbw_ajuda": "como a imersao destrava isso" }],
+  "potencial": "1 paragrafo sobre o que ela pode alcancar como palestrante",
+  "posicionamento": "1-2 frases sugerindo um posicionamento/tese de palco para ela",
+  "fecho_aspiracional": "convite curto e forte para a conversa/imersao"
+}
+Gere 2 a 3 itens em a_desenvolver.`;
+add("[LEAD-DIAG] Agent", "@n8n/n8n-nodes-langchain.chainLlm", {
+  promptType: "define",
+  text: "=Dossie interno (base factual, NAO copie tom nem numeros):\n\n{{ JSON.stringify($('[SINTESE] Parse + Score').first().json.dossier, null, 2) }}\n\nIMERSAO (para ligar os pontos a desenvolver):\n{{ JSON.stringify($('⚙️ CONFIG (pesos e cortes)').first().json.cfg.IMERSAO, null, 2) }}\n\nGere o diagnostico lead-facing em JSON.",
+  messages: { messageValues: [{ message: diagSystem }] },
+}, { typeVersion: 1.6, position: [2440, 900] });
+conn("[RENDER] Agent Dossie HTML", "[LEAD-DIAG] Agent");
+
+add("[LEAD-DIAG] Chat Model", "@n8n/n8n-nodes-langchain.lmChatAnthropic", {
+  model: { __rl: true, mode: "id", value: "claude-sonnet-4-5-20250929" }, options: { maxTokensToSample: 4000, temperature: 0.5 },
+}, { typeVersion: 1.3, position: [2400, 1120], credentials: CRED.anthropic });
+sub("[LEAD-DIAG] Chat Model", "[LEAD-DIAG] Agent", "ai_languageModel");
+
+const diagInject = String.raw`
+let raw = ($json.text) || ($json.output) || '';
+let J = null;
+try { J = JSON.parse(String(raw).replace(/^\s*\x60\x60\x60json\s*/i,'').replace(/^\s*\x60\x60\x60\s*/i,'').replace(/\x60\x60\x60\s*$/i,'').trim()); } catch(e){ J = {}; }
+const ps = $('[SINTESE] Parse + Score').first().json;
+const meta = (ps.dossier && ps.dossier.meta) || {};
+const lb = $('[LEAD] Base').first().json.lead;
+const IM = ($('⚙️ CONFIG (pesos e cortes)').first().json.cfg.IMERSAO) || {};
+const esc = (s) => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const nome = meta.lead_nome || [lb.firstname, lb.lastname].filter(Boolean).join(' ') || 'Voce';
+const fortes = (J.pontos_fortes || []).map(x => '<li>' + esc(x) + '</li>').join('');
+const dev = (J.a_desenvolver || []).map(x => '<div class="card"><div class="card-t">' + esc(x.ponto) + '</div><div class="card-b">' + esc(x.como_tbw_ajuda) + '</div></div>').join('');
+const css = 'body{margin:0;background:#0b0b0d;color:#f5f5f5;font-family:Manrope,Arial,sans-serif;line-height:1.55}.wrap{max-width:840px;margin:0 auto;padding:56px 28px}.kick{color:#FF6A00;font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:12px}h1{font-size:40px;line-height:1.05;margin:12px 0 8px;font-weight:800}h1 em{color:#FF6A00;font-style:normal}.lead{font-size:19px;color:#cfcfcf;margin-bottom:16px}h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#FF6A00;margin:40px 0 14px}ul{padding-left:0;list-style:none;margin:0}ul li{padding:12px 0 12px 30px;border-bottom:1px solid #1f1f22;position:relative}ul li:before{content:"";position:absolute;left:0;top:18px;width:12px;height:12px;background:#FF6A00;border-radius:2px}.card{background:#141417;border-left:3px solid #FF6A00;border-radius:8px;padding:18px 20px;margin-bottom:14px}.card-t{font-weight:700;font-size:17px;margin-bottom:6px}.card-b{color:#c9c9c9;font-size:15px}.p{font-size:17px;color:#e6e6e6}.cta{margin-top:48px;background:linear-gradient(135deg,#FF6A00,#ff8c3a);color:#0b0b0d;border-radius:12px;padding:28px;text-align:center}.cta .f{font-size:22px;font-weight:800;margin-bottom:16px}.cta a{display:inline-block;background:#0b0b0d;color:#fff;text-decoration:none;font-weight:700;padding:14px 28px;border-radius:8px}.ft{margin-top:48px;color:#6a6a6a;font-size:12px;letter-spacing:.1em;text-transform:uppercase}';
+const html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Diagnostico de Palestrante - ' + esc(nome) + '</title><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"><style>' + css + '</style></head><body><div class="wrap">' +
+  '<div class="kick">Diagnostico de Perfil de Palestrante</div>' +
+  '<h1>' + esc(nome) + ', <em>seu palco te espera</em></h1>' +
+  '<p class="lead">' + esc(J.abertura || '') + '</p>' +
+  '<h2>Seus pontos fortes</h2><ul>' + fortes + '</ul>' +
+  '<h2>Onde voce pode evoluir</h2>' + dev +
+  '<h2>Seu potencial</h2><p class="p">' + esc(J.potencial || '') + '</p>' +
+  '<h2>Posicionamento sugerido</h2><p class="p">' + esc(J.posicionamento || '') + '</p>' +
+  '<div class="cta"><div class="f">' + esc(J.fecho_aspiracional || 'Vamos construir isso juntos.') + '</div><a href="' + esc(IM.url || '#') + '" target="_blank" rel="noopener">Conhecer ' + esc(IM.nome || 'a imersao') + '</a></div>' +
+  '<div class="ft">Profissionais SA &middot; ' + esc(IM.nome || '') + '</div>' +
+  '</div></body></html>';
+return [{ json: { text: html, lead_nome: nome } }];`;
+add("[LEAD-DIAG] Inject", "n8n-nodes-base.code", { jsCode: diagInject }, { typeVersion: 2, position: [2640, 900] });
+conn("[LEAD-DIAG] Agent", "[LEAD-DIAG] Inject");
+
+add("[LEAD-DIAG] Upload", "n8n-nodes-base.httpRequest", {
+  method: "POST", url: DOSSIE_ENDPOINT,
+  sendHeaders: true, headerParameters: { parameters: [{ name: "Authorization", value: "=Bearer " + DOSSIE_TOKEN }] },
+  sendBody: true, specifyBody: "json",
+  jsonBody: "={{ { \"html\": $('[LEAD-DIAG] Inject').first().json.text, \"lead\": $('[LEAD-DIAG] Inject').first().json.lead_nome + ' - Diagnostico', \"empresa\": \"B2C-DIAG\" } }}",
+  options: { response: { response: { neverError: true, responseFormat: "json" } } },
+}, { typeVersion: 4.2, position: [2840, 900] });
+conn("[LEAD-DIAG] Inject", "[LEAD-DIAG] Upload");
+
 const injectCode = 'const css = "' + CSS_ESCAPED + '";\n' + String.raw`
-let conteudo = ($json.text) || ($json.output) || '';
+let conteudo = ($('[RENDER] Agent Dossie HTML').first().json.text) || ($('[RENDER] Agent Dossie HTML').first().json.output) || '';
 // Remove cercas de codigo markdown que o modelo as vezes coloca (tres crases + html)
 conteudo = String(conteudo).replace(/^\s*\x60\x60\x60html\s*/i, '').replace(/^\s*\x60\x60\x60\s*/i, '').replace(/\x60\x60\x60\s*$/i, '').trim();
 const ps = $('[SINTESE] Parse + Score').first().json;
@@ -579,12 +653,21 @@ const footer = '<footer style="background:var(--ink);color:var(--paper);padding:
 
 const script = '<' + 'script>function toggleAccordion(b){b.parentElement.classList.toggle("open");}function toggleAll(e){document.querySelectorAll(".accordion").forEach(a=>{e?a.classList.add("open"):a.classList.remove("open");});}<' + '/script>';
 
+// Links clicaveis (Instagram, LinkedIn, noticias, sites) que a pesquisa achou
+const links = Array.isArray(D.links) ? D.links.filter(l => l && l.url) : [];
+const linksBar = links.length ? ('<section class="summary-band" style="padding-top:0"><div style="max-width:1100px;margin:0 auto;padding:8px 48px 20px"><div class="summary-cell-label">Perfis e fontes</div><div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px">' + links.map(l => '<a href="' + esc(l.url) + '" target="_blank" rel="noopener" class="control-btn" style="text-decoration:none">' + esc(l.label || l.url) + '</a>').join('') + '</div></div></section>') : '';
+
+// Botao para o Diagnostico do Lead (pagina lead-facing, para o closer enviar)
+let diagUrl = '';
+try { diagUrl = ($('[LEAD-DIAG] Upload').first().json.url) || ''; } catch(e){}
+const diagBtn = diagUrl ? ('<div style="max-width:1100px;margin:20px auto 0;padding:0 48px"><a href="' + esc(diagUrl) + '" target="_blank" rel="noopener" class="control-btn" style="text-decoration:none;background:var(--ink);color:var(--paper);font-weight:700">Diagnostico do Lead (pagina para enviar) &rarr;</a></div>') : '';
+
 const article = '<article class="dossier">' + statsRow + controls + conteudo + comoFunciona + '</article>';
 const fonts = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">';
-const html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Dossie B2C - ' + esc(nome) + '</title>' + fonts + '<style>' + css + '</style></head><body>' + masthead + summary + article + footer + script + '</body></html>';
+const html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Dossie B2C - ' + esc(nome) + '</title>' + fonts + '<style>' + css + '</style></head><body>' + masthead + summary + diagBtn + linksBar + article + footer + script + '</body></html>';
 return [{ json: { text: html, lead_nome: nome, perfil: perfil, score: score } }];`;
 add("[RENDER] Inject Template", "n8n-nodes-base.code", { jsCode: injectCode }, { typeVersion: 2, position: [2640, 420] });
-conn("[RENDER] Agent Dossie HTML", "[RENDER] Inject Template");
+conn("[LEAD-DIAG] Upload", "[RENDER] Inject Template");
 
 add("[RENDER] Convert to File", "n8n-nodes-base.convertToFile", { operation: "toText", sourceProperty: "text", options: { fileName: "=dossie_b2c_{{ $now.toFormat('yyyyMMdd_HHmmss') }}.html" } },
   { typeVersion: 1.1, position: [2840, 420] });
