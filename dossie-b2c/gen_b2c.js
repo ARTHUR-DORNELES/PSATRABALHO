@@ -440,7 +440,12 @@ REGRAS:
 3. NAO calcule nota final nem perfil (o workflow faz depois com os pesos). Voce so avalia os 5 eixos.
 4. Cruze fontes: fato em >1 fonte = confie; em 1 so = sinalize.
 5. TRAVA DE IDENTIDADE: os dados declarados (bloco hubspot) sao a verdade sobre quem a pessoa e. Se o bloco web trouxer profissao/trajetoria que CONTRADIZ o declarado (ex.: web diz "barbeiro" mas o declarado e outra area), trate como possivel homonimo: NAO use esse fato e registre em fontes_e_entraves.entraves ("possivel homonimo descartado: ..."). Prefira sempre o declarado no HubSpot. Nunca misture duas pessoas no mesmo dossie.
-6. TEMPO VERBAL / VINCULO ATUAL: distinga cargos ATUAIS de ANTERIORES. So trate um cargo ou empresa como ATUAL se houver evidencia clara de vinculo vigente. Na duvida sobre se a pessoa ainda esta na empresa, use PASSADO ("atuou", "foi", "passou por", "ja liderou") em vez de presente. NUNCA afirme que a pessoa esta hoje numa empresa sem evidencia recente; e melhor dizer "ja atuou em X" do que errar dizendo que ainda esta la.
+6. VINCULO ATUAL (regra critica, erra muito aqui): distinga cargos ATUAIS de ANTERIORES.
+   - O bloco APOLLO pode estar DESATUALIZADO: o cargo/empresa que ele marca como "atual" pode ser antigo. NAO assuma que o emprego atual do Apollo e o atual de verdade.
+   - SINAL MAIS FORTE de emprego atual = o DOMINIO DO E-MAIL corporativo (bloco hubspot). Se o e-mail e @empresa.com, a pessoa quase certamente trabalha NESSA empresa hoje. Use o dominio do e-mail como sinal primario para meta.atuacao_hoje.
+   - Ordem de prioridade para "emprego atual": (1) declarado no HubSpot, (2) dominio do e-mail, (3) evidencia web recente (2025-2026). O Apollo entra so como historico/trajetoria, NAO como verdade sobre o presente.
+   - Se as fontes divergirem, NAO crave: use passado para o que nao for claramente atual ("atuou", "foi", "passou por") e sinalize a incerteza. E muito melhor dizer "ja atuou em X" do que errar afirmando que ainda esta la.
+   - Na duvida sobre o cargo atual, prefira descrever a AREA/atuacao ("atua com inovacao e novos negocios") em vez de cravar empresa e titulo especificos que podem estar velhos.
 7. RAPPORT: preencha rapport_sugestoes com 3 aberturas de conversa CURTAS e ESPECIFICAS, cada uma ancorada num fato real desta pessoa (trajetoria, pauta, conteudo, momento), no tom dela. Nada generico ("vi seu trabalho") - cite algo concreto.
 8. PONTES PARA A IMERSAO: preencha pontes_imersao com 3 formas de conectar ESTA pessoa a IMERSAO descrita no input (nome + descricao). Cada ponte parte de algo concreto do perfil dela (um gap, uma ambicao, um momento de vida, o descompasso entre autoridade e vitrine) e mostra como a imersao resolve. Use "voce". Se o perfil for "Escala", foque em escalar/monetizar o que ela ja faz; se "Profissionalize-se", foque em estruturar e profissionalizar; se "Iniciante", foque em comecar do zero com metodo.`;
 add("[SINTESE] Chain", "@n8n/n8n-nodes-langchain.chainLlm", {
@@ -477,7 +482,7 @@ conn("[SINTESE] Chain", "[SINTESE] Parse + Score");
 // ============================================================
 const renderSystem = `Voce e o gerador de conteudo HTML do Dossie B2C da PSA. Recebe o dossie JSON ja avaliado (score_final e perfil ja calculados) e devolve APENAS os accordions de conteudo (cabecalho, placar e rodape sao montados por fora). Portugues do Brasil, use "voce", ZERO travessoes.
 
-SAIDA: SOMENTE uma sequencia de blocos .accordion (sem <html>/<head>/<body>/masthead/stats-row/footer). Use EXATAMENTE estas classes:
+SAIDA: SOMENTE uma sequencia de blocos .accordion (sem <html>/<head>/<body>/masthead/stats-row/footer). Devolva HTML CRU, NUNCA cercado em blocos de codigo markdown (nao use tres crases nem "html" antes/depois). Use EXATAMENTE estas classes:
 
 <div class="accordion open">
   <button class="accordion-header" onclick="toggleAccordion(this)">
@@ -519,7 +524,9 @@ add("[RENDER] Chat Model", "@n8n/n8n-nodes-langchain.lmChatAnthropic", {
 sub("[RENDER] Chat Model", "[RENDER] Agent Dossie HTML", "ai_languageModel");
 
 const injectCode = 'const css = "' + CSS_ESCAPED + '";\n' + String.raw`
-const conteudo = ($json.text) || ($json.output) || '';
+let conteudo = ($json.text) || ($json.output) || '';
+// Remove cercas de codigo markdown que o modelo as vezes coloca (tres crases + html)
+conteudo = String(conteudo).replace(/^\s*\x60\x60\x60html\s*/i, '').replace(/^\s*\x60\x60\x60\s*/i, '').replace(/\x60\x60\x60\s*$/i, '').trim();
 const ps = $('[SINTESE] Parse + Score').first().json;
 const D = ps.dossier || {}; const meta = D.meta || {}; const eixos = D.avaliacao_eixos || {};
 const P = ps.pesos_usados || {}; const C = ps.cortes_usados || {};
