@@ -1,4 +1,6 @@
 const fs = require("fs");
+const os = require("os");
+const path = require("path");
 
 // ---------- helpers ----------
 const nodes = [];
@@ -40,7 +42,8 @@ const DOSSIE_ENDPOINT = "https://psa-ia-board.vercel.app/api/dossie";
 const DOSSIE_TOKEN = "671cadd1060dc205d21f0bf991c6ceae2ca2f8a7091036f1ddd1609ae626d674";
 
 // CSS do design system: extrai VERBATIM do dossiê B2B
-const B2B_PATH = "C:\\Users\\arthu\\Downloads\\SDR Farmer _ primeira maquina - Dossiê Empresas.json";
+// Caminho portável: procura em ~/Downloads (funciona em qualquer PC). Ajuste se mover o arquivo.
+const B2B_PATH = path.join(os.homedir(), "Downloads", "SDR Farmer _ primeira maquina - Dossiê Empresas.json");
 const b2bWf = JSON.parse(fs.readFileSync(B2B_PATH, "utf8"));
 const injB2B = b2bWf.nodes.find((n) => n.name === "[RENDER] Inject Template").parameters.jsCode;
 const CSS_ESCAPED = injB2B.match(/const css = "([\s\S]*?)";\s*\n\s*const footer/)[1];
@@ -74,9 +77,9 @@ const CORTES = { escala: 75, profissionalize: 45 }; // >=75 Escala | 45..74 Prof
 const STATUS_VALUE = "Atualizado";
 
 // APIFY (Instagram). Cole seu token. Enquanto vazio, o fluxo roda sem os numeros do IG.
-// Actor padrao: instagram-profile-scraper (aceita "usernames": [handle]).
-const APIFY_TOKEN = "";                                  // <- cole aqui o seu token Apify
-const APIFY_ACTOR = "apify~instagram-profile-scraper";   // ou troque pelo Actor ID que preferir
+// Actor: instagram-scraper (input via directUrls + resultsType "details").
+const APIFY_TOKEN = "apify_api_2QW5d2WPeEgDn7f2AcxIGgdz9Tthtp0EMBTk";  // token Apify
+const APIFY_ACTOR = "apify~instagram-scraper";   // Actor escolhido (apify/instagram-scraper)
 
 // Gravar o Perfil no CONTATO? So funciona depois que voce criar uma propriedade
 // "perfil" (dropdown: Escala / Profissionalize-se / Iniciante) no objeto Contato.
@@ -237,7 +240,7 @@ REGRAS:
 
 FILOSOFIA: dentro da trava de identidade, busque fundo. Capture bastante, mas SO desta pessoa.
 
-FERRAMENTAS: web_search (Tavily, queries curtas 2-6 palavras pt-BR, aceita site: e frase exata) e web_fetch (Jina, le a pagina inteira; use apos achar URL, minimo 8 fetches).
+FERRAMENTAS: web_search (Tavily, queries curtas 2-6 palavras pt-BR, aceita site: e frase exata) e web_fetch (Jina, le a pagina inteira; use apos achar URL, minimo 4 fetches). Seja eficiente: priorize as fontes mais promissoras e nao repita buscas parecidas.
 
 DATA ATUAL: julho de 2026. Priorize 2025-2026.
 
@@ -253,11 +256,11 @@ DATA ATUAL: julho de 2026. Priorize 2025-2026.
 add("[WEB] Pesquisador Agent", "@n8n/n8n-nodes-langchain.agent", {
   promptType: "define",
   text: "=Pesquise sobre a pessoa ESPECIFICA abaixo. Aplique a TRAVA DE IDENTIDADE.\n\nNome: {{ $json.firstname }} {{ $json.lastname }}\nTema declarado: {{ $json.tema }}\n\nANCORAS DE IDENTIDADE (use para confirmar que os resultados sao dela):\n- LinkedIn: {{ $json.linkedin_url }}\n- Instagram informado: {{ $json.instagram_url }}\n- Cargo: {{ $json.cargo }}\n- Empresa: {{ $json.empresa }}\n- Cidade/estado: {{ $json.cidade }}\n- Dominio de email: {{ $json.dominio_email }}\n\nDescarte qualquer resultado que nao confirme ao menos um ancora. Preencha os 7 buckets (+ descartados_por_homonimo). JSON puro.",
-  options: { systemMessage: webSystem, maxIterations: 40 },
+  options: { systemMessage: webSystem, maxIterations: 15 },
 }, { typeVersion: 1.9, position: [1000, 660] });
 conn("[WEB] Prepara Input", "[WEB] Pesquisador Agent");
 
-add("[WEB] Chat Model", "@n8n/n8n-nodes-langchain.lmChatOpenAi", { model: { __rl: true, mode: "list", value: "gpt-4.1" }, options: {} },
+add("[WEB] Chat Model", "@n8n/n8n-nodes-langchain.lmChatOpenAi", { model: { __rl: true, mode: "list", value: "gpt-4.1-mini" }, options: {} },
   { typeVersion: 1.2, position: [960, 880], credentials: CRED.openai });
 sub("[WEB] Chat Model", "[WEB] Pesquisador Agent", "ai_languageModel");
 
@@ -287,15 +290,29 @@ conn("[WEB] Pesquisador Agent", "[WEB] Normaliza Output");
 // ============================================================
 // BRANCH D - APIFY (Instagram estruturado)
 // ============================================================
-const apifyPrep = `// extrai o @handle do que veio no cadastro (URL, @handle ou texto)
+const apifyPrep = `// Extrai e VALIDA o @handle do cadastro (URL, @handle ou texto).
+// O campo do HubSpot mistura Instagram e LinkedIn, entao filtramos antes de gastar chamada Apify.
 const raw = String(($('[LEAD] Base').first().json.lead.instagram_url) || '').trim();
-let u = raw
-  .replace(/^https?:\\/\\/(www\\.)?instagram\\.com\\//i, '')
-  .replace(/^@/, '')
-  .replace(/[/?#].*$/, '')
-  .trim();
 const cfg = $('⚙️ CONFIG (pesos e cortes)').first().json.cfg;
-return [{ json: { username: u, tem_handle: !!u, token: cfg.APIFY_TOKEN || '', actor: cfg.APIFY_ACTOR || 'apify~instagram-profile-scraper' } }];`;
+let u = '', motivo = '';
+if (!raw) {
+  motivo = 'vazio';
+} else if (/linkedin\\.com/i.test(raw)) {
+  motivo = 'linkedin'; // veio um LinkedIn, nao um Instagram
+} else {
+  u = raw
+    .replace(/^(https?:\\/\\/)?(www\\.)?instagram\\.com\\//i, '')
+    .replace(/^@/, '')
+    .replace(/[/?#].*$/, '')
+    .trim();
+  // handle valido do Instagram: letras, numeros, ponto e underline, ate 30 chars
+  if (!/^[a-zA-Z0-9._]{1,30}$/.test(u)) { u = ''; motivo = 'handle_invalido'; }
+}
+const tem_handle = !!u;
+const directUrl = tem_handle ? ('https://www.instagram.com/' + u + '/') : '';
+// Input do Actor apify/instagram-scraper: perfil + ultimos posts (resultsType "details").
+const input = tem_handle ? { directUrls: [ directUrl ], resultsType: 'details', resultsLimit: 12, addParentData: false } : {};
+return [{ json: { username: u, tem_handle, motivo, directUrl, input, token: cfg.APIFY_TOKEN || '', actor: cfg.APIFY_ACTOR || 'apify~instagram-scraper' } }];`;
 add("[APIFY] Prepara", "n8n-nodes-base.code", { jsCode: apifyPrep }, { typeVersion: 2, position: [760, 1080] });
 conn("[LEAD] Base", "[APIFY] Prepara");
 
@@ -303,16 +320,21 @@ add("[APIFY] Instagram", "n8n-nodes-base.httpRequest", {
   method: "POST",
   url: "=https://api.apify.com/v2/acts/{{ $json.actor }}/run-sync-get-dataset-items?token={{ $json.token }}",
   sendBody: true, specifyBody: "json",
-  jsonBody: "={{ JSON.stringify({ usernames: [ $json.username ] }) }}",
+  jsonBody: "={{ JSON.stringify($json.input) }}",
   options: { response: { response: { neverError: true, responseFormat: "json" } }, timeout: 120000 },
 }, { typeVersion: 4.2, position: [1000, 1080] });
 conn("[APIFY] Prepara", "[APIFY] Instagram");
 
 const apifyNorm = `const prep = $('[APIFY] Prepara').first().json;
 const resp = $json;
-// sem handle no cadastro -> nada a buscar
+// sem handle valido no cadastro -> nada a buscar
 if (!prep.tem_handle) {
-  return [{ json: { apify: { instagram: { status: 'sem_handle', nota: 'Nenhum Instagram informado no cadastro.' } } } }];
+  const notaPorMotivo = {
+    vazio: 'Nenhum Instagram informado no cadastro.',
+    linkedin: 'O campo tinha um LinkedIn, nao um Instagram. Instagram nao coletado.',
+    handle_invalido: 'O que foi informado nao parece um @ valido de Instagram. Instagram nao coletado.'
+  };
+  return [{ json: { apify: { instagram: { status: 'sem_handle', motivo: prep.motivo, nota: notaPorMotivo[prep.motivo] || 'Instagram nao informado.' } } } }];
 }
 // sem token configurado -> nao rodou
 if (!prep.token) {
@@ -610,6 +632,6 @@ const workflow = {
   nodes, connections, active: false,
   settings: { executionOrder: "v1" }, pinData: {}, meta: { templateId: "b2c-dossie" }, tags: [],
 };
-const out = "C:\\Users\\arthu\\Downloads\\Dossie_B2C_Palestrante.json";
+const out = path.join(__dirname, "Dossie_B2C_Palestrante.json");
 fs.writeFileSync(out, JSON.stringify(workflow, null, 2));
 console.log("OK ->", out, "| nodes:", nodes.length);
