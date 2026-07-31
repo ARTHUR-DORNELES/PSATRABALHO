@@ -21,7 +21,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// =====================================================================\n//  PAINEL DE CONTROLE DO DOSSIE B2C  ->  EDITE SOMENTE ESTE BLOCO\n// =====================================================================\n// PESOS de cada eixo (soma = 100). O LLM avalia cada eixo 0-100 e o workflow calcula:\n//   nota_final = SOMA(eixo * peso) / 100\nconst PESOS = {\n  audiencia:          30,\n  repertorio_palco:   25,\n  autoridade_tema:    20,\n  ambicao_realismo:   15,\n  urgencia_timing:    10\n};\n\n// CORTES -> Perfil (nota 0-100)\nconst CORTES = { escala: 75, profissionalize: 45 }; // >=75 Escala | 45..74 Profissionalize-se | <45 Iniciante\n\n// Valor gravado em status_do_dossie (campo so aceita: \"Atualizado\" ou \"Desatualizado\")\nconst STATUS_VALUE = \"Atualizado\";\n\n// APIFY (Instagram). Cole seu token. Enquanto vazio, o fluxo roda sem os numeros do IG.\n// Actor: instagram-scraper (input via directUrls + resultsType \"details\").\nconst APIFY_TOKEN = \"apify_api_2QW5d2WPeEgDn7f2AcxIGgdz9Tthtp0EMBTk\";  // token Apify\nconst APIFY_ACTOR = \"apify~instagram-scraper\";   // Actor escolhido (apify/instagram-scraper)\n\n// IMERSAO (produto B2C de palestrante). Edite nome e descricao. A IA usa isto para gerar as\n// \"pontes de convite\" no dossie (como conectar a pessoa a esta oferta).\nconst IMERSAO = {\n  nome: \"The Best Weekend\",\n  url: \"https://profissionaissa.com.br/the-best-weekend/\",\n  descricao: \"imersao presencial e intensiva de 3 dias da PSA para palestrantes acelerarem a carreira. Em 3 dias a pessoa sai com posicionamento definido, palestra estruturada e um modelo de vendas testado e validado, aplicando o Metodo PSA. Inclui apresentacao de pocket speech com feedback individualizado e networking qualificado com grandes palestrantes. Nao e curso nem aula: e pratica real, mao na massa. Vagas limitadas por turma.\"\n};\n\n// Gravar o Perfil no CONTATO? So funciona depois que voce criar uma propriedade\n// \"perfil\" (dropdown: Escala / Profissionalize-se / Iniciante) no objeto Contato.\n// Enquanto false, o Perfil sai apenas na Nota. Vire true quando criar a propriedade.\nconst PERFIL_NO_CONTATO = false;\n\n// MAPA Perfil -> Closer (value = ID do owner em closer_da_agenda). \"\" = nao grava.\nconst CLOSER_POR_PERFIL = {\n  \"Escala\":            \"\",\n  \"Profissionalize-se\":\"\",\n  \"Iniciante\":         \"\"\n};\n// ---- TABELA owner -> ID (para preencher o mapa acima) ---------------\n// Ricardo Palma=61352275 | Eduardo Tavares=79405596 | Renato Claser Denck=79453133\n// Leonardo Marcondes Moreira=79453134 | Amanda de Oliveira=79760676 | Diego Conceicao=79760744\n// Thiago Berto=79760745 | Mayda Quadros=79760746 | Aline Maurente=79990679\n// Leonardo Bonetti Kirsch=80169105 | Lucas Oliveira=80169395 | Jhuly Correa de Carvalho=80228367\n// Eduardo Pereira Freitas=80343399 | Marcio Spagnolo=80436289 | Nicollas Lenuzza=80454573\n// Eduardo Vince=80454576 | Daniel Bento Sias=80454577 | Katyeli Ceroni Madril=80454582\n// Gabriela Vielmo Miranda=80454583 | Cesar Filho=80454584 | Leandro Bengochea=80454585\n// Rafael Teixeira=80454586 | Joao Gabriel Marins Pereira=80454588 | Leticia Silva dos Santos=80454607\n// Catarina Varoni Borges=80651489 | Rafael Brack=80688884 | Elenice Dias=80959643\n// Gustavo Pacheco=81033487 | Camila Fay=81035544 | Igor Oliveira=81043824 | Luciana Freitas=81191551\n// Enzo Albornoz Braga=81528369 | Bruna Dias Simoni=81609856 | Arthur Dorneles=81780832\n// Audren Ferrao=81878113 | Max=82068976 | Giovana Bastos da Fontoura=82603870 | Priscila Beckel=83754977\n// Amanda Mendonca Duarte=84015882 | Tercio Ferreira da Silva=84249251 | Vitoria Garcia Schaeffer=84497577\n// Bernardo Luiz Haab=84612836 | Victor Okajima=84740875 | Rafael de Azevedo Charlau=84793065\n// Bruna Machado=85002012 | Francielle Lenz=85846971 | Daniela Silva=85846972 | Yaskara Concato=86184663\n// =====================================================================\n//  FIM DO PAINEL DE CONTROLE\n// =====================================================================\n\n// Extrai o ID do contato do payload do HubSpot (formato varia). Tenta varias chaves.\nconst b = $('Webhook B2C').first().json.body || $('Webhook B2C').first().json || {};\nconst props = b.properties || {};\nconst pick = (o, k) => (o && o[k] != null ? (typeof o[k] === 'object' && o[k].value != null ? o[k].value : o[k]) : null);\nconst id_contato = String(\n  b.id_contato || b.contactId || b.objectId || b.vid || b.hs_object_id ||\n  pick(props, 'hs_object_id') || b['Record ID'] || ''\n);\n\nreturn [{ json: { cfg: { PESOS, CORTES, STATUS_VALUE, PERFIL_NO_CONTATO, CLOSER_POR_PERFIL, APIFY_TOKEN, APIFY_ACTOR, IMERSAO }, lead: { id_contato } } }];"
+        "jsCode": "// =====================================================================\n//  PAINEL DE CONTROLE DO DOSSIE B2C  ->  EDITE SOMENTE ESTE BLOCO\n// =====================================================================\n// PESOS de cada eixo (soma = 100). O LLM avalia cada eixo 0-100 e o workflow calcula:\n//   nota_final = SOMA(eixo * peso) / 100\nconst PESOS = {\n  audiencia:          30,\n  repertorio_palco:   25,\n  autoridade_tema:    20,\n  ambicao_realismo:   15,\n  urgencia_timing:    10\n};\n\n// CORTES -> Perfil (nota 0-100)\nconst CORTES = { escala: 75, profissionalize: 45 }; // >=75 Escala | 45..74 Profissionalize-se | <45 Iniciante\n\n// Valor gravado em status_do_dossie (campo so aceita: \"Atualizado\" ou \"Desatualizado\")\nconst STATUS_VALUE = \"Atualizado\";\n\n// APIFY (Instagram). Cole seu token. Enquanto vazio, o fluxo roda sem os numeros do IG.\n// Actor: instagram-scraper (input via directUrls + resultsType \"details\").\nconst APIFY_TOKEN = \"apify_api_2QW5d2WPeEgDn7f2AcxIGgdz9Tthtp0EMBTk\";  // token Apify\nconst APIFY_ACTOR = \"apify~instagram-scraper\";   // Actor escolhido (apify/instagram-scraper)\n\n// IMERSAO (produto B2C de palestrante). Edite nome e descricao. A IA usa isto para gerar as\n// \"pontes de convite\" no dossie (como conectar a pessoa a esta oferta).\nconst IMERSAO = {\n  nome: \"The Best Weekend\",\n  url: \"https://profissionaissa.com.br/the-best-weekend/\",\n  descricao: \"imersao presencial e intensiva de 3 dias da PSA para palestrantes acelerarem a carreira. Em 3 dias a pessoa sai com posicionamento definido, palestra estruturada e um modelo de vendas testado e validado, aplicando o Metodo PSA. Inclui apresentacao de pocket speech com feedback individualizado e networking qualificado com grandes palestrantes. Nao e curso nem aula: e pratica real, mao na massa. Vagas limitadas por turma.\"\n};\n\n// Funil de Vendas B2C. Usado para gravar o Perfil no negocio CERTO quando o contato tem varios negocios.\nconst PIPELINE_B2C = \"725182862\";\n\n// Gravar o Perfil no CONTATO? So funciona depois que voce criar uma propriedade\n// \"perfil\" (dropdown: Escala / Profissionalize-se / Iniciante) no objeto Contato.\n// Enquanto false, o Perfil sai apenas na Nota. Vire true quando criar a propriedade.\nconst PERFIL_NO_CONTATO = false;\n\n// MAPA Perfil -> Closer (value = ID do owner em closer_da_agenda). \"\" = nao grava.\nconst CLOSER_POR_PERFIL = {\n  \"Escala\":            \"\",\n  \"Profissionalize-se\":\"\",\n  \"Iniciante\":         \"\"\n};\n// ---- TABELA owner -> ID (para preencher o mapa acima) ---------------\n// Ricardo Palma=61352275 | Eduardo Tavares=79405596 | Renato Claser Denck=79453133\n// Leonardo Marcondes Moreira=79453134 | Amanda de Oliveira=79760676 | Diego Conceicao=79760744\n// Thiago Berto=79760745 | Mayda Quadros=79760746 | Aline Maurente=79990679\n// Leonardo Bonetti Kirsch=80169105 | Lucas Oliveira=80169395 | Jhuly Correa de Carvalho=80228367\n// Eduardo Pereira Freitas=80343399 | Marcio Spagnolo=80436289 | Nicollas Lenuzza=80454573\n// Eduardo Vince=80454576 | Daniel Bento Sias=80454577 | Katyeli Ceroni Madril=80454582\n// Gabriela Vielmo Miranda=80454583 | Cesar Filho=80454584 | Leandro Bengochea=80454585\n// Rafael Teixeira=80454586 | Joao Gabriel Marins Pereira=80454588 | Leticia Silva dos Santos=80454607\n// Catarina Varoni Borges=80651489 | Rafael Brack=80688884 | Elenice Dias=80959643\n// Gustavo Pacheco=81033487 | Camila Fay=81035544 | Igor Oliveira=81043824 | Luciana Freitas=81191551\n// Enzo Albornoz Braga=81528369 | Bruna Dias Simoni=81609856 | Arthur Dorneles=81780832\n// Audren Ferrao=81878113 | Max=82068976 | Giovana Bastos da Fontoura=82603870 | Priscila Beckel=83754977\n// Amanda Mendonca Duarte=84015882 | Tercio Ferreira da Silva=84249251 | Vitoria Garcia Schaeffer=84497577\n// Bernardo Luiz Haab=84612836 | Victor Okajima=84740875 | Rafael de Azevedo Charlau=84793065\n// Bruna Machado=85002012 | Francielle Lenz=85846971 | Daniela Silva=85846972 | Yaskara Concato=86184663\n// =====================================================================\n//  FIM DO PAINEL DE CONTROLE\n// =====================================================================\n\n// Extrai o ID do contato do payload do HubSpot (formato varia). Tenta varias chaves.\nconst b = $('Webhook B2C').first().json.body || $('Webhook B2C').first().json || {};\nconst props = b.properties || {};\nconst pick = (o, k) => (o && o[k] != null ? (typeof o[k] === 'object' && o[k].value != null ? o[k].value : o[k]) : null);\nconst id_contato = String(\n  b.id_contato || b.contactId || b.objectId || b.vid || b.hs_object_id ||\n  pick(props, 'hs_object_id') || b['Record ID'] || ''\n);\n\nreturn [{ json: { cfg: { PESOS, CORTES, STATUS_VALUE, PERFIL_NO_CONTATO, CLOSER_POR_PERFIL, APIFY_TOKEN, APIFY_ACTOR, IMERSAO, PIPELINE_B2C }, lead: { id_contato } } }];"
       },
       "id": "n002",
       "name": "⚙️ CONFIG (pesos e cortes)",
@@ -681,13 +681,121 @@
     },
     {
       "parameters": {
+        "url": "=https://api.hubapi.com/crm/v4/objects/contacts/{{ $('[LEAD] Base').item.json.lead.id_contato }}/associations/deals",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "n030",
+      "name": "[HUBSPOT] Assoc Deals",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3240,
+        540
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "vqUunHD1VWP4x0gI",
+          "name": "Dossiê B2C HubSpot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.hubapi.com/crm/v3/objects/deals/batch/read",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ properties: ['pipeline','createdate'], inputs: (($json.results)||[]).map(r => ({ id: String(r.toObjectId) })) }) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "n031",
+      "name": "[HUBSPOT] Le Deals",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3440,
+        540
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "vqUunHD1VWP4x0gI",
+          "name": "Dossiê B2C HubSpot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const ps = $('[SINTESE] Parse + Score').first().json;\nconst cfg = $('⚙️ CONFIG (pesos e cortes)').first().json.cfg;\nconst deals = ($json.results) || [];\n// so negocios do funil B2C (contato pode ter varios negocios)\nconst b2c = deals.filter(d => d.properties && String(d.properties.pipeline) === String(cfg.PIPELINE_B2C));\nb2c.sort((a,b) => new Date(b.properties.createdate) - new Date(a.properties.createdate)); // mais recente primeiro\nconst alvo = b2c[0];\nif (!alvo || !ps.perfil) { return []; } // sem negocio B2C -> nao grava (nada a fazer)\nreturn [{ json: { dealId: String(alvo.id), perfil: ps.perfil } }];"
+      },
+      "id": "n032",
+      "name": "[DEAL] Escolhe B2C",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3640,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.hubapi.com/crm/v3/objects/deals/{{ $json.dealId }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ properties: { perfil: $json.perfil } }) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "n033",
+      "name": "[HUBSPOT] Patch Deal Perfil",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3840,
+        540
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "vqUunHD1VWP4x0gI",
+          "name": "Dossiê B2C HubSpot"
+        }
+      }
+    },
+    {
+      "parameters": {
         "content": "## ⚙️ PAINEL DE CONTROLE\\nPesos, cortes, status, flag de Perfil e mapa Perfil→Closer estão DENTRO do nó `⚙️ CONFIG` (com a tabela owner→ID pronta pra colar).\\nO gatilho é o workflow do HubSpot que dispara quando o Negócio B2C entra em 'Reunião Agendada'. Só o **ID do contato** precisa chegar no webhook.",
         "height": 200,
         "width": 460,
         "color": 6
       },
-      "id": "n031",
-      "name": "Nota_n030",
+      "id": "n035",
+      "name": "Nota_n034",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
@@ -702,8 +810,8 @@
         "width": 460,
         "color": 5
       },
-      "id": "n033",
-      "name": "Nota_n032",
+      "id": "n037",
+      "name": "Nota_n036",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
@@ -718,8 +826,8 @@
         "width": 420,
         "color": 7
       },
-      "id": "n035",
-      "name": "Nota_n034",
+      "id": "n039",
+      "name": "Nota_n038",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
@@ -734,8 +842,8 @@
         "width": 480,
         "color": 3
       },
-      "id": "n037",
-      "name": "Nota_n036",
+      "id": "n041",
+      "name": "Nota_n040",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
@@ -1062,6 +1170,50 @@
         [
           {
             "node": "[HUBSPOT] Patch Contato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[HUBSPOT] Patch Contato": {
+      "main": [
+        [
+          {
+            "node": "[HUBSPOT] Assoc Deals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[HUBSPOT] Assoc Deals": {
+      "main": [
+        [
+          {
+            "node": "[HUBSPOT] Le Deals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[HUBSPOT] Le Deals": {
+      "main": [
+        [
+          {
+            "node": "[DEAL] Escolhe B2C",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[DEAL] Escolhe B2C": {
+      "main": [
+        [
+          {
+            "node": "[HUBSPOT] Patch Deal Perfil",
             "type": "main",
             "index": 0
           }

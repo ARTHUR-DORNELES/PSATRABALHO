@@ -91,6 +91,9 @@ const IMERSAO = {
   descricao: "imersao presencial e intensiva de 3 dias da PSA para palestrantes acelerarem a carreira. Em 3 dias a pessoa sai com posicionamento definido, palestra estruturada e um modelo de vendas testado e validado, aplicando o Metodo PSA. Inclui apresentacao de pocket speech com feedback individualizado e networking qualificado com grandes palestrantes. Nao e curso nem aula: e pratica real, mao na massa. Vagas limitadas por turma."
 };
 
+// Funil de Vendas B2C. Usado para gravar o Perfil no negocio CERTO quando o contato tem varios negocios.
+const PIPELINE_B2C = "725182862";
+
 // Gravar o Perfil no CONTATO? So funciona depois que voce criar uma propriedade
 // "perfil" (dropdown: Escala / Profissionalize-se / Iniciante) no objeto Contato.
 // Enquanto false, o Perfil sai apenas na Nota. Vire true quando criar a propriedade.
@@ -131,7 +134,7 @@ const id_contato = String(
   pick(props, 'hs_object_id') || b['Record ID'] || ''
 );
 
-return [{ json: { cfg: { PESOS, CORTES, STATUS_VALUE, PERFIL_NO_CONTATO, CLOSER_POR_PERFIL, APIFY_TOKEN, APIFY_ACTOR, IMERSAO }, lead: { id_contato } } }];`;
+return [{ json: { cfg: { PESOS, CORTES, STATUS_VALUE, PERFIL_NO_CONTATO, CLOSER_POR_PERFIL, APIFY_TOKEN, APIFY_ACTOR, IMERSAO, PIPELINE_B2C }, lead: { id_contato } } }];`;
 add("⚙️ CONFIG (pesos e cortes)", "n8n-nodes-base.code", { jsCode: configCode }, { typeVersion: 2, position: [0, 420] });
 conn("Webhook B2C", "⚙️ CONFIG (pesos e cortes)");
 
@@ -618,6 +621,47 @@ add("[HUBSPOT] Patch Contato", "n8n-nodes-base.httpRequest", {
   options: { response: { response: { neverError: true, responseFormat: "json" } } },
 }, { typeVersion: 4.2, position: [3440, 300], credentials: CRED.hsHeader });
 conn("[HUBSPOT] Monta Props", "[HUBSPOT] Patch Contato");
+
+// ============================================================
+// WRITE-BACK no NEGOCIO (perfil) — grava Perfil no negocio do funil B2C associado ao contato
+// Requer escopos crm.objects.deals.read + crm.objects.deals.write na credencial HubSpot.
+// ============================================================
+add("[HUBSPOT] Assoc Deals", "n8n-nodes-base.httpRequest", {
+  url: "=https://api.hubapi.com/crm/v4/objects/contacts/{{ $('[LEAD] Base').item.json.lead.id_contato }}/associations/deals",
+  authentication: "predefinedCredentialType", nodeCredentialType: "httpHeaderAuth",
+  options: { response: { response: { neverError: true, responseFormat: "json" } } },
+}, { typeVersion: 4.2, position: [3240, 540], credentials: CRED.hsHeader });
+conn("[HUBSPOT] Patch Contato", "[HUBSPOT] Assoc Deals");
+
+add("[HUBSPOT] Le Deals", "n8n-nodes-base.httpRequest", {
+  method: "POST", url: "https://api.hubapi.com/crm/v3/objects/deals/batch/read",
+  authentication: "predefinedCredentialType", nodeCredentialType: "httpHeaderAuth",
+  sendBody: true, specifyBody: "json",
+  jsonBody: "={{ JSON.stringify({ properties: ['pipeline','createdate'], inputs: (($json.results)||[]).map(r => ({ id: String(r.toObjectId) })) }) }}",
+  options: { response: { response: { neverError: true, responseFormat: "json" } } },
+}, { typeVersion: 4.2, position: [3440, 540], credentials: CRED.hsHeader });
+conn("[HUBSPOT] Assoc Deals", "[HUBSPOT] Le Deals");
+
+const pickDeal = `const ps = $('[SINTESE] Parse + Score').first().json;
+const cfg = $('⚙️ CONFIG (pesos e cortes)').first().json.cfg;
+const deals = ($json.results) || [];
+// so negocios do funil B2C (contato pode ter varios negocios)
+const b2c = deals.filter(d => d.properties && String(d.properties.pipeline) === String(cfg.PIPELINE_B2C));
+b2c.sort((a,b) => new Date(b.properties.createdate) - new Date(a.properties.createdate)); // mais recente primeiro
+const alvo = b2c[0];
+if (!alvo || !ps.perfil) { return []; } // sem negocio B2C -> nao grava (nada a fazer)
+return [{ json: { dealId: String(alvo.id), perfil: ps.perfil } }];`;
+add("[DEAL] Escolhe B2C", "n8n-nodes-base.code", { jsCode: pickDeal }, { typeVersion: 2, position: [3640, 540] });
+conn("[HUBSPOT] Le Deals", "[DEAL] Escolhe B2C");
+
+add("[HUBSPOT] Patch Deal Perfil", "n8n-nodes-base.httpRequest", {
+  method: "PATCH", url: "=https://api.hubapi.com/crm/v3/objects/deals/{{ $json.dealId }}",
+  authentication: "predefinedCredentialType", nodeCredentialType: "httpHeaderAuth",
+  sendBody: true, specifyBody: "json",
+  jsonBody: "={{ JSON.stringify({ properties: { perfil: $json.perfil } }) }}",
+  options: { response: { response: { neverError: true, responseFormat: "json" } } },
+}, { typeVersion: 4.2, position: [3840, 540], credentials: CRED.hsHeader });
+conn("[DEAL] Escolhe B2C", "[HUBSPOT] Patch Deal Perfil");
 
 // (Nota removida: o escopo de Notas nao esta disponivel para chaves de servico deste portal
 //  ("isn't available for public use"). O link do dossie ja fica no contato em hunter_dossie_html_url,
