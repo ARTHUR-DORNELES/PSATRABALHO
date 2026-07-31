@@ -310,9 +310,22 @@ const lead = $('[LEAD] Base').first().json.lead;
 const cfg = $('⚙️ CONFIG (pesos e cortes)').first().json.cfg;
 let web = {};
 try { web = ($('[WEB] Normaliza Output').first().json.web) || {}; } catch (e) {}
+// 3a fonte (fallback robusto): varre TODO o output do Web atras de uma URL instagram.com/<handle>,
+// porque o agente nem sempre preenche instagram_confirmado mesmo tendo achado o IG.
+let webScan = '';
+try {
+  const blob = JSON.stringify(web || {});
+  const reservadas = ['p','reel','reels','explore','accounts','stories','tv','about','directory'];
+  const re = /instagram\\.com\\/([A-Za-z0-9._]{2,30})/ig;
+  let mm;
+  while ((mm = re.exec(blob)) !== null) {
+    if (!reservadas.includes(mm[1].toLowerCase())) { webScan = mm[1]; break; }
+  }
+} catch (e) {}
 const candidatos = [
   { raw: String(lead.instagram_url || '').trim(), origem: 'cadastro' },
-  { raw: String(web.instagram_confirmado || '').trim(), origem: 'web' }
+  { raw: String(web.instagram_confirmado || '').trim(), origem: 'web' },
+  { raw: webScan, origem: 'web_scan' }
 ];
 let u = '', motivo = '', origem = '';
 for (const c of candidatos) {
