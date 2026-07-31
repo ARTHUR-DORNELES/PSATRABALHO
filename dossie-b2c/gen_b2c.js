@@ -86,8 +86,9 @@ const APIFY_ACTOR = "apify~instagram-scraper";   // Actor escolhido (apify/insta
 // IMERSAO (produto B2C de palestrante). Edite nome e descricao. A IA usa isto para gerar as
 // "pontes de convite" no dossie (como conectar a pessoa a esta oferta).
 const IMERSAO = {
-  nome: "The Best School — imersao de formacao de palestrantes da PSA",
-  descricao: "imersao que profissionaliza especialistas para atuarem como palestrantes: constroi repertorio de palco, posicionamento e uma tese central, transformando autoridade e conhecimento em palestras que chegam a auditorios e empresas."
+  nome: "The Best Weekend",
+  url: "https://profissionaissa.com.br/the-best-weekend/",
+  descricao: "imersao presencial e intensiva de 3 dias da PSA para palestrantes acelerarem a carreira. Em 3 dias a pessoa sai com posicionamento definido, palestra estruturada e um modelo de vendas testado e validado, aplicando o Metodo PSA. Inclui apresentacao de pocket speech com feedback individualizado e networking qualificado com grandes palestrantes. Nao e curso nem aula: e pratica real, mao na massa. Vagas limitadas por turma."
 };
 
 // Gravar o Perfil no CONTATO? So funciona depois que voce criar uma propriedade
