@@ -65,9 +65,9 @@ const configCode = `// =========================================================
 // PESOS de cada eixo (soma = 100). O LLM avalia cada eixo 0-100 e o workflow calcula:
 //   nota_final = SOMA(eixo * peso) / 100
 const PESOS = {
-  audiencia:          30,
-  repertorio_palco:   25,
-  autoridade_tema:    20,
+  audiencia:          20,
+  repertorio_palco:   30,
+  autoridade_tema:    25,
   ambicao_realismo:   15,
   urgencia_timing:    10
 };
