@@ -83,6 +83,13 @@ const STATUS_VALUE = "Atualizado";
 const APIFY_TOKEN = "apify_api_2QW5d2WPeEgDn7f2AcxIGgdz9Tthtp0EMBTk";  // token Apify
 const APIFY_ACTOR = "apify~instagram-scraper";   // Actor escolhido (apify/instagram-scraper)
 
+// IMERSAO (produto B2C de palestrante). Edite nome e descricao. A IA usa isto para gerar as
+// "pontes de convite" no dossie (como conectar a pessoa a esta oferta).
+const IMERSAO = {
+  nome: "The Best School — imersao de formacao de palestrantes da PSA",
+  descricao: "imersao que profissionaliza especialistas para atuarem como palestrantes: constroi repertorio de palco, posicionamento e uma tese central, transformando autoridade e conhecimento em palestras que chegam a auditorios e empresas."
+};
+
 // Gravar o Perfil no CONTATO? So funciona depois que voce criar uma propriedade
 // "perfil" (dropdown: Escala / Profissionalize-se / Iniciante) no objeto Contato.
 // Enquanto false, o Perfil sai apenas na Nota. Vire true quando criar a propriedade.
@@ -123,7 +130,7 @@ const id_contato = String(
   pick(props, 'hs_object_id') || b['Record ID'] || ''
 );
 
-return [{ json: { cfg: { PESOS, CORTES, STATUS_VALUE, PERFIL_NO_CONTATO, CLOSER_POR_PERFIL, APIFY_TOKEN, APIFY_ACTOR }, lead: { id_contato } } }];`;
+return [{ json: { cfg: { PESOS, CORTES, STATUS_VALUE, PERFIL_NO_CONTATO, CLOSER_POR_PERFIL, APIFY_TOKEN, APIFY_ACTOR, IMERSAO }, lead: { id_contato } } }];`;
 add("⚙️ CONFIG (pesos e cortes)", "n8n-nodes-base.code", { jsCode: configCode }, { typeVersion: 2, position: [0, 420] });
 conn("Webhook B2C", "⚙️ CONFIG (pesos e cortes)");
 
@@ -421,6 +428,8 @@ OUTPUT: SOMENTE JSON puro (sem markdown). Estrutura fixa:
   "resumo_executivo": "",
   "ganchos_conexao": { "tres_topicos": [], "referencias_citadas": [], "ultimos_posts": [{ "resumo": "", "link": "" }], "momento_de_vida": "", "tom_da_pessoa": "" },
   "gancho_abordagem": "",
+  "rapport_sugestoes": ["", "", ""],
+  "pontes_imersao": ["", "", ""],
   "fontes_e_entraves": { "fontes": [], "entraves": [] }
 }
 
@@ -429,10 +438,13 @@ REGRAS:
 2. Cada eixo 0-100 baseado em EVIDENCIA. Sem evidencia -> nota baixa + justificativa "sem evidencia captada".
 3. NAO calcule nota final nem perfil (o workflow faz depois com os pesos). Voce so avalia os 5 eixos.
 4. Cruze fontes: fato em >1 fonte = confie; em 1 so = sinalize.
-5. TRAVA DE IDENTIDADE: os dados declarados (bloco hubspot) sao a verdade sobre quem a pessoa e. Se o bloco web trouxer profissao/trajetoria que CONTRADIZ o declarado (ex.: web diz "barbeiro" mas o declarado e outra area), trate como possivel homonimo: NAO use esse fato e registre em fontes_e_entraves.entraves ("possivel homonimo descartado: ..."). Prefira sempre o declarado no HubSpot. Nunca misture duas pessoas no mesmo dossie.`;
+5. TRAVA DE IDENTIDADE: os dados declarados (bloco hubspot) sao a verdade sobre quem a pessoa e. Se o bloco web trouxer profissao/trajetoria que CONTRADIZ o declarado (ex.: web diz "barbeiro" mas o declarado e outra area), trate como possivel homonimo: NAO use esse fato e registre em fontes_e_entraves.entraves ("possivel homonimo descartado: ..."). Prefira sempre o declarado no HubSpot. Nunca misture duas pessoas no mesmo dossie.
+6. TEMPO VERBAL / VINCULO ATUAL: distinga cargos ATUAIS de ANTERIORES. So trate um cargo ou empresa como ATUAL se houver evidencia clara de vinculo vigente. Na duvida sobre se a pessoa ainda esta na empresa, use PASSADO ("atuou", "foi", "passou por", "ja liderou") em vez de presente. NUNCA afirme que a pessoa esta hoje numa empresa sem evidencia recente; e melhor dizer "ja atuou em X" do que errar dizendo que ainda esta la.
+7. RAPPORT: preencha rapport_sugestoes com 3 aberturas de conversa CURTAS e ESPECIFICAS, cada uma ancorada num fato real desta pessoa (trajetoria, pauta, conteudo, momento), no tom dela. Nada generico ("vi seu trabalho") - cite algo concreto.
+8. PONTES PARA A IMERSAO: preencha pontes_imersao com 3 formas de conectar ESTA pessoa a IMERSAO descrita no input (nome + descricao). Cada ponte parte de algo concreto do perfil dela (um gap, uma ambicao, um momento de vida, o descompasso entre autoridade e vitrine) e mostra como a imersao resolve. Use "voce". Se o perfil for "Escala", foque em escalar/monetizar o que ela ja faz; se "Profissionalize-se", foque em estruturar e profissionalizar; se "Iniciante", foque em comecar do zero com metodo.`;
 add("[SINTESE] Chain", "@n8n/n8n-nodes-langchain.chainLlm", {
   promptType: "define",
-  text: "=INPUT CONSOLIDADO (3 blocos):\n\n{{ JSON.stringify($json.input_consolidado, null, 2) }}\n\nGere o dossie JSON conforme o system message.",
+  text: "=INPUT CONSOLIDADO (3 blocos):\n\n{{ JSON.stringify($json.input_consolidado, null, 2) }}\n\nIMERSAO (produto B2C, use para gerar pontes_imersao):\n{{ JSON.stringify($('⚙️ CONFIG (pesos e cortes)').first().json.cfg.IMERSAO, null, 2) }}\n\nGere o dossie JSON conforme o system message.",
   messages: { messageValues: [{ message: sinteseSystem }] },
 }, { typeVersion: 1.6, position: [2040, 420] });
 conn("[SINTESE] Aggrega", "[SINTESE] Chain");
@@ -486,7 +498,7 @@ Componentes disponiveis dentro de .accordion-content:
 - <ul class="sources-list"><li><span class="source-num">1</span><span class="source-title">fonte</span><span class="source-conf">alta</span></li></ul>
 
 GERE EXATAMENTE ESTES 5 ACCORDIONS, NESTA ORDEM:
-1. (open, tag success) "Como abordar" -> message-card com gancho_abordagem; refined-list dos 3 topicos; referencias citadas; tom; momento de vida.
+1. (open, tag success) "Como abordar" -> message-card com gancho_abordagem; refined-list dos 3 topicos; referencias citadas; tom; momento de vida. Depois um <div class="subsection-intro">Rapport (como quebrar o gelo)</div> seguido de <ul class="refined-list"> com os 3 itens de rapport_sugestoes. Depois um <div class="subsection-intro">Ponte para a imersao</div> seguido de <ul class="refined-list"> com os 3 itens de pontes_imersao. Se algum vier vazio, escreva "Nao captado nesta versao".
 2. (tag info) "Audiencia e conteudo" -> numeros de seguidores/engajamento (pills); ultimos_posts como refined-list com link.
 3. (tag info) "Repertorio e autoridade" -> evidencias de palco, formacao, mencoes (com links).
 4. (open, tag info) "Placar por eixo" -> data-table Eixo | Nota (0-100) | Justificativa, uma linha por eixo.
