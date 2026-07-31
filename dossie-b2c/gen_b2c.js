@@ -623,6 +623,8 @@ const D = ps.dossier || {}; const meta = D.meta || {}; const eixos = D.avaliacao
 const P = ps.pesos_usados || {}; const C = ps.cortes_usados || {};
 const lb = $('[LEAD] Base').first().json.lead;
 const esc = (s) => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+// trata placeholders de "sem dado" como vazio (evita "nao captado anos" etc.)
+const clean = (v) => { const t = String(v == null ? '' : v).trim(); return /^(nao captado|não captado|n\/d|nd|null|undefined|nao informado|não informado|-+)$/i.test(t) ? '' : t; };
 const nome = meta.lead_nome || [lb.firstname, lb.lastname].filter(Boolean).join(' ') || 'Lead';
 const tema = meta.tema_principal || lb.tema || '';
 const perfil = ps.perfil || 'Iniciante';
@@ -640,8 +642,8 @@ const summary =
   '<section class="summary-band"><div class="summary-grid">' +
   '<div class="summary-cell"><div class="summary-cell-label">Perfil</div><div class="summary-cell-value">' + esc(perfil) + '</div><div class="summary-cell-note">Escala &middot; Profissionalize-se &middot; Iniciante</div></div>' +
   '<div class="summary-cell"><div class="summary-cell-label">Score do Dossie</div><div class="summary-cell-value">' + score + '<small style="font-size:16px;color:var(--muted)"> /100</small></div><div class="summary-cell-note">ponderado pelos 5 eixos</div></div>' +
-  '<div class="summary-cell"><div class="summary-cell-label">Atuacao hoje</div><div class="summary-cell-value" style="font-size:20px">' + esc(meta.atuacao_hoje || lb.atuacao_hoje || 'n/d') + '</div><div class="summary-cell-note">' + esc((meta.ja_palestrante||lb.ja_palestrante) ? ('Ja palestrante: ' + (meta.ja_palestrante||lb.ja_palestrante)) : '') + '</div></div>' +
-  '<div class="summary-cell"><div class="summary-cell-label">Tema / Local</div><div class="summary-cell-value" style="font-size:20px">' + esc(tema || 'n/d') + '</div><div class="summary-cell-note">' + esc([meta.estado||lb.estado, (meta.idade||lb.idade) ? ((meta.idade||lb.idade) + ' anos') : ''].filter(Boolean).join(' &middot; ')) + '</div></div>' +
+  '<div class="summary-cell"><div class="summary-cell-label">Atuacao hoje</div><div class="summary-cell-value" style="font-size:20px">' + esc(clean(meta.atuacao_hoje || lb.atuacao_hoje) || 'n/d') + '</div><div class="summary-cell-note">' + (clean(meta.ja_palestrante||lb.ja_palestrante) ? ('Ja palestrante: ' + esc(clean(meta.ja_palestrante||lb.ja_palestrante))) : '') + '</div></div>' +
+  '<div class="summary-cell"><div class="summary-cell-label">Tema / Local</div><div class="summary-cell-value" style="font-size:20px">' + esc(clean(tema) || 'n/d') + '</div><div class="summary-cell-note">' + [clean(meta.estado||lb.estado), (clean(meta.idade||lb.idade) ? (clean(meta.idade||lb.idade) + ' anos') : '')].filter(Boolean).map(esc).join(' &middot; ') + '</div></div>' +
   '</div></section>';
 
 const stat = (label, val) => { const v = (val == null ? 0 : val); const cls = v >= 70 ? 'green' : (v >= 45 ? 'amber' : 'accent'); return '<div><div class="stat-label">' + label + '</div><div class="stat-value ' + cls + '">' + v + '<small style="font-size:13px;color:var(--muted)">/100</small></div></div>'; };
