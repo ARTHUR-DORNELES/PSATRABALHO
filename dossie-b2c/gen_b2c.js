@@ -32,12 +32,12 @@ function sub(from, to, kind) {
 
 // ---------- credentials ----------
 const CRED = {
-  hsHeader: { httpHeaderAuth: { id: "in5KFjziH1wjm6Cx", name: "Hunter B2B HubSpot" } },
+  hsHeader: { httpHeaderAuth: { id: "vqUunHD1VWP4x0gI", name: "Dossiê B2C HubSpot" } },
   apollo: { httpHeaderAuth: { id: "sCYqAEZD63JgxpLV", name: "Apollo API" } },
   anthropic: { anthropicApi: { id: "nKIdBl0STB9kFSez", name: "Anthropic account" } },
   openai: { openAiApi: { id: "xsLRnqjf6a6ia2JG", name: "OpenAi account" } },
 };
-// HubSpot: os nós de PATCH/POST usam a credencial "Hunter B2B HubSpot" (sem token no JSON).
+// HubSpot: os nós Get/PATCH usam a credencial dedicada "Dossiê B2C HubSpot" (id vqUunHD1VWP4x0gI), sem token no JSON.
 const DOSSIE_ENDPOINT = "https://psa-ia-board.vercel.app/api/dossie";
 const DOSSIE_TOKEN = "671cadd1060dc205d21f0bf991c6ceae2ca2f8a7091036f1ddd1609ae626d674";
 
@@ -254,7 +254,8 @@ DATA ATUAL: julho de 2026. Priorize 2025-2026.
 5. referencias_citadas: quem admira/cita/segue; linguagem/tom que usa.
 6. momento_de_vida: transicao de carreira, lancamento recente, o que a empolga hoje.
 7. ultimos_posts: 3 a 5 posts recentes com 1 linha de resumo e link cada.
-+ "ancoras_verificaveis": lista de fatos datados e com fonte que o closer pode citar.`;
++ "ancoras_verificaveis": lista de fatos datados e com fonte que o closer pode citar.
++ "instagram_confirmado": SE e SOMENTE SE voce confirmou (via ancoras) que um Instagram pertence a ESTA pessoa, coloque aqui APENAS o @handle (sem URL, sem @, ex.: "joao.silva"). Se nao houver Instagram confirmavel, deixe "". NUNCA chute por nome, NUNCA coloque handle de homonimo. Este campo alimenta uma coleta automatizada, entao so preencha com certeza.`;
 add("[WEB] Pesquisador Agent", "@n8n/n8n-nodes-langchain.agent", {
   promptType: "define",
   text: "=Pesquise sobre a pessoa ESPECIFICA abaixo. Aplique a TRAVA DE IDENTIDADE.\n\nNome: {{ $json.firstname }} {{ $json.lastname }}\nTema declarado: {{ $json.tema }}\n\nANCORAS DE IDENTIDADE (use para confirmar que os resultados sao dela):\n- LinkedIn: {{ $json.linkedin_url }}\n- Instagram informado: {{ $json.instagram_url }}\n- Cargo: {{ $json.cargo }}\n- Empresa: {{ $json.empresa }}\n- Cidade/estado: {{ $json.cidade }}\n- Dominio de email: {{ $json.dominio_email }}\n\nDescarte qualquer resultado que nao confirme ao menos um ancora. Preencha os 7 buckets (+ descartados_por_homonimo). JSON puro.",
@@ -292,31 +293,37 @@ conn("[WEB] Pesquisador Agent", "[WEB] Normaliza Output");
 // ============================================================
 // BRANCH D - APIFY (Instagram estruturado)
 // ============================================================
-const apifyPrep = `// Extrai e VALIDA o @handle do cadastro (URL, @handle ou texto).
-// O campo do HubSpot mistura Instagram e LinkedIn, entao filtramos antes de gastar chamada Apify.
-const raw = String(($('[LEAD] Base').first().json.lead.instagram_url) || '').trim();
+const apifyPrep = `// Descobre o @handle em 2 fontes: 1) cadastro (HubSpot); 2) Instagram confirmado pelo Pesquisador Web.
+// O campo do HubSpot mistura Instagram e LinkedIn, entao validamos antes de gastar chamada Apify.
+const lead = $('[LEAD] Base').first().json.lead;
 const cfg = $('⚙️ CONFIG (pesos e cortes)').first().json.cfg;
-let u = '', motivo = '';
-if (!raw) {
-  motivo = 'vazio';
-} else if (/linkedin\\.com/i.test(raw)) {
-  motivo = 'linkedin'; // veio um LinkedIn, nao um Instagram
-} else {
-  u = raw
+let web = {};
+try { web = ($('[WEB] Normaliza Output').first().json.web) || {}; } catch (e) {}
+const candidatos = [
+  { raw: String(lead.instagram_url || '').trim(), origem: 'cadastro' },
+  { raw: String(web.instagram_confirmado || '').trim(), origem: 'web' }
+];
+let u = '', motivo = '', origem = '';
+for (const c of candidatos) {
+  if (!c.raw) continue;
+  if (/linkedin\\.com/i.test(c.raw)) { if (!motivo) motivo = 'linkedin'; continue; }
+  const cand = c.raw
     .replace(/^(https?:\\/\\/)?(www\\.)?instagram\\.com\\//i, '')
     .replace(/^@/, '')
     .replace(/[/?#].*$/, '')
     .trim();
-  // handle valido do Instagram: letras, numeros, ponto e underline, ate 30 chars
-  if (!/^[a-zA-Z0-9._]{1,30}$/.test(u)) { u = ''; motivo = 'handle_invalido'; }
+  if (/^[a-zA-Z0-9._]{1,30}$/.test(cand)) { u = cand; origem = c.origem; motivo = ''; break; }
+  if (!motivo) motivo = 'handle_invalido';
 }
+if (!u && !motivo) motivo = 'vazio';
 const tem_handle = !!u;
 const directUrl = tem_handle ? ('https://www.instagram.com/' + u + '/') : '';
 // Input do Actor apify/instagram-scraper: perfil + ultimos posts (resultsType "details").
 const input = tem_handle ? { directUrls: [ directUrl ], resultsType: 'details', resultsLimit: 12, addParentData: false } : {};
-return [{ json: { username: u, tem_handle, motivo, directUrl, input, token: cfg.APIFY_TOKEN || '', actor: cfg.APIFY_ACTOR || 'apify~instagram-scraper' } }];`;
-add("[APIFY] Prepara", "n8n-nodes-base.code", { jsCode: apifyPrep }, { typeVersion: 2, position: [760, 1080] });
-conn("[LEAD] Base", "[APIFY] Prepara");
+return [{ json: { username: u, tem_handle, motivo, origem, directUrl, input, token: cfg.APIFY_TOKEN || '', actor: cfg.APIFY_ACTOR || 'apify~instagram-scraper' } }];`;
+add("[APIFY] Prepara", "n8n-nodes-base.code", { jsCode: apifyPrep }, { typeVersion: 2, position: [1640, 900] });
+// Apify roda DEPOIS da Web (usa o @ que a Web confirmou quando o cadastro nao tem).
+conn("[WEB] Normaliza Output", "[APIFY] Prepara");
 
 add("[APIFY] Instagram", "n8n-nodes-base.httpRequest", {
   method: "POST",
@@ -324,7 +331,7 @@ add("[APIFY] Instagram", "n8n-nodes-base.httpRequest", {
   sendBody: true, specifyBody: "json",
   jsonBody: "={{ JSON.stringify($json.input) }}",
   options: { response: { response: { neverError: true, responseFormat: "json" } }, timeout: 120000 },
-}, { typeVersion: 4.2, position: [1000, 1080] });
+}, { typeVersion: 4.2, position: [1840, 900] });
 conn("[APIFY] Prepara", "[APIFY] Instagram");
 
 const apifyNorm = `const prep = $('[APIFY] Prepara').first().json;
@@ -332,9 +339,9 @@ const resp = $json;
 // sem handle valido no cadastro -> nada a buscar
 if (!prep.tem_handle) {
   const notaPorMotivo = {
-    vazio: 'Nenhum Instagram informado no cadastro.',
-    linkedin: 'O campo tinha um LinkedIn, nao um Instagram. Instagram nao coletado.',
-    handle_invalido: 'O que foi informado nao parece um @ valido de Instagram. Instagram nao coletado.'
+    vazio: 'Instagram nao informado no cadastro e nao confirmado pela pesquisa web.',
+    linkedin: 'So havia LinkedIn (cadastro/web), nao um Instagram. Instagram nao coletado.',
+    handle_invalido: 'O que foi encontrado nao parece um @ valido de Instagram. Instagram nao coletado.'
   };
   return [{ json: { apify: { instagram: { status: 'sem_handle', motivo: prep.motivo, nota: notaPorMotivo[prep.motivo] || 'Instagram nao informado.' } } } }];
 }
@@ -359,6 +366,7 @@ const comEng = posts.filter(x => x.curtidas != null);
 const engaj = comEng.length ? Math.round(comEng.reduce((a,x)=>a+((x.curtidas||0)+(x.comentarios||0)),0)/comEng.length) : null;
 return [{ json: { apify: { instagram: {
   status: priv ? 'privado_bloqueado' : 'ok',
+  origem_handle: prep.origem,
   username: p.username || prep.username,
   seguidores: (p.followersCount != null ? p.followersCount : null),
   seguindo: (p.followsCount != null ? p.followsCount : null),
@@ -369,7 +377,7 @@ return [{ json: { apify: { instagram: {
   ultimos_posts: priv ? [] : posts,
   nota: priv ? 'Perfil PRIVADO/bloqueado: seguidores visiveis, mas posts nao acessiveis.' : ''
 } } } }];`;
-add("[APIFY] Normaliza Output", "n8n-nodes-base.code", { jsCode: apifyNorm }, { typeVersion: 2, position: [1240, 1080] });
+add("[APIFY] Normaliza Output", "n8n-nodes-base.code", { jsCode: apifyNorm }, { typeVersion: 2, position: [2040, 900] });
 conn("[APIFY] Instagram", "[APIFY] Normaliza Output");
 
 // ============================================================
@@ -590,30 +598,10 @@ add("[HUBSPOT] Patch Contato", "n8n-nodes-base.httpRequest", {
 }, { typeVersion: 4.2, position: [3440, 300], credentials: CRED.hsHeader });
 conn("[HUBSPOT] Monta Props", "[HUBSPOT] Patch Contato");
 
-const montaNota = `const ps = $('[SINTESE] Parse + Score').first().json;
-const url = ($('[RENDER] Upload Dossie').first().json.url) || '';
-const nome = ($('[RENDER] Inject Template').first().json.lead_nome) || 'Lead';
-const contactId = String($('[LEAD] Base').first().json.lead.id_contato);
-const esc=(s)=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-const body = '<div><h2>📄 Dossie B2C — '+esc(nome)+'</h2>'+
-  '<p><b>Perfil:</b> '+esc(ps.perfil)+'<br><b>Score:</b> '+esc(ps.score_final)+'/100</p>'+
-  (url? '<p><a href="'+esc(url)+'" target="_blank"><b>👉 Abrir dossie completo</b></a></p>':'<p><i>(dossie sem link de upload)</i></p>')+
-  '<p><em>Gerado automaticamente</em></p></div>';
-return [{ json: { hs_note_body: body, hs_timestamp: Date.now(), contactId } }];`;
-add("[HUBSPOT] Monta Nota", "n8n-nodes-base.code", { jsCode: montaNota }, { typeVersion: 2, position: [3240, 520] });
-conn("[HUBSPOT] Patch Contato", "[HUBSPOT] Monta Nota");
-
-add("[HUBSPOT] Cria Nota Dossie", "n8n-nodes-base.httpRequest", {
-  method: "POST", url: "https://api.hubapi.com/crm/v3/objects/notes",
-  authentication: "predefinedCredentialType", nodeCredentialType: "httpHeaderAuth",
-  sendBody: true, specifyBody: "json",
-  jsonBody: "={{ JSON.stringify({ properties: { hs_note_body: $json.hs_note_body, hs_timestamp: $json.hs_timestamp }, associations: [ { to: { id: $json.contactId }, types: [ { associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 202 } ] } ] }) }}",
-  options: { response: { response: { neverError: true, responseFormat: "json" } } },
-}, { typeVersion: 4.2, position: [3440, 520], credentials: CRED.hsHeader });
-conn("[HUBSPOT] Monta Nota", "[HUBSPOT] Cria Nota Dossie");
-
-// (Respond to Webhook removido: o Webhook B2C ja responde 200 no recebimento.
-//  [HUBSPOT] Cria Nota Dossie e o ultimo no do fluxo.)
+// (Nota removida: o escopo de Notas nao esta disponivel para chaves de servico deste portal
+//  ("isn't available for public use"). O link do dossie ja fica no contato em hunter_dossie_html_url,
+//  entao a Nota era apenas conveniencia. [HUBSPOT] Patch Contato e o ultimo no do fluxo.)
+// (Respond to Webhook tambem removido: o Webhook B2C responde 200 no recebimento.)
 
 // ============================================================
 // STICKY NOTES
@@ -622,7 +610,7 @@ function sticky(content, pos, size, color) { add("Nota_" + uid(), "n8n-nodes-bas
 sticky("## ⚙️ PAINEL DE CONTROLE\\nPesos, cortes, status, flag de Perfil e mapa Perfil→Closer estão DENTRO do nó `⚙️ CONFIG` (com a tabela owner→ID pronta pra colar).\\nO gatilho é o workflow do HubSpot que dispara quando o Negócio B2C entra em 'Reunião Agendada'. Só o **ID do contato** precisa chegar no webhook.", [-260, 180], [460, 200], 6);
 sticky("## 📥 4 COLETORES\\nTudo parte do **contato** (Get Contato → LEAD Base).\\nHubSpot = form+CRM · Apollo = cargo/trajetória · Web = Google/imprensa · **Apify = Instagram** (nº reais de seguidores/engajamento).\\nApify: cole token no CONFIG. Sem token, o fluxo roda e marca 'Instagram não coletado'. IG privado → dossiê avisa que está bloqueado.", [720, 20], [460, 170], 5);
 sticky("## 🧮 SÍNTESE → SCORE → PERFIL\\nIA dá nota 0-100 por eixo → workflow aplica os pesos → nota final → Perfil → closer.", [2000, 260], [420, 120], 7);
-sticky("## 📄 RENDER + WRITE-BACK (CONTATO)\\nGera HTML (design B2B + 'Como funciona') e sobe pro board.\\nGrava no **Contato**: `hunter_dossie_html_url`, `score_dossie`, `status_do_dossie`, `closer_da_agenda` (+ `perfil` se o flag estiver ligado) + Nota com link.\\nVocê copia do contato pro Negócio manualmente.", [3040, 180], [480, 170], 3);
+sticky("## 📄 RENDER + WRITE-BACK (CONTATO)\\nGera HTML (design B2B + 'Como funciona') e sobe pro board.\\nGrava no **Contato**: `hunter_dossie_html_url`, `score_dossie`, `status_do_dossie`, `closer_da_agenda` (+ `perfil` se o flag estiver ligado).\\nVocê copia do contato pro Negócio manualmente.", [3040, 180], [480, 170], 3);
 
 // ============================================================
 const workflow = {
