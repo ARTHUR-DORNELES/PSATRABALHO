@@ -710,7 +710,7 @@ conn("[HUBSPOT] Monta Props", "[HUBSPOT] Patch Contato");
 // Requer escopos crm.objects.deals.read + crm.objects.deals.write na credencial HubSpot.
 // ============================================================
 add("[HUBSPOT] Assoc Deals", "n8n-nodes-base.httpRequest", {
-  url: "=https://api.hubapi.com/crm/v4/objects/contacts/{{ $('[LEAD] Base').item.json.lead.id_contato }}/associations/deals",
+  url: "=https://api.hubapi.com/crm/v4/objects/contacts/{{ $('[LEAD] Base').first().json.lead.id_contato }}/associations/deals",
   authentication: "predefinedCredentialType", nodeCredentialType: "httpHeaderAuth",
   options: { response: { response: { neverError: true, responseFormat: "json" } } },
 }, { typeVersion: 4.2, position: [3240, 540], credentials: CRED.hsHeader });

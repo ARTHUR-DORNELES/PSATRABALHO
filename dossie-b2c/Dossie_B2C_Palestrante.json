@@ -776,7 +776,7 @@
     },
     {
       "parameters": {
-        "url": "=https://api.hubapi.com/crm/v4/objects/contacts/{{ $('[LEAD] Base').item.json.lead.id_contato }}/associations/deals",
+        "url": "=https://api.hubapi.com/crm/v4/objects/contacts/{{ $('[LEAD] Base').first().json.lead.id_contato }}/associations/deals",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "httpHeaderAuth",
         "options": {
